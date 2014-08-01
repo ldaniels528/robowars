@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Root Element -->
+  <xsd:element name="model">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="scale" type="ScaleType" minOccurs="0" maxOccurs="1" />
+        <xsd:element name="vertex" type="VertexType" minOccurs="1" maxOccurs="unbounded" />
+        <xsd:element name="polygon" type="PolygonType" minOccurs="1" maxOccurs="unbounded" />
+      </xsd:sequence>
+      <xsd:attribute name="name" type="xsd:string" use="required" />
+    </xsd:complexType>
+  </xsd:element>
+
+  <!-- Scale Type -->
+  <xsd:complexType name="ScaleType">
+    <xsd:attribute name="sx" type="xsd:decimal" use="required" />
+    <xsd:attribute name="sy" type="xsd:decimal" use="required" />
+    <xsd:attribute name="sz" type="xsd:decimal" use="required" />
+  </xsd:complexType>
+
+  <!-- Vertex Type -->
+  <xsd:complexType name="VertexType">
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="x" type="xsd:decimal" use="required" />
+    <xsd:attribute name="y" type="xsd:decimal" use="required" />
+    <xsd:attribute name="z" type="xsd:decimal" use="required" />
+  </xsd:complexType>
+
+  <!-- Polygon Type -->
+  <xsd:complexType name="PolygonType">
+    <xsd:sequence>
+      <xsd:element name="includeVertex" type="IncludeVertexType" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="color" type="ColorType" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Include Vertex Type -->
+  <xsd:complexType name="IncludeVertexType">
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+  </xsd:complexType>
+
+  <!-- Color Type -->
+  <xsd:complexType name="ColorType">
+    <xsd:attribute name="r" type="xsd:integer" use="required" />
+    <xsd:attribute name="g" type="xsd:integer" use="required" />
+    <xsd:attribute name="b" type="xsd:integer" use="required" />
+  </xsd:complexType>
+
+</xsd:schema>

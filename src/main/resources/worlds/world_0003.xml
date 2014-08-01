@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<world name="Test World" minX="-500" minY="-500" size="1000" rows="10">
+
+  <!-- color definitions -->
+  <colorDef id="daySky" red="50" green="50" blue="200" />
+  <colorDef id="eveningSky" red="50" green="50" blue="100" />
+  <colorDef id="nightSky" red="30" green="30" blue="50" />
+
+  <colorDef id="desertLand" red="170" green="170" blue="90" />
+  <colorDef id="pasture1" red="90" green="90" blue="0" />
+  <colorDef id="pasture2" red="50" green="50" blue="0" />
+
+  <!-- set sky and ground colors -->
+  <environment sky="eveningSky" ground="pasture1" />
+
+  <!-- create actor definitions -->
+  <objectDef id="Tank1" class="combat.environment.vehicles.Tank1" />
+  <objectDef id="Tank2" class="combat.environment.vehicles.Tank2" />
+  <objectDef id="Tank3" class="combat.environment.vehicles.Tank3" />
+  <objectDef id="Tank4" class="combat.environment.vehicles.Tank4" />
+  <objectDef id="Tank5" class="combat.environment.vehicles.Tank5" />
+  <objectDef id="Tank6" class="combat.environment.vehicles.Tank6" />
+  <objectDef id="HoverCraft" class="combat.environment.vehicles.Aircraft1" />
+  <objectDef id="Destroyer" class="combat.environment.vehicles.Aircraft2" />
+
+  <!-- create item definitions -->
+  <objectDef id="HealthCube" class="combat.environment.items.VitalityItem1" />
+  <objectDef id="MissileLauncher" class="combat.environment.items.MissileLauncherItem" />
+
+  <!-- create structure definitions -->
+  <objectDef id="Pyramid" class="combat.environment.structures.Pyramid" />
+  <objectDef id="GenericBuilding" class="combat.environment.structures.Building2" />
+  <objectDef id="GenericWall" class="combat.environment.structures.Wall1" />
+  <objectDef id="GenericPillar" class="combat.environment.structures.Pillar" />
+  <objectDef id="GenericTower" class="combat.environment.structures.Tower" />
+  <objectDef id="MainGate" class="combat.environment.structures.MainGate" />
+
+  <!-- add the player to this world -->
+  <actor type="Tank1" x="202" y="0" z="-80" isPlayer="true" />
+
+  <!-- Pyramids -->
+  <structure type="Pyramid" x="200.0" y="0.0" z="0.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
+
+  <!-- add the fencing structures -->
+  <structure type="GenericPillar" x="-54.0" y="12.0" z="185.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-54.0" y="10.0" z="195.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-54.0" y="12.0" z="205.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-54.0" y="10.0" z="215.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-54.0" y="12.0" z="225.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-54.0" y="10.0" z="235.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-54.0" y="12.0" z="245.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-54.0" y="10.0" z="255.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="50.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="40.0" y="10.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="30.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="20.0" y="10.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="10.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="MainGate" x="0.0" y="5.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="5.0" />
+  <structure type="GenericPillar" x="-10.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-20.0" y="10.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-30.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-40.0" y="10.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-50.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericPillar" x="50.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="40.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="30.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="20.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="10.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="MainGate" x="0.0" y="5.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="5.0" />
+  <structure type="GenericPillar" x="-10.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-20.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-30.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-40.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-50.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-60.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-70.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-80.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-90.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-100.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-110.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-120.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-130.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-140.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-150.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-160.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-170.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-180.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-190.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-200.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-210.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-220.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-230.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-240.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-250.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-260.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-270.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-280.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-290.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-300.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-310.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="MainGate" x="-320.0" y="5.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="5.0" />
+  <structure type="GenericPillar" x="-330.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-340.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-350.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-360.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-370.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-380.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-390.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-400.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-410.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="185.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="195.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="205.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="215.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="225.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="235.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="245.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="255.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="265.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="275.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="285.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="295.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="305.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="315.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="325.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="335.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="345.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="355.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="365.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="375.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="385.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="55.0" y="10.0" z="395.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="55.0" y="12.0" z="405.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericPillar" x="410.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="400.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="390.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="380.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="370.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="360.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="350.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="340.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="330.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="320.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="310.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="300.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="290.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="280.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="270.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="260.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="250.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="240.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="230.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="220.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="210.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="200.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="190.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="180.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="170.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="160.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="150.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="140.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="130.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="120.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="110.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="100.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="90.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="80.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="70.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="60.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="50.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="40.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="30.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="20.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="10.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="0.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-10.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-20.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-30.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-40.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-50.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-60.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-70.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-80.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-90.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-100.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-110.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-120.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-130.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-140.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-150.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-160.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-170.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-180.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-190.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-200.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-210.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-220.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-230.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-240.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-250.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-260.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-270.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-280.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-290.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-300.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-310.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-320.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-330.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-340.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-350.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-360.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-370.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-380.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-390.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-400.0" y="10.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-410.0" y="12.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="405.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="395.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="385.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="375.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="365.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="355.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="345.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="335.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="325.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="315.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="305.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="295.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="285.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="275.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="265.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="255.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="245.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="235.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="225.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="215.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="205.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="195.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="185.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="175.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="165.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="155.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="145.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="135.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="125.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="115.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="105.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="95.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="85.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="75.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="65.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="55.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="45.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="35.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="25.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="15.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="5.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-5.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-15.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-25.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-35.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-45.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-55.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-65.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-75.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-85.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-95.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-105.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-115.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-125.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-135.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-145.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-155.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-165.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-175.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-185.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-195.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-205.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-215.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-225.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-235.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-245.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-255.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-265.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-275.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="414.0" y="10.0" z="-285.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="414.0" y="12.0" z="-295.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="405.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="395.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="385.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="375.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="365.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="355.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="345.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="335.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="325.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="315.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="305.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="295.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="285.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="275.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="265.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="255.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="245.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="235.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="225.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="215.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="205.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="195.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="185.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="175.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="165.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="155.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="145.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="135.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="125.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="115.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="105.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="95.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="85.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="75.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="65.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="55.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="45.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="35.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="25.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="15.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="5.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-5.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-15.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-25.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-35.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-45.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-55.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-65.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-75.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-85.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-95.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-105.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-115.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-125.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-135.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-145.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-155.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-165.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-175.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-185.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-195.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-205.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-215.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-225.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-235.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-245.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-255.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-265.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-275.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-414.0" y="10.0" z="-285.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-414.0" y="12.0" z="-295.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericPillar" x="410.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="400.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="390.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="380.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="370.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="360.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="350.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="340.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="330.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="320.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="310.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="300.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="290.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="280.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="270.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="260.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="250.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="240.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="230.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="220.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="210.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="200.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="190.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="180.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="170.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="160.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="150.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="140.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="130.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="120.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="110.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="100.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="90.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="80.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="70.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="60.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="50.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="40.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="30.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="20.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="10.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="MainGate" x="0.0" y="5.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="5.0" />
+  <structure type="GenericPillar" x="-10.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-20.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-30.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-40.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-50.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-60.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-70.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-80.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-90.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-100.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-110.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-120.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-130.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-140.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-150.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-160.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-170.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-180.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-190.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-200.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-210.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-220.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-230.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-240.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-250.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-260.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-270.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-280.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-290.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-300.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-310.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-320.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-330.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-340.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-350.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-360.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-370.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-380.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-390.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+  <structure type="GenericWall" x="-400.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
+  <structure type="GenericPillar" x="-410.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
+</world>
