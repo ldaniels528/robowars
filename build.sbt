@@ -1,5 +1,7 @@
 import sbt._
 import Keys._
+import sbtassembly.Plugin._
+import AssemblyKeys._
 
 name := "RoboWars"
 
@@ -13,6 +15,19 @@ scalacOptions ++= Seq("-deprecation", "-encoding", "UTF-8", "-feature", "-target
     "-Ywarn-adapted-args", "-Ywarn-value-discard", "-Xlint")
 
 javacOptions ++= Seq("-Xlint:deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-g:vars")
+
+assemblySettings
+
+mainClass in assembly := Some("org.combat.game.CombatGameMain")
+
+jarName in assembly := "robowars.jar"
+
+mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
+  {
+    case PathList("META-INF", "MANIFEST.MF", xs @ _*) => MergeStrategy.discard
+    case x => MergeStrategy.first
+  }
+}
 
 // General Dependencies
 libraryDependencies ++= Seq(
