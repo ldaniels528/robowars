@@ -14,8 +14,8 @@ to compete in battle arenas.
 
 ### Build Requirements
 
-* Scala 2.10.0+
-* SBT 0.13.0+
+* Scala 2.11+
+* SBT 0.13+
 
 ### Building the code
 
