@@ -18,7 +18,7 @@ javacOptions ++= Seq("-Xlint:deprecation", "-Xlint:unchecked", "-source", "1.7",
 
 assemblySettings
 
-mainClass in assembly := Some("org.combat.game.CombatGameMain")
+mainClass in assembly := Some("com.ldaniels528.robowars.RoboWars")
 
 jarName in assembly := "robowars.jar"
 
@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
 	"commons-io" % "commons-io" % "2.4",
 	"org.slf4j" % "slf4j-api" % "1.7.6",
 	"org.scala-lang" % "scala-library" % "2.11.2",
-	"org.scala-lang.modules" % "scala-xml_2.11" % "1.0.2"
+	"org.scala-lang.modules" %% "scala-xml" % "1.0.2"
 )
 	
 // Testing Dependencies
