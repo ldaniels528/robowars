@@ -16,3 +16,15 @@ to compete in battle arenas.
 
 * Scala 2.10.0+
 * SBT 0.13.0+
+
+### Building the code
+
+    $ sbt clean package
+      
+### Running the tests
+
+    $ sbt test    
+    
+### Run the application
+
+	$ java -jar robowars.jar
