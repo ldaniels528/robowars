@@ -1,20 +1,14 @@
 package com.ldaniels528.robowars.audio
 
-import com.ldaniels528.robowars.util.ResourceUtil._
-import java.io._
-import scala.util.{ Try, Success, Failure }
 import akka.actor._
-import sun.audio._
-import org.apache.commons.io.IOUtils
-import com.ldaniels528.robowars.ContentManager
-import scala.beans.BeanProperty
 import com.ldaniels528.fxcore3d.audio._
+import com.ldaniels528.robowars.ContentManager
 
 /**
  * RoboWars Audio Player
  * @author lawrence.daniels@gmail.com
  */
-object CombatAudioPlayer extends FxAudioPlayer {
+object AudioManager extends FxAudioPlayer {
   private val system = ActorSystem("AudioSystem")
   private val audioSampleCache = preloadAudioSamples()
 
@@ -64,15 +58,25 @@ object CombatAudioPlayer extends FxAudioPlayer {
    * Audio-Clip messages
    */
   trait AudioKey
+
   case object Init
+
   case object Ambient extends AudioKey
+
   case object CrashClip extends AudioKey
+
   case object ExplosionClip extends AudioKey
+
   case object BuildingExplodeClip extends AudioKey
+
   case object MachineGunClip extends AudioKey
+
   case object MissileClip extends AudioKey
+
   case object PlasmaClip extends AudioKey
+
   case object ReloadClip extends AudioKey
+
   case object RewardClip extends AudioKey
 
 }

@@ -1,43 +1,43 @@
 package com.ldaniels528.robowars.actors
 
-import scala.collection.mutable.Buffer
-import com.ldaniels528.fxcore3d.FxAngle3D
-import com.ldaniels528.fxcore3d.FxEvent
-import com.ldaniels528.fxcore3d.FxObject
-import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.fxcore3d.FxVelocityVector
-import com.ldaniels528.fxcore3d.FxWorld
+import com.ldaniels528.fxcore3d.{FxAngle3D, FxEvent, FxObject, FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.AbstractMovingObject
-import com.ldaniels528.robowars.events.EventSteeringCommand
-import com.ldaniels528.robowars.events.EventWeaponCommand
-import com.ldaniels528.robowars.structures.AbstractMovingStructure
-import com.ldaniels528.robowars.structures.AbstractStaticStructure
-import com.ldaniels528.robowars.weapons.AbstractRound
-import com.ldaniels528.robowars.weapons.AbstractWeapon
-import EventSteeringCommand._
-import EventWeaponCommand._
+import com.ldaniels528.robowars.events.{Events, EventSteeringCommand, EventWeaponCommand}
+import com.ldaniels528.robowars.structures.{AbstractMovingStructure, AbstractStaticStructure}
+import com.ldaniels528.robowars.weapons.{AbstractRound, AbstractWeapon}
 
 /**
- * Represents a vehicle
+ * Represents an abstract moving vehicle
+ * @param world
+ * @param pos
+ * @param vector
+ * @param turningRate
+ * @param pitchRate
+ * @param acceleration
+ * @param brakingRate
+ * @param maxVelocity
+ * @param climbRate
+ * @param decentRate
+ * @param pitchClimbRateRelation
+ * @param health
  * @author lawrence.daniels@gmail.com
  */
-class AbstractVehicle(
-  world: FxWorld,
-  pos: FxPoint3D,
-  vector: FxVelocityVector,
-  turningRate: Double,
-  pitchRate: Double = 0,
-  acceleration: Double,
-  brakingRate: Double,
-  maxVelocity: Double,
-  climbRate: Double = 0,
-  decentRate: Double = 0,
-  pitchClimbRateRelation: Double = 0,
-  health: Double)
-  extends AbstractMovingObject(world, pos, vector.getAngle(), vector, new FxAngle3D(), health) {
+class AbstractVehicle(world: FxWorld,
+                      pos: FxPoint3D,
+                      vector: FxVelocityVector,
+                      turningRate: Double,
+                      pitchRate: Double = 0,
+                      acceleration: Double,
+                      brakingRate: Double,
+                      maxVelocity: Double,
+                      climbRate: Double = 0,
+                      decentRate: Double = 0,
+                      pitchClimbRateRelation: Double = 0,
+                      health: Double)
+  extends AbstractMovingObject(world, pos, vector.getAngle(), vector, new FxAngle3D(), health) with Events {
 
   private var weaponIndex = 0
-  private val weapons = Buffer[AbstractWeapon]()
+  private val weapons = collection.mutable.Buffer[AbstractWeapon]()
   private var myLastPos: FxPoint3D = _
   private var myLastAgl: FxAngle3D = _
 
@@ -60,7 +60,7 @@ class AbstractVehicle(
         oldStates()
         true
       case r: AbstractRound =>
-        // -- check if the round comes from this vehicle
+        // check if the round comes from this actor
         if (r.shooter == this) true
         else {
           if (damageHealth(r.getImpactDamage()) < 0) die()
@@ -120,67 +120,47 @@ class AbstractVehicle(
     weapons.foreach(_.update(dt))
   }
 
-  def fireSelectedWeapon() {
-    addEvent(new EventWeaponCommand(world.time, FIRE, 0))
-  }
+  def fireSelectedWeapon() = this += EventWeaponCommand(world.time, FIRE, 0)
 
-  def turnLeft(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, TURN_LEFT, factor, dt))
-  }
+  def turnLeft(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, TURN_LEFT, factor, dt)
 
-  def turnRight(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, TURN_RIGHT, factor, dt))
-  }
+  def turnRight(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, TURN_RIGHT, factor, dt)
 
-  def increaseVelocity(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, INCREASE_VELOCITY, factor, dt))
-  }
+  def increaseVelocity(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, INCREASE_VELOCITY, factor, dt)
 
-  def decreaseVelocity(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, DECREASE_VELOCITY, factor, dt))
-  }
+  def decreaseVelocity(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, DECREASE_VELOCITY, factor, dt)
 
-  def brake(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, BRAKE, factor, dt))
-  }
+  def brake(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, BRAKE, factor, dt)
 
-  def climb(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, CLIMB, factor, dt))
-  }
+  def climb(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, CLIMB, factor, dt)
 
-  def decent(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, DECENT, factor, dt))
-  }
+  def decent(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, DECENT, factor, dt)
 
-  def pitchUp(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, PITCH_UP, factor, dt))
-  }
+  def pitchUp(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, PITCH_UP, factor, dt)
 
-  def pitchDown(factor: Double, dt: Double) {
-    addEvent(new EventSteeringCommand(world.time, PITCH_DOWN, -factor, dt))
-  }
+  def pitchDown(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, PITCH_DOWN, -factor, dt)
 
   override protected def handleEvent(event: FxEvent) = {
     event match {
-      case sc: EventSteeringCommand =>
-        sc.command match {
-          case TURN_LEFT => handleTurnLeft(sc.factor, sc.dt)
-          case TURN_RIGHT => handleTurnRight(sc.factor, sc.dt)
-          case INCREASE_VELOCITY => handleIncreaseVelocity(sc.factor, sc.dt)
-          case DECREASE_VELOCITY => handleDecreaseVelocity(sc.factor, sc.dt)
-          case BRAKE => handleBrake(sc.factor, sc.dt)
-          case CLIMB => handleClimb(sc.factor, sc.dt)
-          case DECENT => handleDecent(sc.factor, sc.dt)
-          case PITCH_DOWN => handlePitch(sc.factor, sc.dt)
-          case PITCH_UP => handlePitch(sc.factor, sc.dt)
+      case EventSteeringCommand(_, command, factor, dt) =>
+        command match {
+          case TURN_LEFT => handleTurnLeft(factor, dt)
+          case TURN_RIGHT => handleTurnRight(factor, dt)
+          case INCREASE_VELOCITY => handleIncreaseVelocity(factor, dt)
+          case DECREASE_VELOCITY => handleDecreaseVelocity(factor, dt)
+          case BRAKE => handleBrake(factor, dt)
+          case CLIMB => handleClimb(factor, dt)
+          case DECENT => handleDecent(factor, dt)
+          case PITCH_DOWN => handlePitch(factor, dt)
+          case PITCH_UP => handlePitch(factor, dt)
           case code =>
             throw new IllegalArgumentException(s"Unhandled steering command ($code)")
         }
         true
 
-      case wc: EventWeaponCommand =>
-        wc.command match {
-          case SELECT => selectWeapon(wc.arg - 20)
+      case EventWeaponCommand(_, command, arg) =>
+        command match {
+          case SELECT => selectWeapon(arg - 20)
           case FIRE => selectedWeapon.fire
           case code =>
             throw new IllegalArgumentException(s"Unhandled weapon command ($code)")

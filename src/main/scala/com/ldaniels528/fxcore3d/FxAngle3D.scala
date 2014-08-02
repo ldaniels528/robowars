@@ -18,7 +18,7 @@ case class FxAngle3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = z0
   }
 
-  def times(s: Double) {
+  def *=(s: Double) {
     x *= s
     y *= s
     z *= s
@@ -32,7 +32,7 @@ case class FxAngle3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = -z
   }
 
-  def plus(p: FxAngle3D) {
+  def +=(p: FxAngle3D) {
     x += p.x
     y += p.y
     z += p.z

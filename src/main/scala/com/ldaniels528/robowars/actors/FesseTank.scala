@@ -16,7 +16,7 @@ import com.ldaniels528.robowars.weapons.MissileLauncher
  * @author lawrence.daniels@gmail.com
  */
 class FesseTank(world: FxWorld, p: FxPoint3D)
-  extends AbstractPlayer(
+  extends AbstractActor(
     world,
     new FxPoint3D(p.x, p.y + SCALE.y, p.z),
     FxVelocityVector(Math.PI, 0, 0),

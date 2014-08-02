@@ -2,7 +2,7 @@ package com.ldaniels528.fxcore3d
 
 import scala.beans.BeanProperty
 import scala.collection.mutable.ArrayBuffer
-import com.ldaniels528.robowars.actors.AbstractPlayer
+import com.ldaniels528.robowars.actors.AbstractActor
 
 /**
  * Represents the virtual world in which all objects reside.
@@ -31,7 +31,7 @@ trait FxWorld {
   /**
    * The active player
    */
-  def activePlayer: AbstractPlayer
+  def activePlayer: AbstractActor
 
   /**
    * The world's gravity

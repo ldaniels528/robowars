@@ -40,17 +40,13 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = t * z
   }
 
-  def +=(a: Double) = plus(a)
-
-  def +=(p: FxPoint3D) = plus(p)
-
-  def plus(a: Double) {
+  def +=(a: Double) {
     x += a
     y += a
     z += a
   }
 
-  def plus(p: FxPoint3D) {
+  def +=(p: FxPoint3D) {
     x += p.x
     y += p.y
     z += p.z
@@ -101,9 +97,7 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = z0
   }
 
-  def *=(s: Double) = times(s)
-
-  def times(s: Double) {
+  def *=(s: Double) = {
     x *= s
     y *= s
     z *= s

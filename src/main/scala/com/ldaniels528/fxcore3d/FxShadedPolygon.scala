@@ -2,7 +2,6 @@ package com.ldaniels528.fxcore3d
 
 import java.awt.Graphics2D
 
-import FxIndexingPolygon._
 import com.ldaniels528.fxcore3d.camera.FxGenericCamera
 
 /**
@@ -41,7 +40,6 @@ class FxShadedPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
  * @author lawrence.daniels@gmail.com
  */
 object FxShadedPolygon {
-  import java.io.InputStream
 
   def apply(myIndices: Array[Int], nbrIndices: Int, color: FxColor): FxShadedPolygon = {
     new FxShadedPolygon(myIndices, nbrIndices, color)

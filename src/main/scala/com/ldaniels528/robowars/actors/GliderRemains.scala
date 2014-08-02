@@ -10,7 +10,7 @@ import com.ldaniels528.robowars.structures.AbstractMovingScenery
  * Glider Remains
  * @author lawrence.daniels@gmail.com
  */
-class GliderRemains(world: FxWorld, deadActor: AbstractPlayer)
+class GliderRemains(world: FxWorld, deadActor: AbstractActor)
   extends AbstractMovingScenery(world, deadActor.getPosition(), deadActor.getAngle(), deadActor.getdPosition(), deadActor.getdAngle()) {
 
   // -- use the default polyhedron instance

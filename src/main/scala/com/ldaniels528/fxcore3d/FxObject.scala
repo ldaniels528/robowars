@@ -7,9 +7,11 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
  * @author lawrence.daniels@gmail.com
  */
 class FxObject(theWorld: FxWorld, pos: FxPoint3D, angle: FxAngle3D) {
+
   import java.awt.Graphics2D
+
+import scala.beans.BeanProperty
   import scala.collection.mutable.ArrayBuffer
-  import scala.beans.BeanProperty
 
   private val events = ArrayBuffer[FxEvent]()
   private val occupiedGrids = ArrayBuffer[FxGrid]()
@@ -77,7 +79,12 @@ class FxObject(theWorld: FxWorld, pos: FxPoint3D, angle: FxAngle3D) {
   }
 
   /**
-   * Add a raw event to this object.
+   * Associates an event with this object
+   */
+  def +=(event: FxEvent) = addEvent(event)
+
+  /**
+   * Associates an event with this object
    */
   def addEvent(event: FxEvent) {
     events += event

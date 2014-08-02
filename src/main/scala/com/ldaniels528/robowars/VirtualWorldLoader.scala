@@ -28,7 +28,7 @@ object VirtualWorldLoader {
     // define the containers
     val colors = MMap[String, Color]()
     val classDefs = MMap[String, Class[_]]()
-    var thePlayer: AbstractPlayer = null
+    var thePlayer: AbstractActor = null
 
     // create the world
     val world = toWorld(xml).getOrElse(die("Invalid virtual world defintion"))
@@ -45,7 +45,6 @@ object VirtualWorldLoader {
             } else {
               val ab = new AttackAI(actor)
               ab.selectTarget(thePlayer)
-              ab.attackTarget()
             }
         }
         case "colorDef" => toColor(node) foreach (colors += _)
@@ -104,7 +103,7 @@ object VirtualWorldLoader {
     } yield new Environment(sky, ground)
   }
 
-  private def toActor(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[(AbstractPlayer, Boolean)] = {
+  private def toActor(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[(AbstractActor, Boolean)] = {
     for {
       id <- (node \ "@type").map(_.text).headOption
       classDef = lookup("object", classDefs, id)
@@ -116,7 +115,7 @@ object VirtualWorldLoader {
       println(s"Instantiating '$id' from ${classDef.getName}")
       val args = Array(world, new FxPoint3D(x, y, z)) map (_.asInstanceOf[Object])
       val cons = classDef.getConstructors()(0)
-      val actor = cons.newInstance(args: _*).asInstanceOf[AbstractPlayer]
+      val actor = cons.newInstance(args: _*).asInstanceOf[AbstractActor]
       (actor, isPlayer)
     }
   }

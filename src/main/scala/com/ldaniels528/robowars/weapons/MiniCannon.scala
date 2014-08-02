@@ -1,21 +1,19 @@
 package com.ldaniels528.robowars.weapons
 
-import MiniCannon._
-import com.ldaniels528.robowars.actors.AbstractVehicle
 import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.robowars.actors.AbstractVehicle
+import com.ldaniels528.robowars.weapons.MiniCannon._
 
 /**
  * MiniCannon
  * @author lawrence.daniels@gmail.com
  */
-class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D)
-  extends AbstractWeapon(host, relPos, loadingTime, defaultAmmo) {
+case class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D) extends AbstractWeapon(host, relPos, LOADING_TIME, INITIAL_AMMO) {
 
   override def fire(): Boolean = {
     if (super.fire()) {
       val p = theHost.getPosition()
-      p.plus(relOrigin)
+      p += relOrigin
       new MiniCannonRound(theHost.getWorld(), theHost, p, theHost.getAngle())
       true
     } else false
@@ -28,7 +26,7 @@ class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D)
  * @author lawrence.daniels@gmail.com
  */
 object MiniCannon {
-  val loadingTime: Double = 0.4d
-  val defaultAmmo: Int = 250
+  val LOADING_TIME = 0.4d
+  val INITIAL_AMMO = 250
 
 }

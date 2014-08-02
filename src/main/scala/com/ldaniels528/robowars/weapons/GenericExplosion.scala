@@ -50,9 +50,9 @@ class GenericExplosion(
     if (age > (time0 + time1)) {
       die()
     } else if (age > time0) {
-      scale.plus(dScale2 * dt)
+      scale += (dScale2 * dt)
     } else {
-      scale.plus(dScale1 * dt)
+      scale += (dScale1 * dt)
     }
     getPolyhedronInstance().setScalingFactor(scale)
 

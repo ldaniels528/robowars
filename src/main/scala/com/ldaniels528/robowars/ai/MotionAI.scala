@@ -1,13 +1,15 @@
 package com.ldaniels528.robowars.ai
 
-import MotionAI._
-import com.ldaniels528.fxcore3d.FxEvent
-import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.fxcore3d.FxWorld
-import com.ldaniels528.robowars.events.EventMotionCommand
-import com.ldaniels528.robowars.actors.AbstractPlayer
+import com.ldaniels528.fxcore3d.{FxEvent, FxPoint3D}
+import com.ldaniels528.robowars.actors.AbstractActor
+import com.ldaniels528.robowars.ai.MotionAI._
+import com.ldaniels528.robowars.events.{Events, EventMotionCommand}
 
-class MotionAI(host: AbstractPlayer) extends AbstractAI(host) {
+/**
+ * Represents a non-aggressive autonomous artificial intelligence
+ * @param host the host [[AbstractActor a c t o r]]
+ */
+class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
   protected var destination: Option[FxPoint3D] = None
   protected var maxError: Double = 0
   protected var state: Int = STANDBY
@@ -73,19 +75,18 @@ class MotionAI(host: AbstractPlayer) extends AbstractAI(host) {
   }
 
   def gotoPosition(pos: FxPoint3D, error: Double) {
-    addEvent(new EventMotionCommand(theWorld.time, getUniqueId(),
-      EventMotionCommand.GOTO_POSITION, pos, error))
+    addEvent( EventMotionCommand(theWorld.time, getUniqueId(), GOTO_POSITION, pos, error))
     ()
   }
 
   private def getDeterminant(dest: FxPoint3D): Double = {
     // -- make vector from host position to destination
     val v1 = host.getPosition().vectorTo(dest)
-    
+
     // -- make vector for host's direction
     val v2 = new FxPoint3D(0, 0, -1)
     v2.rotateAboutYaxis(host.getAngle().y)
-    
+
     // -- check if destination is in front of the host
     if (v1.dotProduct(v2) > 0) {
       // -- destination in front of the host

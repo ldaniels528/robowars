@@ -16,7 +16,7 @@ class MissileLauncher(host: AbstractVehicle, relPos: FxPoint3D)
     if (super.fire()) {
       // -- create a new missile
       val p = theHost.getPosition()
-      p.plus(relOrigin)
+      p += relOrigin
       new MissileRound(theHost.getWorld(), theHost, p, theHost.getAngle())
       true
     } else false

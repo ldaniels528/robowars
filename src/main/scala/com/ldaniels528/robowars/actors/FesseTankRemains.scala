@@ -15,7 +15,7 @@ import com.ldaniels528.robowars.structures.AbstractMovingScenery
  * Remains of a Fesse Tank
  * @author lawrence.daniels@gmail.com
  */
-class FesseTankRemains(world: FxWorld, deadTank: AbstractPlayer)
+class FesseTankRemains(world: FxWorld, deadTank: AbstractActor)
   extends AbstractMovingScenery(world, deadTank.getPosition(), deadTank.getAngle(), deadTank.getdPosition(), deadTank.getdAngle()) {
 
   usePolyhedronInstance(new FxPolyhedronInstance(ourDefaultPolyhedron, ourScale))

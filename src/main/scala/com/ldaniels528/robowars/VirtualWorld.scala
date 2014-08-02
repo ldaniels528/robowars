@@ -5,7 +5,7 @@ import scala.beans.BeanProperty
 
 import com.ldaniels528.fxcore3d.FxWorld
 import com.ldaniels528.robowars.actors.FesseTank
-import com.ldaniels528.robowars.actors.AbstractPlayer
+import com.ldaniels528.robowars.actors.AbstractActor
 
 /**
  * Represents a virtual world
@@ -14,7 +14,7 @@ import com.ldaniels528.robowars.actors.AbstractPlayer
 case class VirtualWorld(Xmin: Double, Ymin: Double, size: Double, rows: Int, gravity: Double)
   extends AbstractVirtualWorld(Xmin, Ymin, size, rows) {
 
-  @BeanProperty var activePlayer: AbstractPlayer = _
+  @BeanProperty var activePlayer: AbstractActor = _
 
   // environmental settings
   var skyColor = new Color(60, 60, 200)

@@ -1,19 +1,19 @@
 package com.ldaniels528.robowars
 
 import java.awt._
-import java.awt.event.{ KeyEvent, KeyListener }
-import RoboWars._
+import java.awt.event.{KeyEvent, KeyListener}
+
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
-import com.ldaniels528.robowars.actors.AbstractPlayer
-import com.ldaniels528.robowars.events.EventSteeringCommand
-import com.ldaniels528.robowars.events.EventWeaponCommand
+import com.ldaniels528.robowars.RoboWars._
+import com.ldaniels528.robowars.actors.AbstractActor
+import com.ldaniels528.robowars.events.{EventWeaponCommand, Events}
 
 /**
  * RoboWars Application Main
  * @author lawrence.daniels@gmail.com
  */
-class RoboWars() extends FxFrame("Robo-Wars") {
+class RoboWars() extends FxFrame("Robo-Wars") with Events {
   var world: FxWorld = _
   var camera: FxTrackerCamera = _
   val key = new Array[Boolean](100)
@@ -29,7 +29,9 @@ class RoboWars() extends FxFrame("Robo-Wars") {
   // setup the key listener
   super.addKeyListener(new KeyListener {
     override def keyTyped(event: KeyEvent) = ()
+
     override def keyReleased(event: KeyEvent) = keyboardEvent(event, false)
+
     override def keyPressed(event: KeyEvent) = keyboardEvent(event, true)
   })
 
@@ -44,9 +46,9 @@ class RoboWars() extends FxFrame("Robo-Wars") {
     offScreen.setFont(FONT12)
     theScreen = contentPane.getGraphics().asInstanceOf[Graphics2D]
     screenDim = dim
-    
+
     // load the audio samples
-    import com.ldaniels528.robowars.audio.CombatAudioPlayer._
+    import com.ldaniels528.robowars.audio.AudioManager._
     audioPlayer ! Init
 
     // load the world
@@ -99,7 +101,7 @@ class RoboWars() extends FxFrame("Robo-Wars") {
     offScreen.clearRect(0, 0, dim.width, dim.height)
     camera.setScreenSize(dim.width, dim.height)
     camera.paint(offScreen)
-    
+
     // render the cycle time
     offScreen.setColor(new Color(0xFF, 0x80, 0x00))
     offScreen.drawString(f"dt = $dt%.3f", dim.width - 75, dim.height - 25)
@@ -122,7 +124,7 @@ class RoboWars() extends FxFrame("Robo-Wars") {
     theScreen.drawImage(buffer, 0, 0, this)
   }
 
-  private def renderHUD(player: AbstractPlayer) {
+  private def renderHUD(player: AbstractActor) {
     val XPOS = 5
     val YPOS = 25
     val BAR_WIDTH = 300
@@ -161,8 +163,6 @@ class RoboWars() extends FxFrame("Robo-Wars") {
 
   private def keyboardEvent(event: KeyEvent, pressed: Boolean) {
     import java.awt.event.KeyEvent._
-    import EventSteeringCommand._
-    import EventWeaponCommand._
 
     key(INCREASE_VELOCITY) = event.isControlDown()
     key(DECREASE_VELOCITY) = event.isAltDown()
@@ -190,8 +190,6 @@ class RoboWars() extends FxFrame("Robo-Wars") {
   }
 
   private def handleKeyboardEvents(dt: Double) {
-    import EventSteeringCommand._
-    import EventWeaponCommand._
 
     // get the active player
     val player = world.activePlayer
@@ -209,9 +207,9 @@ class RoboWars() extends FxFrame("Robo-Wars") {
 
     // weapon events
     if (key(FIRE)) player.fireSelectedWeapon()
-    if (key(MINICANNON)) player.addEvent(new EventWeaponCommand(world.time, SELECT, MINICANNON))
-    if (key(MISSILE)) player.addEvent(new EventWeaponCommand(world.time, SELECT, MISSILE))
-    if (key(BOMB)) player.addEvent(new EventWeaponCommand(world.time, SELECT, BOMB))
+    if (key(MINICANNON)) player += EventWeaponCommand(world.time, SELECT, MINICANNON)
+    if (key(MISSILE)) player += EventWeaponCommand(world.time, SELECT, MISSILE)
+    if (key(BOMB)) player += EventWeaponCommand(world.time, SELECT, BOMB)
   }
 
   private def createCamera(world: FxWorld): FxTrackerCamera = {

@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.actors.AbstractPlayer
+import com.ldaniels528.robowars.actors.AbstractActor
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -33,7 +33,7 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
   /**
    * The active player
    */
-  def activePlayer: AbstractPlayer
+  def activePlayer: AbstractActor
 
   /**
    * The world's gravity

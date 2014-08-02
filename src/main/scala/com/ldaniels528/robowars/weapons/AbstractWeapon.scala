@@ -33,7 +33,7 @@ abstract class AbstractWeapon(
    * Fires the weapon
    */
   def fire(): Boolean = {
-    import com.ldaniels528.robowars.audio.CombatAudioPlayer._
+    import com.ldaniels528.robowars.audio.AudioManager._
 
     if (lastFire > 0 || ammo <= 0) false
     else {
