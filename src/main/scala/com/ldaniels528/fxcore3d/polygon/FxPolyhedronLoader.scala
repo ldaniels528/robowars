@@ -57,8 +57,8 @@ object FxPolyhedronLoader {
     new FxArrayOf3DPoints(x, y, z, npoints)
   }
 
-  def readClippableFilledPolygon(is: InputStream): FxClippableFilledPolygon = {
-    createColoredPolygon(is, FxClippableFilledPolygon.apply _)
+  def readClippableFilledPolygon(is: InputStream): FxClippingFilledPolygon = {
+    createColoredPolygon(is, FxClippingFilledPolygon.apply _)
   }
 
   def readFilledPolygon(is: InputStream): FxFilledPolygon = {

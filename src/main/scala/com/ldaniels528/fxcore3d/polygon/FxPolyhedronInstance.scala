@@ -3,8 +3,7 @@ package com.ldaniels528.fxcore3d.polygon
 import java.awt.Graphics2D
 
 import com.ldaniels528.fxcore3d.camera.FxCamera
-import com.ldaniels528.fxcore3d.matrix.FxMatrix3D
-import com.ldaniels528.fxcore3d.{FxAngle3D, FxArrayOf3DPoints, FxBoundingVolume, FxPoint3D}
+import com.ldaniels528.fxcore3d._
 
 /**
  * FxEngine Polyhedron Instance
@@ -104,7 +103,7 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
     if (matrixIsDirty) {
       // -- position or angle has changed and the transformed
       // -- vertices need to be updated.
-      myTransformMatrix.makeMCStoWCStransform(myPosition, myAngle, myScale)
+      myTransformMatrix.setTransformMCStoWCS(myPosition, myAngle, myScale)
       matrixIsDirty = false
     }
   }

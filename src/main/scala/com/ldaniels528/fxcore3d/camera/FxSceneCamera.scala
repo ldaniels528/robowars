@@ -2,6 +2,7 @@ package com.ldaniels528.fxcore3d.camera
 
 import java.awt.{Color, Graphics2D}
 
+import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxArrayOf3DPoints, FxPoint3D, FxProjectedPoints, FxWorld}
 
 /**
@@ -14,9 +15,7 @@ class FxSceneCamera(world: FxWorld,
                     pos: FxPoint3D,
                     agl: FxAngle3D,
                     gridSize: Double)
-  extends FxBasicCamera(world, viewAngle, viewDistance, pos, agl) {
-
-  import com.ldaniels528.fxcore3d.camera.FxCamera.{our2dBuffer, our3dBuffer}
+  extends FxGenericCamera(world, viewAngle, viewDistance, pos, agl) {
 
   // capture the camera's start time
   private val startTime = System.currentTimeMillis()
@@ -33,34 +32,38 @@ class FxSceneCamera(world: FxWorld,
   private val myGroundColor = new Color(130, 130, 50)
   private val pts = ((2 * viewDistance / gridSize) + 1).toInt
   private val nbrPointsInGround: Int = pts * pts
-  private val groundWCS = FxArrayOf3DPoints(nbrPointsInGround)
-
-  var n = 0
-  var x = -viewDistance
-  while (x <= viewDistance) {
-    var z = -viewDistance
-    while (z <= viewDistance) {
-      groundWCS.x(n) = x
-      groundWCS.y(n) = 0
-      groundWCS.z(n) = z
-      n += 1
-      z += gridSize
-    }
-    x += gridSize
-  }
+  private val groundWCS = createTerrain(nbrPointsInGround)
 
   if (our3dBuffer.npoints < nbrPointsInGround) {
     our3dBuffer = FxArrayOf3DPoints(nbrPointsInGround)
     our2dBuffer = FxProjectedPoints(nbrPointsInGround)
   }
 
+  private def createTerrain(nbrPointsInGround: Int): FxArrayOf3DPoints = {
+    val terrain = FxArrayOf3DPoints(nbrPointsInGround)
+    var n = 0
+    var x = -viewDistance
+    while (x <= viewDistance) {
+      var z = -viewDistance
+      while (z <= viewDistance) {
+        terrain.x(n) = x
+        terrain.y(n) = 0
+        terrain.z(n) = z
+        n += 1
+        z += gridSize
+      }
+      x += gridSize
+    }
+    terrain
+  }
+
   override def paint(g: Graphics2D) {
-    fakeHorizon(g)
-    fakeGround(g)
+    paintHorizon(g)
+    paintGround(g)
     super.paint(g)
   }
 
-  protected def fakeHorizon(g: Graphics2D) {
+  protected def paintHorizon(g: Graphics2D) {
     val p = FxPoint3D(0, myPosition.y, -viewDistance * 5)
     p.rotateAboutXaxis(-myAngle.x)
 
@@ -73,7 +76,7 @@ class FxSceneCamera(world: FxWorld,
       g.fillRect(0, 0, x0 << 1, y0 << 1)
     } else {
       // figure out whether the sky is above the ground or vice-versa
-      val (topColor, bottomColor) = if(p.z < 0) (mySkyColor, myGroundColor) else (myGroundColor, mySkyColor)
+      val (topColor, bottomColor) = if (p.z < 0) (mySkyColor, myGroundColor) else (myGroundColor, mySkyColor)
       g.setColor(topColor)
       g.fillRect(0, 0, x0 << 1, screenY)
       g.setColor(bottomColor)
@@ -81,7 +84,7 @@ class FxSceneCamera(world: FxWorld,
     }
   }
 
-  protected def fakeGround(g: Graphics2D) {
+  protected def paintGround(g: Graphics2D) {
     val centerX = (myPosition.x / gridSize).toInt
     val centerZ = (myPosition.z / gridSize).toInt
 
@@ -89,7 +92,7 @@ class FxSceneCamera(world: FxWorld,
     updateMatrix()
 
     // transform the ground points from WCS to VCS
-    myWCStoVCSmatrix.transformWithTranslation(
+    matrixWCStoVCS.transformWithTranslation(
       groundWCS,
       our3dBuffer,
       new FxPoint3D(centerX * gridSize, 0, centerZ * gridSize))
@@ -101,7 +104,7 @@ class FxSceneCamera(world: FxWorld,
     doTheChecks()
 
     g.setColor(new Color(0, 0, 0))
-    (0 to (our2dBuffer.npoints - 1)) foreach { n =>
+    (0 to (our2dBuffer.length - 1)) foreach { n =>
       if (our2dBuffer.clipFlags(n) == 0) {
         g.drawLine(our2dBuffer.x(n), our2dBuffer.y(n), our2dBuffer.x(n), our2dBuffer.y(n))
       }

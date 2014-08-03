@@ -3,15 +3,15 @@ package com.ldaniels528.fxcore3d.polygon
 import java.awt.Graphics2D
 
 import com.ldaniels528.fxcore3d.camera.FxCamera
-import com.ldaniels528.fxcore3d.polygon.FxClippableFilledPolygon._
+import com.ldaniels528.fxcore3d.polygon.FxClippingFilledPolygon._
 import com.ldaniels528.fxcore3d.polygon.FxIndexingPolygon._
 import com.ldaniels528.fxcore3d.{FxColor, FxProjectedPoints}
 
 /**
- * FxEngine Clippable Filled Polygon
+ * FxEngine Clipping Filled Polygon
  * @author lawrence.daniels@gmail.com
  */
-class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
+class FxClippingFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
   extends FxFilledPolygon(myIndices, nbrIndices, myColor) {
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera) {
@@ -19,7 +19,7 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
     var clipFlagsAndOp: Int = p.clipFlags(myIndices(0))
     var clipFlagsOrOp: Int = clipFlagsAndOp
 
-    for (n <- 1 to (nbrIndices - 1)) {
+    (1 to (nbrIndices - 1)) foreach { n =>
       val temp = p.clipFlags(myIndices(n))
       clipFlagsOrOp |= temp
       clipFlagsAndOp &= temp
@@ -84,7 +84,7 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
       val i1 = myIndices(p1)
 
       if (p.z(i1) < cam.zClip) {
-        // -- point infront of the camera
+        // -- point in front of the camera
         if (!inside) {
           // -- last point was "outside"
           cam.clipAndStoreZ(p.x(i0), p.y(i0), p.z(i0), p.x(i1), p.y(i1), p.z(i1), xt, yt, pts)
@@ -113,22 +113,22 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
   override def makeClone(): FxIndexingPolygon = {
     val dst = new Array[Int](nbrIndices)
     System.arraycopy(myIndices, 0, dst, 0, nbrIndices)
-    new FxClippableFilledPolygon(dst, nbrIndices, myColor.copy())
+    new FxClippingFilledPolygon(dst, nbrIndices, myColor.copy())
   }
 
 }
 
 /**
- * FxClippableFilledPolygon Companion Object
+ * FxEngine Clipping Filled Polygon Companion Object
  * @author lawrence.daniels@gmail.com
  */
-object FxClippableFilledPolygon {
+object FxClippingFilledPolygon {
 
   val xt = new Array[Int](100)
   val yt = new Array[Int](100)
 
-  def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxClippableFilledPolygon = {
-    new FxClippableFilledPolygon(myIndices, nbrIndices, color)
+  def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxClippingFilledPolygon = {
+    new FxClippingFilledPolygon(myIndices, nbrIndices, color)
   }
 
 }

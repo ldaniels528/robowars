@@ -1,6 +1,6 @@
 package com.ldaniels528.fxcore3d
 
-import com.ldaniels528.fxcore3d.camera.FxBasicCamera
+import com.ldaniels528.fxcore3d.camera.FxCamera
 import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
 
 /**
@@ -95,11 +95,11 @@ import scala.beans.BeanProperty
   /**
    * Paints this object on camera.
    */
-  def paint(g: Graphics2D, cam: FxBasicCamera) {
+  def paint(g: Graphics2D, cam: FxCamera) {
     polyhedronInstance.clipAndPaint(g, cam)
   }
 
-  def paintWithShading(g: Graphics2D, cam: FxBasicCamera, light: FxPoint3D) {
+  def paintWithShading(g: Graphics2D, cam: FxCamera, light: FxPoint3D) {
     polyhedronInstance.clipAndPaintWithShading(g, cam, light)
   }
 

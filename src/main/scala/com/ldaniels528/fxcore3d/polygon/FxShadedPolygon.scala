@@ -10,7 +10,7 @@ import com.ldaniels528.fxcore3d.{FxColor, FxPoint3D, FxProjectedPoints}
  * @author lawrence.daniels@gmail.com
  */
 class FxShadedPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
-  extends FxClippableFilledPolygon(myIndices, nbrIndices, myColor) {
+  extends FxClippingFilledPolygon(myIndices, nbrIndices, myColor) {
 
   var myNormal: FxPoint3D = _
 

@@ -10,6 +10,6 @@ trait FxArrayOf2DPoints {
   
   def y: Array[Int] 
   
-  def npoints: Int
+  def length: Int
 
 }
