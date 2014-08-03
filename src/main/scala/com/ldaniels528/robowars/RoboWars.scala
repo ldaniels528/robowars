@@ -7,7 +7,7 @@ import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
 import com.ldaniels528.robowars.actors.AbstractActor
-import com.ldaniels528.robowars.events.{EventWeaponCommand, Events}
+import com.ldaniels528.robowars.events.{WeaponCommand, Events}
 
 /**
  * RoboWars Application Main
@@ -190,7 +190,6 @@ class RoboWars() extends FxFrame("Robo-Wars") with Events {
   }
 
   private def handleKeyboardEvents(dt: Double) {
-
     // get the active player
     val player = world.activePlayer
 
@@ -207,9 +206,9 @@ class RoboWars() extends FxFrame("Robo-Wars") with Events {
 
     // weapon events
     if (key(FIRE)) player.fireSelectedWeapon()
-    if (key(MINICANNON)) player += EventWeaponCommand(world.time, SELECT, MINICANNON)
-    if (key(MISSILE)) player += EventWeaponCommand(world.time, SELECT, MISSILE)
-    if (key(BOMB)) player += EventWeaponCommand(world.time, SELECT, BOMB)
+    if (key(MINICANNON)) player += WeaponCommand(world.time, SELECT, MINICANNON)
+    if (key(MISSILE)) player += WeaponCommand(world.time, SELECT, MISSILE)
+    if (key(BOMB)) player += WeaponCommand(world.time, SELECT, BOMB)
   }
 
   private def createCamera(world: FxWorld): FxTrackerCamera = {
@@ -223,7 +222,7 @@ class RoboWars() extends FxFrame("Robo-Wars") with Events {
     light.normalize(1)
 
     // create the camera
-    val cam = new FxTrackerCamera(world, 1.2, 1000, 20, 1, 1.6, player, new FxAngle3D(), new FxPoint3D(0, 4, 4))
+    val cam = new FxTrackerCamera(world, 1.2, 1000, 20, 2.0, player, FxAngle3D(), FxPoint3D(0, 4, 4))
     cam.setLightSource(light)
     cam
   }

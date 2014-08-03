@@ -3,11 +3,11 @@ package com.ldaniels528.robowars.ai
 import com.ldaniels528.fxcore3d.{FxEvent, FxPoint3D}
 import com.ldaniels528.robowars.actors.AbstractActor
 import com.ldaniels528.robowars.ai.MotionAI._
-import com.ldaniels528.robowars.events.{Events, EventMotionCommand}
+import com.ldaniels528.robowars.events.{Events, MotionCommand}
 
 /**
  * Represents a non-aggressive autonomous artificial intelligence
- * @param host the host [[AbstractActor a c t o r]]
+ * @param host the host [[AbstractActor]]
  */
 class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
   protected var destination: Option[FxPoint3D] = None
@@ -16,7 +16,7 @@ class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
 
   override def handleEvent(event: FxEvent): Boolean = {
     event match {
-      case ev: EventMotionCommand =>
+      case ev: MotionCommand =>
         state = ADJUSTING_HEIGHT
         destination = Some(ev.dest)
         maxError = ev.precision
@@ -75,7 +75,7 @@ class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
   }
 
   def gotoPosition(pos: FxPoint3D, error: Double) {
-    addEvent( EventMotionCommand(theWorld.time, getUniqueId(), GOTO_POSITION, pos, error))
+    addEvent( MotionCommand(theWorld.time, getUniqueId(), GOTO_POSITION, pos, error))
     ()
   }
 

@@ -4,7 +4,7 @@ import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.actors.AntiTankCannon._
-import com.ldaniels528.robowars.events.EventWeaponCommand
+import com.ldaniels528.robowars.events.WeaponCommand
 import com.ldaniels528.robowars.structures.GenericFragment
 import com.ldaniels528.robowars.weapons.{AbstractRound, MiniCannon}
 
@@ -45,7 +45,7 @@ class AntiTankCannon(world: FxWorld, p: FxPoint3D)
 
   override protected def handleEvent(event: FxEvent): Boolean = {
     event match {
-      case EventWeaponCommand(_, command, _) =>
+      case WeaponCommand(_, command, _) =>
         if (command == FIRE) selectedWeapon.fire
         true
       case _ => super.handleEvent(event)

@@ -13,8 +13,7 @@ class FxSceneCamera(world: FxWorld,
                     viewDistance: Double,
                     pos: FxPoint3D,
                     agl: FxAngle3D,
-                    gridSize: Double,
-                    fadingFactor: Double)
+                    gridSize: Double)
   extends FxBasicCamera(world, viewAngle, viewDistance, pos, agl) {
 
   import com.ldaniels528.fxcore3d.camera.FxCamera.{our2dBuffer, our3dBuffer}
@@ -73,17 +72,12 @@ class FxSceneCamera(world: FxWorld,
       g.setColor(if (p.z > 0) myGroundColor else mySkyColor)
       g.fillRect(0, 0, x0 << 1, y0 << 1)
     } else {
-      if (p.z < 0) {
-        g.setColor(mySkyColor)
-        g.fillRect(0, 0, x0 << 1, screenY)
-        g.setColor(myGroundColor)
-        g.fillRect(0, screenY, x0 << 1, y0 << 1)
-      } else {
-        g.setColor(myGroundColor)
-        g.fillRect(0, 0, x0 << 1, screenY)
-        g.setColor(mySkyColor)
-        g.fillRect(0, screenY, x0 << 1, y0 << 1)
-      }
+      // figure out whether the sky is above the ground or vice-versa
+      val (topColor, bottomColor) = if(p.z < 0) (mySkyColor, myGroundColor) else (myGroundColor, mySkyColor)
+      g.setColor(topColor)
+      g.fillRect(0, 0, x0 << 1, screenY)
+      g.setColor(bottomColor)
+      g.fillRect(0, screenY, x0 << 1, y0 << 1)
     }
   }
 

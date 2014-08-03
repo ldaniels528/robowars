@@ -2,7 +2,7 @@ package com.ldaniels528.robowars.actors
 
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxEvent, FxObject, FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.AbstractMovingObject
-import com.ldaniels528.robowars.events.{Events, EventSteeringCommand, EventWeaponCommand}
+import com.ldaniels528.robowars.events.{Events, SteeringCommand, WeaponCommand}
 import com.ldaniels528.robowars.structures.{AbstractMovingStructure, AbstractStaticStructure}
 import com.ldaniels528.robowars.weapons.{AbstractRound, AbstractWeapon}
 
@@ -77,7 +77,7 @@ class AbstractVehicle(world: FxWorld,
   private def oldStates() {
     setPosition(myLastPos)
     setAngle(myLastAgl)
-    dPos.asInstanceOf[FxVelocityVector].setVelocity(0)
+    dPos.setVelocity(0)
   }
 
   def addWeapon(weapon: AbstractWeapon) {
@@ -120,29 +120,29 @@ class AbstractVehicle(world: FxWorld,
     weapons.foreach(_.update(dt))
   }
 
-  def fireSelectedWeapon() = this += EventWeaponCommand(world.time, FIRE, 0)
+  def fireSelectedWeapon() = this += WeaponCommand(world.time, FIRE, 0)
 
-  def turnLeft(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, TURN_LEFT, factor, dt)
+  def turnLeft(factor: Double, dt: Double) = this += SteeringCommand(world.time, TURN_LEFT, factor, dt)
 
-  def turnRight(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, TURN_RIGHT, factor, dt)
+  def turnRight(factor: Double, dt: Double) = this += SteeringCommand(world.time, TURN_RIGHT, factor, dt)
 
-  def increaseVelocity(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, INCREASE_VELOCITY, factor, dt)
+  def increaseVelocity(factor: Double, dt: Double) = this += SteeringCommand(world.time, INCREASE_VELOCITY, factor, dt)
 
-  def decreaseVelocity(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, DECREASE_VELOCITY, factor, dt)
+  def decreaseVelocity(factor: Double, dt: Double) = this += SteeringCommand(world.time, DECREASE_VELOCITY, factor, dt)
 
-  def brake(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, BRAKE, factor, dt)
+  def brake(factor: Double, dt: Double) = this += SteeringCommand(world.time, BRAKE, factor, dt)
 
-  def climb(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, CLIMB, factor, dt)
+  def climb(factor: Double, dt: Double) = this += SteeringCommand(world.time, CLIMB, factor, dt)
 
-  def decent(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, DECENT, factor, dt)
+  def decent(factor: Double, dt: Double) = this += SteeringCommand(world.time, DECENT, factor, dt)
 
-  def pitchUp(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, PITCH_UP, factor, dt)
+  def pitchUp(factor: Double, dt: Double) = this += SteeringCommand(world.time, PITCH_UP, factor, dt)
 
-  def pitchDown(factor: Double, dt: Double) = this += EventSteeringCommand(world.time, PITCH_DOWN, -factor, dt)
+  def pitchDown(factor: Double, dt: Double) = this += SteeringCommand(world.time, PITCH_DOWN, -factor, dt)
 
   override protected def handleEvent(event: FxEvent) = {
     event match {
-      case EventSteeringCommand(_, command, factor, dt) =>
+      case SteeringCommand(_, command, factor, dt) =>
         command match {
           case TURN_LEFT => handleTurnLeft(factor, dt)
           case TURN_RIGHT => handleTurnRight(factor, dt)
@@ -158,7 +158,7 @@ class AbstractVehicle(world: FxWorld,
         }
         true
 
-      case EventWeaponCommand(_, command, arg) =>
+      case WeaponCommand(_, command, arg) =>
         command match {
           case SELECT => selectWeapon(arg - 20)
           case FIRE => selectedWeapon.fire
