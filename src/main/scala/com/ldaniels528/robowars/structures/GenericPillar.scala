@@ -9,15 +9,14 @@ import com.ldaniels528.robowars.structures.GenericPillar._
  * Generic Pillar
  * @author lawrence.daniels@gmail.com
  */
-class GenericPillar(
-  world: FxWorld,
-  x: Double, z: Double,
-  agl: FxAngle3D,
-  w: Double, b: Double, h: Double)
+class GenericPillar(world: FxWorld,
+                    x: Double, z: Double,
+                    agl: FxAngle3D,
+                    w: Double, b: Double, h: Double)
   extends AbstractStaticStructure(world, x, h, z, agl) {
 
   // -- make a building
-  usePolyhedronInstance(new FxPolyhedronInstance(DEFAULT_MODEL, new FxPoint3D(w, h, b)));
+  usePolyhedronInstance(new FxPolyhedronInstance(DEFAULT_MODEL, new FxPoint3D(w, h, b)))
 
 }
 

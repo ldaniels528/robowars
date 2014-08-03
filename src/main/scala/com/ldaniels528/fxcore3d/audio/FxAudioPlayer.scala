@@ -5,15 +5,15 @@ import javax.sound.sampled._
 
 /**
  * FxEngine Audio Player
- * @author ldaniels
+ * @author lawrence.daniels@gmail.com
  */
 trait FxAudioPlayer {
 
   /**
    * Creates a cached audio data object from the underlying sound data found
    * within the given input stream.
-   * @param is the given {@link InputStream input stream}
-   * @return a {@link FxAudioSample cached audio data object}
+   * @param is the given [[InputStream]]
+   * @return a [[FxAudioSample]]
    * @throws IOException
    * @throws UnsupportedAudioFileException
    */
@@ -48,11 +48,11 @@ trait FxAudioPlayer {
 
   /**
    * Plays the audio represented by the given cached audcio data object
-   * @param cachedAudioData the given {@link FxAudioSample cached audcio data object}
+   * @param sample the given [[FxAudioSample]]
    */
   def playSample(sample: FxAudioSample) {
-    val format = sample.getFormat()
-    val data = sample.getAudioData()
+    val format = sample.format
+    val data = sample.audioData
 
     // Open a data line to play our type of sampled audio. Use SourceDataLine
     // for play and TargetDataLine for record.
@@ -82,38 +82,38 @@ trait FxAudioPlayer {
 
   /**
    * Plays the audio represented by the given cached audcio data object
-   * @param cachedAudioData the given {@link CachedAudioData cached audcio data object}
+   * @param sample the given [[FxAudioSample]]
    */
   def playContinuousSample(sample: FxAudioSample, isAlive: => Boolean) {
-    val format = sample.getFormat();
-    val data = sample.getAudioData();
+    val format = sample.format
+    val data = sample.audioData
 
     // Open a data line to play our type of sampled audio. Use SourceDataLine
     // for play and TargetDataLine for record.
     val info = new DataLine.Info(classOf[SourceDataLine], format)
     if (!AudioSystem.isLineSupported(info)) {
-      System.out.println("AudioPlayer.playAudioStream does not handle this type of audio.");
-      return ;
+      System.out.println("AudioPlayer.playAudioStream does not handle this type of audio.")
+      return 
     }
 
     // Create a SourceDataLine for play back (throws LineUnavailableException).
     val dataLine = AudioSystem.getLine(info).asInstanceOf[SourceDataLine]
 
     // The line acquires system resources (throws LineAvailableException).
-    dataLine.open(format);
+    dataLine.open(format)
 
     while (isAlive) {
       // Allows the line to move data in and out to a port.
-      dataLine.start();
+      dataLine.start()
 
-      dataLine.write(data, 0, data.length);
+      dataLine.write(data, 0, data.length)
 
       // Continues data line I/O until its buffer is drained.
-      dataLine.drain();
+      dataLine.drain()
     }
 
     // Closes the data line, freeing any resources such as the audio device.
-    dataLine.close();
+    dataLine.close()
   }
 
 }

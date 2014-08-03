@@ -6,8 +6,8 @@ import com.ldaniels528.robowars.actors.AbstractActor;
 import com.ldaniels528.robowars.actors.AntiTankCannon;
 import com.ldaniels528.robowars.actors.FesseTank;
 import com.ldaniels528.robowars.actors.Glider;
-import com.ldaniels528.robowars.ai.AttackAI;
-import com.ldaniels528.robowars.ai.MotionAI;
+import com.ldaniels528.robowars.actors.ai.AttackAI;
+import com.ldaniels528.robowars.actors.ai.MotionAI;
 import com.ldaniels528.robowars.structures.GenericBuilding;
 import com.ldaniels528.robowars.structures.GenericPillar;
 import com.ldaniels528.robowars.structures.GenericWall;
@@ -389,7 +389,7 @@ public class VirtualWorldImpl extends VirtualWorld {
         ab.selectTarget(activePlayer);
 
         MotionAI b = new MotionAI(new Glider(this, new FxPoint3D(-10, -370, 0)));
-        b.gotoPosition(new FxPoint3D(0, 30, 100), 0.01);
+        b.navigateTo(new FxPoint3D(0, 30, 100), 0.01);
     }
 
 }

@@ -11,14 +11,13 @@ import com.ldaniels528.robowars.structures.GenericFragment._
  * Generic Fragment
  * @author lawrence.daniels@gmail.com
  */
-class GenericFragment(
-  world: FxWorld,
-  size: Double,
-  origin: FxPoint3D,
-  spread: Double,
-  generation0: Int,
-  speed: Double,
-  rotation: Double)
+class GenericFragment(world: FxWorld,
+                      size: Double,
+                      origin: FxPoint3D,
+                      spread: Double,
+                      generation0: Int,
+                      speed: Double,
+                      rotation: Double)
   extends AbstractMovingScenery(world,
     new FxPoint3D(
       origin.x + spread * (random() - 0.5),

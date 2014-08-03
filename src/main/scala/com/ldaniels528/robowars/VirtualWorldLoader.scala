@@ -4,7 +4,7 @@ import java.awt.Color
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.actors._
-import com.ldaniels528.robowars.ai.AttackAI
+import com.ldaniels528.robowars.actors.ai.AttackAI
 
 import scala.collection.mutable.{Map => MMap}
 

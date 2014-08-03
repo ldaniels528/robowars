@@ -26,7 +26,7 @@ class FesseTank(world: FxWorld, p: FxPoint3D)
 
   override def die() {
     super.die()
-    for (n <- 1 to FRAGMENTS_WHEN_DEAD) {
+    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
       new GenericFragment(world, FRAGMENT_SIZE, getPosition(),
         FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
     }
@@ -48,7 +48,8 @@ object FesseTank {
   val ACCELERATION: Double = 3d
   val BRAKE_RATE: Double = 10d
   val MAX_VELOCITY: Double = 20d
-  val FRAGMENT_SIZE: Double = 0.25d // 1d
+  val FRAGMENT_SIZE: Double = 0.25d
+  // 1d
   val FRAGMENT_SPEED: Double = 25d
   val FRAGMENT_SPREAD: Double = 2d
   val FRAGMENTS_WHEN_DEAD: Int = 15

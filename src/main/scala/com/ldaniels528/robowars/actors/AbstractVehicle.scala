@@ -111,7 +111,7 @@ class AbstractVehicle(world: FxWorld,
 
     // -- synchronize this object's angle with the
     // -- angle in the velocity vector
-    val v = getdPosition().asInstanceOf[FxVelocityVector]
+    val v = getdPosition()
     val a = getAngle()
     v.synchronizeAngle(a)
     setAngle(a)
@@ -172,19 +172,19 @@ class AbstractVehicle(world: FxWorld,
   }
 
   protected def handleTurnLeft(factor: Double, dt: Double) {
-    val v = getdPosition().asInstanceOf[FxVelocityVector]
+    val v = getdPosition()
     v.increaseAngleAboutYaxis(turningRate * factor * dt)
     setdPosition(v)
   }
 
   protected def handleTurnRight(factor: Double, dt: Double) {
-    val v = getdPosition().asInstanceOf[FxVelocityVector]
+    val v = getdPosition()
     v.increaseAngleAboutYaxis(-turningRate * factor * dt)
     setdPosition(v)
   }
 
   protected def handleIncreaseVelocity(factor: Double, dt: Double) {
-    val v = getdPosition().asInstanceOf[FxVelocityVector]
+    val v = getdPosition()
     if (v.getVelocity() < maxVelocity) {
       v.increaseVelocity(acceleration * factor * dt)
       setdPosition(v)
@@ -192,7 +192,7 @@ class AbstractVehicle(world: FxWorld,
   }
 
   protected def handleDecreaseVelocity(factor: Double, dt: Double) {
-    val v = getdPosition().asInstanceOf[FxVelocityVector]
+    val v = getdPosition()
     if (v.getVelocity() > -maxVelocity) {
       v.increaseVelocity(-acceleration * factor * dt)
       setdPosition(v)
@@ -200,14 +200,14 @@ class AbstractVehicle(world: FxWorld,
   }
 
   protected def handleBrake(factor: Double, dt: Double) {
-    val v = getdPosition().asInstanceOf[FxVelocityVector]
+    val v = getdPosition()
     if (v.getVelocity() > 0) v.increaseVelocity(-brakingRate * factor * dt)
     else if (v.getVelocity() < 0) v.setVelocity(0)
     setdPosition(v)
   }
 
   protected def handlePitch(factor: Double, dt: Double) {
-    val v = getdPosition().asInstanceOf[FxVelocityVector]
+    val v = getdPosition()
     v.increasePitch(-pitchRate * factor * dt)
     setdPosition(v)
   }

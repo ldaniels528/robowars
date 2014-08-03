@@ -28,7 +28,7 @@ class FxFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxIndexingP
   protected def render(g: Graphics2D) {
     // check orientation
     if (orientation() > 0) {
-      g.setColor(myColor.getColor())
+      g.setColor(myColor.color)
       g.fillPolygon(ourScratchPoly)
     }
   }

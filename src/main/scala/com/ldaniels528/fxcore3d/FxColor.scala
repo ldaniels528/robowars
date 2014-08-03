@@ -7,12 +7,7 @@ import java.awt.Color
  * @author lawrence.daniels@gmail.com
  */
 case class FxColor(r: Int, g: Int, b: Int) {
-  private var myBaseColor = new Color(r, g, b)
-
-  /**
-   * @return the base color
-   */
-  def getColor(): Color = myBaseColor
+  var color = new Color(r, g, b)
 
   /**
    * @return a cloned copy of this instance
@@ -27,7 +22,7 @@ case class FxColor(r: Int, g: Int, b: Int) {
     val rr = Math.max(0, Math.min(r + ii, 255))
     val gg = Math.max(0, Math.min(g + ii, 255))
     val bb = Math.max(0, Math.min(b + ii, 255))
-    myBaseColor = new Color(rr, gg, bb)
+    color = new Color(rr, gg, bb)
   }
 
   /**

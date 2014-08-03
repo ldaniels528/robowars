@@ -1,8 +1,8 @@
-package com.ldaniels528.robowars.ai
+package com.ldaniels528.robowars.actors.ai
 
 import com.ldaniels528.fxcore3d.{FxEvent, FxPoint3D}
 import com.ldaniels528.robowars.actors.AbstractActor
-import com.ldaniels528.robowars.ai.MotionAI._
+import com.ldaniels528.robowars.actors.ai.MotionAI._
 import com.ldaniels528.robowars.events.{Events, MotionCommand}
 
 /**
@@ -74,8 +74,8 @@ class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
     v.magnitude()
   }
 
-  def gotoPosition(pos: FxPoint3D, error: Double) {
-    addEvent( MotionCommand(theWorld.time, getUniqueId(), GOTO_POSITION, pos, error))
+  def navigateTo(pos: FxPoint3D, error: Double) {
+    this += MotionCommand(theWorld.time, getUniqueId(), GOTO_POSITION, pos, error)
     ()
   }
 

@@ -1,4 +1,4 @@
-package com.ldaniels528.robowars.ai
+package com.ldaniels528.robowars.actors.ai
 
 import com.ldaniels528.fxcore3d.FxObject
 import com.ldaniels528.robowars.actors.AbstractActor
