@@ -7,7 +7,7 @@ import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
 import com.ldaniels528.robowars.actors.AbstractActor
-import com.ldaniels528.robowars.events.{WeaponCommand, Events}
+import com.ldaniels528.robowars.events.{Events, WeaponCommand}
 
 /**
  * RoboWars Application Main

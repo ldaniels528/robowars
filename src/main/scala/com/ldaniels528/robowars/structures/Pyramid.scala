@@ -1,9 +1,9 @@
 package com.ldaniels528.robowars.structures
 
-import Pyramid._
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxPolyhedron
 import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.robowars.structures.Pyramid._
 
 /**
  * Represents a Pyramid Structure

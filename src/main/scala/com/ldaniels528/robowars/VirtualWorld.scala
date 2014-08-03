@@ -1,11 +1,10 @@
 package com.ldaniels528.robowars
 
 import java.awt.Color
-import scala.beans.BeanProperty
 
-import com.ldaniels528.fxcore3d.FxWorld
-import com.ldaniels528.robowars.actors.FesseTank
 import com.ldaniels528.robowars.actors.AbstractActor
+
+import scala.beans.BeanProperty
 
 /**
  * Represents a virtual world

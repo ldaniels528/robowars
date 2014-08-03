@@ -1,10 +1,9 @@
 package com.ldaniels528.robowars.actors
 
-import GliderRemains._
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.VirtualWorldImpl
+import com.ldaniels528.robowars.actors.GliderRemains._
 import com.ldaniels528.robowars.structures.AbstractMovingScenery
 
 /**
@@ -35,9 +34,9 @@ class GliderRemains(world: FxWorld, deadActor: AbstractActor)
       dp.x = 0
       dp.y = 0
       dp.z = 0
-      
+
       setPosition(p)
-      
+
       val a = getAngle()
       a.set(0, a.y, 0)
       // a.x = a.z = 0

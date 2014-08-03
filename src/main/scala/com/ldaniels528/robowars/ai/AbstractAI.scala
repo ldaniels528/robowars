@@ -2,6 +2,7 @@ package com.ldaniels528.robowars.ai
 
 import com.ldaniels528.fxcore3d.FxEvent
 import com.ldaniels528.robowars.actors.AbstractActor
+
 import scala.collection.mutable.Buffer
 
 /**

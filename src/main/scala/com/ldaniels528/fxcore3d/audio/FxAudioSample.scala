@@ -1,7 +1,8 @@
 package com.ldaniels528.fxcore3d.audio
 
-import scala.beans.BeanProperty
 import javax.sound.sampled.AudioFormat
+
+import scala.beans.BeanProperty
 
 /**
  * Encapsulates the audio information necessary for play back

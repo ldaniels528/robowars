@@ -1,11 +1,10 @@
 package com.ldaniels528.fxcore3d
 
 /**
- * FxEngine Array of Projected Points
+ * FxEngine Array Of 2D Points
  * @author lawrence.daniels@gmail.com
  */
-class FxProjectedPoints(val x: Array[Int], val y: Array[Int], val z: Array[Double], var length: Int)
-  extends FxArrayOf2DPoints {
+case class FxProjectedPoints(val x: Array[Int], val y: Array[Int], val z: Array[Double], var length: Int) {
   val clipFlags = new Array[Int](length)
   var clipOrOp: Int = _
   var clipAndOp: Int = _

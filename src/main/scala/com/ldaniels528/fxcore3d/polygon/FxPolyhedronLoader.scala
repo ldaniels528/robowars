@@ -6,7 +6,7 @@ import com.ldaniels528.fxcore3d._
 
 /**
  * FxEngine Polyhedron Loader
- * @author ldaniels
+ * @author lawrence.daniels@gmail.com
  */
 object FxPolyhedronLoader {
 

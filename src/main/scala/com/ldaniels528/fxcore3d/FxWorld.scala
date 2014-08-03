@@ -1,7 +1,5 @@
 package com.ldaniels528.fxcore3d
 
-import scala.beans.BeanProperty
-import scala.collection.mutable.ArrayBuffer
 import com.ldaniels528.robowars.actors.AbstractActor
 
 /**

@@ -1,9 +1,8 @@
 package com.ldaniels528.robowars.weapons
 
-import MissileLauncher._
 import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.actors.AbstractVehicle
+import com.ldaniels528.robowars.weapons.MissileLauncher._
 
 /**
  * Missile Launcher

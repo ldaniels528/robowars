@@ -1,7 +1,5 @@
 package com.ldaniels528.fxcore3d.camera
 
-import java.awt.Graphics2D
-
 import com.ldaniels528.fxcore3d._
 
 /**
@@ -29,7 +27,7 @@ trait FxCamera {
   /**
    * projects an array of 3d points to the temporary 2d buffer
    */
-  def project(p3d: FxArrayOf3DPoints): FxArrayOf2DPoints
+  def project(p3d: FxArrayOf3DPoints): FxProjectedPoints
 
   /**
    * @return the Z-clipping plane

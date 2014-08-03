@@ -1,6 +1,7 @@
 package com.ldaniels528.robowars.structures
 
 import com.ldaniels528.fxcore3d._
+
 import scala.beans.BeanProperty
 
 /**

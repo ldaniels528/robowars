@@ -2,7 +2,6 @@ package com.ldaniels528.robowars
 
 import java.io._
 
-import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.{FxConvexPolyhedron, FxPolyhedronLoader}
 
 /**

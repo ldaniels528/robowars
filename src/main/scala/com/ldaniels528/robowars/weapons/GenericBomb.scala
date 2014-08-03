@@ -1,13 +1,10 @@
 package com.ldaniels528.robowars.weapons
 
-import GenericBomb._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
-import scala.collection.mutable.ArrayBuffer
-
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.VirtualWorldImpl
 import com.ldaniels528.robowars.structures.AbstractMovingScenery
+import com.ldaniels528.robowars.weapons.GenericBomb._
 
 /**
  * Generic Bomb

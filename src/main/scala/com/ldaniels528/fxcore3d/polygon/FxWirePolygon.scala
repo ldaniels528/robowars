@@ -18,7 +18,7 @@ class FxWirePolygon(myIndices: Seq[Int]) extends FxIndexingPolygon(myIndices) {
   override def makeClone(): FxIndexingPolygon = {
     val dest = new Array[Int](myIndices.length)
     System.arraycopy(myIndices, 0, dest, 0, myIndices.length)
-    return new FxWirePolygon(dest)
+    new FxWirePolygon(dest)
   }
 
   override def paint(g: Graphics2D, x: Array[Int], y: Array[Int]) {

@@ -1,11 +1,11 @@
 package com.ldaniels528.robowars.weapons
 
-import GenericExplosion._
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.structures.AbstractMovingScenery
-import com.ldaniels528.robowars.structures.GenericFragment
+import com.ldaniels528.robowars.structures.{AbstractMovingScenery, GenericFragment}
+import com.ldaniels528.robowars.weapons.GenericExplosion._
+
 import scala.beans.BeanProperty
 
 /**

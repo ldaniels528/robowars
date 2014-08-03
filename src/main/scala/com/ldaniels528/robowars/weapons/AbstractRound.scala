@@ -2,6 +2,7 @@ package com.ldaniels528.robowars.weapons
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.actors.AbstractVehicle
+
 import scala.beans.BeanProperty
 
 /**

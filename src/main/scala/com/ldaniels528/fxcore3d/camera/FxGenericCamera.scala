@@ -67,7 +67,7 @@ class FxGenericCamera(world: FxWorld,
   /**
    * projects an array of 3d points to the temporary 2d buffer
    */
-  def project(p3d: FxArrayOf3DPoints): FxArrayOf2DPoints = {
+  def project(p3d: FxArrayOf3DPoints): FxProjectedPoints = {
     doTransform(p3d)
     doProjection()
     our2dBuffer
@@ -105,7 +105,7 @@ class FxGenericCamera(world: FxWorld,
   protected def doProjection() {
     // project the VCS coordinates to SCS storing the results
     // in a buffer
-    for (n <- 0 to (our3dBuffer.length - 1)) {
+    (0 to (our3dBuffer.length - 1)) foreach { n =>
       val z = our3dBuffer.z(n)
       our2dBuffer.x(n) = (screenDistance * our3dBuffer.x(n) / z).toInt + x0
       our2dBuffer.y(n) = -(screenDistance * our3dBuffer.y(n) / z).toInt + y0
@@ -120,7 +120,7 @@ class FxGenericCamera(world: FxWorld,
     our2dBuffer.clipAndOp = Int.MaxValue
     our2dBuffer.clipOrOp = 0
 
-    for (n <- 0 to (our2dBuffer.length - 1)) {
+    (0 to (our2dBuffer.length - 1)) foreach { n =>
       our2dBuffer.clipFlags(n) = 0
       if (our2dBuffer.x(n) > myWidth) {
         our2dBuffer.clipFlags(n) |= CLIP_RIGHT
@@ -196,7 +196,7 @@ class FxGenericCamera(world: FxWorld,
   }
 
   private def sphereIsVisible(pos: FxPoint3D, radius: Double): Boolean = {
-    val p = new FxPoint3D()
+    val p = FxPoint3D()
     updateMatrix()
     matrixWCStoVCS.transformPoint(pos, p)
     (p.z - radius) <= zClip

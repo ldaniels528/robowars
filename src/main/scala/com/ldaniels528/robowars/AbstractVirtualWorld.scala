@@ -2,6 +2,7 @@ package com.ldaniels528.robowars
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.actors.AbstractActor
+
 import scala.collection.mutable.ArrayBuffer
 
 /**

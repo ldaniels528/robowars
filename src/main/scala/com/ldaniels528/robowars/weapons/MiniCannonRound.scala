@@ -1,11 +1,10 @@
 package com.ldaniels528.robowars.weapons
 
-import MiniCannonRound._
-
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars._
 import com.ldaniels528.robowars.structures.GenericFragment
+import com.ldaniels528.robowars.weapons.MiniCannonRound._
 
 /**
  * MiniCannon Round

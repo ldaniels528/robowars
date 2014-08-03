@@ -1,7 +1,7 @@
 package com.ldaniels528.fxcore3d
 
-import javax.swing.{ JFrame, JPanel }
-import java.awt.{ Dimension, GridLayout }
+import java.awt.{Dimension, GridLayout}
+import javax.swing.{JFrame, JPanel}
 
 /**
  * FxEngine Window Frame

@@ -17,6 +17,11 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
 
   def magnitude(): Double = Math.sqrt(x * x + y * y + z * z)
 
+  /**
+   * @return a cloned copy of this instance
+   */
+  def makeClone: FxPoint3D = this.copy()
+
   def makeVectorTo(p: FxPoint3D) {
     x = p.x - x
     y = p.y - y
@@ -111,6 +116,6 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = p1.x * p2.y - p1.y * p2.x
   }
 
-  override def toString() = f"($x%.1f, $y%.1f, $z%.1f)"
+  override def toString = f"($x%.1f, $y%.1f, $z%.1f)"
 
 }

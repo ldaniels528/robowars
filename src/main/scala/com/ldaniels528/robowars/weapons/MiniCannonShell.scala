@@ -1,9 +1,9 @@
 package com.ldaniels528.robowars.weapons
 
-import MiniCannonShell._
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.robowars.weapons.MiniCannonShell._
 
 /**
  * MiniCannon Shell-Casing

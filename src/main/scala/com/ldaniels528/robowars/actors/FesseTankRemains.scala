@@ -1,13 +1,9 @@
 package com.ldaniels528.robowars.actors
 
-import FesseTankRemains._
-
-import com.ldaniels528.fxcore3d.FxAngle3D
-import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.fxcore3d.FxWorld
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.{FxAngle3D, FxPoint3D, FxWorld}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.VirtualWorldImpl
+import com.ldaniels528.robowars.actors.FesseTankRemains._
 import com.ldaniels528.robowars.structures.AbstractMovingScenery
 
 /**

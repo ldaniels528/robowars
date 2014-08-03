@@ -2,10 +2,10 @@ package com.ldaniels528.robowars.structures
 
 import java.lang.Math.random
 
-import GenericFragment._
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.robowars.structures.GenericFragment._
 
 /**
  * Generic Fragment

@@ -1,6 +1,6 @@
 package com.ldaniels528.fxcore3d.polygon
 
-import java.awt._
+import java.awt.{Graphics2D, Polygon}
 
 import com.ldaniels528.fxcore3d.camera.FxCamera
 import com.ldaniels528.fxcore3d.polygon.FxIndexingPolygon._

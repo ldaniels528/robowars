@@ -1,15 +1,11 @@
 package com.ldaniels528.robowars.actors
 
-import Glider._
-import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.fxcore3d.FxVelocityVector
-import com.ldaniels528.fxcore3d.FxWorld
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.{FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.robowars.actors.Glider._
 import com.ldaniels528.robowars.structures.GenericFragment
-import com.ldaniels528.robowars.weapons.BombBay
-import com.ldaniels528.robowars.weapons.MiniCannon
-import com.ldaniels528.robowars.weapons.MissileLauncher
+import com.ldaniels528.robowars.weapons.{BombBay, MiniCannon, MissileLauncher}
 
 /**
  * Glider Vehicle
@@ -34,7 +30,7 @@ class Glider(world: FxWorld, p: FxPoint3D)
 
   override def die() {
     super.die()
-    for (n <- 1 to FRAGMENTS_WHEN_DEAD) {
+    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
       new GenericFragment(getWorld(), FRAGMENT_SIZE, getPosition(),
         FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
     }

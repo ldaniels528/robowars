@@ -1,14 +1,12 @@
 package com.ldaniels528.robowars
 
 import java.awt.Color
-import java.io.{ File, FileInputStream, InputStream }
-import scala.collection.mutable.{ Map => MMap, Buffer }
-import scala.util.{ Try, Success, Failure }
-import scala.xml.{ NodeSeq, XML }
+
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.actors._
-import com.ldaniels528.robowars.structures._
 import com.ldaniels528.robowars.ai.AttackAI
+
+import scala.collection.mutable.{Map => MMap}
 
 /**
  * Virtual World Loader

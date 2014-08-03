@@ -20,14 +20,13 @@ class FxFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxIndexingP
    * Paint the polygon if it is CCW
    */
   override def paint(g: Graphics2D, x: Array[Int], y: Array[Int]) {
-    // -- copy the indexed coordinates from the 2d list to
-    // -- the scratch-pad
+    // copy the indexed coordinates from the 2d list to the scratch-pad
     copyIndexedPoints(x, y)
     render(g)
   }
 
   protected def render(g: Graphics2D) {
-    // -- check orientation
+    // check orientation
     if (orientation() > 0) {
       g.setColor(myColor.getColor())
       g.fillPolygon(ourScratchPoly)

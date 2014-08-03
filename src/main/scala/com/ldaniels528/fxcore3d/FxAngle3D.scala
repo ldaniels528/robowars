@@ -6,6 +6,11 @@ package com.ldaniels528.fxcore3d
  */
 case class FxAngle3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
 
+  /**
+   * @return a cloned copy of this instance
+   */
+  def makeClone = this.copy()
+
   def set(a: FxAngle3D) {
     x = a.x
     y = a.y
@@ -44,7 +49,7 @@ case class FxAngle3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z += p.z * factor
   }
 
-  override def toString() = f"($x%.1f, $y%.1f, $z%.1f)"
+  override def toString = f"($x%.1f, $y%.1f, $z%.1f)"
 
 }
 

@@ -2,8 +2,8 @@ package com.ldaniels528.fxcore3d.polygon
 
 import java.awt.Graphics2D
 
-import com.ldaniels528.fxcore3d.camera.FxCamera
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.fxcore3d.camera.FxCamera
 
 /**
  * FxEngine Polyhedron Instance

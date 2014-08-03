@@ -1,22 +1,22 @@
 package com.ldaniels528.fxcore3d
 
-import com.ldaniels528.fxcore3d.camera.FxCamera
 import java.awt.Graphics2D
+
+import com.ldaniels528.fxcore3d.camera.FxCamera
 
 /**
  * Abstract class that represents a moving object
  * @author lawrence.daniels@gmail.com
  */
-class FxMovingObject(
-  world: FxWorld,
-  pos: FxPoint3D,
-  agl: FxAngle3D,
-  dpos: FxVelocityVector,
-  dagl: FxAngle3D)
+class FxMovingObject(world: FxWorld,
+                     pos: FxPoint3D,
+                     agl: FxAngle3D,
+                     dpos: FxVelocityVector,
+                     dagl: FxAngle3D)
   extends FxObject(world, pos, agl) {
-  
-  var dPos: FxVelocityVector = dpos.copy()
-  var dAgl: FxAngle3D = dagl.copy()
+
+  var dPos: FxVelocityVector = dpos.makeClone
+  var dAgl: FxAngle3D = dagl.makeClone
 
   /**
    * Overrides.
@@ -24,12 +24,12 @@ class FxMovingObject(
   override def checkForCollisionWith(obj: FxObject, dt: Double): Boolean = {
     // update the position and angle of the polyhedron
     polyhedronInstance.setOrientation(Pos, Agl)
-    
+
     // if the other object is a moving object. updates it too.
     if (obj.isInstanceOf[FxMovingObject]) {
       obj.polyhedronInstance.setOrientation(obj.Pos, obj.Agl)
     }
-    
+
     // let the overridden method check the collision
     super.checkForCollisionWith(obj, dt)
   }
@@ -49,10 +49,10 @@ class FxMovingObject(
    */
   override def update(dt: Double) {
     super.update(dt)
-    
+
     // since this is a moving object it's physics must be updated.
     updatePhysics(dt)
-    
+
     // must be updated each round since this object might have left the old grids and entered new ones.
     updateTheOccupiedGrids()
   }
@@ -67,7 +67,7 @@ class FxMovingObject(
 
   def getdAngle(): FxAngle3D = dAgl.copy()
 
-  def getdPosition(): FxVelocityVector = dPos.copy()
+  def getdPosition(): FxVelocityVector = dPos.makeClone
 
   def setdPosition(p: FxPoint3D) = dPos.set(p)
 

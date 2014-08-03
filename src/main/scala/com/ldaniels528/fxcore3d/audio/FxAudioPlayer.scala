@@ -2,7 +2,6 @@ package com.ldaniels528.fxcore3d.audio
 
 import java.io._
 import javax.sound.sampled._
-import scala.beans.BeanProperty
 
 /**
  * FxEngine Audio Player

@@ -2,7 +2,6 @@ package com.ldaniels528.robowars.weapons
 
 import com.ldaniels528.fxcore3d.FxWorld._
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.VirtualWorldImpl;
 import com.ldaniels528.robowars.structures.AbstractMovingScenery;
 
 /**

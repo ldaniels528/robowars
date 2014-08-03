@@ -9,7 +9,7 @@ class FxVelocityVector() extends FxPoint3D() {
   var Ax: Double = _
   var velocity: Double = _
 
-  def copy() = FxVelocityVector(Ay, Ax, velocity, x, y, z)
+  override def makeClone: FxVelocityVector = FxVelocityVector(Ay, Ax, velocity, x, y, z)
 
   def setVelocity(nv: Double) {
     velocity = nv

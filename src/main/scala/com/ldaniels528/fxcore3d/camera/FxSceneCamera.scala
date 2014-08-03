@@ -2,8 +2,8 @@ package com.ldaniels528.fxcore3d.camera
 
 import java.awt.{Color, Graphics2D}
 
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
 
 /**
  * FxEngine Scene Camera renders the scene with skyline and terrain

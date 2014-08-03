@@ -1,14 +1,11 @@
 package com.ldaniels528.robowars.actors
 
-import FesseTank._
-import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.fxcore3d.FxVelocityVector
-import com.ldaniels528.fxcore3d.FxWorld
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.{FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.robowars.actors.FesseTank._
 import com.ldaniels528.robowars.structures.GenericFragment
-import com.ldaniels528.robowars.weapons.MiniCannon
-import com.ldaniels528.robowars.weapons.MissileLauncher
+import com.ldaniels528.robowars.weapons.{MiniCannon, MissileLauncher}
 
 /**
  * Fesse Tank
