@@ -99,19 +99,19 @@ class FxGenericCamera(world: FxWorld,
   protected def doTransform(p3d: FxArrayOf3DPoints) {
     updateMatrix()
     matrixWCStoVCS.transform(p3d, our3dBuffer)
-    our3dBuffer.npoints = p3d.npoints
+    our3dBuffer.length = p3d.length
   }
 
   protected def doProjection() {
     // project the VCS coordinates to SCS storing the results
     // in a buffer
-    for (n <- 0 to (our3dBuffer.npoints - 1)) {
+    for (n <- 0 to (our3dBuffer.length - 1)) {
       val z = our3dBuffer.z(n)
       our2dBuffer.x(n) = (screenDistance * our3dBuffer.x(n) / z).toInt + x0
       our2dBuffer.y(n) = -(screenDistance * our3dBuffer.y(n) / z).toInt + y0
     }
 
-    our2dBuffer.length = our3dBuffer.npoints
+    our2dBuffer.length = our3dBuffer.length
     // lend the buffer to the caller.
   }
 
@@ -215,6 +215,6 @@ object FxGenericCamera {
   var our2dBuffer = FxProjectedPoints(250)
 
   // a temporary buffer used for WCS to VCS transform
-  var our3dBuffer = FxArrayOf3DPoints(250)
+  var our3dBuffer = Fx3DPointArrayBuffer(250)
 
 }

@@ -30,7 +30,7 @@ object FxPolyhedronLoader {
   }
 
   private def createPolygonNormals(vertices: FxArrayOf3DPoints, myPolygons: Seq[FxIndexingPolygon]): FxArrayOf3DPoints = {
-    val normals = FxArrayOf3DPoints(myPolygons.length)
+    val normals = Fx3DPointArray(myPolygons.length)
     (0 to (myPolygons.length - 1)) foreach { n =>
       val norm = myPolygons(n).getNormal(vertices)
       normals.x(n) = norm.x
@@ -65,7 +65,7 @@ object FxPolyhedronLoader {
       stream.nextToken()
       z(n) = stream.nval
     }
-    new FxArrayOf3DPoints(x, y, z, length)
+    new Fx3DPointArray(x, y, z)
   }
 
   def readClippingFilledPolygon(is: InputStream): FxClippingFilledPolygon = {

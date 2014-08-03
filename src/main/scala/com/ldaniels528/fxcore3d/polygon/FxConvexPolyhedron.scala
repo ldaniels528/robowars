@@ -60,7 +60,7 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
   }
 
   override def scalePoints(fx: Double, fy: Double, fz: Double) {
-    (0 to (vertices.npoints - 1)) foreach { n =>
+    (0 to (vertices.length - 1)) foreach { n =>
       vertices.x(n) *= fx
       vertices.y(n) *= fy
       vertices.z(n) *= fz

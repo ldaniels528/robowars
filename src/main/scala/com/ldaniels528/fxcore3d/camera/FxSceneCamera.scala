@@ -3,7 +3,7 @@ package com.ldaniels528.fxcore3d.camera
 import java.awt.{Color, Graphics2D}
 
 import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
-import com.ldaniels528.fxcore3d.{FxAngle3D, FxArrayOf3DPoints, FxPoint3D, FxProjectedPoints, FxWorld}
+import com.ldaniels528.fxcore3d._
 
 /**
  * FxEngine Scene Camera renders the scene with skyline and terrain
@@ -34,13 +34,13 @@ class FxSceneCamera(world: FxWorld,
   private val nbrPointsInGround: Int = pts * pts
   private val groundWCS = createTerrain(nbrPointsInGround)
 
-  if (our3dBuffer.npoints < nbrPointsInGround) {
-    our3dBuffer = FxArrayOf3DPoints(nbrPointsInGround)
+  if (our3dBuffer.length < nbrPointsInGround) {
+    our3dBuffer = Fx3DPointArrayBuffer(nbrPointsInGround)
     our2dBuffer = FxProjectedPoints(nbrPointsInGround)
   }
 
   private def createTerrain(nbrPointsInGround: Int): FxArrayOf3DPoints = {
-    val terrain = FxArrayOf3DPoints(nbrPointsInGround)
+    val terrain = Fx3DPointArray(nbrPointsInGround)
     var n = 0
     var x = -viewDistance
     while (x <= viewDistance) {
@@ -98,7 +98,7 @@ class FxSceneCamera(world: FxWorld,
       new FxPoint3D(centerX * gridSize, 0, centerZ * gridSize))
 
     // set the number of points in the cache buffer
-    our3dBuffer.npoints = groundWCS.npoints
+    our3dBuffer.length = groundWCS.length
 
     doProjection()
     doTheChecks()
