@@ -9,8 +9,8 @@ import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
  */
 case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPoint3D) {
   protected val myRadius = myScale.magnitude()
-  protected val myBox = Fx3DPointArray(8)
-  protected val myNormals = Fx3DPointArray(6)
+  protected val myBox = Fx3DPointSeq(8)
+  protected val myNormals = Fx3DPointSeq(6)
 
   def checkForCollisionWith(volume: FxBoundingVolume): Boolean = {
     val pp = theHostPolyInst.getPosition().copy()
@@ -84,7 +84,7 @@ object FxBoundingVolume {
     val px = Array[Double](1, -1, -1, 1, -1, 1, 1, -1)
     val py = Array[Double](1, -1, 1, -1, 1, -1, 1, -1)
     val pz = Array[Double](1, -1, 1, -1, -1, 1, -1, 1)
-    new Fx3DPointArray(px, py, pz)
+    new Fx3DPointSeq(px, py, pz)
   }
 
   // the normals
@@ -93,7 +93,7 @@ object FxBoundingVolume {
     val nx = Array[Double](0, 0, -1, 1, 0, 0)
     val ny = Array[Double](1, -1, 0, 0, 0, 0)
     val nz = Array[Double](0, 0, 0, 0, -1, 1)
-    new Fx3DPointArray(nx, ny, nz)
+    new Fx3DPointSeq(nx, ny, nz)
   }
 
 }

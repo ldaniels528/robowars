@@ -215,6 +215,6 @@ object FxGenericCamera {
   var our2dBuffer = FxProjectedPoints(250)
 
   // a temporary buffer used for WCS to VCS transform
-  var our3dBuffer = Fx3DPointArrayBuffer(250)
+  var our3dBuffer = Fx3DPointBuffer(250)
 
 }

@@ -35,12 +35,12 @@ class FxSceneCamera(world: FxWorld,
   private val groundWCS = createTerrain(nbrPointsInGround)
 
   if (our3dBuffer.length < nbrPointsInGround) {
-    our3dBuffer = Fx3DPointArrayBuffer(nbrPointsInGround)
+    our3dBuffer = Fx3DPointBuffer(nbrPointsInGround)
     our2dBuffer = FxProjectedPoints(nbrPointsInGround)
   }
 
   private def createTerrain(nbrPointsInGround: Int): FxArrayOf3DPoints = {
-    val terrain = Fx3DPointArray(nbrPointsInGround)
+    val terrain = Fx3DPointSeq(nbrPointsInGround)
     var n = 0
     var x = -viewDistance
     while (x <= viewDistance) {
