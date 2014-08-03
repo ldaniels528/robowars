@@ -17,8 +17,6 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
 
   def magnitude(): Double = Math.sqrt(x * x + y * y + z * z)
 
-  def makeClone(): FxPoint3D = new FxPoint3D(x, y, z)
-
   def makeVectorTo(p: FxPoint3D) {
     x = p.x - x
     y = p.y - y

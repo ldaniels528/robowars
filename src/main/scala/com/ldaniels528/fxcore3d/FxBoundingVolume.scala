@@ -12,7 +12,7 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
   protected val myNormals = FxArrayOf3DPoints(6)
 
   def checkForCollisionWith(volume: FxBoundingVolume): Boolean = {
-    val pp = theHostPolyInst.getPosition().makeClone()
+    val pp = theHostPolyInst.getPosition().copy()
     pp.negate()
     pp += (volume.theHostPolyInst.getPosition())
 

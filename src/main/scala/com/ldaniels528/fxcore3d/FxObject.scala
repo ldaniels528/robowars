@@ -16,8 +16,8 @@ import scala.beans.BeanProperty
   private val events = ArrayBuffer[FxEvent]()
   private val occupiedGrids = ArrayBuffer[FxGrid]()
 
-  var Pos: FxPoint3D = pos.makeClone()
-  var Agl: FxAngle3D = angle.makeClone()
+  var Pos: FxPoint3D = pos.copy()
+  var Agl: FxAngle3D = angle.copy()
   var alive: Boolean = true
 
   @BeanProperty var age: Double = 0.0
@@ -112,12 +112,12 @@ import scala.beans.BeanProperty
   /**
    * Returns a clone of the position.
    */
-  def getPosition(): FxPoint3D = Pos.makeClone()
+  def getPosition(): FxPoint3D = Pos.copy()
 
   /**
    * Returns a clone of the angle.
    */
-  def getAngle(): FxAngle3D = Agl.makeClone()
+  def getAngle(): FxAngle3D = Agl.copy()
 
   /**
    * Returns the world coordinate for a position relative this object.

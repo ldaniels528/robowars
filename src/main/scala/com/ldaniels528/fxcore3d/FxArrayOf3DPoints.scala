@@ -6,28 +6,15 @@ package com.ldaniels528.fxcore3d
  */
 case class FxArrayOf3DPoints(x: Array[Double], y: Array[Double], z: Array[Double], var npoints: Int) {
 
+  def apply(n:Int) = FxPoint3D(x(n), y(n), z(n))
+
   /**
    * Returns a clone.
    */
-  def makeClone(): FxArrayOf3DPoints = {
-    val xnew = new Array[Double](npoints)
-    val ynew = new Array[Double](npoints)
-    val znew = new Array[Double](npoints)
-    System.arraycopy(x, 0, xnew, 0, npoints)
-    System.arraycopy(y, 0, ynew, 0, npoints)
-    System.arraycopy(z, 0, znew, 0, npoints)
-    new FxArrayOf3DPoints(xnew, ynew, znew, npoints)
-  }
+  def makeClone(): FxArrayOf3DPoints = this.copy()
 
-  /**
-   * ovrrides the Object method
-   */
   override def toString = {
-    val sb = new StringBuilder(npoints * 10)
-    for (n <- 0 to (npoints - 1)) {
-      sb.append(",(%.1f, %.1f, %.1f)".format(x(n), y(n), z(n)))
-    }
-    sb.substring(1)
+    ((0 to (npoints - 1)) map (n => "(%.1f, %.1f, %.1f)".format(x(n), y(n), z(n)))).mkString(",")
   }
 }
 

@@ -112,7 +112,7 @@ class FxClippableFilledPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: 
   override def makeClone(): FxIndexingPolygon = {
     val dst = new Array[Int](nbrIndices)
     System.arraycopy(myIndices, 0, dst, 0, nbrIndices)
-    new FxClippableFilledPolygon(dst, nbrIndices, myColor.makeClone())
+    new FxClippableFilledPolygon(dst, nbrIndices, myColor.copy())
   }
 
 }

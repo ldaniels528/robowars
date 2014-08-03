@@ -25,8 +25,6 @@ case class FxColor(r: Int, g: Int, b: Int) {
    */
   def getColor(): Color = myBaseColor
 
-  def makeClone(): FxColor = new FxColor(r, g, b)
-
   /**
    * make a string representation
    */

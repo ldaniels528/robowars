@@ -1,88 +1,82 @@
 package com.ldaniels528.fxcore3d
 
 import java.awt.Graphics2D
-import scala.beans.BeanProperty
 
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera;
+import com.ldaniels528.fxcore3d.camera.FxGenericCamera
 
 /**
  * FxEngine Convex Polyhedron
  * @author lawrence.daniels@gmail.com
  */
-class FxConvexPolyhedron(
-  val vertices: FxArrayOf3DPoints,
-  val myPolygons: Array[FxIndexingPolygon],
-  val nbrOfPolygons: Int,
-  normals: FxArrayOf3DPoints = null) extends FxPolyhedron {
+case class FxConvexPolyhedron(val vertices: FxArrayOf3DPoints,
+                              val myPolygons: Array[FxIndexingPolygon],
+                              val nbrOfPolygons: Int,
+                              normals: Option[FxArrayOf3DPoints] = None) extends FxPolyhedron {
 
-  // the 3d coordinates for the model
-  @BeanProperty var myPolygonNormals: FxArrayOf3DPoints = normals
-
-  // create the normals if not defined
-  if (myPolygonNormals == null) {
-    makePolygonNormals()
-  }
-
-  private def makePolygonNormals() {
-    myPolygonNormals = FxArrayOf3DPoints(nbrOfPolygons)
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      val norm = myPolygons(n).getNormal(vertices)
-      myPolygonNormals.x(n) = norm.x
-      myPolygonNormals.y(n) = norm.y
-      myPolygonNormals.z(n) = norm.z
-    }
-  }
+  // the 3D coordinates for the model
+  private val myPolygonNormals: FxArrayOf3DPoints = normals getOrElse (createPolygonNormals)
 
   override def calculateIntensities(light: FxPoint3D, intensities: Array[Double]) {
-    val ptemp = new FxPoint3D()
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      ptemp.set(myPolygonNormals.x(n), myPolygonNormals.y(n), myPolygonNormals.z(n))
-      intensities(n) = ptemp.dotProduct(light)
+    val p = new FxPoint3D()
+    (0 to (nbrOfPolygons - 1)) foreach { n =>
+      p.set(myPolygonNormals.x(n), myPolygonNormals.y(n), myPolygonNormals.z(n))
+      intensities(n) = p.dotProduct(light)
     }
+  }
+
+  override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera) {
+    for (n <- 0 to (nbrOfPolygons - 1)) {
+      myPolygons(n).clipAndPaint(g, p, camera)
+    }
+  }
+
+  override def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera, intensities: Array[Double]) {
+    for (n <- 0 to (nbrOfPolygons - 1)) {
+      myPolygons(n).clipAndPaintWithShading(g, p, camera, intensities(n))
+    }
+  }
+
+  override def makeClone(): FxPolyhedron = {
+    val polys = new Array[FxIndexingPolygon](nbrOfPolygons)
+    (0 to (nbrOfPolygons - 1)) foreach { n =>
+      polys(n) = myPolygons(n).makeClone()
+    }
+    new FxConvexPolyhedron(vertices.makeClone(), polys, nbrOfPolygons, Some(myPolygonNormals))
   }
 
   /**
    * overrides FxPolyhedron.paint(..) the polygons don't need to be sorted.
    */
-  def paint(g: Graphics2D, point2d: FxArrayOf2DPoints) {
+  override def paint(g: Graphics2D, point2d: FxArrayOf2DPoints) {
     //  the polygons don't have to be sorted
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      myPolygons(n).paint(g, point2d.x, point2d.y);
+    (0 to (nbrOfPolygons - 1)) foreach { n =>
+      myPolygons(n).paint(g, point2d.x, point2d.y)
     }
   }
 
-  def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera) {
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      myPolygons(n).clipAndPaint(g, p, camera);
+  override def paintWithShading(g: Graphics2D, points: FxArrayOf2DPoints, intensities: Array[Double]) {
+    (0 to (nbrOfPolygons - 1)) foreach { n =>
+      myPolygons(n).paintWithShading(g, points.x, points.y, intensities(n))
     }
-  }
-
-  def paintWithShading(g: Graphics2D, point2d: FxArrayOf2DPoints, intensities: Array[Double]) {
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      myPolygons(n).paintWithShading(g, point2d.x, point2d.y, intensities(n));
-    }
-  }
-
-  def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera, intensities: Array[Double]) {
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      myPolygons(n).clipAndPaintWithShading(g, p, camera, intensities(n));
-    }
-  }
-
-  def makeClone(): FxPolyhedron = {
-    val polys = new Array[FxIndexingPolygon](nbrOfPolygons)
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      polys(n) = myPolygons(n).makeClone();
-    }
-    new FxConvexPolyhedron(vertices.makeClone(), polys, nbrOfPolygons, myPolygonNormals);
   }
 
   override def scalePoints(fx: Double, fy: Double, fz: Double) {
-    for (n <- 0 to (vertices.npoints - 1)) {
+    (0 to (vertices.npoints - 1)) foreach { n =>
       vertices.x(n) *= fx
       vertices.y(n) *= fy
       vertices.z(n) *= fz
     }
+  }
+
+  private def createPolygonNormals(): FxArrayOf3DPoints = {
+    val normals = FxArrayOf3DPoints(nbrOfPolygons)
+    (0 to (nbrOfPolygons - 1)) foreach { n =>
+      val norm = myPolygons(n).getNormal(vertices)
+      normals.x(n) = norm.x
+      normals.y(n) = norm.y
+      normals.z(n) = norm.z
+    }
+    normals
   }
 
 }

@@ -23,7 +23,7 @@ trait FxPolyhedron {
   def makeClone(): FxPolyhedron
 
   /**
-   * paint the polyhedron using the supplied 2d coordinates.
+   * paint the polyhedron using the supplied 2D coordinates.
    */
   def paint(g: Graphics2D, point2d: FxArrayOf2DPoints)
 

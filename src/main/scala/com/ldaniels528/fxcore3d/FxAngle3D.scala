@@ -18,13 +18,13 @@ case class FxAngle3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = z0
   }
 
-  def *=(s: Double) {
-    x *= s
-    y *= s
-    z *= s
-  }
+  def *(factor: Double) = FxAngle3D(x * factor, y * factor, z * factor)
 
-  def makeClone(): FxAngle3D = this.copy()
+  def *=(factor: Double) {
+    x *= factor
+    y *= factor
+    z *= factor
+  }
 
   def negate() {
     x = -x

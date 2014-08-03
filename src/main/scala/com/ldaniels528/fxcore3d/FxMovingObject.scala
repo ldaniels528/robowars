@@ -15,8 +15,8 @@ class FxMovingObject(
   dagl: FxAngle3D)
   extends FxObject(world, pos, agl) {
   
-  var dPos: FxVelocityVector = dpos.makeClone()
-  var dAgl: FxAngle3D = dagl.makeClone()
+  var dPos: FxVelocityVector = dpos.copy()
+  var dAgl: FxAngle3D = dagl.copy()
 
   /**
    * Overrides.
@@ -65,9 +65,9 @@ class FxMovingObject(
     Agl.plus(dAgl, dt)
   }
 
-  def getdAngle(): FxAngle3D = dAgl.makeClone()
+  def getdAngle(): FxAngle3D = dAgl.copy()
 
-  def getdPosition(): FxVelocityVector = dPos.makeClone()
+  def getdPosition(): FxVelocityVector = dPos.copy()
 
   def setdPosition(p: FxPoint3D) = dPos.set(p)
 

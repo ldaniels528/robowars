@@ -9,6 +9,8 @@ class FxVelocityVector() extends FxPoint3D() {
   var Ax: Double = _
   var velocity: Double = _
 
+  def copy() = FxVelocityVector(Ay, Ax, velocity, x, y, z)
+
   def setVelocity(nv: Double) {
     velocity = nv
     calculateComponents()
@@ -46,8 +48,6 @@ class FxVelocityVector() extends FxPoint3D() {
   }
 
   def synchronizeAngle(a: FxAngle3D) = a.set(Ax, Ay, 0)
-
-  override def makeClone() = FxVelocityVector(Ay, Ax, velocity, x, y, z)
 
   override def negate() {
     velocity = -velocity

@@ -12,7 +12,7 @@ class FxFilledPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
   override def makeClone(): FxIndexingPolygon = {
     val dst = new Array[Int](nbrIndices)
     System.arraycopy(myIndices, 0, dst, 0, dst.length)
-    new FxFilledPolygon(dst, nbrIndices, myColor.makeClone())
+    new FxFilledPolygon(dst, nbrIndices, myColor.copy())
   }
 
   /**

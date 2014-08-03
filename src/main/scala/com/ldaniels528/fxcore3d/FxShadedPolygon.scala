@@ -25,7 +25,7 @@ class FxShadedPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
   override def makeClone(): FxShadedPolygon = {
     val dst = new Array[Int](nbrIndices)
     System.arraycopy(myIndices, 0, dst, 0, nbrIndices)
-    new FxShadedPolygon(dst, nbrIndices, myColor.makeClone())
+    new FxShadedPolygon(dst, nbrIndices, myColor.copy())
   }
 
   override def paintWithShading(g: Graphics2D, x: Array[Int], y: Array[Int], intensity: Double) {

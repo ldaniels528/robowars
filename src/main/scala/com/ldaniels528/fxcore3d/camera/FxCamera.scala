@@ -24,7 +24,7 @@ class FxCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos: FxP
   /**
    * Sets the ambient light
    */
-  def setAmbientLight(vect: FxPoint3D): Unit = light = vect.makeClone()
+  def setAmbientLight(vect: FxPoint3D): Unit = light = vect.copy()
 
   def paint(g: Graphics2D) {
     // filter for only the objects within our bounding sphere
