@@ -9,7 +9,7 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera
  * Describes an abstract indexing polygon.
  * @author lawrence.daniels@gmail.com
  */
-abstract class FxIndexingPolygon(myIndices: Array[Int], nbrIndices: Int) {
+abstract class FxIndexingPolygon(myIndices: Seq[Int], nbrIndices: Int) {
 
   def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxGenericCamera) {
     paint(g, p.x, p.y)

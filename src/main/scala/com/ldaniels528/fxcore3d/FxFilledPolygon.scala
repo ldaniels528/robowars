@@ -6,7 +6,7 @@ import FxIndexingPolygon._
 /**
  * A solid color polygon.
  */
-class FxFilledPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
+class FxFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
   extends FxIndexingPolygon(myIndices, nbrIndices) {
 
   override def makeClone(): FxIndexingPolygon = {
@@ -42,7 +42,7 @@ class FxFilledPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
 object FxFilledPolygon {
   import java.io._
 
-  def apply(myIndices: Array[Int], nbrIndices: Int, color: FxColor): FxFilledPolygon = {
+  def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxFilledPolygon = {
     new FxFilledPolygon(myIndices, nbrIndices, color)
   }
 

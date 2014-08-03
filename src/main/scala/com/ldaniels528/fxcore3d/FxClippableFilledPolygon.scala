@@ -10,7 +10,7 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera
  * FxEngine Clippable Filled Polygon
  * @author lawrence.daniels@gmail.com
  */
-class FxClippableFilledPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
+class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
   extends FxFilledPolygon(myIndices, nbrIndices, myColor) {
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera) {
@@ -127,7 +127,7 @@ object FxClippableFilledPolygon {
   val xt = new Array[Int](100)
   val yt = new Array[Int](100)
 
-  def apply(myIndices: Array[Int], nbrIndices: Int, color: FxColor): FxClippableFilledPolygon = {
+  def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxClippableFilledPolygon = {
     new FxClippableFilledPolygon(myIndices, nbrIndices, color)
   }
 

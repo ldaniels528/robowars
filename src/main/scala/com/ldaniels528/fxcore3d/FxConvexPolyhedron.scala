@@ -8,13 +8,14 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera
  * FxEngine Convex Polyhedron
  * @author lawrence.daniels@gmail.com
  */
-case class FxConvexPolyhedron(val vertices: FxArrayOf3DPoints,
-                              val myPolygons: Array[FxIndexingPolygon],
-                              val nbrOfPolygons: Int,
+case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
+                              myPolygons: Seq[FxIndexingPolygon],
                               normals: Option[FxArrayOf3DPoints] = None) extends FxPolyhedron {
 
   // the 3D coordinates for the model
   private val myPolygonNormals: FxArrayOf3DPoints = normals getOrElse (createPolygonNormals)
+
+  override def nbrOfPolygons = myPolygons.length
 
   override def calculateIntensities(light: FxPoint3D, intensities: Array[Double]) {
     val p = new FxPoint3D()
@@ -41,7 +42,7 @@ case class FxConvexPolyhedron(val vertices: FxArrayOf3DPoints,
     (0 to (nbrOfPolygons - 1)) foreach { n =>
       polys(n) = myPolygons(n).makeClone()
     }
-    new FxConvexPolyhedron(vertices.makeClone(), polys, nbrOfPolygons, Some(myPolygonNormals))
+    new FxConvexPolyhedron(vertices.makeClone(), polys, Some(myPolygonNormals))
   }
 
   /**

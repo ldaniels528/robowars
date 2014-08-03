@@ -1,17 +1,15 @@
 package com.ldaniels528.fxcore3d
 
 import java.awt._
-import java.io._
 
-import FxIndexingPolygon._
+import com.ldaniels528.fxcore3d.FxIndexingPolygon._
 import com.ldaniels528.fxcore3d.camera.FxGenericCamera
 
 /**
  * FxEngine Wire Polygon
  * @author lawrence.daniels@gmail.com
  */
-class FxWirePolygon(myIndices: Array[Int], nbrIndices: Int)
-  extends FxIndexingPolygon(myIndices, nbrIndices) {
+class FxWirePolygon(myIndices: Seq[Int], nbrIndices: Int) extends FxIndexingPolygon(myIndices, nbrIndices) {
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxGenericCamera) {
     paint(g, p.x, p.y)
@@ -28,7 +26,7 @@ class FxWirePolygon(myIndices: Array[Int], nbrIndices: Int)
     g.setColor(Color.black)
     g.drawPolygon(ourScratchPoly)
   }
-  
+
 }
 
 /**
@@ -37,7 +35,7 @@ class FxWirePolygon(myIndices: Array[Int], nbrIndices: Int)
  */
 object FxWirePolygon {
 
-  def apply(myIndices: Array[Int], nbrIndices: Int): FxWirePolygon = {
+  def apply(myIndices: Seq[Int], nbrIndices: Int): FxWirePolygon = {
     new FxWirePolygon(myIndices, nbrIndices)
   }
 

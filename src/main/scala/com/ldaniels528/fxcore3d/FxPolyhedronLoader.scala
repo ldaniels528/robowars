@@ -1,7 +1,6 @@
 package com.ldaniels528.fxcore3d
 
-import java.io.InputStream
-import java.io.StreamTokenizer
+import java.io.{InputStream, StreamTokenizer}
 
 /**
  * FxEngine Polyhedron Loader
@@ -23,15 +22,9 @@ object FxPolyhedronLoader {
     stream.nextToken()
     val nbrPolygons = stream.nval.toInt
 
-    // create the vector
-    val myPolygons = new Array[FxIndexingPolygon](nbrPolygons)
-
-    // read each polygon
-    for (n <- 0 to (nbrPolygons - 1)) {
-      myPolygons(n) = readShadedPolygon(is)
-    }
-
-    new FxConvexPolyhedron(vertices, myPolygons, myPolygons.length)
+    // read each polygon and create the polyhedron
+    val myPolygons = (1 to nbrPolygons) map (n => readShadedPolygon(is))
+    new FxConvexPolyhedron(vertices, myPolygons)
   }
 
   /**
@@ -51,7 +44,7 @@ object FxPolyhedronLoader {
     val z = new Array[Double](npoints)
 
     // read the coordinates
-    for (n <- 0 to (npoints - 1)) {
+    (0 to (npoints - 1)) foreach { n =>
       stream.nextToken()
       x(n) = stream.nval.toDouble
       stream.nextToken()
@@ -95,28 +88,7 @@ object FxPolyhedronLoader {
     new FxColor(r, g, b)
   }
 
-  private def createPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Array[Int], Int) => T): T = {
-    // make a stream reader
-    val stream = getTokenizer(is)
-    
-    // get the # of indicies in this polygon
-    stream.nextToken()
-    val nbrIndices = stream.nval.toInt
-
-    // allocate the vector
-    val myIndices = new Array[Int](nbrIndices)
-
-    // read all indices
-    for (i <- 0 to (nbrIndices - 1)) {
-      stream.nextToken()
-      myIndices(i) = stream.nval.toInt
-    }
-
-    // create the polygon
-    fx(myIndices, nbrIndices)
-  }
-
-  private def createColoredPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Array[Int], Int, FxColor) => T): T = {
+  private def createPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Seq[Int], Int) => T): T = {
     // make a stream reader
     val stream = getTokenizer(is)
 
@@ -124,13 +96,28 @@ object FxPolyhedronLoader {
     stream.nextToken()
     val nbrIndices = stream.nval.toInt
 
-    // allocate the vector
-    val myIndices = new Array[Int](nbrIndices)
+    // read all indices
+    val myIndices = (1 to nbrIndices) map { n =>
+      stream.nextToken()
+      stream.nval.toInt
+    }
+
+    // create the polygon
+    fx(myIndices, nbrIndices)
+  }
+
+  private def createColoredPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Seq[Int], Int, FxColor) => T): T = {
+    // make a stream reader
+    val stream = getTokenizer(is)
+
+    // get the # of indices in this polygon
+    stream.nextToken()
+    val nbrIndices = stream.nval.toInt
 
     // read all indices
-    for (n <- 0 to (nbrIndices - 1)) {
+    val myIndices = (1 to nbrIndices) map { n =>
       stream.nextToken()
-      myIndices(n) = stream.nval.toInt
+      stream.nval.toInt
     }
 
     // create the polygon

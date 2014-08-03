@@ -8,7 +8,7 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera
  * FxEngine Shaded Polygon
  * @author lawrence.daniels@gmail.com
  */
-class FxShadedPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
+class FxShadedPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
   extends FxClippableFilledPolygon(myIndices, nbrIndices, myColor) {
 
   var myNormal: FxPoint3D = _
@@ -41,7 +41,7 @@ class FxShadedPolygon(myIndices: Array[Int], nbrIndices: Int, myColor: FxColor)
  */
 object FxShadedPolygon {
 
-  def apply(myIndices: Array[Int], nbrIndices: Int, color: FxColor): FxShadedPolygon = {
+  def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxShadedPolygon = {
     new FxShadedPolygon(myIndices, nbrIndices, color)
   }
 
