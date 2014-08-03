@@ -10,6 +10,16 @@ import com.ldaniels528.robowars.weapons._
 class AbstractStaticStructure(world: FxWorld, x: Double, y: Double, z: Double, agl: FxAngle3D, health: Double = Double.MaxValue)
   extends AbstractStaticObject(world, new FxPoint3D(x, y, z), agl, health) {
 
+  override def die() {
+    import com.ldaniels528.robowars.audio.AudioManager._
+
+    // play the explosion clip
+    audioPlayer ! BuildingExplodeClip
+
+    // allow super-class to take action
+    super.die()
+  }
+
   override def interestedOfCollisionWith(obj: FxObject): Boolean = {
     obj match {
       case r: AbstractRound => true
