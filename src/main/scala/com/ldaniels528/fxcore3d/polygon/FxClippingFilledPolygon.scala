@@ -11,15 +11,14 @@ import com.ldaniels528.fxcore3d.{FxColor, FxProjectedPoints}
  * FxEngine Clipping Filled Polygon
  * @author lawrence.daniels@gmail.com
  */
-class FxClippingFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
-  extends FxFilledPolygon(myIndices, nbrIndices, myColor) {
+class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxFilledPolygon(myIndices, myColor) {
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera) {
     // -- gather information about the clipping needed for
     var clipFlagsAndOp: Int = p.clipFlags(myIndices(0))
     var clipFlagsOrOp: Int = clipFlagsAndOp
 
-    (1 to (nbrIndices - 1)) foreach { n =>
+    (1 to (myIndices.length - 1)) foreach { n =>
       val temp = p.clipFlags(myIndices(n))
       clipFlagsOrOp |= temp
       clipFlagsAndOp &= temp
@@ -68,7 +67,7 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxC
   }
 
   protected def clipZ(p: FxProjectedPoints, xt: Array[Int], yt: Array[Int], cam: FxCamera): Int = {
-    var p0 = 0
+    val p0 = 0
     var pts = 0
     var i0 = myIndices(p0)
 
@@ -79,8 +78,8 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxC
       pts += 1
     }
 
-    for (n <- 1 to (nbrIndices - 1)) {
-      val p1 = if (n < nbrIndices) n else 0
+    for (n <- 1 to (myIndices.length - 1)) {
+      val p1 = if (n < myIndices.length) n else 0
       val i1 = myIndices(p1)
 
       if (p.z(i1) < cam.zClip) {
@@ -107,13 +106,13 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxC
       }
       i0 = i1
     }
-    return pts
+    pts
   }
 
   override def makeClone(): FxIndexingPolygon = {
-    val dst = new Array[Int](nbrIndices)
-    System.arraycopy(myIndices, 0, dst, 0, nbrIndices)
-    new FxClippingFilledPolygon(dst, nbrIndices, myColor.copy())
+    val dst = new Array[Int](myIndices.length)
+    System.arraycopy(myIndices, 0, dst, 0, myIndices.length)
+    new FxClippingFilledPolygon(dst, myColor.copy())
   }
 
 }
@@ -127,8 +126,8 @@ object FxClippingFilledPolygon {
   val xt = new Array[Int](100)
   val yt = new Array[Int](100)
 
-  def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxClippingFilledPolygon = {
-    new FxClippingFilledPolygon(myIndices, nbrIndices, color)
+  def apply(myIndices: Seq[Int], color: FxColor): FxClippingFilledPolygon = {
+    new FxClippingFilledPolygon(myIndices, color)
   }
 
 }

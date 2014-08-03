@@ -10,7 +10,7 @@ import com.ldaniels528.fxcore3d.{FxArrayOf3DPoints, FxPoint3D, FxProjectedPoints
  * Describes an abstract indexing polygon.
  * @author lawrence.daniels@gmail.com
  */
-abstract class FxIndexingPolygon(myIndices: Seq[Int], nbrIndices: Int) {
+abstract class FxIndexingPolygon(myIndices: Seq[Int]) {
 
   def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxCamera) {
     paint(g, p.x, p.y)
@@ -24,12 +24,12 @@ abstract class FxIndexingPolygon(myIndices: Seq[Int], nbrIndices: Int) {
    * pokes out the 2d coordinates and stores them into the scratch polygon.
    */
   protected def copyIndexedPoints(x: Array[Int], y: Array[Int]) {
-    (0 to (nbrIndices - 1)) foreach { n =>
+    (0 to (myIndices.length - 1)) foreach { n =>
       val index = myIndices(n)
       ourScratchPoly.xpoints(n) = x(index)
       ourScratchPoly.ypoints(n) = y(index)
     }
-    ourScratchPoly.npoints = nbrIndices
+    ourScratchPoly.npoints = myIndices.length
   }
 
   /**
@@ -38,7 +38,7 @@ abstract class FxIndexingPolygon(myIndices: Seq[Int], nbrIndices: Int) {
   def getNormal(a: FxArrayOf3DPoints): FxPoint3D = {
     val i0 = myIndices(0)
     val i1 = myIndices(1)
-    val i2 = myIndices(nbrIndices - 1)
+    val i2 = myIndices(myIndices.length - 1)
 
     val p0 = FxPoint3D(a.x(i0), a.y(i0), a.z(i0))
     val v1 = p0.vectorTo(FxPoint3D(a.x(i1), a.y(i1), a.z(i1)))

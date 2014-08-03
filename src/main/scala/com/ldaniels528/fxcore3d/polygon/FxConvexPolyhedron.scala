@@ -11,10 +11,7 @@ import com.ldaniels528.fxcore3d.{FxArrayOf2DPoints, FxArrayOf3DPoints, FxPoint3D
  */
 case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
                               myPolygons: Seq[FxIndexingPolygon],
-                              normals: Option[FxArrayOf3DPoints] = None) extends FxPolyhedron {
-
-  // the 3D coordinates for the model
-  private val myPolygonNormals: FxArrayOf3DPoints = normals getOrElse (createPolygonNormals)
+                              myPolygonNormals: FxArrayOf3DPoints) extends FxPolyhedron {
 
   override def nbrOfPolygons = myPolygons.length
 
@@ -43,7 +40,7 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
     (0 to (nbrOfPolygons - 1)) foreach { n =>
       polys(n) = myPolygons(n).makeClone()
     }
-    new FxConvexPolyhedron(vertices.makeClone(), polys, Some(myPolygonNormals))
+    new FxConvexPolyhedron(vertices.makeClone(), polys, myPolygonNormals)
   }
 
   /**
@@ -68,17 +65,6 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
       vertices.y(n) *= fy
       vertices.z(n) *= fz
     }
-  }
-
-  private def createPolygonNormals(): FxArrayOf3DPoints = {
-    val normals = FxArrayOf3DPoints(nbrOfPolygons)
-    (0 to (nbrOfPolygons - 1)) foreach { n =>
-      val norm = myPolygons(n).getNormal(vertices)
-      normals.x(n) = norm.x
-      normals.y(n) = norm.y
-      normals.z(n) = norm.z
-    }
-    normals
   }
 
 }

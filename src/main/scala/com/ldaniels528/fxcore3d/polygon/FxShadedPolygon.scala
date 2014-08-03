@@ -9,8 +9,7 @@ import com.ldaniels528.fxcore3d.{FxColor, FxPoint3D, FxProjectedPoints}
  * FxEngine Shaded Polygon
  * @author lawrence.daniels@gmail.com
  */
-class FxShadedPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
-  extends FxClippingFilledPolygon(myIndices, nbrIndices, myColor) {
+class FxShadedPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxClippingFilledPolygon(myIndices, myColor) {
 
   var myNormal: FxPoint3D = _
 
@@ -24,9 +23,9 @@ class FxShadedPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
   }
 
   override def makeClone(): FxShadedPolygon = {
-    val dst = new Array[Int](nbrIndices)
-    System.arraycopy(myIndices, 0, dst, 0, nbrIndices)
-    new FxShadedPolygon(dst, nbrIndices, myColor.copy())
+    val dst = new Array[Int](myIndices.length)
+    System.arraycopy(myIndices, 0, dst, 0, myIndices.length)
+    new FxShadedPolygon(dst, myColor.copy())
   }
 
   override def paintWithShading(g: Graphics2D, x: Array[Int], y: Array[Int], intensity: Double) {
@@ -42,8 +41,8 @@ class FxShadedPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
  */
 object FxShadedPolygon {
 
-  def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxShadedPolygon = {
-    new FxShadedPolygon(myIndices, nbrIndices, color)
+  def apply(myIndices: Seq[Int], color: FxColor): FxShadedPolygon = {
+    new FxShadedPolygon(myIndices, color)
   }
 
 }

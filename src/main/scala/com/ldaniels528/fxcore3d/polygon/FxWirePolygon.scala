@@ -9,16 +9,16 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
  * FxEngine Wire Polygon
  * @author lawrence.daniels@gmail.com
  */
-class FxWirePolygon(myIndices: Seq[Int], nbrIndices: Int) extends FxIndexingPolygon(myIndices, nbrIndices) {
+class FxWirePolygon(myIndices: Seq[Int]) extends FxIndexingPolygon(myIndices) {
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxCamera) {
     paint(g, p.x, p.y)
   }
 
   override def makeClone(): FxIndexingPolygon = {
-    val dest = new Array[Int](nbrIndices)
-    System.arraycopy(myIndices, 0, dest, 0, nbrIndices)
-    return new FxWirePolygon(dest, nbrIndices)
+    val dest = new Array[Int](myIndices.length)
+    System.arraycopy(myIndices, 0, dest, 0, myIndices.length)
+    return new FxWirePolygon(dest)
   }
 
   override def paint(g: Graphics2D, x: Array[Int], y: Array[Int]) {
@@ -35,8 +35,8 @@ class FxWirePolygon(myIndices: Seq[Int], nbrIndices: Int) extends FxIndexingPoly
  */
 object FxWirePolygon {
 
-  def apply(myIndices: Seq[Int], nbrIndices: Int): FxWirePolygon = {
-    new FxWirePolygon(myIndices, nbrIndices)
+  def apply(myIndices: Seq[Int]): FxWirePolygon = {
+    new FxWirePolygon(myIndices)
   }
 
 }

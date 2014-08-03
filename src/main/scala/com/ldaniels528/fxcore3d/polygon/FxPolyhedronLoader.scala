@@ -26,7 +26,18 @@ object FxPolyhedronLoader {
 
     // read each polygon and create the polyhedron
     val myPolygons = (1 to nbrPolygons) map (n => readShadedPolygon(is))
-    new FxConvexPolyhedron(vertices, myPolygons)
+    new FxConvexPolyhedron(vertices, myPolygons, createPolygonNormals(vertices, myPolygons))
+  }
+
+  private def createPolygonNormals(vertices: FxArrayOf3DPoints, myPolygons: Seq[FxIndexingPolygon]): FxArrayOf3DPoints = {
+    val normals = FxArrayOf3DPoints(myPolygons.length)
+    (0 to (myPolygons.length - 1)) foreach { n =>
+      val norm = myPolygons(n).getNormal(vertices)
+      normals.x(n) = norm.x
+      normals.y(n) = norm.y
+      normals.z(n) = norm.z
+    }
+    normals
   }
 
   /**
@@ -38,26 +49,26 @@ object FxPolyhedronLoader {
 
     // get the # points
     stream.nextToken()
-    val npoints = stream.nval.toInt
+    val length = stream.nval.toInt
 
     // create the vectors
-    val x = new Array[Double](npoints)
-    val y = new Array[Double](npoints)
-    val z = new Array[Double](npoints)
+    val x = new Array[Double](length)
+    val y = new Array[Double](length)
+    val z = new Array[Double](length)
 
     // read the coordinates
-    (0 to (npoints - 1)) foreach { n =>
+    (0 to (length - 1)) foreach { n =>
       stream.nextToken()
-      x(n) = stream.nval.toDouble
+      x(n) = stream.nval
       stream.nextToken()
-      y(n) = stream.nval.toDouble
+      y(n) = stream.nval
       stream.nextToken()
-      z(n) = stream.nval.toDouble
+      z(n) = stream.nval
     }
-    new FxArrayOf3DPoints(x, y, z, npoints)
+    new FxArrayOf3DPoints(x, y, z, length)
   }
 
-  def readClippableFilledPolygon(is: InputStream): FxClippingFilledPolygon = {
+  def readClippingFilledPolygon(is: InputStream): FxClippingFilledPolygon = {
     createColoredPolygon(is, FxClippingFilledPolygon.apply _)
   }
 
@@ -90,7 +101,7 @@ object FxPolyhedronLoader {
     new FxColor(r, g, b)
   }
 
-  private def createPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Seq[Int], Int) => T): T = {
+  private def createPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Seq[Int]) => T): T = {
     // make a stream reader
     val stream = getTokenizer(is)
 
@@ -105,10 +116,10 @@ object FxPolyhedronLoader {
     }
 
     // create the polygon
-    fx(myIndices, nbrIndices)
+    fx(myIndices)
   }
 
-  private def createColoredPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Seq[Int], Int, FxColor) => T): T = {
+  private def createColoredPolygon[T <: FxIndexingPolygon](is: InputStream, fx: (Seq[Int], FxColor) => T): T = {
     // make a stream reader
     val stream = getTokenizer(is)
 
@@ -123,7 +134,7 @@ object FxPolyhedronLoader {
     }
 
     // create the polygon
-    fx(myIndices, nbrIndices, readColor(is))
+    fx(myIndices, readColor(is))
   }
 
   private def getTokenizer(is: InputStream): StreamTokenizer = {
