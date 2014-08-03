@@ -13,7 +13,7 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
                               myPolygons: Seq[FxIndexingPolygon],
                               myPolygonNormals: FxArrayOf3DPoints) extends FxPolyhedron {
 
-  override def nbrOfPolygons = myPolygons.length
+  val nbrOfPolygons = myPolygons.length
 
   override def calculateIntensities(light: FxPoint3D, intensities: Array[Double]) {
     val p = new FxPoint3D()
@@ -24,33 +24,24 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
   }
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera) {
-    for (n <- 0 to (nbrOfPolygons - 1)) {
-      myPolygons(n).clipAndPaint(g, p, camera)
-    }
+    myPolygons foreach (_.clipAndPaint(g, p, camera))
   }
 
   override def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera, intensities: Array[Double]) {
-    for (n <- 0 to (nbrOfPolygons - 1)) {
+    (0 to (nbrOfPolygons - 1)) foreach { n =>
       myPolygons(n).clipAndPaintWithShading(g, p, camera, intensities(n))
     }
   }
 
   override def makeClone(): FxPolyhedron = {
-    val polys = new Array[FxIndexingPolygon](nbrOfPolygons)
-    (0 to (nbrOfPolygons - 1)) foreach { n =>
-      polys(n) = myPolygons(n).makeClone()
-    }
-    new FxConvexPolyhedron(vertices.makeClone(), polys, myPolygonNormals)
+    new FxConvexPolyhedron(vertices.makeClone(), myPolygons map (_.makeClone), myPolygonNormals)
   }
 
   /**
    * overrides FxPolyhedron.paint(..) the polygons don't need to be sorted.
    */
   override def paint(g: Graphics2D, point2d: FxArrayOf2DPoints) {
-    //  the polygons don't have to be sorted
-    (0 to (nbrOfPolygons - 1)) foreach { n =>
-      myPolygons(n).paint(g, point2d.x, point2d.y)
-    }
+    myPolygons foreach (_.paint(g, point2d.x, point2d.y))
   }
 
   override def paintWithShading(g: Graphics2D, points: FxArrayOf2DPoints, intensities: Array[Double]) {

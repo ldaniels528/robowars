@@ -8,18 +8,18 @@ import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
  * @author lawrence.daniels@gmail.com
  */
 case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPoint3D) {
-  protected val myRadius = myScale.magnitude()
+  val boundingRadius = myScale.magnitude()
   protected val myBox = Fx3DPointSeq(8)
   protected val myNormals = Fx3DPointSeq(6)
 
   def checkForCollisionWith(volume: FxBoundingVolume): Boolean = {
     val pp = theHostPolyInst.getPosition().copy()
     pp.negate()
-    pp += (volume.theHostPolyInst.getPosition())
+    pp += volume.theHostPolyInst.getPosition()
 
     // check if the bounding spheres collide
     // so: if outside collision radius. no need for further checking
-    if (pp.magnitude() > (myRadius + volume.myRadius)) false
+    if (pp.magnitude() > (boundingRadius + volume.boundingRadius)) false
     else {
       // update the world coordinates of the box
       this.updateBox()
@@ -30,8 +30,6 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
     }
   }
 
-  def getBoundingRadius(): Double = myRadius
-
   def makeClone(): FxBoundingVolume = new FxBoundingVolume(theHostPolyInst, myScale)
 
   private def pointInMyVolume(otherBox: FxArrayOf3DPoints): Boolean = {
@@ -40,7 +38,7 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
     val point = FxPoint3D()
     val vector = FxPoint3D()
 
-    for (p <- 0 to 7) {
+    (0 to 7) foreach { p =>
       point.set(otherBox.x(p), otherBox.y(p), otherBox.z(p))
       var outside = false
       var n = 0

@@ -44,8 +44,8 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
     }
   }
 
-  def checkForCollisionWith(polyinst: FxPolyhedronInstance): Boolean = {
-    myBoundingVolume.checkForCollisionWith(polyinst.myBoundingVolume)
+  def checkForCollisionWith(polyhedron: FxPolyhedronInstance): Boolean = {
+    myBoundingVolume.checkForCollisionWith(polyhedron.myBoundingVolume)
   }
 
   def clipAndPaint(g: Graphics2D, camera: FxCamera) {
@@ -101,8 +101,6 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
 
   private def updateMatrix() {
     if (matrixIsDirty) {
-      // -- position or angle has changed and the transformed
-      // -- vertices need to be updated.
       myTransformMatrix.setTransformMCStoWCS(myPosition, myAngle, myScale)
       matrixIsDirty = false
     }
@@ -134,7 +132,7 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
 
   def getScalingFactor(): FxPoint3D = myScale.copy()
 
-  def getBoundingRadius(): Double = myBoundingVolume.getBoundingRadius()
+  def getBoundingRadius(): Double = myBoundingVolume.boundingRadius
 
   def getPosition(): FxPoint3D = myPosition
 

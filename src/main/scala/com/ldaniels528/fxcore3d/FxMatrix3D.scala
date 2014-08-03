@@ -18,15 +18,15 @@ class FxMatrix3D() {
     val ct = Math.cos(az)
     val st = Math.sin(az)
 
-    val nyx = (yx * ct + xx * st)
-    val nyy = (yy * ct + xy * st)
-    val nyz = (yz * ct + xz * st)
-    val nyo = (yo * ct + xo * st)
+    val nyx = yx * ct + xx * st
+    val nyy = yy * ct + xy * st
+    val nyz = yz * ct + xz * st
+    val nyo = yo * ct + xo * st
 
-    val nxx = (xx * ct - yx * st)
-    val nxy = (xy * ct - yy * st)
-    val nxz = (xz * ct - yz * st)
-    val nxo = (xo * ct - yo * st)
+    val nxx = xx * ct - yx * st
+    val nxy = xy * ct - yy * st
+    val nxz = xz * ct - yz * st
+    val nxo = xo * ct - yo * st
 
     xx = nxx; xy = nxy; xz = nxz; xo = nxo
     yx = nyx; yy = nyy; yz = nyz; yo = nyo
@@ -39,15 +39,15 @@ class FxMatrix3D() {
     val ct = Math.cos(ay)
     val st = Math.sin(ay)
 
-    val nxx = (xx * ct + zx * st)
-    val nxy = (xy * ct + zy * st)
-    val nxz = (xz * ct + zz * st)
-    val nxo = (xo * ct + zo * st)
+    val nxx = xx * ct + zx * st
+    val nxy = xy * ct + zy * st
+    val nxz = xz * ct + zz * st
+    val nxo = xo * ct + zo * st
 
-    val nzx = (zx * ct - xx * st)
-    val nzy = (zy * ct - xy * st)
-    val nzz = (zz * ct - xz * st)
-    val nzo = (zo * ct - xo * st)
+    val nzx = zx * ct - xx * st
+    val nzy = zy * ct - xy * st
+    val nzz = zz * ct - xz * st
+    val nzo = zo * ct - xo * st
 
     xx = nxx; xy = nxy; xz = nxz; xo = nxo
     zx = nzx; zy = nzy; zz = nzz; zo = nzo
@@ -60,15 +60,15 @@ class FxMatrix3D() {
     val ct = Math.cos(ax)
     val st = Math.sin(ax)
 
-    val nyx = (yx * ct + zx * st)
-    val nyy = (yy * ct + zy * st)
-    val nyz = (yz * ct + zz * st)
-    val nyo = (yo * ct + zo * st)
+    val nyx = yx * ct + zx * st
+    val nyy = yy * ct + zy * st
+    val nyz = yz * ct + zz * st
+    val nyo = yo * ct + zo * st
 
-    val nzx = (zx * ct - yx * st)
-    val nzy = (zy * ct - yy * st)
-    val nzz = (zz * ct - yz * st)
-    val nzo = (zo * ct - yo * st)
+    val nzx = zx * ct - yx * st
+    val nzy = zy * ct - yy * st
+    val nzz = zz * ct - yz * st
+    val nzo = zo * ct - yo * st
 
     yx = nyx; yy = nyy; yz = nyz; yo = nyo
     zx = nzx; zy = nzy; zz = nzz; zo = nzo
