@@ -224,7 +224,7 @@ class RoboWars() extends FxFrame("Robo-Wars") with Events {
 
     // create the camera
     val cam = new FxTrackerCamera(world, 1.2, 1000, 20, 1, 1.6, player, new FxAngle3D(), new FxPoint3D(0, 4, 4))
-    cam.setAmbientLight(light)
+    cam.setLightSource(light)
     cam
   }
 

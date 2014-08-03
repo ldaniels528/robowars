@@ -1,9 +1,10 @@
-package com.ldaniels528.fxcore3d
+package com.ldaniels528.fxcore3d.polygon
 
 import java.awt._
 
-import FxIndexingPolygon._
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera
+import com.ldaniels528.fxcore3d.camera.FxCamera
+import com.ldaniels528.fxcore3d.polygon.FxIndexingPolygon._
+import com.ldaniels528.fxcore3d.{FxArrayOf3DPoints, FxPoint3D, FxProjectedPoints}
 
 /**
  * Describes an abstract indexing polygon.
@@ -11,11 +12,11 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera
  */
 abstract class FxIndexingPolygon(myIndices: Seq[Int], nbrIndices: Int) {
 
-  def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxGenericCamera) {
+  def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxCamera) {
     paint(g, p.x, p.y)
   }
 
-  def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera, intensity: Double) {
+  def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera, intensity: Double) {
     paint(g, p.x, p.y)
   }
 
@@ -23,7 +24,7 @@ abstract class FxIndexingPolygon(myIndices: Seq[Int], nbrIndices: Int) {
    * pokes out the 2d coordinates and stores them into the scratch polygon.
    */
   protected def copyIndexedPoints(x: Array[Int], y: Array[Int]) {
-    for (n <- 0 to (nbrIndices - 1)) {
+    (0 to (nbrIndices - 1)) foreach { n =>
       val index = myIndices(n)
       ourScratchPoly.xpoints(n) = x(index)
       ourScratchPoly.ypoints(n) = y(index)
@@ -81,15 +82,15 @@ object FxIndexingPolygon {
     val p1x = ourScratchPoly.xpoints(1)
     val p1y = ourScratchPoly.ypoints(1)
 
-    // -- vector from vertex #1 to vertex #2
+    // vector from vertex #1 to vertex #2
     val v1x = ourScratchPoly.xpoints(2) - p1x
     val v1y = ourScratchPoly.ypoints(2) - p1y
 
-    // -- vector from vertex #1 to vertex #0
+    // vector from vertex #1 to vertex #0
     val v2x = ourScratchPoly.xpoints(0) - p1x
     val v2y = ourScratchPoly.ypoints(0) - p1y
 
-    // -- return the determinant of the vectors
+    // return the determinant of the vectors
     v1x * v2y - v2x * v1y
   }
 

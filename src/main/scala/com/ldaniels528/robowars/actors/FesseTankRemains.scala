@@ -4,9 +4,8 @@ import FesseTankRemains._
 
 import com.ldaniels528.fxcore3d.FxAngle3D
 import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.fxcore3d.FxPolyhedron
-import com.ldaniels528.fxcore3d.FxPolyhedronInstance
 import com.ldaniels528.fxcore3d.FxWorld
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.VirtualWorldImpl
 import com.ldaniels528.robowars.structures.AbstractMovingScenery

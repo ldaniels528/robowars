@@ -1,6 +1,7 @@
 package com.ldaniels528.robowars.actors
 
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.actors.AntiTankCannon._
 import com.ldaniels528.robowars.events.EventWeaponCommand

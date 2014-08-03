@@ -2,6 +2,7 @@ package com.ldaniels528.robowars.structures
 
 import GenericBuilding._
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
 import com.ldaniels528.robowars.ContentManager
 
 /**

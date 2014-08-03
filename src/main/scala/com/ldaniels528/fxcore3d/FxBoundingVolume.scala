@@ -1,6 +1,7 @@
 package com.ldaniels528.fxcore3d
 
 import com.ldaniels528.fxcore3d.FxBoundingVolume._
+import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
 
 /**
  * FxEngine Bounding Volume

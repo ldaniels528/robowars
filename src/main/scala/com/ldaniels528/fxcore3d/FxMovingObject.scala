@@ -1,6 +1,6 @@
 package com.ldaniels528.fxcore3d
 
-import com.ldaniels528.fxcore3d.camera.FxCamera
+import com.ldaniels528.fxcore3d.camera.FxBasicCamera
 import java.awt.Graphics2D
 
 /**
@@ -34,12 +34,12 @@ class FxMovingObject(
     super.checkForCollisionWith(obj, dt)
   }
 
-  override def paint(g: Graphics2D, cam: FxCamera) {
+  override def paint(g: Graphics2D, cam: FxBasicCamera) {
     polyhedronInstance.setOrientation(Pos, Agl)
     super.paint(g, cam)
   }
 
-  override def paintWithShading(g: Graphics2D, cam: FxCamera, light: FxPoint3D) {
+  override def paintWithShading(g: Graphics2D, cam: FxBasicCamera, light: FxPoint3D) {
     polyhedronInstance.setOrientation(Pos, Agl)
     super.paintWithShading(g, cam, light)
   }

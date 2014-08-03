@@ -1,6 +1,8 @@
-package com.ldaniels528.fxcore3d
+package com.ldaniels528.fxcore3d.polygon
 
 import java.io.{InputStream, StreamTokenizer}
+
+import com.ldaniels528.fxcore3d._
 
 /**
  * FxEngine Polyhedron Loader

@@ -1,9 +1,9 @@
-package com.ldaniels528.fxcore3d
+package com.ldaniels528.fxcore3d.polygon
 
 import java.awt._
 
-import com.ldaniels528.fxcore3d.FxIndexingPolygon._
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera
+import com.ldaniels528.fxcore3d.FxProjectedPoints
+import com.ldaniels528.fxcore3d.camera.FxCamera
 
 /**
  * FxEngine Wire Polygon
@@ -11,7 +11,7 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera
  */
 class FxWirePolygon(myIndices: Seq[Int], nbrIndices: Int) extends FxIndexingPolygon(myIndices, nbrIndices) {
 
-  override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxGenericCamera) {
+  override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxCamera) {
     paint(g, p.x, p.y)
   }
 
@@ -24,7 +24,7 @@ class FxWirePolygon(myIndices: Seq[Int], nbrIndices: Int) extends FxIndexingPoly
   override def paint(g: Graphics2D, x: Array[Int], y: Array[Int]) {
     copyIndexedPoints(x, y)
     g.setColor(Color.black)
-    g.drawPolygon(ourScratchPoly)
+    g.drawPolygon(FxIndexingPolygon.ourScratchPoly)
   }
 
 }

@@ -1,8 +1,10 @@
-package com.ldaniels528.fxcore3d
+package com.ldaniels528.fxcore3d.polygon
 
 import java.awt.Graphics2D
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera
+
+import com.ldaniels528.fxcore3d.camera.FxCamera
 import com.ldaniels528.fxcore3d.matrix.FxMatrix3D
+import com.ldaniels528.fxcore3d.{FxAngle3D, FxArrayOf3DPoints, FxBoundingVolume, FxPoint3D}
 
 /**
  * FxEngine Polyhedron Instance
@@ -47,7 +49,7 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
     myBoundingVolume.checkForCollisionWith(polyinst.myBoundingVolume)
   }
 
-  def clipAndPaint(g: Graphics2D, camera: FxGenericCamera) {
+  def clipAndPaint(g: Graphics2D, camera: FxCamera) {
     updateVertices()
     val theirBuffer = camera.projectWithCheck(transformedVertices)
     if (theirBuffer.clipAndOp != 0) {
@@ -65,17 +67,17 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
   /**
    * paint the polyhedron instance.
    */
-  def paint(g: Graphics2D, camera: FxGenericCamera) {
+  def paint(g: Graphics2D, camera: FxCamera) {
     updateVertices()
     thePolyhedron.paint(g, camera.project(transformedVertices))
   }
 
-  def paintWithShading(g: Graphics2D, camera: FxGenericCamera, light: FxPoint3D) {
+  def paintWithShading(g: Graphics2D, camera: FxCamera, light: FxPoint3D) {
     updateVertices()
     paint(g, camera)
   }
 
-  def clipAndPaintWithShading(g: Graphics2D, camera: FxGenericCamera, light: FxPoint3D) {
+  def clipAndPaintWithShading(g: Graphics2D, camera: FxCamera, light: FxPoint3D) {
     updateIntensities(light)
     clipAndPaint(g, camera)
   }

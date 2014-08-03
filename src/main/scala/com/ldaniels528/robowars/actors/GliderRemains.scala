@@ -2,6 +2,7 @@ package com.ldaniels528.robowars.actors
 
 import GliderRemains._
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.VirtualWorldImpl
 import com.ldaniels528.robowars.structures.AbstractMovingScenery

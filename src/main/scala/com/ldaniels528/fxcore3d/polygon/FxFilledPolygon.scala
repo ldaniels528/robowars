@@ -1,7 +1,9 @@
-package com.ldaniels528.fxcore3d
+package com.ldaniels528.fxcore3d.polygon
 
 import java.awt.Graphics2D
-import FxIndexingPolygon._
+
+import com.ldaniels528.fxcore3d.FxColor
+import com.ldaniels528.fxcore3d.polygon.FxIndexingPolygon._
 
 /**
  * A solid color polygon.
@@ -40,7 +42,6 @@ class FxFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
  * @author lawrence.daniels@gmail.com
  */
 object FxFilledPolygon {
-  import java.io._
 
   def apply(myIndices: Seq[Int], nbrIndices: Int, color: FxColor): FxFilledPolygon = {
     new FxFilledPolygon(myIndices, nbrIndices, color)

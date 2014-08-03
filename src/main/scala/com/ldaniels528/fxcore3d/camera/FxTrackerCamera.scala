@@ -15,23 +15,21 @@ class FxTrackerCamera(world: FxWorld,
                       theObject: FxObject,
                       relAgl: FxAngle3D,
                       relPos: FxPoint3D)
-  extends FxMagicCamera(world, viewAngle, viewDistance, theObject.getPosition(), theObject.getAngle(), gridSize, fadingFactor) {
+  extends FxSceneCamera(world, viewAngle, viewDistance, theObject.getPosition(), theObject.getAngle(), gridSize, fadingFactor) {
 
   private var relativeAngle: FxAngle3D = relAgl.copy()
   private var relativePosition: FxPoint3D = relPos.copy()
 
   // initialize the camera
-  init()
+  relativeAngle.negate()
 
-  def init(): Unit = relativeAngle.negate()
+  def getRelativeAngle(): FxAngle3D = relativeAngle.copy()
 
-  def setRelativePosition(p: FxPoint3D): Unit = relativePosition = p.copy()
-
-  def setRelativeAngle(p: FxAngle3D): Unit = relativeAngle = p.copy()
+  def setRelativeAngle(a: FxAngle3D): Unit = relativeAngle = a.copy()
 
   def getRelativePosition(): FxPoint3D = relativePosition.copy()
 
-  def getRelativeAngle(): FxAngle3D = relativeAngle.copy()
+  def setRelativePosition(p: FxPoint3D): Unit = relativePosition = p.copy()
 
   override def update(dt: Double) {
     val thePointToTrack = theObject.getWorldCoordForRelativePoint(relativePosition)

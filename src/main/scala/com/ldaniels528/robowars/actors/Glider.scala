@@ -2,10 +2,9 @@ package com.ldaniels528.robowars.actors
 
 import Glider._
 import com.ldaniels528.fxcore3d.FxPoint3D
-import com.ldaniels528.fxcore3d.FxPolyhedron
-import com.ldaniels528.fxcore3d.FxPolyhedronInstance
 import com.ldaniels528.fxcore3d.FxVelocityVector
 import com.ldaniels528.fxcore3d.FxWorld
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedronInstance, FxPolyhedron}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.structures.GenericFragment
 import com.ldaniels528.robowars.weapons.BombBay

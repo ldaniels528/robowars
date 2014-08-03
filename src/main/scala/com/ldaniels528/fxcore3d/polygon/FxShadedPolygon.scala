@@ -1,8 +1,9 @@
-package com.ldaniels528.fxcore3d
+package com.ldaniels528.fxcore3d.polygon
 
 import java.awt.Graphics2D
 
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera
+import com.ldaniels528.fxcore3d.camera.FxCamera
+import com.ldaniels528.fxcore3d.{FxColor, FxPoint3D, FxProjectedPoints}
 
 /**
  * FxEngine Shaded Polygon
@@ -17,7 +18,7 @@ class FxShadedPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
     myColor.setIntensity(light.dotProduct(myNormal))
   }
 
-  override def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera, intensity: Double) {
+  override def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera, intensity: Double) {
     myColor.setIntensity(intensity)
     super.clipAndPaint(g, p, camera)
   }

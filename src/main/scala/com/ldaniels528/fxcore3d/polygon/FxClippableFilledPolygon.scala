@@ -1,10 +1,11 @@
-package com.ldaniels528.fxcore3d
+package com.ldaniels528.fxcore3d.polygon
 
-import java.awt.{ Graphics2D, Polygon }
+import java.awt.Graphics2D
 
-import FxIndexingPolygon._
-import FxClippableFilledPolygon._
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera
+import com.ldaniels528.fxcore3d.camera.FxCamera
+import com.ldaniels528.fxcore3d.polygon.FxClippableFilledPolygon._
+import com.ldaniels528.fxcore3d.polygon.FxIndexingPolygon._
+import com.ldaniels528.fxcore3d.{FxColor, FxProjectedPoints}
 
 /**
  * FxEngine Clippable Filled Polygon
@@ -13,7 +14,7 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera
 class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: FxColor)
   extends FxFilledPolygon(myIndices, nbrIndices, myColor) {
 
-  override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxGenericCamera) {
+  override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera) {
     // -- gather information about the clipping needed for
     var clipFlagsAndOp: Int = p.clipFlags(myIndices(0))
     var clipFlagsOrOp: Int = clipFlagsAndOp
@@ -41,7 +42,7 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
     }
 
     // -- clipping is needed
-    if ((clipFlagsOrOp & FxGenericCamera.CLIP_Z) != 0) {
+    if ((clipFlagsOrOp & FxCamera.CLIP_Z) != 0) {
       // -- polygon points are behind the camera
       // -- z-clipping needed.
       val pleft = clipZ(p, xt, yt, camera)
@@ -66,12 +67,12 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
     ourScratchPoly.npoints = npts
   }
 
-  protected def clipZ(p: FxProjectedPoints, xt: Array[Int], yt: Array[Int], cam: FxGenericCamera): Int = {
+  protected def clipZ(p: FxProjectedPoints, xt: Array[Int], yt: Array[Int], cam: FxCamera): Int = {
     var p0 = 0
     var pts = 0
     var i0 = myIndices(p0)
 
-    var inside = p.z(i0) < cam.Zclip
+    var inside = p.z(i0) < cam.zClip
     if (inside) {
       xt(0) = p.x(i0)
       yt(0) = p.y(i0)
@@ -82,11 +83,11 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
       val p1 = if (n < nbrIndices) n else 0
       val i1 = myIndices(p1)
 
-      if (p.z(i1) < cam.Zclip) {
+      if (p.z(i1) < cam.zClip) {
         // -- point infront of the camera
         if (!inside) {
           // -- last point was "outside"
-          cam.clipZandStore(p.x(i0), p.y(i0), p.z(i0), p.x(i1), p.y(i1), p.z(i1), xt, yt, pts)
+          cam.clipAndStoreZ(p.x(i0), p.y(i0), p.z(i0), p.x(i1), p.y(i1), p.z(i1), xt, yt, pts)
           pts += 1
         }
         // -- point inside, store it in the array
@@ -98,7 +99,7 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
         // -- point behind camera
         if (inside) {
           // -- the last point was "inside" view volume
-          cam.clipZandStore(p.x(i0), p.y(i0), p.z(i0), p.x(i1),
+          cam.clipAndStoreZ(p.x(i0), p.y(i0), p.z(i0), p.x(i1),
             p.y(i1), p.z(i1), xt, yt, pts)
           pts += 1
         }
@@ -122,7 +123,6 @@ class FxClippableFilledPolygon(myIndices: Seq[Int], nbrIndices: Int, myColor: Fx
  * @author lawrence.daniels@gmail.com
  */
 object FxClippableFilledPolygon {
-  import java.io._
 
   val xt = new Array[Int](100)
   val yt = new Array[Int](100)
