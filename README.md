@@ -5,7 +5,7 @@ A 3D combat game written in Scala.
 ### Objective
 
 The objective is to create a free JVM-based MMO, where players can build and customize their machines
-and battle in out in a 3D battle arena.
+and battle it out in a 3D battle arena.
 
 ### Status
 
