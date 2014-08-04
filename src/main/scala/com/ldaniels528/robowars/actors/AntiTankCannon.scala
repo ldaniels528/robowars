@@ -21,7 +21,7 @@ class AntiTankCannon(world: FxWorld, p: FxPoint3D)
     climbRate = 0, decentRate = 0, pitchClimbRateFactor = 0, INITIAL_HEALTH) {
 
   usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
-  addWeapon(new MiniCannon(this,  FxPoint3D()))
+  this += new MiniCannon(this,  FxPoint3D())
   selectWeapon(0)
 
   override def die() {

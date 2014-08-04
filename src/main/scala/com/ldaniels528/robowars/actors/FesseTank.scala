@@ -20,8 +20,8 @@ class FesseTank(world: FxWorld, p: FxPoint3D)
     climbRate = 0, decentRate = 0, pitchClimbRateFactor = 0, INITIAL_HEALTH) {
 
   usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
-  addWeapon(new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0)))
-  addWeapon(new MissileLauncher(this, new FxPoint3D(0, SCALE.y, 0)))
+  this += new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0))
+  this +=new MissileLauncher(this, new FxPoint3D(0, SCALE.y, 0))
   selectWeapon(0)
 
   override def die() {

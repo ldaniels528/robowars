@@ -23,14 +23,14 @@ class JetCraft(world: FxWorld, p: FxPoint3D)
   usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
 
   // -- add the weapons
-  addWeapon(new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0)))
-  addWeapon(new MissileLauncher(this, new FxPoint3D(0, SCALE.y, 0)))
-  addWeapon(new BombBay(this, new FxPoint3D(0, SCALE.y, 0)))
+  this += new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0))
+  this += new MissileLauncher(this, new FxPoint3D(0, SCALE.y, 0))
+  this += new BombBay(this, new FxPoint3D(0, SCALE.y, 0))
   selectWeapon(0)
 
   override def die() {
     super.die()
-    for (n <- 1 to FRAGMENTS_WHEN_DEAD) {
+    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
       new GenericFragment(getWorld(), FRAGMENT_SIZE, getPosition(),
         FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
     }

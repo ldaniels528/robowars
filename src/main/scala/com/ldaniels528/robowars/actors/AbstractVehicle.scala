@@ -80,19 +80,11 @@ class AbstractVehicle(world: FxWorld,
     dPos.setVelocity(0)
   }
 
-  def addWeapon(weapon: AbstractWeapon) {
-    weapons += weapon
-    ()
-  }
+  def +=(weapon: AbstractWeapon) = weapons += weapon
 
-  def removeWeapon(weapon: AbstractWeapon) {
-    weapons += weapon
-    ()
-  }
+  def -=(weapon: AbstractWeapon) = weapons += weapon
 
-  def selectedWeapon: AbstractWeapon = {
-    weapons(weaponIndex)
-  }
+  def selectedWeapon: AbstractWeapon = weapons(weaponIndex)
 
   def switchWeapons(): AbstractWeapon = {
     if (weaponIndex + 1 < weapons.size) weaponIndex += 1 else weaponIndex = 0
@@ -223,4 +215,5 @@ class AbstractVehicle(world: FxWorld,
     p.y -= climbRate * dt * factor
     setPosition(p)
   }
+
 }
