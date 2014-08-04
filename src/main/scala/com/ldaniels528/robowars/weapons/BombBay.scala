@@ -13,10 +13,9 @@ class BombBay(host: AbstractVehicle, relPos: FxPoint3D)
 
   override def fire(): Boolean = {
     if (super.fire()) {
-      val p = theHost.getPosition()
+      val p = theHost.position
       p += relOrigin
-      new GenericBomb(theHost.getWorld(), theHost.getPosition(),
-        theHost.getAngle(), theHost.getdPosition(), 15)
+      new GenericBomb(theHost.world, theHost.position, theHost.angle, theHost.getdPosition(), 15)
       true
     }
     false

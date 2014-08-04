@@ -3,6 +3,7 @@ package com.ldaniels528.robowars.weapons
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.robowars.actors.AbstractVehicle
 import com.ldaniels528.robowars.structures.GenericFragment
 import com.ldaniels528.robowars.weapons.MissileRound._
 
@@ -10,17 +11,19 @@ import com.ldaniels528.robowars.weapons.MissileRound._
  * Missile Round
  * @author lawrence.daniels@gmail.com
  */
-class MissileRound(w: FxWorld, shooter: FxObject, pos: FxPoint3D, agl: FxAngle3D)
-  extends AbstractRound(w, shooter, pos, FxVelocityVector(agl.y, agl.x, 0), 0, 0,
-    ACCELERATION, 0, MAX_VELOCITY, 0, 0, 1, IMPACT_DAMAGE) {
+class MissileRound(w: FxWorld, shooter: AbstractVehicle, pos: FxPoint3D, agl: FxAngle3D)
+  extends AbstractRound(w, shooter, pos, FxVelocityVector(agl.y, agl.x, 0), IMPACT_DAMAGE) {
 
+  val maxVelocity = MAX_VELOCITY
+
+  // set the polyhedron instance
   usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
 
   override def update(dt: Double) {
     super.update(dt)
     increaseVelocity(1, dt)
 
-    val p = getPosition()
+    val p = position
     if ((age > 4) || (p.y < 0)) {
       p.y = 0
       setPosition(p)
@@ -32,7 +35,7 @@ class MissileRound(w: FxWorld, shooter: FxObject, pos: FxPoint3D, agl: FxAngle3D
     super.die()
     for (n <- 1 to FRAGMENTS_WHEN_DEAD) {
       new GenericFragment(
-        getWorld(), FRAGMENT_SIZE, getPosition(),
+        world, FRAGMENT_SIZE, position,
         FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
     }
   }

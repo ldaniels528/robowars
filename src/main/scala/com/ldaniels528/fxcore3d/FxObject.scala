@@ -7,7 +7,7 @@ import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
  * Abstract class the represents a virtual object.
  * @author lawrence.daniels@gmail.com
  */
-abstract class FxObject(theWorld: FxWorld, pos: FxPoint3D, angle: FxAngle3D) {
+abstract class FxObject(theWorld: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D) {
 
   import java.awt.Graphics2D
 
@@ -16,8 +16,8 @@ import scala.collection.mutable.ArrayBuffer
   private val events = ArrayBuffer[FxEvent]()
   private val occupiedGrids = ArrayBuffer[FxGrid]()
 
-  var Pos: FxPoint3D = pos.makeClone
-  var Agl: FxAngle3D = angle.makeClone
+  var Pos: FxPoint3D = myPos.makeClone
+  var Agl: FxAngle3D = myAngle.makeClone
   var alive: Boolean = true
 
   var age: Double = 0.0
@@ -33,9 +33,19 @@ import scala.collection.mutable.ArrayBuffer
   def isAlive: Boolean = alive
 
   /**
+   * Returns a clone of the position.
+   */
+  def position: FxPoint3D = Pos.makeClone
+
+  /**
+   * Returns a clone of the angle.
+   */
+  def angle: FxAngle3D = Agl.makeClone
+
+  /**
    * Returns the world in which this object lives in.
    */
-  def getWorld(): FxWorld = theWorld
+  def world: FxWorld = theWorld
 
   /**
    * Checks collision with another object. Only implemented by checking the bounding circles.
@@ -74,22 +84,14 @@ import scala.collection.mutable.ArrayBuffer
    * Creates a collision event which is added to the event list.
    */
   def collisionWith(obj: FxObject, dt: Double) {
-    events += new FxEventCollision(age, obj, dt)
+    events += FxEventCollision(age, obj, dt)
     ()
   }
 
   /**
    * Associates an event with this object
    */
-  def +=(event: FxEvent) = addEvent(event)
-
-  /**
-   * Associates an event with this object
-   */
-  def addEvent(event: FxEvent) {
-    events += event
-    ()
-  }
+  def +=(event: FxEvent) = events += event
 
   /**
    * Paints this object on camera.
@@ -106,16 +108,6 @@ import scala.collection.mutable.ArrayBuffer
    * Returns the distance of this object to some other point.
    */
   def distanceToPoint(toPoint: FxPoint3D): Double = Math.sqrt(Pos.distanceToPoint(toPoint))
-
-  /**
-   * Returns a clone of the position.
-   */
-  def getPosition(): FxPoint3D = Pos.copy()
-
-  /**
-   * Returns a clone of the angle.
-   */
-  def getAngle(): FxAngle3D = Agl.copy()
 
   /**
    * Returns the world coordinate for a position relative this object.

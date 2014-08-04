@@ -10,7 +10,7 @@ import scala.collection.mutable.Buffer
  * @param theHost the host actor
  */
 abstract class AbstractAI(val theHost: AbstractActor) {
-  protected val theWorld = theHost.getWorld()
+  protected val theWorld = theHost.world
   private val myEvents = Buffer[FxEvent]()
 
   // set the host's brain

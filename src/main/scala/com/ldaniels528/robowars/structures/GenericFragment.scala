@@ -52,7 +52,7 @@ class GenericFragment(world: FxWorld,
       v
     })
 
-    val p = getPosition()
+    val p = position
     if (p.y < 0) {
       p.y = size
       setPosition(p)
@@ -64,7 +64,7 @@ class GenericFragment(world: FxWorld,
     super.die()
     if (generation > 0) {
       for (n <- 1 to 5) {
-        new GenericFragment(getWorld(), size / 2, getPosition(), size, generation - 1, getdPosition().y * 0.5, 3)
+        new GenericFragment(world, size / 2, position, size, generation - 1, getdPosition().y * 0.5, 3)
       }
     }
   }

@@ -11,11 +11,12 @@ import com.ldaniels528.robowars.structures.AbstractMovingScenery
  * @author lawrence.daniels@gmail.com
  */
 class FesseTankRemains(world: FxWorld, deadTank: AbstractActor)
-  extends AbstractMovingScenery(world, deadTank.getPosition(), deadTank.getAngle(), deadTank.getdPosition(), deadTank.getdAngle()) {
+  extends AbstractMovingScenery(world, deadTank.position, deadTank.angle, deadTank.getdPosition(), deadTank.getdAngle()) {
 
+  // set the default polyhedron instance
   usePolyhedronInstance(new FxPolyhedronInstance(ourDefaultPolyhedron, ourScale))
 
-  // -- throw the remaining tank up in the air
+  // throw the remaining tank up in the air
   val dp = getdPosition()
   dp.y = FxWorld.rand(0, ourSpeedUp)
   setdPosition(dp)
@@ -28,7 +29,7 @@ class FesseTankRemains(world: FxWorld, deadTank: AbstractActor)
 
   override def update(dt: Double) {
     super.update(dt)
-    val p = getPosition()
+    val p = position
     // -- check if hit the ground
     if (p.y < ourScale.y) {
       val dp = getdPosition()
@@ -37,7 +38,7 @@ class FesseTankRemains(world: FxWorld, deadTank: AbstractActor)
       dp.y = 0
       dp.z = 0
       setPosition(p)
-      val a = getAngle()
+      val a = angle
       a.set(0, a.y, 0)
       // a.x = a.z = 0
       setAngle(a)

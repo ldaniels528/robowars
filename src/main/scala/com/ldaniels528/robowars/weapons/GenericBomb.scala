@@ -25,13 +25,13 @@ class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, str
     super.die()
 
     // create an explosion that is proportional to the strength of the bomb
-    new GenericExplosion(world, getPosition(), strength * 0.25, 0.5, strength, 0.6, strength * 0.1)
+    new GenericExplosion(world, position, strength * 0.25, 0.5, strength, 0.6, strength * 0.1)
 
     // create an explosion round since
     val explosion = new Explosion(world, 10 * strength)
 
     // get all objects within a radius and check feed them with the impact of the bomb
-    val objects = world.getAllObjectsInRadius(getPosition(), BLAST_RADIUS)
+    val objects = world.getAllObjectsInRadius(position, BLAST_RADIUS)
 
     // check for collisions
     objects foreach { obj =>
@@ -53,7 +53,7 @@ class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, str
       v
     })
 
-    val p = getPosition()
+    val p = position
     if (p.y < 0) {
       die()
     }

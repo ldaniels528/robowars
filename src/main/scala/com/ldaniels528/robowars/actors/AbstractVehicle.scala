@@ -11,35 +11,31 @@ import com.ldaniels528.robowars.weapons.{AbstractRound, AbstractWeapon}
  * @param world
  * @param pos
  * @param vector
- * @param turningRate
- * @param pitchRate
- * @param acceleration
- * @param brakingRate
- * @param maxVelocity
- * @param climbRate
- * @param decentRate
- * @param pitchClimbRateRelation
- * @param health
  * @author lawrence.daniels@gmail.com
  */
-class AbstractVehicle(world: FxWorld,
-                      pos: FxPoint3D,
-                      vector: FxVelocityVector,
-                      turningRate: Double,
-                      pitchRate: Double = 0,
-                      acceleration: Double,
-                      brakingRate: Double,
-                      maxVelocity: Double,
-                      climbRate: Double = 0,
-                      decentRate: Double = 0,
-                      pitchClimbRateRelation: Double = 0,
-                      health: Double)
+abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocityVector, health: Double)
   extends AbstractMovingObject(world, pos, vector.getAngle(), vector, new FxAngle3D(), health) with Events {
 
   private var weaponIndex = 0
   private val weapons = collection.mutable.Buffer[AbstractWeapon]()
   private var myLastPos: FxPoint3D = _
   private var myLastAgl: FxAngle3D = _
+
+  def turningRate: Double
+
+  def pitchRate: Double
+
+  def acceleration: Double
+
+  def brakingRate: Double
+
+  def maxVelocity: Double
+
+  def climbRate: Double
+
+  def decentRate: Double
+
+  def pitchClimbRateFactor: Double
 
   override def interestedOfCollisionWith(obj: FxObject) = {
     obj match {
@@ -63,7 +59,7 @@ class AbstractVehicle(world: FxWorld,
         // check if the round comes from this actor
         if (r.shooter == this) true
         else {
-          if (damageHealth(r.getImpactDamage()) < 0) die()
+          if (damageHealth(r.impactDamage) < 0) die()
           false
         }
       case v: AbstractVehicle =>
@@ -96,15 +92,15 @@ class AbstractVehicle(world: FxWorld,
   }
 
   override def update(dt: Double) {
-    myLastPos = getPosition()
-    myLastAgl = getAngle()
+    myLastPos = position
+    myLastAgl = angle
 
     super.update(dt)
 
     // -- synchronize this object's angle with the
     // -- angle in the velocity vector
     val v = getdPosition()
-    val a = getAngle()
+    val a = angle
     v.synchronizeAngle(a)
     setAngle(a)
 
@@ -205,13 +201,13 @@ class AbstractVehicle(world: FxWorld,
   }
 
   protected def handleClimb(factor: Double, dt: Double) {
-    val p = getPosition()
+    val p = position
     p.y += climbRate * dt * factor
     setPosition(p)
   }
 
   protected def handleDecent(factor: Double, dt: Double) {
-    val p = getPosition()
+    val p = position
     p.y -= climbRate * dt * factor
     setPosition(p)
   }

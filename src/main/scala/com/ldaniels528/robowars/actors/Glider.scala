@@ -12,17 +12,21 @@ import com.ldaniels528.robowars.weapons.{BombBay, MiniCannon, MissileLauncher}
  * @author lawrence.daniels@gmail.com
  */
 class Glider(world: FxWorld, p: FxPoint3D)
-  extends AbstractActor(
-    world,
-    new FxPoint3D(p.x, p.y + SCALE.y, p.z),
-    FxVelocityVector(Math.PI, 0, 0),
-    TURNING_RATE, PITCH_RATE, ACCELERATION,
-    BRAKE_RATE, MAX_VELOCITY, CLIMB_RATE, DECENT_RATE, 1, INITIAL_HEALTH) {
+  extends AbstractActor(world, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), INITIAL_HEALTH) {
 
-  // -- use the default polyhedron instance
+  val turningRate: Double = 0.6d
+  val pitchRate: Double = 0.5d
+  val acceleration: Double = 3d
+  val brakingRate: Double = 3d
+  val maxVelocity: Double = 150d
+  val climbRate: Double = 3d
+  val decentRate: Double = 4d
+  val pitchClimbRateFactor: Double = 1d
+
+  // set the default polyhedron instance
   usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
 
-  // -- add the weapons
+  // attach some weapons
   this += new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0))
   this += new MissileLauncher(this, new FxPoint3D(0, SCALE.y, 0))
   this += new BombBay(this, new FxPoint3D(0, SCALE.y, 0))
@@ -31,7 +35,7 @@ class Glider(world: FxWorld, p: FxPoint3D)
   override def die() {
     super.die()
     (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
-      new GenericFragment(getWorld(), FRAGMENT_SIZE, getPosition(),
+      new GenericFragment(world, FRAGMENT_SIZE, position,
         FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
     }
     new GliderRemains(world, this)
@@ -42,7 +46,7 @@ class Glider(world: FxWorld, p: FxPoint3D)
     super.update(dt)
 
     // -- check collision with ground
-    val p = getPosition()
+    val p = position
     if (p.y < SCALE.y) {
       p.y = SCALE.y
       setPosition(p)
@@ -72,13 +76,7 @@ object Glider {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/glider.f3d")
   val SCALE = new FxPoint3D(8d, 1d, 4d)
   val INITIAL_HEALTH: Double = 5d
-  val TURNING_RATE: Double = 0.6d
-  val ACCELERATION: Double = 3d
-  val BRAKE_RATE: Double = 3d
-  val MAX_VELOCITY: Double = 150d
-  val CLIMB_RATE: Double = 3d
-  val DECENT_RATE: Double = 4d
-  val PITCH_RATE: Double = 0.5d
+
   val FRAGMENT_SIZE: Double = 0.25d
   val FRAGMENT_SPEED: Double = 7d
   val FRAGMENT_SPREAD: Double = 1d

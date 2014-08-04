@@ -44,7 +44,7 @@ class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
 
   protected def climbTowardsPoint(dest: FxPoint3D, dt: Double): Double = {
     destination map { dest =>
-      val error = dest.y - host.getPosition().y
+      val error = dest.y - host.position.y
       // -- check if I should climb or decent
       if (error > 0) {
         host.climb(Math.min(1, Math.abs(error / host.climbRate)), dt)
@@ -70,8 +70,8 @@ class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
 
   protected def moveTowardsPoint(ref: FxPoint3D, dt: Double): Double = {
     host.increaseVelocity(1, dt)
-    val v = host.getPosition().vectorTo(ref)
-    v.magnitude()
+    val v = host.position.vectorTo(ref)
+    v.magnitude
   }
 
   def navigateTo(pos: FxPoint3D, error: Double) {
@@ -81,11 +81,11 @@ class MotionAI(host: AbstractActor) extends AbstractAI(host) with Events {
 
   private def getDeterminant(dest: FxPoint3D): Double = {
     // -- make vector from host position to destination
-    val v1 = host.getPosition().vectorTo(dest)
+    val v1 = host.position.vectorTo(dest)
 
     // -- make vector for host's direction
     val v2 = new FxPoint3D(0, 0, -1)
-    v2.rotateAboutYaxis(host.getAngle().y)
+    v2.rotateAboutYaxis(host.angle.y)
 
     // -- check if destination is in front of the host
     if (v1.dotProduct(v2) > 0) {

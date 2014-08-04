@@ -25,7 +25,7 @@ class FxMovingObject(world: FxWorld,
     // update the position and angle of the polyhedron
     polyhedronInstance.setOrientation(Pos, Agl)
 
-    // if the other object is a moving object. updates it too.
+    // if the other object is a moving object then update it too.
     if (obj.isInstanceOf[FxMovingObject]) {
       obj.polyhedronInstance.setOrientation(obj.Pos, obj.Agl)
     }

@@ -12,9 +12,8 @@ class AbstractMovingStructure(theWorld: FxWorld,
                               pos: FxPoint3D,
                               agl: FxAngle3D,
                               dpos: FxVelocityVector,
-                              dagl: FxAngle3D,
-                              myHealth: Double = Double.MaxValue)
-  extends AbstractMovingObject(theWorld, pos, agl, dpos, dagl, myHealth) {
+                              dagl: FxAngle3D)
+  extends AbstractMovingObject(theWorld, pos, agl, dpos, dagl) {
 
   override def interestedOfCollisionWith(obj: FxObject): Boolean = {
     obj match {
@@ -26,7 +25,7 @@ class AbstractMovingStructure(theWorld: FxWorld,
   override def handleCollisionWith(obj: FxObject, dt: Double): Boolean = {
     obj match {
       case rnd: AbstractRound =>
-        if (damageHealth(rnd.getImpactDamage()) < 0) {
+        if (damageHealth(rnd.impactDamage) < 0) {
           die()
         }
         true

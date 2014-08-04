@@ -179,7 +179,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       case VK_Z =>
         if (pressed) world.activePlayer.switchWeapons(); ()
       case VK_0 =>
-        val p = world.activePlayer.getPosition()
+        val p = world.activePlayer.position
         println("Position  = (%.1f, %.1f, %.1f)".format(p.x, p.y, p.z))
       case VK_1 => key(MINICANNON) = pressed
       case VK_2 => key(MISSILE) = pressed

@@ -15,8 +15,8 @@ class FxGrid() {
    */
   def getAllObjectsInRadius(p: FxPoint3D, radius: Double): Seq[FxObject] = {
     val radiusSq = radius * radius
-    val listA = theMovingObjects filter (_.getPosition().distanceToPoint(p) <= radiusSq)
-    val listB = theStaticObjects filter (_.getPosition().distanceToPoint(p) <= radiusSq)
+    val listA = theMovingObjects filter (_.position.distanceToPoint(p) <= radiusSq)
+    val listB = theStaticObjects filter (_.position.distanceToPoint(p) <= radiusSq)
     listA ++ listB
   }
 

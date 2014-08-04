@@ -59,7 +59,7 @@ class AbstractDoor(theWorld: FxWorld,
   }
 
   private def doorMovingUp(dt: Double) {
-    val p = getPosition()
+    val p = position
     if (p.y - height > originalPos) {
       val dp = getdPosition()
       dp.y = 0
@@ -80,7 +80,7 @@ class AbstractDoor(theWorld: FxWorld,
   }
 
   private def doorMovingDown(dt: Double) {
-    val p = getPosition()
+    val p = position
     if (p.y < originalPos) {
       val dp = getdPosition()
       dp.y = 0

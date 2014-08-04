@@ -14,7 +14,7 @@ class FxTrackerCamera(world: FxWorld,
                       theObject: FxObject,
                       relAgl: FxAngle3D,
                       relPos: FxPoint3D)
-  extends FxSceneCamera(world, viewAngle, viewDistance, theObject.getPosition(), theObject.getAngle(), gridSize) {
+  extends FxSceneCamera(world, viewAngle, viewDistance, theObject.position, theObject.angle, gridSize) {
 
   private val relativeAngle: FxAngle3D = relAgl.copy()
   private val relativePosition: FxPoint3D = relPos.copy()
@@ -31,7 +31,7 @@ class FxTrackerCamera(world: FxWorld,
     v += myPosition
 
     // create the angle
-    val b = theObject.getAngle()
+    val b = theObject.angle
     b += relativeAngle
 
     // determine the angle between the object and myself

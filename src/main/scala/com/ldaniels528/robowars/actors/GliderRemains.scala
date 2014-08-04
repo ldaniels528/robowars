@@ -11,9 +11,9 @@ import com.ldaniels528.robowars.structures.AbstractMovingScenery
  * @author lawrence.daniels@gmail.com
  */
 class GliderRemains(world: FxWorld, deadActor: AbstractActor)
-  extends AbstractMovingScenery(world, deadActor.getPosition(), deadActor.getAngle(), deadActor.getdPosition(), deadActor.getdAngle()) {
+  extends AbstractMovingScenery(world, deadActor.position, deadActor.angle, deadActor.getdPosition(), deadActor.getdAngle()) {
 
-  // -- use the default polyhedron instance
+  // set the default polyhedron instance
   usePolyhedronInstance(new FxPolyhedronInstance(ourDefaultPolyhedron, ourScale))
 
   // -- set a random rotation on the remaining glider
@@ -24,7 +24,7 @@ class GliderRemains(world: FxWorld, deadActor: AbstractActor)
 
   override def update(dt: Double) {
     super.update(dt)
-    val p = getPosition()
+    val p = position
 
     // -- check if collision with ground
     if (p.y < ourScale.y) {
@@ -37,7 +37,7 @@ class GliderRemains(world: FxWorld, deadActor: AbstractActor)
 
       setPosition(p)
 
-      val a = getAngle()
+      val a = angle
       a.set(0, a.y, 0)
       // a.x = a.z = 0
       setAngle(a)

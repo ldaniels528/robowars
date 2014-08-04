@@ -19,13 +19,13 @@ class AttackAI(host: AbstractActor) extends MotionAI(host) {
     super.update(dt)
     for {
       target <- myTarget
-      distanceToTarget = target.distanceToPoint(host.getPosition())
+      distanceToTarget = target.distanceToPoint(host.position)
     } {
-      if (target.isAlive && Math.abs(turnTowardsPoint(target.getPosition(), dt)) < 0.2) {
+      if (target.isAlive && Math.abs(turnTowardsPoint(target.position, dt)) < 0.2) {
         if (distanceToTarget <= 50) {
           host.fireSelectedWeapon()
         } else {
-          moveTowardsPoint(target.getPosition(), dt)
+          moveTowardsPoint(target.position, dt)
         }
       }
     }

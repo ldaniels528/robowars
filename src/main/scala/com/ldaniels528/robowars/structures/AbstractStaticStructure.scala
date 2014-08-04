@@ -30,7 +30,7 @@ class AbstractStaticStructure(world: FxWorld, x: Double, y: Double, z: Double, a
   override def handleCollisionWith(obj: FxObject, dt: Double): Boolean = {
     obj match {
       case r: AbstractRound => 
-        if (damageHealth(r.getImpactDamage()) <= 0) die()
+        if (damageHealth(r.impactDamage) <= 0) die()
       case _ => 
     }
     super.handleCollisionWith(obj, dt)

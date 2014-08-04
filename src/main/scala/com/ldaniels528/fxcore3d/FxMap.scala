@@ -113,7 +113,7 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
     (ystart to yend) flatMap { yy =>
       (xstart to xend) flatMap { xx =>
         myGrids(yy * rows + xx).getAllObjectsInRadius(p, radius) filter { obj =>
-          val vector = p.vectorTo(obj.getPosition())
+          val vector = p.vectorTo(obj.position)
           vector.dotProduct(dir) < 0
         }
       }

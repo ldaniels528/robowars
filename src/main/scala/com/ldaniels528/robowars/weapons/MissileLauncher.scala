@@ -14,9 +14,9 @@ class MissileLauncher(host: AbstractVehicle, relPos: FxPoint3D)
   override def fire(): Boolean = {
     if (super.fire()) {
       // -- create a new missile
-      val p = theHost.getPosition()
+      val p = theHost.position
       p += relOrigin
-      new MissileRound(theHost.getWorld(), theHost, p, theHost.getAngle())
+      new MissileRound(theHost.world, theHost, p, theHost.angle)
       true
     } else false
   }

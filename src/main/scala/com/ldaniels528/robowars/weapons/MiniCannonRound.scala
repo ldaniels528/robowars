@@ -3,6 +3,7 @@ package com.ldaniels528.robowars.weapons
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars._
+import com.ldaniels528.robowars.actors.AbstractVehicle
 import com.ldaniels528.robowars.structures.GenericFragment
 import com.ldaniels528.robowars.weapons.MiniCannonRound._
 
@@ -10,13 +11,14 @@ import com.ldaniels528.robowars.weapons.MiniCannonRound._
  * MiniCannon Round
  * @author lawrence.daniels@gmail.com
  */
-class MiniCannonRound(world: FxWorld, shooter: AbstractMovingObject, pos: FxPoint3D, agl: FxAngle3D)
-  extends AbstractRound(world, shooter, pos, FxVelocityVector(agl.y, agl.x, maxVelocity), 0, 0, 0, 0, maxVelocity, 0, 0, 1, impactDamage) {
+class MiniCannonRound(world: FxWorld, shooter: AbstractVehicle, pos: FxPoint3D, agl: FxAngle3D)
+  extends AbstractRound(world, shooter, pos, FxVelocityVector(agl.y, agl.x, MAX_VELOCITY), impactDamage) {
 
   protected var dieNextUpdate: Boolean = _
   protected var deadOfAge: Boolean = _
+  val maxVelocity: Double = MAX_VELOCITY
 
-  // -- the polyhedron instance
+  // set the polyhedron instance
   usePolyhedronInstance(new FxPolyhedronInstance(model, ourScale))
 
   // -- create an empty shell
@@ -28,7 +30,7 @@ class MiniCannonRound(world: FxWorld, shooter: AbstractMovingObject, pos: FxPoin
     // -- if this round has died by hitting something
     if (!deadOfAge) {
       for (n <- 1 to fragmentsWhenDead) {
-        new GenericFragment(world, fragmentSize, getPosition(),
+        new GenericFragment(world, fragmentSize, position,
           fragmentSpread, fragmentGenerations, fragmentSpeed,
           fragmentRotation)
       }
@@ -44,7 +46,7 @@ class MiniCannonRound(world: FxWorld, shooter: AbstractMovingObject, pos: FxPoin
       // -- if bullet hits the ground then die
       // -- next round so that a collision detection
       // -- can be done
-      val p = getPosition()
+      val p = position
       if (p.y < 0) {
         p.y = 0
         setPosition(p)
@@ -68,7 +70,8 @@ class MiniCannonRound(world: FxWorld, shooter: AbstractMovingObject, pos: FxPoin
 object MiniCannonRound {
   val model: FxPolyhedron = ContentManager.loadModel("/models/weapons/bullet.f3d")
   val ourScale = new FxPoint3D(0.1d, 0.1d, 0.5d)
-  val maxVelocity: Double = 70d
+
+  val MAX_VELOCITY: Double = 70d
   val fragmentSize: Double = 0.5d
   val fragmentSpeed: Double = 2d
   val fragmentSpread: Double = 2d

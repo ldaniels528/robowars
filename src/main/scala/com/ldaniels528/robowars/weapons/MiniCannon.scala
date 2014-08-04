@@ -12,9 +12,9 @@ case class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D) extends Abstract
 
   override def fire(): Boolean = {
     if (super.fire()) {
-      val p = theHost.getPosition()
+      val p = theHost.position
       p += relOrigin
-      new MiniCannonRound(theHost.getWorld(), theHost, p, theHost.getAngle())
+      new MiniCannonRound(theHost.world, theHost, p, theHost.angle)
       true
     } else false
   }

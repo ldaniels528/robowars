@@ -21,12 +21,12 @@ class Pyramid(
    */
   override def die() {
     super.die()
-    val pos = getPosition()
-    new PyramidRubble(world, pos.x, pos.z, getAngle(), myWidth, myBredth, myHeight * .2)
+    val pos = position
+    new PyramidRubble(world, pos.x, pos.z, angle, myWidth, myBredth, myHeight * .2)
     val fragCount = (REL_FRAG_WHEN_DEAD * myHeight).toInt
     for (n <- 1 to fragCount) {
       new GenericFragment(world, REL_FRAG_SIZE * myHeight,
-        getPosition(), REL_FRAG_SPREAD * myHeight,
+        position, REL_FRAG_SPREAD * myHeight,
         (myHeight * REL_FRAG_GENERATIONS).toInt, myHeight * REL_FRAG_SPEED, myHeight * REL_FRAG_ROTATION)
     }
   }
