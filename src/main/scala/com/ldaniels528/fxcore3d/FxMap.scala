@@ -8,9 +8,9 @@ import scala.collection.mutable.ArrayBuffer
  *
  * Xmin,Ymin ----+--| ----+--| ----+----Xmin+size,Ymin+size
  * @param rows Number of rows and columns in this map. Rows = columns => map should be a square.
- * @param Xmin  My left-,topmost point.
- * @param Ymin  My left-,topmost point.
- * @see FxGrid
+ * @param xmin  My left-,topmost point.
+ * @param ymin  My left-,topmost point.
+ * @see [[FxGrid]]
  */
 case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
 
@@ -90,7 +90,7 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
     (ystart to yend) flatMap { yy =>
       (xstart to xend) flatMap { xx =>
         myGrids(yy * rows + xx).getAllObjectsInRadius(p, radius) filter { obj =>
-          val inst = obj.getPolyhedronInstance()
+          val inst = obj.polyhedronInstance
           sphereIsVisible(inst.getPosition(), inst.getBoundingRadius())
         }
       }

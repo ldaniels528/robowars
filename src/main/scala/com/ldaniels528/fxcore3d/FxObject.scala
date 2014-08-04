@@ -7,23 +7,22 @@ import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
  * Abstract class the represents a virtual object.
  * @author lawrence.daniels@gmail.com
  */
-class FxObject(theWorld: FxWorld, pos: FxPoint3D, angle: FxAngle3D) {
+abstract class FxObject(theWorld: FxWorld, pos: FxPoint3D, angle: FxAngle3D) {
 
   import java.awt.Graphics2D
 
-import scala.beans.BeanProperty
-  import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ArrayBuffer
 
   private val events = ArrayBuffer[FxEvent]()
   private val occupiedGrids = ArrayBuffer[FxGrid]()
 
-  var Pos: FxPoint3D = pos.copy()
-  var Agl: FxAngle3D = angle.copy()
+  var Pos: FxPoint3D = pos.makeClone
+  var Agl: FxAngle3D = angle.makeClone
   var alive: Boolean = true
 
-  @BeanProperty var age: Double = 0.0
-  @BeanProperty var flags: Int = _
-  @BeanProperty var polyhedronInstance: FxPolyhedronInstance = _
+  var age: Double = 0.0
+  var flags: Int = _
+  var polyhedronInstance: FxPolyhedronInstance = _
 
   // insert object into the world
   theWorld.insertObject(this)
@@ -106,9 +105,7 @@ import scala.beans.BeanProperty
   /**
    * Returns the distance of this object to some other point.
    */
-  def distanceToPoint(toPoint: FxPoint3D): Double = {
-    return Math.sqrt(Pos.distanceToPoint(toPoint))
-  }
+  def distanceToPoint(toPoint: FxPoint3D): Double = Math.sqrt(Pos.distanceToPoint(toPoint))
 
   /**
    * Returns a clone of the position.

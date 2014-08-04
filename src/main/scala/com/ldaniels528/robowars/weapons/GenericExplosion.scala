@@ -44,10 +44,8 @@ class GenericExplosion(
 
   override def update(dt: Double) {
     super.update(dt)
-    val age = getAge()
-
     // adjust the scaling of the polyehdron
-    val scale = getPolyhedronInstance().getScalingFactor()
+    val scale = polyhedronInstance.getScalingFactor()
     if (age > (time0 + time1)) {
       die()
     } else if (age > time0) {
@@ -55,7 +53,7 @@ class GenericExplosion(
     } else {
       scale += (dScale1 * dt)
     }
-    getPolyhedronInstance().setScalingFactor(scale)
+    polyhedronInstance.setScalingFactor(scale)
 
     // adjust the position so that the bottom always touches the ground
     val p = getPosition()

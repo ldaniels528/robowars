@@ -9,10 +9,10 @@ import com.ldaniels528.robowars.actors.ai.AttackAI
 import scala.collection.mutable.{Map => MMap}
 
 /**
- * Virtual World Loader
+ * Virtual World Reader
  * @author lawrence.daniels@gmail.com
  */
-object VirtualWorldLoader {
+object VirtualWorldReader {
   import scala.xml._
 
   /**
@@ -39,7 +39,7 @@ object VirtualWorldLoader {
             if (isPlayer) {
               println(s"Player is $actor (${actor.getClass.getName()})")
               thePlayer = actor
-              world.setActivePlayer(actor)
+              world.activePlayer = actor
             } else {
               val ab = new AttackAI(actor)
               ab.selectTarget(thePlayer)
@@ -110,7 +110,7 @@ object VirtualWorldLoader {
       z <- (node \ "@z").map(_.text).headOption.map(_.toDouble)
       isPlayer = (node \ "@isPlayer").map(_.text).headOption.map(_ == "true").getOrElse(false)
     } yield {
-      println(s"Instantiating '$id' from ${classDef.getName}")
+      //println(s"Instantiating '$id' from ${classDef.getName}")
       val args = Array(world, new FxPoint3D(x, y, z)) map (_.asInstanceOf[Object])
       val cons = classDef.getConstructors()(0)
       val actor = cons.newInstance(args: _*).asInstanceOf[AbstractActor]

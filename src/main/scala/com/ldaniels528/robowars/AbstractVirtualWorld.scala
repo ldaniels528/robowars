@@ -19,7 +19,7 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
   /**
    * All objects in this world.
    */
-  private val myObjects = ArrayBuffer[FxObject]()
+  val myObjects = ArrayBuffer[FxObject]()
 
   /**
    * Stack of new objects that should enter the world next round.
@@ -126,7 +126,7 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
   private def insertNewObjects() {
     if (newObjects.nonEmpty) {
       myObjects ++= newObjects
-      newObjects.clear()
+      newObjects.clear
     }
   }
 

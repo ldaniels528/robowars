@@ -30,6 +30,7 @@ public class VirtualWorldImpl extends VirtualWorld {
         // -- the active player
         activePlayer = new FesseTank(this, new FxPoint3D(0, 0, -290));
         //activePlayer = new Glider(this, new FxPoint3D(20, -400, 0));
+        super.activePlayer_$eq(activePlayer);
 
         // populate the world
         populateWorld(activePlayer);

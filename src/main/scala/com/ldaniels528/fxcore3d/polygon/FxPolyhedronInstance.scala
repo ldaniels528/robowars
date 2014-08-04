@@ -130,7 +130,7 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
     intensitiesAreDirty = true
   }
 
-  def getScalingFactor(): FxPoint3D = myScale.copy()
+  def getScalingFactor(): FxPoint3D = myScale.makeClone
 
   def getBoundingRadius(): Double = myBoundingVolume.boundingRadius
 

@@ -13,7 +13,7 @@ import com.ldaniels528.robowars.events.{Events, WeaponCommand}
  * RoboWars Application Main
  * @author lawrence.daniels@gmail.com
  */
-class RoboWars() extends FxFrame("Robo-Wars") with Events {
+class RoboWars() extends FxFrame("RoboWars") with Events {
   var world: FxWorld = _
   var camera: FxTrackerCamera = _
   val key = new Array[Boolean](100)
@@ -53,7 +53,7 @@ class RoboWars() extends FxFrame("Robo-Wars") with Events {
 
     // load the world
     //world = new VirtualWorldImpl()
-    world = VirtualWorldLoader.load("/worlds/world_0001.xml")
+    world = VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
   }
 

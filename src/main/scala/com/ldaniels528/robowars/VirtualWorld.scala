@@ -4,8 +4,6 @@ import java.awt.Color
 
 import com.ldaniels528.robowars.actors.AbstractActor
 
-import scala.beans.BeanProperty
-
 /**
  * Represents a virtual world
  * @author lawrence.daniels@gmail.com
@@ -13,7 +11,7 @@ import scala.beans.BeanProperty
 case class VirtualWorld(Xmin: Double, Ymin: Double, size: Double, rows: Int, gravity: Double)
   extends AbstractVirtualWorld(Xmin, Ymin, size, rows) {
 
-  @BeanProperty var activePlayer: AbstractActor = _
+  var activePlayer: AbstractActor = _
 
   // environmental settings
   var skyColor = new Color(60, 60, 200)

@@ -28,7 +28,7 @@ class AbstractShell(
     v.y += world.gravity * dt;
     setdPosition(v);
 
-    if ((getPosition().y < 0) || (getAge() > lifeTime)) {
+    if ((getPosition().y < 0) || (age > lifeTime)) {
       die();
     }
   }

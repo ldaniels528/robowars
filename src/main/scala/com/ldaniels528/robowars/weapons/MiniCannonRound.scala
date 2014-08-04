@@ -11,10 +11,7 @@ import com.ldaniels528.robowars.weapons.MiniCannonRound._
  * @author lawrence.daniels@gmail.com
  */
 class MiniCannonRound(world: FxWorld, shooter: AbstractMovingObject, pos: FxPoint3D, agl: FxAngle3D)
-  extends AbstractRound(
-    world, shooter, pos,
-    FxVelocityVector(agl.y, agl.x, maxVelocity),
-    0, 0, 0, 0, maxVelocity, 0, 0, 1, impactDamage) {
+  extends AbstractRound(world, shooter, pos, FxVelocityVector(agl.y, agl.x, maxVelocity), 0, 0, 0, 0, maxVelocity, 0, 0, 1, impactDamage) {
 
   protected var dieNextUpdate: Boolean = _
   protected var deadOfAge: Boolean = _
@@ -55,7 +52,7 @@ class MiniCannonRound(world: FxWorld, shooter: AbstractMovingObject, pos: FxPoin
       }
 
       // -- if life is out
-      if (getAge() > lifeTime) {
+      if (age > lifeTime) {
         deadOfAge = true
         die()
       }

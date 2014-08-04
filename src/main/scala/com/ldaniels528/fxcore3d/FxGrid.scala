@@ -4,7 +4,7 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
  * Represents a grid in FxMap
- * @see FxMap
+ * @see [[FxMap]]
  */
 class FxGrid() {
   private val theMovingObjects = ArrayBuffer[FxMovingObject]()

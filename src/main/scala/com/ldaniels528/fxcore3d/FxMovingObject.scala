@@ -65,7 +65,7 @@ class FxMovingObject(world: FxWorld,
     Agl.plus(dAgl, dt)
   }
 
-  def getdAngle(): FxAngle3D = dAgl.copy()
+  def getdAngle(): FxAngle3D = dAgl.makeClone
 
   def getdPosition(): FxVelocityVector = dPos.makeClone
 
