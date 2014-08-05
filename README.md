@@ -17,6 +17,10 @@ to compete in battle arenas.
 * Scala 2.11+
 * SBT 0.13+
 
+### Getting the code
+
+    $ git clone git@github.com:ldaniels528/robowars.git
+
 ### Building the code
 
     $ sbt clean package
