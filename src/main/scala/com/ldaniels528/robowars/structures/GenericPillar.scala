@@ -15,8 +15,8 @@ class GenericPillar(world: FxWorld,
                     w: Double, b: Double, h: Double)
   extends AbstractStaticStructure(world, x, h, z, agl) {
 
-  // -- make a building
-  usePolyhedronInstance(new FxPolyhedronInstance(DEFAULT_MODEL, new FxPoint3D(w, h, b)))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(w, h, b))
 
 }
 
@@ -25,6 +25,6 @@ class GenericPillar(world: FxWorld,
  * @author lawrence.daniels@gmail.com
  */
 object GenericPillar {
-  val DEFAULT_MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/pillar1.f3d")
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/pillar1.f3d")
 
 }

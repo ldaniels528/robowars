@@ -29,12 +29,10 @@ class GenericFragment(world: FxWorld,
 
   val generation = generation0 - 1
 
-  // --
-  usePolyhedronInstance(new FxPolyhedronInstance(ourDefaultPolyhedron,
-    new FxPoint3D(FxWorld.rand(0, size), FxWorld.rand(0, size),
-      FxWorld.rand(0, size))))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxWorld.random3DPoint(size))
 
-  // --
+  // set the delta-position
   setdPosition({
     val v = getdPosition()
     v.x = FxWorld.rand(-speed, speed)
@@ -76,7 +74,7 @@ class GenericFragment(world: FxWorld,
  * @author lawrence.daniels@gmail.com
  */
 object GenericFragment {
-  val ourDefaultPolyhedron: FxPolyhedron = ContentManager.loadModel("/models/structures/fragment.f3d")
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/fragment.f3d")
   val velYfactor: Double = 3d
 
 }

@@ -7,7 +7,7 @@ import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
  * Abstract class the represents a virtual object.
  * @author lawrence.daniels@gmail.com
  */
-abstract class FxObject(theWorld: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D) {
+abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D) {
 
   import java.awt.Graphics2D
 
@@ -15,17 +15,29 @@ import scala.collection.mutable.ArrayBuffer
 
   private val events = ArrayBuffer[FxEvent]()
   private val occupiedGrids = ArrayBuffer[FxGrid]()
-
-  var Pos: FxPoint3D = myPos.makeClone
-  var Agl: FxAngle3D = myAngle.makeClone
-  var alive: Boolean = true
+  private var alive: Boolean = true
+  val Pos: FxPoint3D = myPos.makeClone
+  val Agl: FxAngle3D = myAngle.makeClone
 
   var age: Double = 0.0
   var flags: Int = _
-  var polyhedronInstance: FxPolyhedronInstance = _
 
   // insert object into the world
-  theWorld.insertObject(this)
+  world += this
+
+  // setup the model's orientation and update the grids
+  polyhedronInstance.setOrientation(Pos, Agl)
+  updateTheOccupiedGrids()
+
+  /**
+   * Causes this object to die
+   */
+  def die() {
+    alive = false
+
+    // remove the dead object from the map
+    occupiedGrids.foreach(_.removeObject(this))
+  }
 
   /**
    * Indicates whether the object is alive
@@ -43,9 +55,10 @@ import scala.collection.mutable.ArrayBuffer
   def angle: FxAngle3D = Agl.makeClone
 
   /**
-   * Returns the world in which this object lives in.
+   * Returns the polyhedron instance
+   * @return the [[FxPolyhedronInstance]]
    */
-  def world: FxWorld = theWorld
+  def polyhedronInstance: FxPolyhedronInstance
 
   /**
    * Checks collision with another object. Only implemented by checking the bounding circles.
@@ -55,11 +68,17 @@ import scala.collection.mutable.ArrayBuffer
   }
 
   /**
-   * Updates this object by delta-time seconds.
+   * Creates a collision event which is added to the event list.
    */
-  def update(dt: Double) {
-    age += dt
+  def collisionWith(obj: FxObject, dt: Double) {
+    events += FxEventCollision(age, obj, dt)
+    ()
   }
+
+  /**
+   * Returns the distance of this object to some other point.
+   */
+  def distanceToPoint(toPoint: FxPoint3D): Double = Math.sqrt(Pos.distanceToPoint(toPoint))
 
   /**
    * Calls handleEvent for every event in the list.
@@ -81,14 +100,6 @@ import scala.collection.mutable.ArrayBuffer
   def interestedOfCollisionWith(obj: FxObject): Boolean = false
 
   /**
-   * Creates a collision event which is added to the event list.
-   */
-  def collisionWith(obj: FxObject, dt: Double) {
-    events += FxEventCollision(age, obj, dt)
-    ()
-  }
-
-  /**
    * Associates an event with this object
    */
   def +=(event: FxEvent) = events += event
@@ -105,9 +116,11 @@ import scala.collection.mutable.ArrayBuffer
   }
 
   /**
-   * Returns the distance of this object to some other point.
+   * Updates this object by delta-time seconds.
    */
-  def distanceToPoint(toPoint: FxPoint3D): Double = Math.sqrt(Pos.distanceToPoint(toPoint))
+  def update(dt: Double) {
+    age += dt
+  }
 
   /**
    * Returns the world coordinate for a position relative this object.
@@ -127,7 +140,7 @@ import scala.collection.mutable.ArrayBuffer
     occupiedGrids.clear()
 
     // get the new grids.
-    theWorld.map.getGridsForSphere(Pos, polyhedronInstance.getBoundingRadius(), occupiedGrids)
+    world.map.getGridsForSphere(Pos, polyhedronInstance.getBoundingRadius(), occupiedGrids)
 
     // insert this object in all occupied grids.
     occupiedGrids.foreach(_.insertObject(this))
@@ -151,24 +164,5 @@ import scala.collection.mutable.ArrayBuffer
    * checking more collisions. I.e. the object is dead.
    */
   def handleCollisionWith(obj: FxObject, dt: Double): Boolean = false
-
-  /**
-   * Instructs the object to use this FxPolyhedronInstance.
-   */
-  protected def usePolyhedronInstance(poly: FxPolyhedronInstance) {
-    polyhedronInstance = poly
-    polyhedronInstance.setOrientation(Pos, Agl)
-    updateTheOccupiedGrids()
-  }
-
-  /**
-   * Kills this object.
-   */
-  def die() {
-    alive = false
-
-    // remove the dead object from the map
-    occupiedGrids.foreach(_.removeObject(this))
-  }
 
 }

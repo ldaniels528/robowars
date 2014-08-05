@@ -25,10 +25,8 @@ class GenericExplosion(world: FxWorld,
   var dScale1: Double = _
   var dScale2: Double = _
 
-  def initialHealth: Double = 0
-
-  // set the polyhedron instance
-  usePolyhedronInstance(new FxPolyhedronInstance(ourDefaultPolyhedron, new FxPoint3D(strength0 * 2, strength0 * 0.33, strength0 * 2)))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(strength0 * 2, strength0 * 0.33, strength0 * 2))
 
   // create some fragments
   for (n <- 1 to (nbrOfFragments * strength).toInt) {
@@ -67,7 +65,7 @@ class GenericExplosion(world: FxWorld,
  * @author lawrence.daniels@gmail.com
  */
 object GenericExplosion {
-  val ourDefaultPolyhedron: FxPolyhedron = ContentManager.loadModel("/models/weapons/explosion.f3d")
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/explosion.f3d")
   val nbrOfFragments: Double = 1d
   val fragmentsSpeed: Double = 1d
   val fragmentsSize: Double = 0.2d

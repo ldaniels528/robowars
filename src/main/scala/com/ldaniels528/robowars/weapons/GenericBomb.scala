@@ -11,15 +11,10 @@ import com.ldaniels528.robowars.weapons.GenericBomb._
  * @author lawrence.daniels@gmail.com
  */
 class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, strength: Double)
-  extends AbstractMovingScenery(
-    world, p, a, new FxVelocityVector(),
-    new FxAngle3D(
-      FxWorld.rand(-ROTATION, ROTATION),
-      FxWorld.rand(-ROTATION, ROTATION),
-      FxWorld.rand(-ROTATION, ROTATION))) {
+  extends AbstractMovingScenery(world, p, a, new FxVelocityVector(), FxWorld.random3DAngle(ROTATION)) {
 
-  // set the model for the bomb
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   override def die() {
     super.die()
@@ -71,5 +66,5 @@ object GenericBomb {
   val START_ANGLE: Double = 1d
   val ROTATION: Double = 3d
   val BLAST_RADIUS = 30d
-  
+
 }

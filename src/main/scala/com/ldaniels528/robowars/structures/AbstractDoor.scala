@@ -8,14 +8,14 @@ import com.ldaniels528.robowars.structures.AbstractDoor._
  * Abstract Door
  * @author lawrence.daniels@gmail.com
  */
-class AbstractDoor(theWorld: FxWorld,
-                   pos: FxPoint3D,
-                   agl: FxAngle3D,
-                   speedUp: Double,
-                   speedDown: Double,
-                   waitTimeUp: Double,
-                   height: Double)
-  extends AbstractMovingStructure(theWorld, pos, agl, new FxVelocityVector(), new FxAngle3D()) {
+abstract class AbstractDoor(world: FxWorld,
+                            pos: FxPoint3D,
+                            agl: FxAngle3D,
+                            speedUp: Double,
+                            speedDown: Double,
+                            waitTimeUp: Double,
+                            height: Double)
+  extends AbstractMovingStructure(world, pos, agl, new FxVelocityVector(), new FxAngle3D()) {
 
   private val originalPos: Double = pos.y
   private var state: Int = DOOR_INITIAL_STATE

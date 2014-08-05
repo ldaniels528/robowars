@@ -8,11 +8,11 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
  * Abstract class that represents a moving object
  * @author lawrence.daniels@gmail.com
  */
-class FxMovingObject(world: FxWorld,
-                     pos: FxPoint3D,
-                     agl: FxAngle3D,
-                     dpos: FxVelocityVector,
-                     dagl: FxAngle3D)
+abstract class FxMovingObject(world: FxWorld,
+                              pos: FxPoint3D,
+                              agl: FxAngle3D,
+                              dpos: FxVelocityVector,
+                              dagl: FxAngle3D)
   extends FxObject(world, pos, agl) {
 
   var dPos: FxVelocityVector = dpos.makeClone

@@ -23,8 +23,8 @@ class JetCraft(world: FxWorld, p: FxPoint3D)
   val decentRate: Double = 4d
   val pitchClimbRateFactor: Double = 1d
 
-  // -- use the default polyhedron instance
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // -- add the weapons
   this += new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0))

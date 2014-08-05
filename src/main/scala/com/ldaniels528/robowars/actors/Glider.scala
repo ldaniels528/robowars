@@ -24,7 +24,7 @@ class Glider(world: FxWorld, p: FxPoint3D)
   val pitchClimbRateFactor: Double = 1d
 
   // set the default polyhedron instance
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // attach some weapons
   this += new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0))

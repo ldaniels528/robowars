@@ -10,10 +10,10 @@ import com.ldaniels528.robowars.structures.MainGate._
  * @author lawrence.daniels@gmail.com
  */
 class MainGate(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D)
-  extends AbstractDoor(world, new FxPoint3D(pos.x, pos.y + SCALE.y, pos.z), agl, SPEED_UP, speedDown,
-    waitTimeUp, maxHeight) {
+  extends AbstractDoor(world, new FxPoint3D(pos.x, pos.y + SCALE.y, pos.z), agl, SPEED_UP, speedDown, waitTimeUp, maxHeight) {
 
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
 }
 

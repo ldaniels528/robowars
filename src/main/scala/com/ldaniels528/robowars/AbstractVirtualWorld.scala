@@ -50,13 +50,14 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
     time = 0.0
   }
 
-  def +=(obj: FxObject) = newObjects += obj
-
   /**
-   * Inserts a object into the world. The object will be pushed into the stack
+   * Inserts an object into the world. The object will be pushed into the stack
    * and then inserted first thing next round.
    */
-  def insertObject(obj: FxObject) = newObjects += obj
+  def +=(obj: FxObject) = {
+    newObjects += obj
+    ()
+  }
 
   /**
    * Update the world by delta-time seconds.

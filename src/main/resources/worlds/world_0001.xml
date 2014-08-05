@@ -11,7 +11,7 @@
   <colorDef id="pasture2" red="50" green="50" blue="0" />
 
   <!-- set sky and ground colors -->
-  <environment sky="eveningSky" ground="pasture2" />
+  <environment sky="nightSky" ground="pasture2" />
 
   <!-- create actor definitions -->
   <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.actors.AntiTankCannon" />
@@ -66,10 +66,6 @@
   <item type="HomingMissileLauncher" x="-400" y="0" z="400" />
 
   <!-- add structures to this world -->
-  <structure type="Pyramid" x="115.0" y="5.0" z="-35.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" depth="5.0" height="5.0" />
-  <structure type="Pyramid" x="115.0" y="5.0" z="-5.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" depth="5.0" height="5.0" />
-  <structure type="Pyramid" x="25.0" y="5.0" z="65.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" depth="5.0" height="5.0" />
-  <structure type="Pyramid" x="55.0" y="5.0" z="55.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" depth="5.0" height="5.0" />
   <structure type="Building1" x="85.0" y="5.0" z="45.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" depth="5.0" height="5.0" />
   <structure type="Building1" x="105.0" y="5.0" z="25.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" depth="5.0" height="5.0" />
   <structure type="Building1" x="105.0" y="5.0" z="-65.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" depth="5.0" height="5.0" />
@@ -149,6 +145,10 @@
   <structure type="Pyramid" x="-200.0" y="0.0" z="-160.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
   <structure type="Pyramid" x="-240.0" y="0.0" z="-200.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
   <structure type="Pyramid" x="-240.0" y="0.0" z="-160.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
+  <structure type="Pyramid" x="115.0" y="5.0" z="-35.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
+  <structure type="Pyramid" x="115.0" y="5.0" z="-5.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
+  <structure type="Pyramid" x="25.0" y="5.0" z="65.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
+  <structure type="Pyramid" x="55.0" y="5.0" z="55.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" depth="10.0" height="10.0" />
 
   <!-- add the fencing structures -->
   <structure type="Pillar" x="-54.0" y="12.0" z="185.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0" depth="3.0" height="12.0" />

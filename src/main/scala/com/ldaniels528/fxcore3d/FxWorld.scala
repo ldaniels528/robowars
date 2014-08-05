@@ -41,18 +41,16 @@ trait FxWorld {
    */
   def reset()
 
-  def +=(obj: FxObject) : Unit
-
   /**
-   * Inserts a object into the world. The object will be pushed into the stack
+   * Inserts an object into the world. The object will be pushed into the stack
    * and then inserted first thing next round.
    */
-  def insertObject(obj: FxObject) : Unit
+  def +=(obj: FxObject): Unit
 
   /**
    * Update the world by delta-time seconds.
    */
-  def update(dt: Double)  : Unit
+  def update(dt: Double): Unit
 
   /**
    * Inserts all objects that are within radius into collection.
@@ -63,6 +61,7 @@ trait FxWorld {
    * Inserts all objects that are within radius into collection.
    */
   def getAllObjectsInSphere(pos: FxPoint3D, radius: Double, sphereIsVisible: (FxPoint3D, Double) => Boolean): Seq[FxObject]
+
   /**
    * Inserts all objects that are within radius and in-front of the plane
    * specified by a point (pos) and a normal (norm).
@@ -76,6 +75,24 @@ trait FxWorld {
  * @author lawrence.daniels@gmail.com
  */
 object FxWorld {
+
+  /**
+   * Returns a point in a random position in space
+   * @param range the range of each coordinate value
+   * @return a [[FxPoint3D]]
+   */
+  def random3DPoint(range: Double): FxPoint3D = {
+    FxPoint3D(rand(0, range), rand(0, range), rand(0, range))
+  }
+
+  /**
+   * Returns a point in a random rotation in space
+   * @param rotation the range of each rotational axis
+   * @return a [[FxAngle3D]]
+   */
+  def random3DAngle(rotation: Double): FxAngle3D = {
+    FxAngle3D(rand(-rotation, rotation), rand(-rotation, rotation), rand(-rotation, rotation))
+  }
 
   /**
    * Returns a random number between b and e.

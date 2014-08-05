@@ -18,8 +18,8 @@ class MiniCannonShell(world: FxWorld, origin: FxPoint3D, agl: FxAngle3D, vel: Fx
     new FxAngle3D(angleX, angleY, angleZ),
     randomSpread, randomRotation, lifeTime) {
 
-  usePolyhedronInstance(new FxPolyhedronInstance(ourDefaultPolyhedron,
-    ourScale))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
 }
 
@@ -28,8 +28,8 @@ class MiniCannonShell(world: FxWorld, origin: FxPoint3D, agl: FxAngle3D, vel: Fx
  * @author lawrence.daniels@gmail.com
  */
 object MiniCannonShell {
-  val ourDefaultPolyhedron: FxPolyhedron = ContentManager.loadModel("/models/weapons/shell.f3d")
-  val ourScale = new FxPoint3D(0.1d, 0.1d, 0.2d)
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/shell.f3d")
+  val SCALE = new FxPoint3D(0.1d, 0.1d, 0.2d)
   val angleX: Double = 2d
   val angleY: Double = 2d
   val angleZ: Double = 2d

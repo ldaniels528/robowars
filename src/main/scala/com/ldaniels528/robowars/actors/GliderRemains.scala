@@ -14,21 +14,18 @@ class GliderRemains(world: FxWorld, deadActor: AbstractActor)
   extends AbstractMovingScenery(world, deadActor.position, deadActor.angle, deadActor.getdPosition(), deadActor.getdAngle()) {
 
   // set the default polyhedron instance
-  usePolyhedronInstance(new FxPolyhedronInstance(ourDefaultPolyhedron, ourScale))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // -- set a random rotation on the remaining glider
-  setdAngle(new FxAngle3D(
-    FxWorld.rand(-ourRandRot, ourRandRot),
-    FxWorld.rand(-ourRandRot, ourRandRot),
-    FxWorld.rand(-ourRandRot, ourRandRot)))
+  setdAngle(FxWorld.random3DAngle(ourRandRot))
 
   override def update(dt: Double) {
     super.update(dt)
     val p = position
 
     // -- check if collision with ground
-    if (p.y < ourScale.y) {
-      p.y = ourScale.y
+    if (p.y < SCALE.y) {
+      p.y = SCALE.y
 
       val dp = getdPosition()
       dp.x = 0
@@ -43,7 +40,7 @@ class GliderRemains(world: FxWorld, deadActor: AbstractActor)
       setAngle(a)
       setdAngle(new FxAngle3D())
       setdPosition(dp)
-    } else if (p.y > ourScale.y) {
+    } else if (p.y > SCALE.y) {
       // -- GRAVITY
       val dp = getdPosition()
       dp.y += world.gravity * dt
@@ -54,8 +51,8 @@ class GliderRemains(world: FxWorld, deadActor: AbstractActor)
 }
 
 object GliderRemains {
-  val ourDefaultPolyhedron: FxPolyhedron = ContentManager.loadModel("/models/actors/gliderRemains.f3d")
-  val ourScale: FxPoint3D = new FxPoint3D(8d, 0.2d, 4d)
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/gliderRemains.f3d")
+  val SCALE: FxPoint3D = new FxPoint3D(8d, 0.2d, 4d)
   val ourRandRot: Double = 1d
 
 }

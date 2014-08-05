@@ -1,20 +1,22 @@
 package com.ldaniels528.robowars.structures
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.FxPolyhedron
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.structures.Pyramid._
 
 /**
  * Represents a Pyramid Structure
- * @author ldaniels
+ * @author lawrence.daniels@gmail.com
  */
-class Pyramid(
-  world: FxWorld,
-  x: Double, z: Double,
-  agl: FxAngle3D,
-  myWidth: Double, myBredth: Double, myHeight: Double)
-  extends AbstractStaticStructure(world, x, myHeight, z, agl, INITIAL_HEIGHT) {
+class Pyramid(world: FxWorld,
+              x: Double, z: Double,
+              agl: FxAngle3D,
+              width: Double, breadth: Double, height: Double)
+  extends AbstractStaticStructure(world, x, 0, z, agl) {
+
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(width, height, breadth))
 
   /**
    * Causes this virtual object to die
@@ -22,28 +24,19 @@ class Pyramid(
   override def die() {
     super.die()
     val pos = position
-    new PyramidRubble(world, pos.x, pos.z, angle, myWidth, myBredth, myHeight * .2)
-    val fragCount = (REL_FRAG_WHEN_DEAD * myHeight).toInt
-    for (n <- 1 to fragCount) {
-      new GenericFragment(world, REL_FRAG_SIZE * myHeight,
-        position, REL_FRAG_SPREAD * myHeight,
-        (myHeight * REL_FRAG_GENERATIONS).toInt, myHeight * REL_FRAG_SPEED, myHeight * REL_FRAG_ROTATION)
-    }
+
+    new PyramidRubble(world, pos.x, pos.z, angle, width, breadth, height * .2)
+
+    // destroy the building
+    destruct(height)
   }
 
 }
 
 /**
- * Pyramid
- * @author ldaniels
+ * Pyramid Companion Object
+ * @author lawrence.daniels@gmail.com
  */
 object Pyramid {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/pyramid.f3d")
-  val REL_FRAG_SIZE: Double = 0.6d
-  val REL_FRAG_SPEED: Double = 2d
-  val REL_FRAG_SPREAD: Double = 1d
-  val REL_FRAG_WHEN_DEAD: Double = 1d
-  val REL_FRAG_GENERATIONS: Double = 0.01d
-  val REL_FRAG_ROTATION: Double = 0.2d
-  val INITIAL_HEIGHT = 250d
 }

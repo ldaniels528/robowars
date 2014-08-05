@@ -6,5 +6,5 @@ import com.ldaniels528.fxcore3d._
  * Abstract Static Scenery
  * @author lawrence.daniels@gmail.com
  */
-class AbstractStaticScenery(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D)
+abstract class AbstractStaticScenery(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D)
   extends AbstractStaticObject(world, pos, agl, Double.MaxValue)

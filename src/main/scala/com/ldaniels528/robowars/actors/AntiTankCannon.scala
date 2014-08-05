@@ -25,7 +25,7 @@ class AntiTankCannon(world: FxWorld, p: FxPoint3D)
   val pitchClimbRateFactor: Double = 0
 
   // set the default polyhedron instance
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // attach some weapons
   this += new MiniCannon(this, FxPoint3D())

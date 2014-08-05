@@ -16,8 +16,8 @@ class MissileRound(w: FxWorld, shooter: AbstractVehicle, pos: FxPoint3D, agl: Fx
 
   val maxVelocity = MAX_VELOCITY
 
-  // set the polyhedron instance
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, SCALE))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   override def update(dt: Double) {
     super.update(dt)

@@ -12,8 +12,8 @@ import com.ldaniels528.robowars.structures.GenericTowerRuin._
 class GenericTowerRuin(world: FxWorld, x: Double, z: Double, agl: FxAngle3D, w: Double, b: Double, h: Double)
   extends AbstractStaticStructure(world, x, h, z, agl, Double.MaxValue) {
 
-  // -- make a building
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, new FxPoint3D(w, h, b)));
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(w, h, b))
 
 }
 

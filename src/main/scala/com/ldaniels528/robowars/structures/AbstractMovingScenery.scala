@@ -7,11 +7,10 @@ import com.ldaniels528.robowars.AbstractMovingObject
  * Abstract Moving Scenery
  * @author lawrence.daniels@gmail.com
  */
-class AbstractMovingScenery(
-  theWorld: FxWorld,
-  pos: FxPoint3D,
-  agl: FxAngle3D,
-  dPos: FxVelocityVector,
-  dAgl: FxAngle3D)
-  extends AbstractMovingObject(theWorld, pos, agl, dPos, dAgl) 
+abstract class AbstractMovingScenery(world: FxWorld,
+                                     pos: FxPoint3D,
+                                     agl: FxAngle3D,
+                                     dPos: FxVelocityVector,
+                                     dAgl: FxAngle3D)
+  extends AbstractMovingObject(world, pos, agl, dPos, dAgl)
 	

@@ -18,8 +18,8 @@ class MiniCannonRound(world: FxWorld, shooter: AbstractVehicle, pos: FxPoint3D, 
   protected var deadOfAge: Boolean = _
   val maxVelocity: Double = MAX_VELOCITY
 
-  // set the polyhedron instance
-  usePolyhedronInstance(new FxPolyhedronInstance(model, ourScale))
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // -- create an empty shell
   new MiniCannonShell(world, pos, agl, shooter.getdPosition())
@@ -68,8 +68,8 @@ class MiniCannonRound(world: FxWorld, shooter: AbstractVehicle, pos: FxPoint3D, 
  * @author lawrence.daniels@gmail.com
  */
 object MiniCannonRound {
-  val model: FxPolyhedron = ContentManager.loadModel("/models/weapons/bullet.f3d")
-  val ourScale = new FxPoint3D(0.1d, 0.1d, 0.5d)
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/bullet.f3d")
+  val SCALE = new FxPoint3D(0.1d, 0.1d, 0.5d)
 
   val MAX_VELOCITY: Double = 70d
   val fragmentSize: Double = 0.5d

@@ -9,26 +9,22 @@ import com.ldaniels528.robowars.structures.GenericTower._
  * Generic Tower
  * @author lawrence.daniels@gmail.com
  */
-class GenericTower(
-  world: FxWorld,
-  x: Double, z: Double,
-  agl: FxAngle3D,
-  myWidth: Double, myBredth: Double, myHeight: Double)
-  extends AbstractStaticStructure(world, x, myHeight, z, new FxAngle3D(0, 0, 0), INITIAL_HEIGHT) {
+class GenericTower(world: FxWorld,
+                   x: Double, z: Double,
+                   agl: FxAngle3D,
+                   width: Double, breadth: Double, height: Double)
+  extends AbstractStaticStructure(world, x, height, z, FxAngle3D()) {
 
-  usePolyhedronInstance(new FxPolyhedronInstance(MODEL, new FxPoint3D(myWidth, myHeight, myBredth)));
+  // set the default polyhedron instance
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(width, height, breadth))
 
   override def die() {
-    super.die();
+    super.die()
     val pos = position
-    new GenericTowerRuin(world, pos.x, pos.z, angle, myWidth, myBredth, myHeight * .2);
-    val nbr = (REL_FRAG_WHEN_DEAD * myHeight).toInt
-    for (n <- 1 to nbr) {
-      new GenericFragment(world, REL_FRAG_SIZE * myHeight,
-        position, REL_FRAG_SPREAD * myHeight,
-        (myHeight * REL_FRAG_GENERATIONS).toInt, myHeight * REL_FRAG_SPEED,
-        myHeight * REL_FRAG_ROTATION);
-    }
+    new GenericTowerRuin(world, pos.x, pos.z, angle, width, breadth, height * .2)
+
+    // destroy the building
+    destruct(height)
   }
 
 }
@@ -39,12 +35,4 @@ class GenericTower(
  */
 object GenericTower {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/build2.f3d")
-  val REL_FRAG_SIZE: Double = 0.6d
-  val REL_FRAG_SPEED: Double = 2d
-  val REL_FRAG_SPREAD: Double = 1d
-  val REL_FRAG_WHEN_DEAD: Double = 1
-  val REL_FRAG_GENERATIONS: Double = 0.01d
-  val REL_FRAG_ROTATION: Double = 0.2d
-  val INITIAL_HEIGHT: Double = 20d
-
 }
