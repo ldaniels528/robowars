@@ -2,7 +2,9 @@ package com.ldaniels528.robowars.actors
 
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxEvent, FxObject, FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.AbstractMovingObject
+import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.{Events, SteeringCommand, WeaponCommand}
+import com.ldaniels528.robowars.items.AbstractItem
 import com.ldaniels528.robowars.structures.{AbstractMovingStructure, AbstractStaticStructure}
 import com.ldaniels528.robowars.weapons.{AbstractRound, AbstractWeapon}
 
@@ -39,9 +41,10 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   override def interestedOfCollisionWith(obj: FxObject) = {
     obj match {
-      case s: AbstractStaticStructure => true
+      case i: AbstractItem => true
       case m: AbstractMovingStructure => true
       case r: AbstractRound => true
+      case s: AbstractStaticStructure => true
       case v: AbstractVehicle => true
       case _ => super.interestedOfCollisionWith(obj)
     }
@@ -49,10 +52,17 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   override def handleCollisionWith(obj: FxObject, dt: Double) = {
     obj match {
-      case mv: AbstractMovingStructure =>
+      case i: AbstractItem =>
+        if(i.isAlive) {
+          audioPlayer ! RewardClip
+          this.damageHealth(-2)
+          i.die()
+        }
+        true
+      case m: AbstractMovingStructure =>
         oldStates()
         true
-      case ss: AbstractStaticStructure =>
+      case s: AbstractStaticStructure =>
         oldStates()
         true
       case r: AbstractRound =>

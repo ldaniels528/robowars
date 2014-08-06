@@ -52,6 +52,7 @@ object VirtualWorldReader {
           world.skyColor = lookup("color", colors, env.sky)
           world.groundColor = lookup("color", colors, env.ground)
         }
+        case "item" => toItem(world, classDefs, node)
         case "objectDef" => toClassDef(node) foreach (classDefs += _)
         case "structure" => toStructure(world, classDefs, node)
         case _ =>
@@ -132,6 +133,21 @@ object VirtualWorldReader {
     } yield {
       //println(s"Instantiating '$id' from ${classDef.getName}")
       val args = Array(world, new FxPoint3D(x, y, z), new FxAngle3D(rx, ry, rz)) map (_.asInstanceOf[Object])
+      val cons = classDef.getConstructors()(0)
+      cons.newInstance(args: _*).asInstanceOf[FxObject]
+    }
+  }
+
+  private def toItem(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[FxObject] = {
+    for {
+      id <- (node \ "@type").map(_.text).headOption
+      classDef = lookup("class", classDefs, id)
+      x <- (node \ "@x").map(_.text).headOption.map(_.toDouble)
+      y <- (node \ "@y").map(_.text).headOption.map(_.toDouble)
+      z <- (node \ "@z").map(_.text).headOption.map(_.toDouble)
+    } yield {
+      //println(s"Instantiating '$id' from ${classDef.getName}")
+      val args = Array(world, new FxPoint3D(x, y, z)) map (_.asInstanceOf[Object])
       val cons = classDef.getConstructors()(0)
       cons.newInstance(args: _*).asInstanceOf[FxObject]
     }

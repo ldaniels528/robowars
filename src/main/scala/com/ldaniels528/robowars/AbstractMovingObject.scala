@@ -26,6 +26,7 @@ abstract class AbstractMovingObject(world: FxWorld,
    */
   def damageHealth(damage: Double): Double = {
     health -= damage
+    if(health > 5) health = 5
     health
   }
 

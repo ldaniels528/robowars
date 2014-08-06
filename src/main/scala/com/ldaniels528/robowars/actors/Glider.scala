@@ -12,7 +12,7 @@ import com.ldaniels528.robowars.weapons.{BombBay, MiniCannon, MissileLauncher}
  * @author lawrence.daniels@gmail.com
  */
 class Glider(world: FxWorld, p: FxPoint3D)
-  extends AbstractActor(world, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), INITIAL_HEALTH) {
+  extends AbstractActor(world, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), health = 5d) {
 
   val turningRate: Double = 0.6d
   val pitchRate: Double = 0.5d
@@ -75,7 +75,6 @@ class Glider(world: FxWorld, p: FxPoint3D)
 object Glider {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/glider.f3d")
   val SCALE = new FxPoint3D(8d, 1d, 4d)
-  val INITIAL_HEALTH: Double = 5d
 
   val FRAGMENT_SIZE: Double = 0.25d
   val FRAGMENT_SPEED: Double = 7d
