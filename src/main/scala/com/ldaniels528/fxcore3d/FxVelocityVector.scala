@@ -84,6 +84,8 @@ class FxVelocityVector() extends FxPoint3D() {
  */
 object FxVelocityVector {
 
+  def apply(): FxVelocityVector = new FxVelocityVector()
+
   def apply(Ay: Double, Ax: Double, velocity: Double): FxVelocityVector = {
     val vv = new FxVelocityVector()
     vv.Ax = Ax

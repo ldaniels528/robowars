@@ -11,21 +11,15 @@ import com.ldaniels528.robowars.structures.GenericFragment._
  * Generic Fragment
  * @author lawrence.daniels@gmail.com
  */
-class GenericFragment(world: FxWorld,
-                      size: Double,
-                      origin: FxPoint3D,
-                      spread: Double,
-                      generation0: Int,
-                      speed: Double,
-                      rotation: Double)
+class GenericFragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: Double, generation0: Int, speed: Double, rotation: Double)
   extends AbstractMovingScenery(world,
-    new FxPoint3D(
+    FxPoint3D(
       origin.x + spread * (random() - 0.5),
       origin.y + spread * (random() - 0.5),
       origin.z + spread * (random() - 0.5)),
-    new FxAngle3D(random() * 3, random() * 3, random() * 3),
-    new FxVelocityVector(),
-    new FxAngle3D(random() * 3, random() * 3, random() * 3)) {
+    FxAngle3D(random() * 3, random() * 3, random() * 3),
+    FxVelocityVector(),
+    FxAngle3D(random() * 3, random() * 3, random() * 3)) {
 
   val generation = generation0 - 1
 
@@ -41,6 +35,16 @@ class GenericFragment(world: FxWorld,
     v
   })
 
+  override def die() {
+    super.die()
+
+    if (generation > 0) {
+      (1 to 5) foreach { n =>
+        new GenericFragment(world, size / 2d, position, size, generation - 1, getdPosition().y * 0.5, 3)
+      }
+    }
+  }
+
   override def update(dt: Double) {
     super.update(dt)
 
@@ -55,15 +59,6 @@ class GenericFragment(world: FxWorld,
       p.y = size
       setPosition(p)
       die()
-    }
-  }
-
-  override def die() {
-    super.die()
-    if (generation > 0) {
-      for (n <- 1 to 5) {
-        new GenericFragment(world, size / 2, position, size, generation - 1, getdPosition().y * 0.5, 3)
-      }
     }
   }
 

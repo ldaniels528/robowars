@@ -52,8 +52,8 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     audioPlayer ! Init
 
     // load the world
-    //world = new VirtualWorldImpl()
-    world = new VirtualWorldFull() // VirtualWorldReader.load("/worlds/world_0001.xml")
+    //world = new VirtualWorldFull()
+    world = VirtualWorldReader.load("/worlds/world_0002.xml")
     camera = createCamera(world)
   }
 
@@ -234,8 +234,8 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
  * @author lawrence.daniels@gmail.com
  */
 object RoboWars {
-  val FONT12 = new Font(Font.MONOSPACED, Font.BOLD, 12)
-  val FONT32 = new Font(Font.MONOSPACED, Font.BOLD, 50)
+  private val FONT12 = new Font(Font.MONOSPACED, Font.BOLD, 12)
+  private val FONT32 = new Font(Font.MONOSPACED, Font.BOLD, 50)
 
   /**
    * Main application entry-point

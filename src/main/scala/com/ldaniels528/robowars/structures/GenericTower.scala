@@ -9,8 +9,8 @@ import com.ldaniels528.robowars.structures.GenericTower._
  * Generic Tower
  * @author lawrence.daniels@gmail.com
  */
-class GenericTower(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
-  extends AbstractStaticStructure(world, FxPoint3D(pos.x, dim.h, pos.z), agl, health = 50) {
+case class GenericTower(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
+  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, dim.h, pos.z), agl, health = 50) {
 
   // set the default polyhedron instance
   lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)

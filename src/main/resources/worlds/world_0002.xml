@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<world name="Andromeda" minX="-500" minY="-500" size="1000" rows="10">
+<world name="Andromeda" minX="-500" minY="-500" size="1000" rows="2" gravity="-10">
 
   <!-- color definitions -->
   <colorDef id="daySky" red="50" green="50" blue="200" />
@@ -14,23 +13,23 @@
   <environment sky="eveningSky" ground="pasture1" />
 
   <!-- create weapons definitions -->
-  <objectDef id="MiniCannon" class="combat.environment.weapons.MachineGun" />
-  <objectDef id="MissileLauncher" class="combat.environment.weapons.MissileLauncher" />
-  <objectDef id="RocketLauncher" class="combat.environment.weapons.RocketLauncher" />
+  <objectDef id="MiniCannon" class="com.ldaniels528.robowars.weapons.MachineGun" />
+  <objectDef id="MissileLauncher" class="com.ldaniels528.robowars.weapons.MissileLauncher" />
+  <objectDef id="RocketLauncher" class="com.ldaniels528.robowars.weapons.RocketLauncher" />
 
   <!-- create actor definitions -->
-  <objectDef id="ScoutTank" class="combat.environment.vehicles.Tank2" />
-  <objectDef id="RoverTank" class="combat.environment.vehicles.Tank1" />
-  <objectDef id="HoverCraft" class="combat.environment.vehicles.Aircraft1" />
-  <objectDef id="Destroyer" class="combat.environment.vehicles.Aircraft2" />
-  <objectDef id="Cannon" class="combat.environment.vehicles.Tank4" />
+  <objectDef id="ScoutTank" class="com.ldaniels528.robowars.vehicles.Tank2" />
+  <objectDef id="RoverTank" class="com.ldaniels528.robowars.vehicles.Tank1" />
+  <objectDef id="HoverCraft" class="com.ldaniels528.robowars.vehicles.Aircraft1" />
+  <objectDef id="Destroyer" class="com.ldaniels528.robowars.vehicles.Aircraft2" />
+  <objectDef id="Cannon" class="com.ldaniels528.robowars.vehicles.Tank4" />
 
   <!-- create structure definitions -->
-  <objectDef id="GenericBuilding" class="combat.environment.structures.Building2" />
-  <objectDef id="GenericWall" class="combat.environment.structures.Wall1" />
-  <objectDef id="GenericPillar" class="combat.environment.structures.Pillar" />
-  <objectDef id="GenericTower" class="combat.environment.structures.Tower" />
-  <objectDef id="MainGate" class="combat.environment.structures.MainGate" />
+  <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.structures.Building2" />
+  <objectDef id="GenericWall" class="com.ldaniels528.robowars.structures.Wall1" />
+  <objectDef id="GenericPillar" class="com.ldaniels528.robowars.structures.Pillar" />
+  <objectDef id="GenericTower" class="com.ldaniels528.robowars.structures.Tower" />
+  <objectDef id="MainGate" class="com.ldaniels528.robowars.structures.MainGate" />
 
   <!-- add the player to this world -->
   <actor type="RoverTank" x="0" y="0" z="-250" isPlayer="true" />

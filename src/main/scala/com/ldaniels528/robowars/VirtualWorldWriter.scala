@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars
 
 import com.ldaniels528.robowars.actors.AbstractActor
-import com.ldaniels528.robowars.structures.{MainGate, AbstractDoor, AbstractStaticStructure}
+import com.ldaniels528.robowars.structures._
 
 /**
  * Virtual World Writer
@@ -37,11 +37,20 @@ object VirtualWorldWriter {
   }
 
   private def encodeStructure(structure: AbstractStaticStructure): (String, String, Node) = {
-    val p = structure.Pos
-    val h = p.y.toString
+    val (w, p, a, s) = structure match {
+      case GenericBuilding(world, pos, agl, dim) => (world, pos, agl, dim)
+      case GenericPillar(world, pos, agl, dim) => (world, pos, agl, dim)
+      case GenericTower(world, pos, agl, dim) => (world, pos, agl, dim)
+      case GenericWall(world, pos, agl, dim) => (world, pos, agl, dim)
+      case x =>
+        throw new IllegalStateException(s"Class type ${x.getClass.getName} not recognized")
+    }
     val id = structure.getClass.getSimpleName
     val className = structure.getClass.getName
-    val node = <structure type={id} x={p.x.toString} y={p.y.toString} z={p.z.toString} rx="0.0" ry="0.0" rz="0.0" width={h} depth={h} height={h} />;
+    val node = <structure type={id}
+                          x={p.x.toString} y={p.y.toString} z={p.z.toString}
+                          rx={a.x.toString} ry={a.y.toString} rz={a.z.toString}
+                          width={s.w.toString} height={s.h.toString} depth={s.d.toString}/>;
     (id, className, node)
   }
 
@@ -52,7 +61,7 @@ object VirtualWorldWriter {
     val h = MainGate.SCALE.y.toString
     val id = door.getClass.getSimpleName
     val className = door.getClass.getName
-    val node = <door type={id} x={p.x.toString} y={p.y.toString} z={p.z.toString} rx="0.0" ry="0.0" rz="0.0" />;
+    val node = <door type={id} x={p.x.toString} y={p.y.toString} z={p.z.toString} rx="0.0" ry="0.0" rz="0.0"/>;
     (id, className, node)
   }
 
@@ -70,11 +79,7 @@ object VirtualWorldWriter {
       <!-- set sky and ground colors -->
       <environment sky="eveningSky" ground="pasture2"/>
 
-      <!-- object definitions -->
-      {objects.groupBy(_._1) map { case (id, seq) => <objectDef id={id} class={seq.head._2}/>}}
-
-      <!-- actor definitions -->
-      {objects map { case (_, _, xml) => xml}}
+      <!-- object definitions -->{objects.groupBy(_._1) map { case (id, seq) => <objectDef id={id} class={seq.head._2}/>}}<!-- actor definitions -->{objects map { case (_, _, xml) => xml}}
     </world>
   }
 

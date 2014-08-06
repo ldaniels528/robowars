@@ -13,6 +13,7 @@ import scala.collection.mutable.{Map => MMap}
  * @author lawrence.daniels@gmail.com
  */
 object VirtualWorldReader {
+
   import scala.xml._
 
   /**
@@ -146,12 +147,12 @@ object VirtualWorldReader {
       rx <- (node \ "@rx").map(_.text).headOption.map(_.toDouble)
       ry <- (node \ "@ry").map(_.text).headOption.map(_.toDouble)
       rz <- (node \ "@rz").map(_.text).headOption.map(_.toDouble)
-      width <- (node \ "@width").map(_.text).headOption.map(_.toDouble)
-      depth <- (node \ "@depth").map(_.text).headOption.map(_.toDouble)
-      height <- (node \ "@height").map(_.text).headOption.map(_.toDouble)
+      w <- (node \ "@width").map(_.text).headOption.map(_.toDouble)
+      d <- (node \ "@depth").map(_.text).headOption.map(_.toDouble)
+      h <- (node \ "@height").map(_.text).headOption.map(_.toDouble)
     } yield {
       //println(s"Instantiating '$id' from ${classDef.getName}")
-      val args = Array(world, x, z, new FxAngle3D(rx, ry, rz), width, depth, height) map (_.asInstanceOf[Object])
+      val args = Array(world, FxPoint3D(x, y, z), FxAngle3D(rx, ry, rz), FxScale3D(w, h, d)) map (_.asInstanceOf[Object])
       val cons = classDef.getConstructors()(0)
       cons.newInstance(args: _*).asInstanceOf[FxObject]
     }

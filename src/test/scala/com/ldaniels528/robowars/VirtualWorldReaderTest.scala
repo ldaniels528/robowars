@@ -7,7 +7,7 @@ class VirtualWorldReaderTest {
 
   @Test
   def load() {
-    val world = VirtualWorldReader.load("worlds/world_0001.xml")
+    val world = VirtualWorldReader.load("worlds/world_0004.xml")
     println(world)
   }
 

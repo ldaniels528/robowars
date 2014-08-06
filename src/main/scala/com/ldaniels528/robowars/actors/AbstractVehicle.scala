@@ -14,7 +14,7 @@ import com.ldaniels528.robowars.weapons.{AbstractRound, AbstractWeapon}
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocityVector, health: Double)
-  extends AbstractMovingObject(world, pos, vector.getAngle(), vector, new FxAngle3D(), health) with Events {
+  extends AbstractMovingObject(world, pos, vector.getAngle(), vector, FxAngle3D(), health) with Events {
 
   private var weaponIndex = 0
   private val weapons = collection.mutable.Buffer[AbstractWeapon]()
