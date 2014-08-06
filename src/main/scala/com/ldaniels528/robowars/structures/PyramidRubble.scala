@@ -9,11 +9,11 @@ import com.ldaniels528.robowars.structures.PyramidRubble._
  * Remains of a destroyed Pyramid
  * @author ldaniels
  */
-class PyramidRubble(world: FxWorld, x: Double, z: Double, agl: FxAngle3D, w: Double, b: Double, h: Double)
-  extends AbstractStaticStructure(world, x, h, z, agl, Double.MaxValue) {
+class PyramidRubble(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, size: FxScale3D)
+  extends AbstractStaticStructure(world, FxPoint3D(pos.x, size.h, pos.z), agl, Double.MaxValue) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, new FxPoint3D(w, h, b))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, size.toPoint)
 
 }
 

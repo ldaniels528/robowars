@@ -9,11 +9,11 @@ import com.ldaniels528.robowars.structures.GenericTowerRuin._
  * Generic Tower Ruin
  * @author lawrence.daniels@gmail.com
  */
-class GenericTowerRuin(world: FxWorld, x: Double, z: Double, agl: FxAngle3D, w: Double, b: Double, h: Double)
-  extends AbstractStaticStructure(world, x, h, z, agl, Double.MaxValue) {
+class GenericTowerRuin(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
+  extends AbstractStaticStructure(world, FxPoint3D(pos.x, dim.h, pos.z), agl) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(w, h, b))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
 
 }
 
@@ -22,6 +22,6 @@ class GenericTowerRuin(world: FxWorld, x: Double, z: Double, agl: FxAngle3D, w: 
  * @author lawrence.daniels@gmail.com
  */
 object GenericTowerRuin {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/build2Rubble.f3d")
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/buildingRubble.f3d")
 
 }

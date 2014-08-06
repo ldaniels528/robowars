@@ -9,22 +9,19 @@ import com.ldaniels528.robowars.structures.GenericTower._
  * Generic Tower
  * @author lawrence.daniels@gmail.com
  */
-class GenericTower(world: FxWorld,
-                   x: Double, z: Double,
-                   agl: FxAngle3D,
-                   width: Double, breadth: Double, height: Double)
-  extends AbstractStaticStructure(world, x, height, z, FxAngle3D(), health = 50) {
+class GenericTower(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
+  extends AbstractStaticStructure(world, FxPoint3D(pos.x, dim.h, pos.z), agl, health = 50) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(width, height, breadth))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
 
   override def die() {
     super.die()
     val pos = position
-    new GenericTowerRuin(world, pos.x, pos.z, angle, width, breadth, height * .2)
+    new GenericTowerRuin(world, pos, angle, FxScale3D(dim.w, dim.h * 0.2d, dim.d))
 
     // destroy the building
-    destruct(height)
+    destruct(dim.h)
   }
 
 }
@@ -34,5 +31,6 @@ class GenericTower(world: FxWorld,
  * @author lawrence.daniels@gmail.com
  */
 object GenericTower {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/build2.f3d")
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/tower1.f3d")
+
 }

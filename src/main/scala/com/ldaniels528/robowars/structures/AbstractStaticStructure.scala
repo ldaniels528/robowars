@@ -8,11 +8,8 @@ import com.ldaniels528.robowars.weapons._
  * Abstract Static Structure
  * @author lawrence.daniels@gmail.com
  */
-abstract class AbstractStaticStructure(world: FxWorld,
-                                       x: Double, y: Double, z: Double,
-                                       agl: FxAngle3D,
-                                       health: Double = Double.MaxValue)
-  extends AbstractStaticObject(world, new FxPoint3D(x, y, z), agl, health) {
+abstract class AbstractStaticStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, health: Double = Double.MaxValue)
+  extends AbstractStaticObject(world, pos, agl, health) {
 
   override def die() {
     import com.ldaniels528.robowars.audio.AudioManager._

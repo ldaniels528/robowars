@@ -9,14 +9,11 @@ import com.ldaniels528.robowars.structures.Pyramid._
  * Represents a Pyramid Structure
  * @author lawrence.daniels@gmail.com
  */
-class Pyramid(world: FxWorld,
-              x: Double, z: Double,
-              agl: FxAngle3D,
-              width: Double, breadth: Double, height: Double)
-  extends AbstractStaticStructure(world, x, 0, z, agl, health = 50) {
+case class Pyramid(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, size: FxScale3D)
+  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, 0, pos.z), agl, health = 50) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(width, height, breadth))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, size.toPoint)
 
   /**
    * Causes this virtual object to die
@@ -25,10 +22,10 @@ class Pyramid(world: FxWorld,
     super.die()
     val pos = position
 
-    new PyramidRubble(world, pos.x, pos.z, angle, width, breadth, height * .2)
+    new PyramidRubble(world, pos, angle, FxScale3D(size.w, size.h * 0.2d, size.d))
 
-    // destroy the building
-    destruct(height)
+    // destroy the pyramid
+    destruct(size.h)
   }
 
 }

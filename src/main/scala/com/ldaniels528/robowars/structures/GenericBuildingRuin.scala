@@ -3,17 +3,17 @@ package com.ldaniels528.robowars.structures
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.structures.GenericBuildingRuin._;
+import com.ldaniels528.robowars.structures.GenericBuildingRuin._
 
 /**
  * Generic Building Ruin
  * @author lawrence.daniels@gmail.com
  */
-class GenericBuildingRuin(world: FxWorld, x: Double, z: Double, agl: FxAngle3D, w: Double, b: Double, h: Double)
-  extends AbstractStaticStructure(world, x, h, z, agl, Double.MaxValue) {
+class GenericBuildingRuin(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
+  extends AbstractStaticStructure(world, FxPoint3D(pos.x, scale.h, pos.z), agl, Double.MaxValue) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(w, h, b))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, scale.toPoint)
 
 }
 
@@ -22,6 +22,6 @@ class GenericBuildingRuin(world: FxWorld, x: Double, z: Double, agl: FxAngle3D, 
  * @author lawrence.daniels@gmail.com
  */
 object GenericBuildingRuin {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/build2Rubble.f3d")
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/buildingRubble.f3d")
 
 }
