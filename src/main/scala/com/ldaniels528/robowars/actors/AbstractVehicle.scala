@@ -66,7 +66,6 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
         oldStates()
         true
       case _ => super.handleCollisionWith(obj, dt)
-
     }
   }
 

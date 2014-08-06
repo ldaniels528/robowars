@@ -30,7 +30,7 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
     }
   }
 
-  def makeClone(): FxBoundingVolume = new FxBoundingVolume(theHostPolyInst, myScale)
+  def makeClone: FxBoundingVolume = this.copy()
 
   private def pointInMyVolume(otherBox: FxArrayOf3DPoints): Boolean = {
     // start checking if any point is within my volume

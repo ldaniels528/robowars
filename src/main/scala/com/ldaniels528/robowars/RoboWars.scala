@@ -52,8 +52,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     audioPlayer ! Init
 
     // load the world
-    //world = new VirtualWorldFull()
-    world = VirtualWorldReader.load("/worlds/world_0002.xml")
+    world = VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
   }
 
@@ -93,6 +92,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
   private def renderScene(dt: Double, dim: Dimension): Boolean = {
     val player = world.activePlayer
+    val p = player.position
 
     // update the camera
     camera.update(dt)
@@ -104,7 +104,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
     // render the cycle time
     offScreen.setColor(new Color(0xFF, 0x80, 0x00))
-    offScreen.drawString(f"dt = $dt%.3f", dim.width - 75, dim.height - 25)
+    offScreen.drawString(f"pos = $p,  dt = $dt%.3f", dim.width - 300, dim.height - 25)
 
     // render the heads-up display
     renderHUD(player)

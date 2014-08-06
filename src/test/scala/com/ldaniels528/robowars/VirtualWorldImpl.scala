@@ -6,10 +6,10 @@ import com.ldaniels528.robowars.actors.ai._
 import com.ldaniels528.robowars.structures._
 
 /**
- * Virtual World Full
- * Created by ldaniels on 8/5/14.
+ * Virtual World Test Implementation
+ * @author lawrence.daniels@gmail.com
  */
-class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
+class VirtualWorldImpl() extends VirtualWorld(-500, -500, 500, 20, -10d) {
   val world: FxWorld = this
   activePlayer = new HoverTank(world, FxPoint3D(0, 0, -290))
   //activePlayer = new Glider(world, FxPoint3D(20, -400, 0));

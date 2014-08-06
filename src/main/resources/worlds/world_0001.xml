@@ -12,16 +12,20 @@
     <environment sky="eveningSky" ground="pasture2"/>
 
     <!-- object definitions -->
+    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.structures.GenericBuilding"/>
     <objectDef id="GenericPillar" class="com.ldaniels528.robowars.structures.GenericPillar"/>
+    <objectDef id="GenericTower" class="com.ldaniels528.robowars.structures.GenericTower"/>
+    <objectDef id="GenericWall" class="com.ldaniels528.robowars.structures.GenericWall"/>
+    <objectDef id="MainGate" class="com.ldaniels528.robowars.structures.MainGate"/>
+
     <objectDef id="HoverTank" class="com.ldaniels528.robowars.actors.HoverTank"/>
     <objectDef id="Glider" class="com.ldaniels528.robowars.actors.Glider"/>
-    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.structures.GenericBuilding"/>
-    <objectDef id="MainGate" class="com.ldaniels528.robowars.structures.MainGate"/>
     <objectDef id="FesseTank" class="com.ldaniels528.robowars.actors.FesseTank"/>
-    <objectDef id="GenericWall" class="com.ldaniels528.robowars.structures.GenericWall"/>
     <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.actors.AntiTankCannon"/>
+
     <!-- actor definitions -->
     <actor type="HoverTank" x="0.0" y="0.75" z="-290.0" isPlayer="true"/>
+
     <structure type="GenericPillar" x="-410.0" y="0.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" height="12.0"
                depth="3.0"/>
     <structure type="GenericWall" x="-400.0" y="0.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" height="10.0"
@@ -637,6 +641,8 @@
                height="10.0" depth="2.0"/>
     <structure type="GenericPillar" x="410.0" y="0.0" z="410.0" rx="0.0" ry="3.141592653589793" rz="0.0" width="2.0"
                height="12.0" depth="3.0"/>
+
+
     <structure type="GenericBuilding" x="385.0" y="0.0" z="-255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
     <structure type="GenericBuilding" x="355.0" y="0.0" z="-255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
@@ -1079,6 +1085,7 @@
                depth="5.0"/>
     <structure type="GenericBuilding" x="-375.0" y="0.0" z="-35.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
+
     <structure type="GenericPillar" x="55.0" y="0.0" z="405.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="2.0"
                height="12.0" depth="3.0"/>
     <structure type="GenericWall" x="55.0" y="0.0" z="395.0" rx="0.0" ry="-1.5707963267948966" rz="0.0" width="8.0"
@@ -1254,145 +1261,146 @@
                height="10.0" depth="2.0"/>
     <structure type="GenericPillar" x="-54.0" y="0.0" z="185.0" rx="0.0" ry="1.5707963267948966" rz="0.0" width="2.0"
                height="12.0" depth="3.0"/>
-    <structure type="GenericBuilding" x="-135.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+
+    <structure type="GenericTower" x="-135.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-155.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-155.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-175.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-175.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-195.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-195.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-215.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-215.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-235.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-235.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-135.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-135.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-155.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-155.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-175.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-175.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-195.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-195.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-215.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-215.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-235.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-235.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-135.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-135.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-155.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-155.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-175.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-175.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-195.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-195.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-215.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-215.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-235.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-235.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-255.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-255.0" y="0.0" z="215.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-255.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-255.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-265.0" y="0.0" z="245.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-265.0" y="0.0" z="245.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-275.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-275.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="235.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="255.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="295.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="295.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="295.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="295.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="315.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="315.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="315.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="315.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="335.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="335.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="335.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="335.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="355.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="355.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="355.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="355.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-355.0" y="0.0" z="375.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-355.0" y="0.0" z="375.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-375.0" y="0.0" z="375.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-375.0" y="0.0" z="375.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-140.0" y="0.0" z="290.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-140.0" y="0.0" z="290.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-180.0" y="0.0" z="290.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-180.0" y="0.0" z="290.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-220.0" y="0.0" z="290.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-220.0" y="0.0" z="290.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-140.0" y="0.0" z="330.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-140.0" y="0.0" z="330.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-180.0" y="0.0" z="330.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-180.0" y="0.0" z="330.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-220.0" y="0.0" z="330.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-220.0" y="0.0" z="330.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-140.0" y="0.0" z="370.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-140.0" y="0.0" z="370.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-180.0" y="0.0" z="370.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-180.0" y="0.0" z="370.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-220.0" y="0.0" z="370.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-220.0" y="0.0" z="370.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="0.0" y="0.0" z="360.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="0.0" y="0.0" z="360.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-40.0" y="0.0" z="360.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-40.0" y="0.0" z="360.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-80.0" y="0.0" z="360.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-80.0" y="0.0" z="360.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="20.0" y="0.0" z="300.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="20.0" y="0.0" z="300.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-20.0" y="0.0" z="300.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-20.0" y="0.0" z="300.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-60.0" y="0.0" z="300.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-60.0" y="0.0" z="300.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="35.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="35.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="35.0" y="0.0" z="285.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="35.0" y="0.0" z="285.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-35.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-35.0" y="0.0" z="275.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-35.0" y="0.0" z="285.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-35.0" y="0.0" z="285.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="30.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="30.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="70.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="70.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="30.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="30.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="70.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="70.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-30.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-30.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-70.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-70.0" y="0.0" z="90.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-30.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-30.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-70.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
+    <structure type="GenericTower" x="-70.0" y="0.0" z="130.0" rx="0.0" ry="0.0" rz="0.0" width="10.0" height="10.0"
                depth="10.0"/>
-    <structure type="GenericBuilding" x="-105.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-105.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-135.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-135.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-165.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-165.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-195.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-195.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <structure type="GenericBuilding" x="-225.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
+    <structure type="GenericTower" x="-225.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
     <structure type="GenericBuilding" x="-245.0" y="0.0" z="125.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
