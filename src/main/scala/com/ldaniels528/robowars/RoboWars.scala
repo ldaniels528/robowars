@@ -6,7 +6,7 @@ import java.awt.event.{KeyEvent, KeyListener}
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
-import com.ldaniels528.robowars.actors.AbstractActor
+import com.ldaniels528.robowars.objects.vehicles.{AbstractVehicle}
 import com.ldaniels528.robowars.events.{Events, WeaponCommand}
 
 /**
@@ -124,7 +124,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     theScreen.drawImage(buffer, 0, 0, this)
   }
 
-  private def renderHUD(player: AbstractActor) {
+  private def renderHUD(player: AbstractVehicle) {
     val XPOS = 5
     val YPOS = 25
     val BAR_WIDTH = 300

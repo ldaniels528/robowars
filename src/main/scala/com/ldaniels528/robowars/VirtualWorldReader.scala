@@ -3,8 +3,8 @@ package com.ldaniels528.robowars
 import java.awt.Color
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.actors._
-import com.ldaniels528.robowars.actors.ai.AttackAI
+import com.ldaniels528.robowars.objects.vehicles._
+import com.ldaniels528.robowars.objects.ai.AggressiveAI
 
 import scala.collection.mutable.{Map => MMap}
 
@@ -27,7 +27,7 @@ object VirtualWorldReader {
     // define the containers
     val colors = MMap[String, Color]()
     val classDefs = MMap[String, Class[_]]()
-    var thePlayer: AbstractActor = null
+    var thePlayer: AbstractVehicle = null
 
     // create the world
     val world = toWorld(xml).getOrElse(die("Invalid virtual world defintion"))
@@ -42,7 +42,7 @@ object VirtualWorldReader {
               thePlayer = actor
               world.activePlayer = actor
             } else {
-              val ab = new AttackAI(actor)
+              val ab = new AggressiveAI(actor)
               ab.selectTarget(thePlayer)
             }
         }
@@ -103,7 +103,7 @@ object VirtualWorldReader {
     } yield new Environment(sky, ground)
   }
 
-  private def toActor(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[(AbstractActor, Boolean)] = {
+  private def toActor(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[(AbstractVehicle, Boolean)] = {
     for {
       id <- (node \ "@type").map(_.text).headOption
       classDef = lookup("object", classDefs, id)
@@ -115,7 +115,7 @@ object VirtualWorldReader {
       //println(s"Instantiating '$id' from ${classDef.getName}")
       val args = Array(world, new FxPoint3D(x, y, z)) map (_.asInstanceOf[Object])
       val cons = classDef.getConstructors()(0)
-      val actor = cons.newInstance(args: _*).asInstanceOf[AbstractActor]
+      val actor = cons.newInstance(args: _*).asInstanceOf[AbstractVehicle]
       (actor, isPlayer)
     }
   }

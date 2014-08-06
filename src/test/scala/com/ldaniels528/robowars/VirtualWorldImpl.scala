@@ -1,9 +1,9 @@
 package com.ldaniels528.robowars
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.actors._
-import com.ldaniels528.robowars.actors.ai._
-import com.ldaniels528.robowars.structures._
+import com.ldaniels528.robowars.objects.vehicles._
+import com.ldaniels528.robowars.objects.ai._
+import com.ldaniels528.robowars.objects.structures._
 
 /**
  * Virtual World Test Implementation
@@ -662,38 +662,38 @@ class VirtualWorldImpl() extends VirtualWorld(-500, -500, 500, 20, -10d) {
   }
 
   private def attachActors() {
-    var ab: AttackAI = null
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-165, 0, -185)))
+    var ab: AggressiveAI = null
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-165, 0, -185)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-43.6, 0, -104.8)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-43.6, 0, -104.8)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-295, 0, 165)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-295, 0, 165)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-345, 0, 165)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-345, 0, 165)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-295, 0, 215)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-295, 0, 215)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-345, 0, 215)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-345, 0, 215)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(25, 0, 225)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(25, 0, 225)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-25, 0, 225)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-25, 0, 225)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(15, 0, 335)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(15, 0, 335)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-15, 0, 335)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-15, 0, 335)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-255, 0, 295)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-255, 0, 295)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-255, 0, 365)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-255, 0, 365)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-305, 0, 325)))
+    ab = new AggressiveAI(new AntiTankCannon(world, FxPoint3D(-305, 0, 325)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new FesseTank(world, FxPoint3D(0, 0, -500)))
+    ab = new AggressiveAI(new FesseTank(world, FxPoint3D(0, 0, -500)))
     ab.selectTarget(activePlayer)
-    ab = new AttackAI(new FesseTank(world, FxPoint3D(0, 0, -360)))
+    ab = new AggressiveAI(new FesseTank(world, FxPoint3D(0, 0, -360)))
     ab.selectTarget(activePlayer)
-    val b: MotionAI = new MotionAI(new Glider(world, FxPoint3D(-10, -370, 0)))
+    val b: PassiveAI = new PassiveAI(new Glider(world, FxPoint3D(-10, -370, 0)))
     b.navigateTo(FxPoint3D(0, 30, 100), 0.01)
   }
 }

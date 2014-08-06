@@ -75,6 +75,18 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   }
 
   /**
+   * Handles a collision with a object. Returns false if there is no point in
+   * checking more collisions. I.e. the object is dead.
+   */
+  def handleCollisionWith(obj: FxObject, dt: Double): Boolean = false
+
+  /**
+   * The core will ask this object if it is interested of collision with some
+   * other object. Return true if the object is interested.
+   */
+  def interestedOfCollisionWith(obj: FxObject): Boolean = false
+
+  /**
    * Returns the distance of this object to some other point.
    */
   def distanceToPoint(toPoint: FxPoint3D): Double = Math.sqrt(Pos.distanceToPoint(toPoint))
@@ -91,12 +103,6 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
     // all collisions are handled. clear the list.
     events.clear()
   }
-
-  /**
-   * The core will ask this object if it is interested of collision with some
-   * other object. Return true if the object is interested.
-   */
-  def interestedOfCollisionWith(obj: FxObject): Boolean = false
 
   /**
    * Associates an event with this object
@@ -157,11 +163,5 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
       case _ => true
     }
   }
-
-  /**
-   * Handles a collision with a object. Returns false if there is no point in
-   * checking more collisions. I.e. the object is dead.
-   */
-  def handleCollisionWith(obj: FxObject, dt: Double): Boolean = false
 
 }

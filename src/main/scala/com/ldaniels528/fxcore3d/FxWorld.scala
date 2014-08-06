@@ -1,6 +1,6 @@
 package com.ldaniels528.fxcore3d
 
-import com.ldaniels528.robowars.actors.AbstractActor
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
  * Represents the virtual world in which all objects reside.
@@ -29,7 +29,7 @@ trait FxWorld {
   /**
    * The active player
    */
-  def activePlayer: AbstractActor
+  def activePlayer: AbstractVehicle
 
   /**
    * The world's gravity

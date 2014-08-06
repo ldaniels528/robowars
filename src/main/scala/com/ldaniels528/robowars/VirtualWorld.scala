@@ -2,7 +2,7 @@ package com.ldaniels528.robowars
 
 import java.awt.Color
 
-import com.ldaniels528.robowars.actors.AbstractActor
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
  * Represents a virtual world
@@ -11,7 +11,7 @@ import com.ldaniels528.robowars.actors.AbstractActor
 case class VirtualWorld(Xmin: Double, Ymin: Double, size: Double, rows: Int, gravity: Double)
   extends AbstractVirtualWorld(Xmin, Ymin, size, rows) {
 
-  var activePlayer: AbstractActor = _
+  var activePlayer: AbstractVehicle = _
 
   // environmental settings
   var skyColor = new Color(60, 60, 200)

@@ -14,12 +14,12 @@
   <environment sky="nightSky" ground="pasture2" />
 
   <!-- create actor definitions -->
-  <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.actors.AntiTankCannon" />
-  <objectDef id="FesseTank" class="com.ldaniels528.robowars.actors.FesseTank" />
-  <objectDef id="Glider" class="com.ldaniels528.robowars.actors.Glider" />
-  <objectDef id="HoverTank" class="com.ldaniels528.robowars.actors.HoverTank" />
-  <objectDef id="JetCraft" class="com.ldaniels528.robowars.actors.JetCraft" />
-  <objectDef id="Tank" class="com.ldaniels528.robowars.actors.Tank" />
+  <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon" />
+  <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.FesseTank" />
+  <objectDef id="Glider" class="com.ldaniels528.robowars.objects.vehicles.Glider" />
+  <objectDef id="HoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank" />
+  <objectDef id="JetCraft" class="com.ldaniels528.robowars.objects.vehicles.JetCraft" />
+  <objectDef id="Tank" class="com.ldaniels528.robowars.objects.vehicles.Tank" />
 
   <!-- create item definitions -->
   <!--  
@@ -30,12 +30,12 @@
 
   <!-- create structure definitions -->
 
-  <objectDef id="Building1" class="com.ldaniels528.robowars.structures.GenericBuilding" />
-  <objectDef id="Building2" class="com.ldaniels528.robowars.structures.GenericTower" />
-  <objectDef id="MainGate" class="com.ldaniels528.robowars.structures.MainGate" />
-  <objectDef id="Pillar" class="com.ldaniels528.robowars.structures.GenericPillar" />
-  <objectDef id="Pyramid" class="com.ldaniels528.robowars.structures.Pyramid" />
-  <objectDef id="Wall1" class="com.ldaniels528.robowars.structures.GenericWall" />
+  <objectDef id="Building1" class="com.ldaniels528.robowars.objects.structures.GenericBuilding" />
+  <objectDef id="Building2" class="com.ldaniels528.robowars.objects.structures.GenericTower" />
+  <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.MainGate" />
+  <objectDef id="Pillar" class="com.ldaniels528.robowars.objects.structures.GenericPillar" />
+  <objectDef id="Pyramid" class="com.ldaniels528.robowars.objects.structures.Pyramid" />
+  <objectDef id="Wall1" class="com.ldaniels528.robowars.objects.structures.GenericWall" />
 
   <!-- add the actors to this world -->
   <actor type="HoverTank" x="-300" y="0" z="-250" isPlayer="true" />

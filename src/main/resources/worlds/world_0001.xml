@@ -12,21 +12,21 @@
     <environment sky="eveningSky" ground="pasture2"/>
 
     <!-- structure definitions -->
-    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.structures.GenericBuilding"/>
-    <objectDef id="GenericPillar" class="com.ldaniels528.robowars.structures.GenericPillar"/>
-    <objectDef id="GenericTower" class="com.ldaniels528.robowars.structures.GenericTower"/>
-    <objectDef id="GenericWall" class="com.ldaniels528.robowars.structures.GenericWall"/>
-    <objectDef id="MainGate" class="com.ldaniels528.robowars.structures.MainGate"/>
+    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.objects.structures.GenericBuilding"/>
+    <objectDef id="GenericPillar" class="com.ldaniels528.robowars.objects.structures.GenericPillar"/>
+    <objectDef id="GenericTower" class="com.ldaniels528.robowars.objects.structures.GenericTower"/>
+    <objectDef id="GenericWall" class="com.ldaniels528.robowars.objects.structures.GenericWall"/>
+    <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.MainGate"/>
 
     <!-- item definitions -->
-    <objectDef id="HealthCube" class="com.ldaniels528.robowars.items.HealthCube"/>
+    <objectDef id="HealthCube" class="com.ldaniels528.robowars.objects.items.HealthCube"/>
 
     <!-- vehicle definitions -->
-    <objectDef id="HoverTank" class="com.ldaniels528.robowars.actors.HoverTank"/>
-    <objectDef id="Glider" class="com.ldaniels528.robowars.actors.Glider"/>
-    <objectDef id="FesseTank" class="com.ldaniels528.robowars.actors.FesseTank"/>
-    <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.actors.AntiTankCannon"/>
-    <objectDef id="Tank" class="com.ldaniels528.robowars.actors.Tank"/>
+    <objectDef id="HoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank"/>
+    <objectDef id="Glider" class="com.ldaniels528.robowars.objects.vehicles.Glider"/>
+    <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.FesseTank"/>
+    <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon"/>
+    <objectDef id="Tank" class="com.ldaniels528.robowars.objects.vehicles.Tank"/>
 
     <!-- actor definitions -->
     <actor type="HoverTank" x="0.0" y="0.75" z="-290.0" isPlayer="true"/>

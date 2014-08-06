@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars
 
-import com.ldaniels528.robowars.actors.AbstractActor
-import com.ldaniels528.robowars.structures._
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
+import com.ldaniels528.robowars.objects.structures._
 
 /**
  * Virtual World Writer
@@ -18,7 +18,7 @@ object VirtualWorldWriter {
     // extract the actors first
     val objects = world.myObjects.toSeq flatMap { obj =>
       obj match {
-        case actor: AbstractActor => Some(encodeActor(actor, actor == player))
+        case actor: AbstractVehicle => Some(encodeActor(actor, actor == player))
         case structure: AbstractStaticStructure => Some(encodeStructure(structure))
         case door: MainGate => Some(encodeMovingDoor(door))
         case _ => None
@@ -28,7 +28,7 @@ object VirtualWorldWriter {
     println(constructDocument(objects))
   }
 
-  private def encodeActor(actor: AbstractActor, isPlayer: Boolean): (String, String, Node) = {
+  private def encodeActor(actor: AbstractVehicle, isPlayer: Boolean): (String, String, Node) = {
     val p = actor.pos
     val id = actor.getClass.getSimpleName
     val className = actor.getClass.getName
