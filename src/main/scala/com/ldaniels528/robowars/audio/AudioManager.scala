@@ -16,6 +16,10 @@ object AudioManager extends FxAudioPlayer {
   val audioPlayers = (1 to 8) map (n => system.actorOf(Props[AudioPlaybackActor], name = s"audioPlayer$n"))
   var ticker = 0
 
+  /**
+   * Returns a reference to an actor for the audio play-back pool
+   * @return an actor reference
+   */
   def audioPlayer: ActorRef = {
     ticker += 1
     audioPlayers(ticker % audioPlayers.length)
