@@ -53,7 +53,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
     // load the world
     //world = new VirtualWorldImpl()
-    world = VirtualWorldReader.load("/worlds/world_0001.xml")
+    world = new VirtualWorldFull() // VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
   }
 

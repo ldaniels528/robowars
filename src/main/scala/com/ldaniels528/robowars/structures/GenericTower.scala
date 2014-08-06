@@ -13,7 +13,7 @@ class GenericTower(world: FxWorld,
                    x: Double, z: Double,
                    agl: FxAngle3D,
                    width: Double, breadth: Double, height: Double)
-  extends AbstractStaticStructure(world, x, height, z, FxAngle3D()) {
+  extends AbstractStaticStructure(world, x, height, z, FxAngle3D(), health = 50) {
 
   // set the default polyhedron instance
   lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(width, height, breadth))

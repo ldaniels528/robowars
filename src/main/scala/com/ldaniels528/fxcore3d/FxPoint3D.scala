@@ -15,6 +15,11 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
 
   def dotProduct(p: FxPoint3D): Double = p.x * x + p.y * y + p.z * z
 
+  def ground: FxPoint3D = {
+    y = 0
+    this
+  }
+
   def magnitude(): Double = Math.sqrt(x * x + y * y + z * z)
 
   /**
@@ -105,7 +110,7 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     y *= s
     z *= s
   }
-  
+
   def vectorTo(p: FxPoint3D): FxPoint3D = {
     new FxPoint3D(p.x - x, p.y - y, p.z - z)
   }

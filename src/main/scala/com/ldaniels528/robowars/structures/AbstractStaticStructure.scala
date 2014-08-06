@@ -49,6 +49,11 @@ abstract class AbstractStaticStructure(world: FxWorld,
     }
   }
 
+  protected def destruct(height: Double, carcass: (FxWorld, Double, Double, FxAngle3D, Double, Double, Double) => FxObject) {
+    destruct(height)
+    // TODO
+  }
+
 }
 
 /**

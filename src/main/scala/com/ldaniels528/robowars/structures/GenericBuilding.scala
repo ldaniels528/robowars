@@ -8,24 +8,24 @@ import com.ldaniels528.robowars.structures.GenericBuilding._
 /**
  * Generic Building
  * @author lawrence.daniels@gmail.com
+ *
+ *         x: Double, z: Double,
+ *         width: Double, breadth: Double, height: Double
  */
-class GenericBuilding(world: FxWorld,
-                      x: Double, z: Double,
-                      agl: FxAngle3D,
-                      width: Double, breadth: Double, height: Double)
-  extends AbstractStaticStructure(world, x, height, z, agl) {
+case class GenericBuilding(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxSize3D)
+  extends AbstractStaticStructure(theWorld, pos.x, dim.h, pos.z, agl, health = 50) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, new FxPoint3D(width, height, breadth))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
 
   override def die() {
     super.die()
     val pos = position
 
-    new GenericBuildingRuin(world, pos.x, pos.z, angle, width, breadth, height * .2)
+    new GenericBuildingRuin(world, pos.x, pos.z, angle, dim.w, dim.d, dim.h * .2)
 
     // destroy the building
-    destruct(height)
+    destruct(dim.h)
   }
 }
 
@@ -36,18 +36,8 @@ class GenericBuilding(world: FxWorld,
 object GenericBuilding {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/build2.f3d")
 
-  /**
-   * Generic building with the default 0,0,0 angle.
-   */
-  def apply(world: FxWorld, x: Double, z: Double, w: Double, b: Double, h: Double): GenericBuilding = {
-    new GenericBuilding(world, x, z, new FxAngle3D(0, 0, 0), w, b, h)
-  }
-
-  /**
-   * Generic building with the default 0,0,0 angle.
-   */
-  def apply(world: FxWorld, pos: FxPoint3D, dims: FxDimensions3D): GenericBuilding = {
-    new GenericBuilding(world, pos.x, pos.z, new FxAngle3D(0, 0, 0), dims.width, dims.breadth, dims.height)
+  def apply(world: FxWorld, pos: FxPoint3D, dim: FxSize3D): GenericBuilding = {
+    GenericBuilding(world, pos, FxAngle3D(), dim)
   }
 
 }

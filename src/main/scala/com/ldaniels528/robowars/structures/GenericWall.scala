@@ -8,15 +8,15 @@ import com.ldaniels528.robowars.structures.GenericWall._
 /**
  * Generic Wall
  * @author lawrence.daniels@gmail.com
+ *
+ *         x: Double, z: Double,
+ *         w: Double, b: Double, h: Double
  */
-class GenericWall(world: FxWorld,
-                  x: Double, z: Double,
-                  agl: FxAngle3D,
-                  w: Double, b: Double, h: Double)
-  extends AbstractStaticStructure(world, x, h, z, agl) {
+class GenericWall(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim:FxSize3D)
+  extends AbstractStaticStructure(world, pos.x, dim.h, pos.z, agl) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(w, h, b))
+  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint) // FxPoint3D(w, h, b)
 
 }
 

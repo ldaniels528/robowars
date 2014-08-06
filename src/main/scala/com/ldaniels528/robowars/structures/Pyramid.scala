@@ -13,7 +13,7 @@ class Pyramid(world: FxWorld,
               x: Double, z: Double,
               agl: FxAngle3D,
               width: Double, breadth: Double, height: Double)
-  extends AbstractStaticStructure(world, x, 0, z, agl) {
+  extends AbstractStaticStructure(world, x, 0, z, agl, health = 50) {
 
   // set the default polyhedron instance
   lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(width, height, breadth))

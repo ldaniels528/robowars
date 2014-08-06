@@ -8,12 +8,12 @@ import com.ldaniels528.robowars.weapons.AbstractRound
  * Abstract Moving Structure
  * @author lawrence.daniels@gmail.com
  */
-abstract class AbstractMovingStructure(theWorld: FxWorld,
+abstract class AbstractMovingStructure(world: FxWorld,
                                        pos: FxPoint3D,
                                        agl: FxAngle3D,
                                        dpos: FxVelocityVector,
                                        dagl: FxAngle3D)
-  extends AbstractMovingObject(theWorld, pos, agl, dpos, dagl) {
+  extends AbstractMovingObject(world, pos, agl, dpos, dagl) {
 
   override def interestedOfCollisionWith(obj: FxObject): Boolean = {
     obj match {

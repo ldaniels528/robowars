@@ -9,7 +9,7 @@ class VirtualWorldWriterTest {
 
   @Test
   def save() {
-    val world = new VirtualWorldImpl()
+    val world = new VirtualWorldFull()
     world.update(0)
     VirtualWorldWriter.save(world)
   }

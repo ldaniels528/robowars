@@ -1,18 +1,17 @@
 package com.ldaniels528.fxcore3d
 
+import java.awt.Graphics2D
+
 import com.ldaniels528.fxcore3d.camera.FxCamera
 import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
+
+import scala.collection.mutable.ArrayBuffer
 
 /**
  * Abstract class the represents a virtual object.
  * @author lawrence.daniels@gmail.com
  */
 abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D) {
-
-  import java.awt.Graphics2D
-
-import scala.collection.mutable.ArrayBuffer
-
   private val events = ArrayBuffer[FxEvent]()
   private val occupiedGrids = ArrayBuffer[FxGrid]()
   private var alive: Boolean = true

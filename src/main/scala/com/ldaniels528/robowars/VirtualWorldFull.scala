@@ -6,7 +6,7 @@ import com.ldaniels528.robowars.actors.ai._
 import com.ldaniels528.robowars.structures._
 
 /**
- * VirtualWorldFull
+ * Virtual World Full
  * Created by ldaniels on 8/5/14.
  */
 class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
@@ -15,23 +15,23 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
   //activePlayer = new Glider(world, FxPoint3D(20, -400, 0));
 
   // populate the world
-  populateWorld
-  attachActors
+  populateWorld()
+  attachActors()
 
-  def populateWorld {
-    new GenericPillar(world, -410, -300, new FxAngle3D(0, 0, 0), 2, 3, 12)
+  def populateWorld() {
+    new GenericPillar(world, FxPoint3D(-410, 0, -300), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
 
     section1
 
-    new GenericPillar(world, -414, -295, new FxAngle3D(0, Math.PI / 2, 0), 2, 3, 12)
+    new GenericPillar(world, FxPoint3D(-414, 0, -295), FxAngle3D(0, Math.PI / 2, 0), FxSize3D(w = 2, d = 3, h = 12))
 
     section2
 
-    new GenericPillar(world, 414, -295, new FxAngle3D(0, -Math.PI / 2, 0), 2, 3, 12)
+    new GenericPillar(world, FxPoint3D(414, 0, -295), FxAngle3D(0, -Math.PI / 2, 0), FxSize3D(w = 2, d = 3, h = 12))
 
     section3
 
-    new GenericPillar(world, -410, 410, new FxAngle3D(0, Math.PI, 0), 2, 3, 12)
+    new GenericPillar(world, FxPoint3D(-410, 0, 410), FxAngle3D(0, Math.PI, 0), FxSize3D(w = 2, d = 3, h = 12))
 
     section4
 
@@ -39,8 +39,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     section6
 
-    GenericBuilding(world, 25, -255, 5, 5, 5)
-    GenericBuilding(world, 25, -105, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(25, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(25, 0, -105), FxSize3D(5, 5, 5))
 
     section7
 
@@ -48,8 +48,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     section9
 
-    GenericBuilding(world, 385, -45, 5, 5, 5)
-    GenericBuilding(world, 385, 5, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(385, 0, -45), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(385, 0, 5), FxSize3D(5, 5, 5))
 
     section10
 
@@ -57,47 +57,47 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     section12
 
-    GenericBuilding(world, -115, -255, 5, 5, 5)
-    GenericBuilding(world, -125, -255, 5, 5, 5)
-    GenericBuilding(world, -145, -255, 5, 5, 5)
-    GenericBuilding(world, -155, -255, 5, 5, 5)
-    GenericBuilding(world, -175, -255, 5, 5, 5)
-    GenericBuilding(world, -185, -255, 5, 5, 5)
-    GenericBuilding(world, -205, -255, 5, 5, 5)
-    GenericBuilding(world, -215, -255, 5, 5, 5)
-    GenericBuilding(world, -235, -95, 5, 5, 5)
-    GenericBuilding(world, -245, -95, 5, 5, 5)
-    GenericBuilding(world, -255, -95, 5, 5, 5)
-    GenericBuilding(world, -255, -105, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(-115, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-125, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-145, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-155, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-175, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-185, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-205, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-215, 0, -255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-235, 0, -95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-245, 0, -95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-255, 0, -95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-255, 0, -105), FxSize3D(5, 5, 5))
 
     section13
 
-    GenericBuilding(world, -120, -170, 10, 10, 10)
-    GenericBuilding(world, -120, -200, 10, 10, 10)
-    GenericBuilding(world, -210, -170, 10, 10, 10)
-    GenericBuilding(world, -210, -200, 10, 10, 10)
+    GenericBuilding(world, FxPoint3D(-120, 0, -170), FxSize3D(10, 10, 10))
+    GenericBuilding(world, FxPoint3D(-120, 0, -200), FxSize3D(10, 10, 10))
+    GenericBuilding(world, FxPoint3D(-210, 0, -170), FxSize3D(10, 10, 10))
+    GenericBuilding(world, FxPoint3D(-210, 0, -200), FxSize3D(10, 10, 10))
 
     section14
 
-    GenericBuilding(world, -25, -105, 5, 5, 5)
-    GenericBuilding(world, -25, -255, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(-25, 0, -105), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-25, 0, -255), FxSize3D(5, 5, 5))
 
     section15
 
     section16
 
-    GenericBuilding(world, -375, -5, 5, 5, 5)
-    GenericBuilding(world, -375, -35, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(-375, 0, -5), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-375, 0, -35), FxSize3D(5, 5, 5))
 
-    new GenericPillar(world, 55, 405, new FxAngle3D(0, -Math.PI / 2, 0), 2, 3, 12)
+    new GenericPillar(world, FxPoint3D(55, 0, 405), FxAngle3D(0, -Math.PI / 2, 0), FxSize3D(w = 2, d = 3, h = 12))
 
     section17
 
-    new GenericPillar(world, -410, 180, new FxAngle3D(0, 0, 0), 2, 3, 12)
+    new GenericPillar(world, FxPoint3D(-410, 0, 180), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
 
     section18
 
-    new GenericPillar(world, -50, 260, new FxAngle3D(0, 0, 0), 2, 3, 12)
+    new GenericPillar(world, FxPoint3D(-50, 0, 260), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
 
     section19
 
@@ -105,10 +105,10 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     section21
 
-    GenericBuilding(world, -255, 215, 5, 5, 5)
-    GenericBuilding(world, -255, 255, 5, 5, 5)
-    GenericBuilding(world, -265, 245, 5, 5, 5)
-    GenericBuilding(world, -275, 235, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(-255, 0, 215), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-255, 0, 255), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-265, 0, 245), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-275, 0, 235), FxSize3D(5, 5, 5))
 
     section22
 
@@ -118,10 +118,10 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     section25
 
-    GenericBuilding(world, 35, 275, 5, 5, 5)
-    GenericBuilding(world, 35, 285, 5, 5, 5)
-    GenericBuilding(world, -35, 275, 5, 5, 5)
-    GenericBuilding(world, -35, 285, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(35, 0, 275), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(35, 0, 285), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-35, 0, 275), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-35, 0, 285), FxSize3D(5, 5, 5))
 
     section26
 
@@ -133,38 +133,38 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     section30
 
-    GenericBuilding(world, -135, 25, 5, 5, 5)
-    GenericBuilding(world, -105, 65, 5, 5, 5)
-    GenericBuilding(world, -105, 95, 5, 5, 5)
-    GenericBuilding(world, -135, 95, 5, 5, 5)
-    GenericBuilding(world, -195, 95, 5, 5, 5)
-    GenericBuilding(world, -225, 55, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(-135, 0, 25), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-105, 0, 65), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-105, 0, 95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-135, 0, 95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-195, 0, 95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-225, 0, 55), FxSize3D(5, 5, 5))
 
     section31
 
-    GenericBuilding(world, -265, 55, 5, 5, 5)
-    GenericBuilding(world, -275, 45, 5, 5, 5)
-    GenericBuilding(world, -285, 35, 5, 5, 5)
-    GenericBuilding(world, -305, 105, 5, 5, 5)
-    GenericBuilding(world, -305, 85, 5, 5, 5)
-    GenericBuilding(world, -335, 105, 5, 5, 5)
-    GenericBuilding(world, -335, 85, 5, 5, 5)
-    GenericBuilding(world, -55, -95, 5, 5, 5)
-    GenericBuilding(world, -85, -85, 5, 5, 5)
-    GenericBuilding(world, -105, -65, 5, 5, 5)
-    GenericBuilding(world, -105, 25, 5, 5, 5)
-    GenericBuilding(world, -85, 45, 5, 5, 5)
-    GenericBuilding(world, -55, 55, 5, 5, 5)
-    GenericBuilding(world, -25, 65, 5, 5, 5)
-    GenericBuilding(world, 55, -95, 5, 5, 5)
-    GenericBuilding(world, 85, -85, 5, 5, 5)
-    GenericBuilding(world, 105, -65, 5, 5, 5)
-    GenericBuilding(world, 105, 25, 5, 5, 5)
-    GenericBuilding(world, 85, 45, 5, 5, 5)
-    GenericBuilding(world, 55, 55, 5, 5, 5)
-    GenericBuilding(world, 25, 65, 5, 5, 5)
-    GenericBuilding(world, 115, -5, 5, 5, 5)
-    GenericBuilding(world, 115, -35, 5, 5, 5)
+    GenericBuilding(world, FxPoint3D(-265, 0, 55), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-275, 0, 45), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-285, 0, 35), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-305, 0, 105), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-305, 0, 85), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-335, 0, 105), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-335, 0, 85), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-55, 0, -95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-85, 0, -85), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-105, 0, -65), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-105, 0, 25), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-85, 0, 45), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-55, 0, 55), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(-25, 0, 65), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(55, 0, -95), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(85, 0, -85), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(105, 0, -65), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(105, 0, 25), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(85, 0, 45), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(55, 0, 55), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(25, 0, 65), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(115, 0, -5), FxSize3D(5, 5, 5))
+    GenericBuilding(world, FxPoint3D(115, 0, -35), FxSize3D(5, 5, 5))
   }
 
   def section31 {
@@ -172,8 +172,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var i: Int = 0
     while (i <= 50) {
       {
-        GenericBuilding(world, -205 - i, 115 - i, 5, 5, 5)
-        GenericBuilding(world, -235 - i, 115 - i, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(-205 - i, 0, 115 - i), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-235 - i, 0, 115 - i), FxSize3D(5, 5, 5))
       }
       i += 10
     }
@@ -185,7 +185,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = -195
     while (x > -260) {
       {
-        GenericBuilding(world, x, 25, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(x, 0, 25), FxSize3D(5, 5, 5))
       }
       x -= 30
     }
@@ -197,7 +197,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = -245
     while (x > -340) {
       {
-        GenericBuilding(world, x, 125, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(x, 0, 125), FxSize3D(5, 5, 5))
       }
       x -= 30
     }
@@ -209,7 +209,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = -105
     while (x > -230) {
       {
-        GenericBuilding(world, x, 125, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(x, 0, 125), FxSize3D(5, 5, 5))
       }
       x -= 30
     }
@@ -225,7 +225,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = -30
           while (x > -80) {
             {
-              GenericBuilding(world, x, y, 10, 10, 10)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(10, 10, 10))
             }
             x -= 40
           }
@@ -245,7 +245,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = 30
           while (x < 80) {
             {
-              GenericBuilding(world, x, y, 10, 10, 10)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(10, 10, 10))
             }
             x += 40
           }
@@ -261,7 +261,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = 20
     while (x > -70) {
       {
-        GenericBuilding(world, x, 300, 10, 10, 10)
+        GenericBuilding(world, FxPoint3D(x, 0, 300), FxSize3D(10, 10, 10))
       }
       x -= 40
     }
@@ -273,7 +273,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = 0
     while (x > -90) {
       {
-        GenericBuilding(world, x, 360, 10, 10, 10)
+        GenericBuilding(world, FxPoint3D(x, 0, 360), FxSize3D(10, 10, 10))
       }
       x -= 40
     }
@@ -289,7 +289,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = -140
           while (x > -230) {
             {
-              GenericBuilding(world, x, y, 10, 10, 10)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(10, 10, 10))
             }
             x -= 40
           }
@@ -309,7 +309,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = -355
           while (x > -380) {
             {
-              GenericBuilding(world, x, y, 5, 5, 5)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(5, 5, 5))
             }
             x -= 20
           }
@@ -329,7 +329,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = -135
           while (x > -240) {
             {
-              GenericBuilding(world, x, y, 5, 5, 5)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(5, 5, 5))
             }
             x -= 20
           }
@@ -345,8 +345,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var y: Int = 255
     while (y > 190) {
       {
-        new GenericWall(world, -54, y, new FxAngle3D(0, Math.PI / 2, 0), 8, 2, 10)
-        new GenericPillar(world, -54, y - 10, new FxAngle3D(0, Math.PI / 2, 0), 2, 3, 12)
+        new GenericWall(world, FxPoint3D(-54, 0, y), FxAngle3D(0, Math.PI / 2, 0), FxSize3D(w = 8, d = 2, h = 10))
+        new GenericPillar(world, FxPoint3D(-54, 0, y - 10), FxAngle3D(0, Math.PI / 2, 0), FxSize3D(w = 2, d = 3, h = 12))
       }
       y -= 20
     }
@@ -359,12 +359,12 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     while (x <= 50) {
       {
         if (x == 0) {
-          new MainGate(world, FxPoint3D(x, 0, 260), new FxAngle3D(0, 0, 0))
-          new GenericPillar(world, x + 10, 260, new FxAngle3D(0, 0, 0), 2, 3, 12)
+          new MainGate(world, FxPoint3D(x, 0, 260), FxAngle3D(0, 0, 0))
+          new GenericPillar(world, FxPoint3D(x + 10, 0, 260), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
         }
         else {
-          new GenericWall(world, x, 260, new FxAngle3D(0, 0, 0), 8, 2, 10)
-          new GenericPillar(world, x + 10, 260, new FxAngle3D(0, 0, 0), 2, 3, 12)
+          new GenericWall(world, FxPoint3D(x, 0, 260), FxAngle3D(0, 0, 0), FxSize3D(w = 8, d = 2, h = 10))
+          new GenericPillar(world, FxPoint3D(x + 10, 0, 260), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
         }
       }
       x += 20
@@ -378,12 +378,12 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     while (x <= 50) {
       {
         if ((x == 0) || (x == -320)) {
-          new MainGate(world, FxPoint3D(x, 0, 180), new FxAngle3D(0, 0, 0))
-          new GenericPillar(world, x + 10, 180, new FxAngle3D(0, 0, 0), 2, 3, 12)
+          new MainGate(world, FxPoint3D(x, 0, 180), FxAngle3D(0, 0, 0))
+          new GenericPillar(world, FxPoint3D(x + 10, 0, 180), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
         }
         else {
-          new GenericWall(world, x, 180, new FxAngle3D(0, 0, 0), 8, 2, 10)
-          new GenericPillar(world, x + 10, 180, new FxAngle3D(0, 0, 0), 2, 3, 12)
+          new GenericWall(world, FxPoint3D(x, 0, 180), FxAngle3D(0, 0, 0), FxSize3D(w = 8, d = 2, h = 10))
+          new GenericPillar(world, FxPoint3D(x + 10, 0, 180), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
         }
       }
       x += 20
@@ -396,8 +396,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var y: Int = 395
     while (y > 185) {
       {
-        new GenericWall(world, 55, y, new FxAngle3D(0, -Math.PI / 2, 0), 8, 2, 10)
-        new GenericPillar(world, 55, y - 10, new FxAngle3D(0, -Math.PI / 2, 0), 2, 3, 12)
+        new GenericWall(world, FxPoint3D(55, 0, y), FxAngle3D(0, -Math.PI / 2, 0), FxSize3D(w = 8, d = 2, h = 10))
+        new GenericPillar(world, FxPoint3D(55, 0, y - 10), FxAngle3D(0, -Math.PI / 2, 0), FxSize3D(w = 2, d = 3, h = 12))
       }
       y -= 20
     }
@@ -413,7 +413,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = -115
           while (x > -270) {
             {
-              GenericBuilding(world, x, y, 5, 5, 5)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(5, 5, 5))
             }
             x -= 30
           }
@@ -433,7 +433,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = -295
           while (x > -350) {
             {
-              GenericBuilding(world, x, y, 5, 5, 5)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(5, 5, 5))
             }
             x -= 50
           }
@@ -449,7 +449,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var y: Int = -225
     while (y < -130) {
       {
-        GenericBuilding(world, -25, y, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(-25, 0, y), FxSize3D(5, 5, 5))
       }
       y += 30
     }
@@ -465,7 +465,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = -120
           while (x > -220) {
             {
-              GenericBuilding(world, x, y, 10, 10, 10)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(10, 10, 10))
             }
             x -= 30
           }
@@ -481,14 +481,14 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var y: Int = -115
     while (y < -90) {
       {
-        GenericBuilding(world, -115, y, 5, 5, 5)
-        GenericBuilding(world, -125, y, 5, 5, 5)
-        GenericBuilding(world, -145, y, 5, 5, 5)
-        GenericBuilding(world, -155, y, 5, 5, 5)
-        GenericBuilding(world, -175, y, 5, 5, 5)
-        GenericBuilding(world, -185, y, 5, 5, 5)
-        GenericBuilding(world, -205, y, 5, 5, 5)
-        GenericBuilding(world, -215, y, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(-115, 0, y), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-125, 0, y), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-145, 0, y), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-155, 0, y), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-175, 0, y), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-185, 0, y), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-205, 0, y), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(-215, 0, y), FxSize3D(5, 5, 5))
       }
       y += 20
     }
@@ -500,16 +500,16 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = -235
     while (x > -260) {
       {
-        GenericBuilding(world, x, -255, 5, 5, 5)
-        GenericBuilding(world, x, -235, 5, 5, 5)
-        GenericBuilding(world, x, -225, 5, 5, 5)
-        GenericBuilding(world, x, -205, 5, 5, 5)
-        GenericBuilding(world, x, -195, 5, 5, 5)
-        GenericBuilding(world, x, -175, 5, 5, 5)
-        GenericBuilding(world, x, -165, 5, 5, 5)
-        GenericBuilding(world, x, -145, 5, 5, 5)
-        GenericBuilding(world, x, -135, 5, 5, 5)
-        GenericBuilding(world, x, -115, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(x, 0, -255), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -235), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -225), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -205), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -195), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -175), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -165), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -145), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -135), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -115), FxSize3D(5, 5, 5))
       }
       x -= 20
     }
@@ -521,16 +521,16 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = -75
     while (x > -100) {
       {
-        GenericBuilding(world, x, -255, 5, 5, 5)
-        GenericBuilding(world, x, -235, 5, 5, 5)
-        GenericBuilding(world, x, -225, 5, 5, 5)
-        GenericBuilding(world, x, -205, 5, 5, 5)
-        GenericBuilding(world, x, -195, 5, 5, 5)
-        GenericBuilding(world, x, -175, 5, 5, 5)
-        GenericBuilding(world, x, -165, 5, 5, 5)
-        GenericBuilding(world, x, -145, 5, 5, 5)
-        GenericBuilding(world, x, -135, 5, 5, 5)
-        GenericBuilding(world, x, -115, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(x, 0, -255), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -235), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -225), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -205), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -195), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -175), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -165), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -145), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -135), FxSize3D(5, 5, 5))
+        GenericBuilding(world, FxPoint3D(x, 0, -115), FxSize3D(5, 5, 5))
       }
       x -= 20
     }
@@ -546,7 +546,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = 150
           while (x < 360) {
             {
-              GenericBuilding(world, x, y, 10, 10, 10)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(10, 10, 10))
             }
             x += 40
           }
@@ -561,7 +561,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     var x: Int = 385
     while (x > 100) {
-      GenericBuilding(world, x, -105, 5, 5, 5)
+      GenericBuilding(world, FxPoint3D(x, 0, -105), FxSize3D(5, 5, 5))
       x -= 30
     }
 
@@ -571,7 +571,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
 
     var x: Int = 385
     while (x > 130) {
-      GenericBuilding(world, x, -75, 5, 5, 5)
+      GenericBuilding(world, FxPoint3D(x, 0, -75), FxSize3D(5, 5, 5))
       x -= 30
     }
 
@@ -582,7 +582,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var y: Int = -225
     while (y < -130) {
       {
-        GenericBuilding(world, 25, y, 5, 5, 5)
+        GenericBuilding(world, FxPoint3D(25, 0, y), FxSize3D(5, 5, 5))
       }
       y += 30
     }
@@ -598,7 +598,7 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
           var x: Int = 385
           while (x > 40) {
             {
-              GenericBuilding(world, x, y, 5, 5, 5)
+              GenericBuilding(world, FxPoint3D(x, 0, y), FxSize3D(5, 5, 5))
             }
             x -= 30
           }
@@ -614,8 +614,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var x: Int = -400
     while (x <= 400) {
       {
-        new GenericWall(world, x, 410, new FxAngle3D(0, Math.PI, 0), 8, 2, 10)
-        new GenericPillar(world, x + 10, 410, new FxAngle3D(0, Math.PI, 0), 2, 3, 12)
+        new GenericWall(world, FxPoint3D(x, 0, 410), FxAngle3D(0, Math.PI, 0), FxSize3D(w = 8, d = 2, h = 10))
+        new GenericPillar(world, FxPoint3D(x + 10, 0, 410), FxAngle3D(0, Math.PI, 0), FxSize3D(w = 2, d = 3, h = 12))
       }
       x += 20
     }
@@ -626,8 +626,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var y: Int = -285
     while (y <= 400) {
       {
-        new GenericWall(world, 414, y, new FxAngle3D(0, -Math.PI / 2, 0), 8, 2, 10)
-        new GenericPillar(world, 414, y + 10, new FxAngle3D(0, -Math.PI / 2, 0), 2, 3, 12)
+        new GenericWall(world, FxPoint3D(414, 0, y), FxAngle3D(0, -Math.PI / 2, 0), FxSize3D(w = 8, d = 2, h = 10))
+        new GenericPillar(world, FxPoint3D(414, 0, y + 10), FxAngle3D(0, -Math.PI / 2, 0), FxSize3D(w = 2, d = 3, h = 12))
       }
       y += 20
     }
@@ -637,8 +637,8 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     var y: Int = -285
     while (y <= 400) {
       {
-        new GenericWall(world, -414, y, new FxAngle3D(0, Math.PI / 2, 0), 8, 2, 10)
-        new GenericPillar(world, -414, y + 10, new FxAngle3D(0, Math.PI / 2, 0), 2, 3, 12)
+        new GenericWall(world, FxPoint3D(-414, 0, y), FxAngle3D(0, Math.PI / 2, 0), FxSize3D(w = 8, d = 2, h = 10))
+        new GenericPillar(world, FxPoint3D(-414, 0, y + 10), FxAngle3D(0, Math.PI / 2, 0), FxSize3D(w = 2, d = 3, h = 12))
       }
       y += 20
     }
@@ -649,19 +649,19 @@ class VirtualWorldFull() extends VirtualWorld(-500, -500, 500, 20, -10d) {
     while (x <= 400) {
       {
         if (x == 0) {
-          new MainGate(world, FxPoint3D(x, 0, -300), new FxAngle3D(0, 0, 0))
-          new GenericPillar(world, x + 10, -300, new FxAngle3D(0, 0, 0), 2, 3, 12)
+          new MainGate(world, FxPoint3D(x, 0, -300), FxAngle3D(0, 0, 0))
+          new GenericPillar(world, FxPoint3D(x + 10, 0, -300), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
         }
         else {
-          new GenericWall(world, x, -300, new FxAngle3D(0, 0, 0), 8, 2, 10)
-          new GenericPillar(world, x + 10, -300, new FxAngle3D(0, 0, 0), 2, 3, 12)
+          new GenericWall(world, FxPoint3D(x, 0, -300), FxAngle3D(0, 0, 0), FxSize3D(w = 8, d = 2, h = 10))
+          new GenericPillar(world, FxPoint3D(x + 10, 0, -300), FxAngle3D(0, 0, 0), FxSize3D(w = 2, d = 3, h = 12))
         }
       }
       x += 20
     }
   }
 
-  private def attachActors {
+  private def attachActors() {
     var ab: AttackAI = null
     ab = new AttackAI(new AntiTankCannon(world, FxPoint3D(-165, 0, -185)))
     ab.selectTarget(activePlayer)
