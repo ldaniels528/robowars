@@ -12,8 +12,14 @@ object AudioManager extends FxAudioPlayer {
   private val system = ActorSystem("AudioManager")
   private val audioSampleCache = loadSamples()
 
-  // create the audio play-back actor
-  val audioPlayer = system.actorOf(Props[AudioPlaybackActor], name = "audioPlayer")
+  // create the audio play-back actors
+  val audioPlayers = (1 to 8) map (n => system.actorOf(Props[AudioPlaybackActor], name = s"audioPlayer$n"))
+  var ticker = 0
+
+  def audioPlayer: ActorRef = {
+    ticker += 1
+    audioPlayers(ticker % audioPlayers.length)
+  }
 
   /**
    * Loads all audio-samples
