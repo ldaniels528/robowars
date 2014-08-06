@@ -12,23 +12,24 @@
   <!-- set sky and ground colors -->
   <environment sky="eveningSky" ground="pasture1" />
 
-  <!-- create weapons definitions -->
+  <!-- create weapons definitions
   <objectDef id="MiniCannon" class="com.ldaniels528.robowars.weapons.MachineGun" />
   <objectDef id="MissileLauncher" class="com.ldaniels528.robowars.weapons.MissileLauncher" />
   <objectDef id="RocketLauncher" class="com.ldaniels528.robowars.weapons.RocketLauncher" />
+                     -->
 
   <!-- create actor definitions -->
-  <objectDef id="ScoutTank" class="com.ldaniels528.robowars.vehicles.Tank2" />
-  <objectDef id="RoverTank" class="com.ldaniels528.robowars.vehicles.Tank1" />
-  <objectDef id="HoverCraft" class="com.ldaniels528.robowars.vehicles.Aircraft1" />
-  <objectDef id="Destroyer" class="com.ldaniels528.robowars.vehicles.Aircraft2" />
-  <objectDef id="Cannon" class="com.ldaniels528.robowars.vehicles.Tank4" />
+  <objectDef id="ScoutTank" class="com.ldaniels528.robowars.actors.FesseTank" />
+  <objectDef id="RoverTank" class="com.ldaniels528.robowars.actors.HoverTank" />
+  <objectDef id="HoverCraft" class="com.ldaniels528.robowars.actors.Tank" />
+  <objectDef id="Destroyer" class="com.ldaniels528.robowars.actors.JetCraft" />
+  <objectDef id="Cannon" class="com.ldaniels528.robowars.actors.AntiTankCannon" />
 
   <!-- create structure definitions -->
-  <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.structures.Building2" />
-  <objectDef id="GenericWall" class="com.ldaniels528.robowars.structures.Wall1" />
-  <objectDef id="GenericPillar" class="com.ldaniels528.robowars.structures.Pillar" />
-  <objectDef id="GenericTower" class="com.ldaniels528.robowars.structures.Tower" />
+  <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.structures.GenericBuilding" />
+  <objectDef id="GenericWall" class="com.ldaniels528.robowars.structures.GenericWall" />
+  <objectDef id="GenericPillar" class="com.ldaniels528.robowars.structures.GenericPillar" />
+  <objectDef id="GenericTower" class="com.ldaniels528.robowars.structures.GenericTower" />
   <objectDef id="MainGate" class="com.ldaniels528.robowars.structures.MainGate" />
 
   <!-- add the player to this world -->
@@ -185,7 +186,7 @@
   <structure type="GenericPillar" x="30.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="20.0" y="10.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="10.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
-  <structure type="MainGate" x="0.0" y="5.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
+  <door type="MainGate" x="0.0" y="5.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
   <structure type="GenericPillar" x="-10.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="-20.0" y="10.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="-30.0" y="12.0" z="260.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
@@ -196,7 +197,7 @@
   <structure type="GenericPillar" x="30.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="20.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="10.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
-  <structure type="MainGate" x="0.0" y="5.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
+  <door type="MainGate" x="0.0" y="5.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
   <structure type="GenericPillar" x="-10.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="-20.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="-30.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
@@ -228,7 +229,7 @@
   <structure type="GenericPillar" x="-290.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="-300.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="-310.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
-  <structure type="MainGate" x="-320.0" y="5.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
+  <door type="MainGate" x="-320.0" y="5.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
   <structure type="GenericPillar" x="-330.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="-340.0" y="10.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="-350.0" y="12.0" z="180.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
@@ -749,7 +750,7 @@
   <structure type="GenericPillar" x="30.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="20.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="10.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
-  <structure type="MainGate" x="0.0" y="5.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
+  <door type="MainGate" x="0.0" y="5.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="0.0" depth="0.0" height="0.0" />
   <structure type="GenericPillar" x="-10.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
   <structure type="GenericWall" x="-20.0" y="10.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" depth="2.0" height="10.0" />
   <structure type="GenericPillar" x="-30.0" y="12.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" depth="3.0" height="12.0" />
