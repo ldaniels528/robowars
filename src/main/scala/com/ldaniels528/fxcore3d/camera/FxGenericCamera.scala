@@ -4,7 +4,6 @@ import java.awt.Graphics2D
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera.FxCamera._
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
 
 /**
  * FxEngine Generic Camera
@@ -12,6 +11,12 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
  */
 abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos: FxPoint3D, agl: FxAngle3D)
   extends FxCamera {
+  // a temporary buffer used for projection
+  protected var my2dBuffer = FxProjectedPoints(250)
+
+  // a temporary buffer used for WCS to VCS transform
+  protected var my3dBuffer = Fx3DPointBuffer(250)
+
   // the screen distance
   protected var screenDistance: Double = _
 
@@ -25,14 +30,14 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
   protected lazy val matrixWCStoVCS = new FxMatrix3D()
   protected lazy val myPosition = new FxPoint3D()
   protected lazy val myAngle = new FxAngle3D()
-  protected var matrixIsDirty: Boolean = true
+  private var matrixIsDirty: Boolean = true
   var zClip: Double = 0
 
   // the view angle
   calculateParameters()
 
   // create the light vector
-  private var light = new FxPoint3D(-1, 0, 0)
+  private var light = FxPoint3D(-1, 0, 0)
   light.rotateAboutXaxis(Math.PI / 5)
   light.rotateAboutYaxis(Math.PI / 3)
   light.normalize(1)
@@ -40,10 +45,60 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
   // set the camera's orientation
   setOrientation(pos, agl)
 
-  /**
-   * Sets the light source
-   */
-  def setLightSource(vector: FxPoint3D): Unit = light = vector.copy()
+  private def calculateParameters() {
+    // calculate the screen origin
+    x0 = myWidth >> 1
+    y0 = myHeight >> 1
+
+    // calculate the screen distance
+    screenDistance = -(x0 / Math.tan(viewAngle / 2d))
+    zClip = -3
+  }
+
+  protected def doProjection() {
+    // project the VCS coordinates to SCS storing the results in a buffer
+    (0 to (my3dBuffer.length - 1)) foreach { n =>
+      val z = my3dBuffer.z(n)
+      my2dBuffer.x(n) = (screenDistance * my3dBuffer.x(n) / z).toInt + x0
+      my2dBuffer.y(n) = -(screenDistance * my3dBuffer.y(n) / z).toInt + y0
+    }
+
+    // limit the 2D buffer
+    my2dBuffer.length = my3dBuffer.length
+  }
+
+  protected def doTheChecks() {
+    // initiate the AND and OR operation
+    my2dBuffer.clipAndOp = Int.MaxValue
+    my2dBuffer.clipOrOp = 0
+
+    (0 to (my2dBuffer.length - 1)) foreach { n =>
+      my2dBuffer.clipFlags(n) = 0
+      if (my2dBuffer.x(n) > myWidth) {
+        my2dBuffer.clipFlags(n) |= CLIP_RIGHT
+      } else if (my2dBuffer.x(n) < 0) {
+        my2dBuffer.clipFlags(n) |= CLIP_LEFT
+      }
+      if (my2dBuffer.y(n) > myHeight) {
+        my2dBuffer.clipFlags(n) |= CLIP_BOTTOM
+      } else if (my2dBuffer.y(n) < 0) {
+        my2dBuffer.clipFlags(n) |= CLIP_TOP
+      }
+
+      my2dBuffer.z(n) = my3dBuffer.z(n)
+      if (my2dBuffer.z(n) > zClip) {
+        my2dBuffer.clipFlags(n) |= CLIP_Z
+      }
+      my2dBuffer.clipOrOp |= my2dBuffer.clipFlags(n)
+      my2dBuffer.clipAndOp &= my2dBuffer.clipFlags(n)
+    }
+  }
+
+  protected def doTransform(p3d: FxArrayOf3DPoints) {
+    updateMatrix()
+    matrixWCStoVCS.transform(p3d, my3dBuffer)
+    my3dBuffer.length = p3d.length
+  }
 
   def paint(g: Graphics2D) {
     // filter for only the objects within our bounding sphere
@@ -59,11 +114,27 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
   /**
    * projects an array of 3d points to the temporary 2d buffer
    */
-  def project(p3d: FxArrayOf3DPoints): FxProjectedPoints = {
+  override def project(p3d: FxArrayOf3DPoints): FxProjectedPoints = {
     doTransform(p3d)
     doProjection()
-    our2dBuffer
+    my2dBuffer
   }
+
+  /**
+   * Transforms and projects the points to the screen. It also stores the z
+   * coordinate and clipping info in case the polygons need clipping.
+   */
+  override def projectWithCheck(p3d: FxArrayOf3DPoints): FxProjectedPoints = {
+    doTransform(p3d)
+    doProjection()
+    doTheChecks()
+    my2dBuffer
+  }
+
+  /**
+   * Sets the light source
+   */
+  def setLightSource(vector: FxPoint3D): Unit = light = vector.copy()
 
   /**
    * sets the position and angle of the camera.
@@ -86,63 +157,6 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
       myHeight = height
       calculateParameters()
     }
-  }
-
-  protected def doTransform(p3d: FxArrayOf3DPoints) {
-    updateMatrix()
-    matrixWCStoVCS.transform(p3d, our3dBuffer)
-    our3dBuffer.length = p3d.length
-  }
-
-  protected def doProjection() {
-    // project the VCS coordinates to SCS storing the results
-    // in a buffer
-    (0 to (our3dBuffer.length - 1)) foreach { n =>
-      val z = our3dBuffer.z(n)
-      our2dBuffer.x(n) = (screenDistance * our3dBuffer.x(n) / z).toInt + x0
-      our2dBuffer.y(n) = -(screenDistance * our3dBuffer.y(n) / z).toInt + y0
-    }
-
-    our2dBuffer.length = our3dBuffer.length
-    // lend the buffer to the caller.
-  }
-
-  protected def doTheChecks() {
-    // initiate the AND and OR operation
-    our2dBuffer.clipAndOp = Int.MaxValue
-    our2dBuffer.clipOrOp = 0
-
-    (0 to (our2dBuffer.length - 1)) foreach { n =>
-      our2dBuffer.clipFlags(n) = 0
-      if (our2dBuffer.x(n) > myWidth) {
-        our2dBuffer.clipFlags(n) |= CLIP_RIGHT
-      } else if (our2dBuffer.x(n) < 0) {
-        our2dBuffer.clipFlags(n) |= CLIP_LEFT
-      }
-      if (our2dBuffer.y(n) > myHeight) {
-        our2dBuffer.clipFlags(n) |= CLIP_BOTTOM
-      } else if (our2dBuffer.y(n) < 0) {
-        our2dBuffer.clipFlags(n) |= CLIP_TOP
-      }
-
-      our2dBuffer.z(n) = our3dBuffer.z(n)
-      if (our2dBuffer.z(n) > zClip) {
-        our2dBuffer.clipFlags(n) |= CLIP_Z
-      }
-      our2dBuffer.clipOrOp |= our2dBuffer.clipFlags(n)
-      our2dBuffer.clipAndOp &= our2dBuffer.clipFlags(n)
-    }
-  }
-
-  /**
-   * Transforms and projects the points to the screen. It also stores the z
-   * coordinate and clipping info in case the polygons need clipping.
-   */
-  def projectWithCheck(p3d: FxArrayOf3DPoints): FxProjectedPoints = {
-    doTransform(p3d)
-    doProjection()
-    doTheChecks()
-    our2dBuffer
   }
 
   /**
@@ -177,35 +191,11 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
     yStore(p) = (screenDistance * yv1 / zClip).toInt + y0
   }
 
-  private def calculateParameters() {
-    // calculate the screen origin
-    x0 = myWidth >> 1
-    y0 = myHeight >> 1
-
-    // calculate the screen distance
-    screenDistance = -(x0 / Math.tan(viewAngle / 2d))
-    zClip = -3
-  }
-
   private def sphereIsVisible(pos: FxPoint3D, radius: Double): Boolean = {
     val p = FxPoint3D()
     updateMatrix()
     matrixWCStoVCS.transformPoint(pos, p)
     (p.z - radius) <= zClip
   }
-
-}
-
-/**
- * FxEngine Camera Companion Object
- * @author lawrence.daniels@gmail.com
- */
-object FxGenericCamera {
-
-  // a temporary buffer used for projection
-  var our2dBuffer = FxProjectedPoints(250)
-
-  // a temporary buffer used for WCS to VCS transform
-  var our3dBuffer = Fx3DPointBuffer(250)
 
 }

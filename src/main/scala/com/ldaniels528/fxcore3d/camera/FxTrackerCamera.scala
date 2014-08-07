@@ -6,15 +6,9 @@ import com.ldaniels528.fxcore3d.{FxAngle3D, FxObject, FxPoint3D, FxWorld}
  * FxEngine Tracker Camera
  * @author lawrence.daniels@gmail.com
  */
-class FxTrackerCamera(world: FxWorld,
-                      viewAngle: Double,
-                      viewDistance: Double,
-                      gridSize: Double,
-                      speedFactor: Double,
-                      theObject: FxObject,
-                      relAgl: FxAngle3D,
-                      relPos: FxPoint3D)
-  extends FxSceneCamera(world, viewAngle, viewDistance, theObject.position, theObject.angle, gridSize) {
+class FxTrackerCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, gridSize: Double, speedFactor: Double,
+                      host: FxObject, relAgl: FxAngle3D, relPos: FxPoint3D)
+  extends FxSceneCamera(world, viewAngle, viewDistance, host.position, host.angle, gridSize) {
 
   private val relativeAngle: FxAngle3D = relAgl.copy()
   private val relativePosition: FxPoint3D = relPos.copy()
@@ -22,8 +16,16 @@ class FxTrackerCamera(world: FxWorld,
   // initialize the camera
   relativeAngle.negate()
 
+  /**
+   * Returns the world coordinate for a position relative an object.
+   */
+  private def getWorldCoordinateOfRelativePoint(obj: FxObject, relPos: FxPoint3D): FxPoint3D = {
+    obj.polyhedronInstance.transformPoint(relPos, FxPoint3D())
+  }
+
   override def update(dt: Double) {
-    val thePointToTrack = theObject.getWorldCoordForRelativePoint(relativePosition)
+    // compute the point to track
+    val thePointToTrack = getWorldCoordinateOfRelativePoint(host, relativePosition)
 
     // create the vector
     val v = myPosition.vectorTo(thePointToTrack)
@@ -31,7 +33,7 @@ class FxTrackerCamera(world: FxWorld,
     v += myPosition
 
     // create the angle
-    val b = theObject.angle
+    val b = host.angle
     b += relativeAngle
 
     // determine the angle between the object and myself
@@ -43,6 +45,12 @@ class FxTrackerCamera(world: FxWorld,
     setOrientation(v, a)
   }
 
-  private def angleBetween(p1: FxAngle3D, p2: FxAngle3D) = FxAngle3D(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z)
+  /**
+   * Computes the angle between the two angles
+   * @param a1 the first of two angles
+   * @param a2 the second of two angles
+   * @return the bisecting angle
+   */
+  private def angleBetween(a1: FxAngle3D, a2: FxAngle3D) = FxAngle3D(a2.x - a1.x, a2.y - a1.y, a2.z - a1.z)
 
 }

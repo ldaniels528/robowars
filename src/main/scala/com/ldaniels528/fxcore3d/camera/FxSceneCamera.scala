@@ -3,7 +3,6 @@ package com.ldaniels528.fxcore3d.camera
 import java.awt.{Color, Graphics2D}
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
 
 /**
  * FxEngine Scene Camera renders the scene with skyline and terrain
@@ -18,9 +17,9 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
   private val nbrPointsInGround: Int = pts * pts
   private val groundWCS = createTerrain(nbrPointsInGround)
 
-  if (our3dBuffer.length < nbrPointsInGround) {
-    our3dBuffer = Fx3DPointBuffer(nbrPointsInGround)
-    our2dBuffer = FxProjectedPoints(nbrPointsInGround)
+  if (my3dBuffer.length < nbrPointsInGround) {
+    my3dBuffer = Fx3DPointBuffer(nbrPointsInGround)
+    my2dBuffer = FxProjectedPoints(nbrPointsInGround)
   }
 
   private def createTerrain(nbrPointsInGround: Int): FxArrayOf3DPoints = {
@@ -51,7 +50,10 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
     val p = FxPoint3D(0, myPosition.y, -viewDistance * 5)
     p.rotateAboutXaxis(-myAngle.x)
 
+    // get the sky color
     val mySkyColor = FxDayNightSky.getColor(world.time)
+
+    // paint the scene
     val screenY = ((screenDistance * p.y / p.z) + y0).toInt
     if (screenY < 0) {
       g.setColor(if (p.z < 0) myGroundColor else mySkyColor)
@@ -77,21 +79,18 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
     updateMatrix()
 
     // transform the ground points from WCS to VCS
-    matrixWCStoVCS.transformWithTranslation(
-      groundWCS,
-      our3dBuffer,
-      new FxPoint3D(centerX * gridSize, 0, centerZ * gridSize))
+    matrixWCStoVCS.transformWithTranslation(groundWCS, my3dBuffer, FxPoint3D(centerX * gridSize, 0, centerZ * gridSize))
 
     // set the number of points in the cache buffer
-    our3dBuffer.length = groundWCS.length
+    my3dBuffer.length = groundWCS.length
 
     doProjection()
     doTheChecks()
 
     g.setColor(new Color(0, 0, 0))
-    (0 to (our2dBuffer.length - 1)) foreach { n =>
-      if (our2dBuffer.clipFlags(n) == 0) {
-        g.drawLine(our2dBuffer.x(n), our2dBuffer.y(n), our2dBuffer.x(n), our2dBuffer.y(n))
+    (0 to (my2dBuffer.length - 1)) foreach { n =>
+      if (my2dBuffer.clipFlags(n) == 0) {
+        g.drawLine(my2dBuffer.x(n), my2dBuffer.y(n), my2dBuffer.x(n), my2dBuffer.y(n))
       }
     }
   }

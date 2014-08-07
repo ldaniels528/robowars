@@ -45,8 +45,10 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
   }
 
   override def paintWithShading(g: Graphics2D, points: FxProjectedPoints, intensities: Array[Double]) {
-    (0 to (nbrOfPolygons - 1)) foreach { n =>
-      myPolygons(n).paintWithShading(g, points.x, points.y, intensities(n))
+    var n = 0
+    myPolygons foreach { p =>
+      p.paintWithShading(g, points.x, points.y, intensities(n))
+      n += 1
     }
   }
 

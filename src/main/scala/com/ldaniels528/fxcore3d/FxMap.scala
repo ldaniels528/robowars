@@ -22,17 +22,12 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
   /**
    * My grids.
    */
-  private val myGrids: Seq[FxGrid] = ((1 to nbrGrids) map (n => new FxGrid()))
+  private val myGrids: Seq[FxGrid] = (1 to nbrGrids) map (n => new FxGrid())
 
   /**
    * The width of a grid in world coordinates.
    */
   private val gridSize: Double = size / rows.toDouble
-
-  /**
-   * The width of a grid inverted.
-   */
-  private val gridSizeInv: Double = rows / size
 
   /**
    * Inserts the grids that are within the sphere into the supplied vector.
@@ -91,7 +86,7 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
       (xstart to xend) flatMap { xx =>
         myGrids(yy * rows + xx).getAllObjectsInRadius(p, radius) filter { obj =>
           val inst = obj.polyhedronInstance
-          sphereIsVisible(inst.getPosition(), inst.getBoundingRadius())
+          sphereIsVisible(inst.position, inst.boundingRadius)
         }
       }
     }

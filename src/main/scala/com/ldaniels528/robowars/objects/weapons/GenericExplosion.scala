@@ -42,7 +42,7 @@ class GenericExplosion(world: FxWorld,
   override def update(dt: Double) {
     super.update(dt)
     // adjust the scaling of the polyhedron
-    val scale = polyhedronInstance.getScalingFactor()
+    val scale = polyhedronInstance.scalingFactor
     if (age > (time0 + time1)) {
       die()
     } else if (age > time0) {

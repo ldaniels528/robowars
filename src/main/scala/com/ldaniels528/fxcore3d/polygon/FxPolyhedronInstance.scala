@@ -106,10 +106,11 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
     }
   }
 
-  def transformPoint(ps: FxPoint3D, pd: FxPoint3D) {
+  def transformPoint(ps: FxPoint3D, pd: FxPoint3D): FxPoint3D = {
     updateMatrix()
     // -- transform the polyhedron model coordinates to world coordinates.
     myTransformMatrix.transformPoint(ps, pd)
+    pd
   }
 
   def transformPoints(source: FxArrayOf3DPoints, dest: FxArrayOf3DPoints) {
@@ -130,10 +131,10 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
     intensitiesAreDirty = true
   }
 
-  def getScalingFactor(): FxPoint3D = myScale.makeClone
+  def scalingFactor: FxPoint3D = myScale.makeClone
 
-  def getBoundingRadius(): Double = myBoundingVolume.boundingRadius
+  def boundingRadius: Double = myBoundingVolume.boundingRadius
 
-  def getPosition(): FxPoint3D = myPosition
+  def position: FxPoint3D = myPosition
 
 }

@@ -18,7 +18,7 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   val Pos: FxPoint3D = myPos.makeClone
   val Agl: FxAngle3D = myAngle.makeClone
 
-  var age: Double = 0.0
+  var age: Double = _
   var flags: Int = _
 
   // insert object into the world
@@ -128,15 +128,6 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   }
 
   /**
-   * Returns the world coordinate for a position relative this object.
-   */
-  def getWorldCoordForRelativePoint(relpos: FxPoint3D): FxPoint3D = {
-    val pwcs = new FxPoint3D()
-    polyhedronInstance.transformPoint(relpos, pwcs)
-    pwcs
-  }
-
-  /**
    * Updates the list of occupied grids. Moving objects will do this every
    * frame while static objects do it once.
    */
@@ -145,7 +136,7 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
     occupiedGrids.clear()
 
     // get the new grids.
-    world.map.getGridsForSphere(Pos, polyhedronInstance.getBoundingRadius(), occupiedGrids)
+    world.map.getGridsForSphere(Pos, polyhedronInstance.boundingRadius, occupiedGrids)
 
     // insert this object in all occupied grids.
     occupiedGrids.foreach(_.insertObject(this))

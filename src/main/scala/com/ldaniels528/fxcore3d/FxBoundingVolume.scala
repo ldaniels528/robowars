@@ -13,9 +13,9 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
   protected val myNormals = Fx3DPointSeq(6)
 
   def checkForCollisionWith(volume: FxBoundingVolume): Boolean = {
-    val pp = theHostPolyInst.getPosition().copy()
+    val pp = theHostPolyInst.position.makeClone
     pp.negate()
-    pp += volume.theHostPolyInst.getPosition()
+    pp += volume.theHostPolyInst.position
 
     // check if the bounding spheres collide
     // so: if outside collision radius. no need for further checking
