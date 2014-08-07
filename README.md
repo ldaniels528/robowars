@@ -12,7 +12,6 @@ and battle it out in a 3D battle arena.
 The game is up and running in single-player mode with sound effects. The next step is add the network code to 
 support multiple players to competing in battle arenas.
 
-
 ### Features
 
 * Fast-paced 3D action
@@ -31,10 +30,13 @@ support multiple players to competing in battle arenas.
 
     $ git clone git@github.com:ldaniels528/robowars.git
 
-### Configuring your IDE
+### Configuring the project for your IDE
 
-* For Eclipse: sbt update eclipse
-* For Intellij Idea: sbt update gen-idea
+#### Eclipse project
+    $ sbt update eclipse
+    
+#### Intellij Idea project
+    $ sbt update gen-idea
 
 ### Building the code
 
