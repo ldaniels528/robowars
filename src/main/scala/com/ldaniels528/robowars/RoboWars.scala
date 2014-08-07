@@ -45,9 +45,9 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
     // create the image buffer and graphics context
     buffer = createImage(dim.width, dim.height)
-    offScreen = buffer.getGraphics().asInstanceOf[Graphics2D]
+    offScreen = buffer.getGraphics.asInstanceOf[Graphics2D]
     offScreen.setFont(FONT12)
-    theScreen = contentPane.getGraphics().asInstanceOf[Graphics2D]
+    theScreen = contentPane.getGraphics.asInstanceOf[Graphics2D]
     screenDim = dim
 
     // initialize the audio player
@@ -91,7 +91,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       frames += 1
       timeMillis += dtMillis
       if (timeMillis >= 1000) {
-        fps = (1000d * frames.toDouble / timeMillis.toDouble)
+        fps = 1000d * frames.toDouble / timeMillis.toDouble
         timeMillis = 0
         frames = 0
       }
@@ -104,8 +104,8 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
    * @param dim the screen dimensions
    */
   private def renderScene(dt: Double, dim: Dimension) {
+    // get the active player
     val player = world.activePlayer
-    val p = player.position
 
     // update the camera
     camera.update(dt)
@@ -115,33 +115,21 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     camera.setScreenSize(dim.width, dim.height)
     camera.paint(offScreen)
 
-    // render the cycle time
-    offScreen.setColor(new Color(0xFF, 0x80, 0x00))
-    offScreen.drawString(f"pos = $p,  dt = $dt%.3f", dim.width - 300, dim.height - 25)
-
-    // render any notices
-    renderNotices()
-
     // render the heads-up display
-    renderHUD(player)
+    renderHUD(player, dt)
 
     // render the frame rate off-screen
     renderFrameRate(dim)
 
-    // is the player dead?
-    if (!player.isAlive) {
-      offScreen.setColor(Color.RED)
-      offScreen.setFont(FONT32)
-      offScreen.drawString("You are Dead", dim.width / 2 - (dim.width / 4), dim.height / 2)
-      offScreen.setFont(FONT12)
-    }
+    // render any notices
+    renderNotices(player)
 
     // paint the screen
     theScreen.drawImage(buffer, 0, 0, this)
     ()
   }
 
-  private def renderNotices() {
+  private def renderNotices(player: AbstractVehicle) {
     if (world.time < 4d) {
       // show cursor key instructions
       val cursorCenterX = (super.getWidth - controlKeysImage.getWidth) / 2
@@ -156,9 +144,17 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       offScreen.drawString("Shift to Fire weapon", textLeftX, 430)
       offScreen.setFont(FONT12)
     }
+
+    // is the player dead?
+    if (!player.isAlive) {
+      offScreen.setColor(Color.RED)
+      offScreen.setFont(FONT32)
+      offScreen.drawString("You are Dead", this.getWidth / 2 - (this.getWidth / 4), this.getHeight / 2)
+      offScreen.setFont(FONT12)
+    }
   }
 
-  private def renderHUD(player: AbstractVehicle) {
+  private def renderHUD(player: AbstractVehicle, dt: Double) {
     val XPOS = 5
     val YPOS = 25
     val BAR_WIDTH = 300
@@ -184,6 +180,11 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     // draw the outline
     offScreen.setColor(Color.GRAY)
     offScreen.drawRect(XPOS, YPOS, BAR_WIDTH, BAR_HEIGHT)
+
+    // render the cycle time
+    val p = player.position
+    offScreen.setColor(new Color(0xFF, 0x80, 0x00))
+    offScreen.drawString(f"pos = $p,  dt = $dt%.3f", this.getWidth - 300, this.getHeight - 25)
   }
 
   private def renderFrameRate(dim: Dimension) {
@@ -198,11 +199,11 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
   private def keyboardEvent(event: KeyEvent, pressed: Boolean) {
     import java.awt.event.KeyEvent._
 
-    key(INCREASE_VELOCITY) = event.isControlDown()
-    key(DECREASE_VELOCITY) = event.isAltDown()
-    key(FIRE) = event.isShiftDown()
+    key(INCREASE_VELOCITY) = event.isControlDown
+    key(DECREASE_VELOCITY) = event.isAltDown
+    key(FIRE) = event.isShiftDown
 
-    event.getKeyCode() match {
+    event.getKeyCode match {
       case VK_LEFT => key(TURN_LEFT) = pressed
       case VK_RIGHT => key(TURN_RIGHT) = pressed
       case VK_G => key(BRAKE) = pressed
@@ -212,9 +213,6 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       case VK_DOWN => key(PITCH_UP) = pressed
       case VK_Z =>
         if (pressed) world.activePlayer.switchWeapons(); ()
-      case VK_0 =>
-        val p = world.activePlayer.position
-        println("Position  = (%.1f, %.1f, %.1f)".format(p.x, p.y, p.z))
       case VK_1 => key(MINICANNON) = pressed
       case VK_2 => key(MISSILE) = pressed
       case VK_3 => key(BOMB) = pressed
