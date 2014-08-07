@@ -2,7 +2,7 @@ package com.ldaniels528.robowars
 
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
-import java.io.InputStream
+import java.io.{FileNotFoundException, InputStream}
 import javax.imageio.ImageIO
 
 import com.ldaniels528.fxcore3d.polygon.{FxConvexPolyhedron, FxPolyhedronLoader}
@@ -18,11 +18,12 @@ object ContentManager {
    * @param path the given resource path
    * @return a [[BufferedImage]]
    */
+  @throws[java.io.FileNotFoundException]
   def loadImage(path: String): BufferedImage = {
     Option(getClass.getResource(path)) match {
       case Some(url) => ImageIO.read(url)
       case None =>
-        throw new IllegalStateException(s"Image '$path' not found")
+        throw new FileNotFoundException(s"Image '$path' not found")
     }
   }
 
@@ -33,6 +34,7 @@ object ContentManager {
    * @param height the desired height
    * @return the scaled [[BufferedImage]]
    */
+  @throws[java.io.FileNotFoundException]
   def loadImage(path: String, width: Int, height: Int): BufferedImage = {
     scaleImage(loadImage(path), width, height)
   }
@@ -86,11 +88,12 @@ object ContentManager {
    * @param path the given resource path
    * @return an [[InputStream]]
    */
+  @throws[java.io.FileNotFoundException]
   def getResource(path: String): InputStream = {
     Option(getClass.getResource(path)) match {
       case Some(url) => url.openStream()
       case None =>
-        throw new IllegalStateException(s"Resource '$path' not found")
+        throw new FileNotFoundException(s"Resource '$path' not found")
     }
   }
 
