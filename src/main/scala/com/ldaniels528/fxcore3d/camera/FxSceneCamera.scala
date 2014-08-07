@@ -9,24 +9,8 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
  * FxEngine Scene Camera renders the scene with skyline and terrain
  * @author lawrence.daniels@gmail.com
  */
-class FxSceneCamera(world: FxWorld,
-                    viewAngle: Double,
-                    viewDistance: Double,
-                    pos: FxPoint3D,
-                    agl: FxAngle3D,
-                    gridSize: Double)
+class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos: FxPoint3D, agl: FxAngle3D, gridSize: Double)
   extends FxGenericCamera(world, viewAngle, viewDistance, pos, agl) {
-
-  // capture the camera's start time
-  private val startTime = System.currentTimeMillis()
-
-  // predefine the sky and ground colors
-  private def mySkyColor = {
-    //  new Color(50, 50, 200)
-    val elapsedSecs = ((System.currentTimeMillis() - startTime) / 1000L).toInt
-    val shade = 60 - (elapsedSecs % 60)
-    new Color(shade, shade, 200)
-  }
 
   // make the default ground
   private val myGroundColor = new Color(130, 130, 50)
@@ -67,6 +51,7 @@ class FxSceneCamera(world: FxWorld,
     val p = FxPoint3D(0, myPosition.y, -viewDistance * 5)
     p.rotateAboutXaxis(-myAngle.x)
 
+    val mySkyColor = FxDayNightSky.getColor(world.time)
     val screenY = ((screenDistance * p.y / p.z) + y0).toInt
     if (screenY < 0) {
       g.setColor(if (p.z < 0) myGroundColor else mySkyColor)
@@ -110,5 +95,7 @@ class FxSceneCamera(world: FxWorld,
       }
     }
   }
+
+  override def update(dt: Double) = ()
 
 }
