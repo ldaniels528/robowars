@@ -1,7 +1,8 @@
 package com.ldaniels528.robowars
 
+import java.awt.Graphics2D
 import java.awt.image.BufferedImage
-import java.io._
+import java.io.InputStream
 import javax.imageio.ImageIO
 
 import com.ldaniels528.fxcore3d.polygon.{FxConvexPolyhedron, FxPolyhedronLoader}
@@ -23,6 +24,43 @@ object ContentManager {
       case None =>
         throw new IllegalStateException(s"Image '$path' not found")
     }
+  }
+
+  /**
+   * Retrieves a scaled image from the classpath
+   * @param path the given resource path
+   * @param width the desired width
+   * @param height the desired height
+   * @return the scaled [[BufferedImage]]
+   */
+  def loadImage(path: String, width: Int, height: Int): BufferedImage = {
+    scaleImage(loadImage(path), width, height)
+  }
+
+  /**
+   * Scales the given image to the given width and height
+   * @param image the source image
+   * @param width the desired width
+   * @param height the desired height
+   * @return the scaled [[BufferedImage]]
+   */
+  private def scaleImage(image: BufferedImage, width: Int, height: Int): BufferedImage = {
+    // create the scaled image buffer
+    val scaledImage = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR)
+
+    // determine the X- and Y-axis scale
+    val sx = width.toDouble / image.getWidth.toDouble
+    val sy = height.toDouble / image.getHeight.toDouble
+
+    // render the new image
+    val g = scaledImage.getGraphics.asInstanceOf[Graphics2D]
+    g.setTransform({
+      val tx = g.getTransform
+      tx.scale(sx, sy)
+      tx
+    })
+    g.drawImage(image, 0, 0, null)
+    scaledImage
   }
 
   /**
