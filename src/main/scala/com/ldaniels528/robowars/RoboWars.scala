@@ -6,8 +6,9 @@ import java.awt.event.{KeyEvent, KeyListener}
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
-import com.ldaniels528.robowars.objects.vehicles.{AbstractVehicle}
+import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.{Events, WeaponCommand}
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
  * RoboWars Application Main
@@ -21,6 +22,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
   var fps: Double = 0.0
 
   // the off-screen buffer variables
+  lazy val controlKeysImage = ContentManager.loadImage("/images/control_keys.png")
   var buffer: Image = _
   var offScreen: Graphics2D = _
   var theScreen: Graphics2D = _
@@ -29,16 +31,17 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
   // setup the key listener
   super.addKeyListener(new KeyListener {
     override def keyTyped(event: KeyEvent) = ()
-
-    override def keyReleased(event: KeyEvent) = keyboardEvent(event, false)
-
-    override def keyPressed(event: KeyEvent) = keyboardEvent(event, true)
+    override def keyReleased(event: KeyEvent) = keyboardEvent(event, pressed = false)
+    override def keyPressed(event: KeyEvent) = keyboardEvent(event, pressed = true)
   })
 
+  /**
+   * Initializes the application
+   */
   def init() {
     // get the dimensions of the content pane
-    val contentPane = super.getContentPane()
-    val dim = contentPane.getSize()
+    val contentPane = super.getContentPane
+    val dim = contentPane.getSize
 
     // create the image buffer and graphics context
     buffer = createImage(dim.width, dim.height)
@@ -47,15 +50,20 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     theScreen = contentPane.getGraphics().asInstanceOf[Graphics2D]
     screenDim = dim
 
-    // load the audio samples
-    import com.ldaniels528.robowars.audio.AudioManager._
-    audioPlayer ! Init
+    // initialize the audio player
+    audioPlayer ! InitAudio
 
     // load the world
     world = VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
+
+    // start the player moving forward
+    world.activePlayer.increaseVelocity(40, .2)
   }
 
+  /**
+   * Main application loop
+   */
   def run() {
     var lastUpdate: Long = System.currentTimeMillis()
     var frames: Int = 0
@@ -90,7 +98,12 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     }
   }
 
-  private def renderScene(dt: Double, dim: Dimension): Boolean = {
+  /**
+   * Render the scene
+   * @param dt the given frame time in seconds
+   * @param dim the screen dimensions
+   */
+  private def renderScene(dt: Double, dim: Dimension) {
     val player = world.activePlayer
     val p = player.position
 
@@ -105,6 +118,9 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     // render the cycle time
     offScreen.setColor(new Color(0xFF, 0x80, 0x00))
     offScreen.drawString(f"pos = $p,  dt = $dt%.3f", dim.width - 300, dim.height - 25)
+
+    // render any notices
+    renderNotices()
 
     // render the heads-up display
     renderHUD(player)
@@ -122,6 +138,24 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
     // paint the screen
     theScreen.drawImage(buffer, 0, 0, this)
+    ()
+  }
+
+  private def renderNotices() {
+    if (world.time < 4d) {
+      // show cursor key instructions
+      val cursorCenterX = (super.getWidth - controlKeysImage.getWidth) / 2
+      val textLeftX =   cursorCenterX - 150
+      offScreen.setFont(FONT32)
+
+      // cursor key image & text
+      offScreen.setColor(Color.LIGHT_GRAY)
+      offScreen.drawImage(controlKeysImage, cursorCenterX, 50, this)
+      offScreen.drawString("Left/Right to Navigate", textLeftX, 340)
+      offScreen.drawString("Up/Down to Accel/Decel", textLeftX, 385)
+      offScreen.drawString("Shift to Fire weapon", textLeftX, 430)
+      offScreen.setFont(FONT12)
+    }
   }
 
   private def renderHUD(player: AbstractVehicle) {
