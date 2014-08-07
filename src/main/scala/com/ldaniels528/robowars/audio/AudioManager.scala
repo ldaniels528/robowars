@@ -55,7 +55,7 @@ object AudioManager extends FxAudioPlayer {
    */
   class AudioPlaybackActor extends Actor {
     def receive = {
-      case Init =>
+      case InitAudio =>
         println("Initializing sound system...")
       case audioKey: AudioKey =>
         audioSampleCache.get(audioKey) foreach { sample =>
@@ -69,27 +69,16 @@ object AudioManager extends FxAudioPlayer {
    * Audio-Clip messages
    */
   trait AudioKey
-
-  case object Init
-
+  case object InitAudio
   case object Ambient extends AudioKey
-
   case object BuildingExplodeClip extends AudioKey
-
   case object BigExplosionClip extends AudioKey
-
   case object CrashClip extends AudioKey
-
   case object ExplosionClip extends AudioKey
-
   case object MachineGunClip extends AudioKey
-
   case object MissileClip extends AudioKey
-
   case object PlasmaClip extends AudioKey
-
   case object ReloadClip extends AudioKey
-
   case object RewardClip extends AudioKey
 
 }
