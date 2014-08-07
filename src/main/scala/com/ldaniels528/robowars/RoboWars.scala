@@ -17,7 +17,7 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 class RoboWars() extends FxFrame("RoboWars") with Events {
   var world: FxWorld = _
   var camera: FxTrackerCamera = _
-  val key = new Array[Boolean](100)
+  val key = new Array[Boolean](20)
   var alive: Boolean = true
   var fps: Double = 0.0
 
@@ -140,7 +140,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       offScreen.setColor(Color.LIGHT_GRAY)
       offScreen.drawImage(controlKeysImage, cursorCenterX, 50, this)
       offScreen.drawString("Left/Right to Navigate", textLeftX, 340)
-      offScreen.drawString("Up/Down to Accel/Decel", textLeftX, 385)
+      offScreen.drawString("CTRL/ALT to Accel/Decel", textLeftX, 385)
       offScreen.drawString("Shift to Fire weapon", textLeftX, 430)
       offScreen.setFont(FONT12)
     }
@@ -213,7 +213,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       case VK_DOWN => key(PITCH_UP) = pressed
       case VK_Z =>
         if (pressed) world.activePlayer.switchWeapons(); ()
-      case VK_1 => key(MINICANNON) = pressed
+      case VK_1 => key(MINI_CANNON) = pressed
       case VK_2 => key(MISSILE) = pressed
       case VK_3 => key(BOMB) = pressed
       case _ =>
@@ -238,7 +238,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
     // weapon events
     if (key(FIRE)) player.fireSelectedWeapon()
-    if (key(MINICANNON)) player += WeaponCommand(world.time, SELECT, MINICANNON)
+    if (key(MINI_CANNON)) player += WeaponCommand(world.time, SELECT, MINI_CANNON)
     if (key(MISSILE)) player += WeaponCommand(world.time, SELECT, MISSILE)
     if (key(BOMB)) player += WeaponCommand(world.time, SELECT, BOMB)
   }
