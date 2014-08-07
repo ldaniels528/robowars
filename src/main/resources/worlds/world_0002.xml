@@ -19,7 +19,7 @@
                      -->
 
   <!-- create actor definitions -->
-  <objectDef id="ScoutTank" class="com.ldaniels528.robowars.objects.vehicles.FesseTank" />
+  <objectDef id="ScoutTank" class="com.ldaniels528.robowars.objects.vehicles.Rover" />
   <objectDef id="RoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank" />
   <objectDef id="HoverCraft" class="com.ldaniels528.robowars.objects.vehicles.Tank" />
   <objectDef id="Destroyer" class="com.ldaniels528.robowars.objects.vehicles.JetCraft" />

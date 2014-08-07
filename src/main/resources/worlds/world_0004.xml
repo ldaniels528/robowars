@@ -17,7 +17,7 @@
     <objectDef id="Glider" class="com.ldaniels528.robowars.objects.vehicles.Glider"/>
     <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.objects.structures.GenericBuilding"/>
     <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.MainGate"/>
-    <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.FesseTank"/>
+    <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.Rover"/>
     <objectDef id="GenericWall" class="com.ldaniels528.robowars.objects.structures.GenericWall"/>
     <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon"/>
     <!-- actor definitions -->

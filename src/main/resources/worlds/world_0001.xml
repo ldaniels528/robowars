@@ -24,7 +24,7 @@
     <!-- vehicle definitions -->
     <objectDef id="HoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank"/>
     <objectDef id="Glider" class="com.ldaniels528.robowars.objects.vehicles.Glider"/>
-    <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.FesseTank"/>
+    <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.Rover"/>
     <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon"/>
     <objectDef id="Tank" class="com.ldaniels528.robowars.objects.vehicles.Tank"/>
 
