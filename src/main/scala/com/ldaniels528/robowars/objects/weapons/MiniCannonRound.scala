@@ -7,7 +7,7 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import com.ldaniels528.robowars.objects.weapons.MiniCannonRound._
 
 /**
- * Represents a MiniCannon Round
+ * Represents a Mini-Cannon Round
  * @author lawrence.daniels@gmail.com
  */
 case class MiniCannonRound(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D, agl0: FxAngle3D)
@@ -19,11 +19,11 @@ case class MiniCannonRound(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D
 }
 
 /**
- * MiniCannon Round (Companion Object)
+ * Mini-Cannon Round (Companion Object)
  * @author lawrence.daniels@gmail.com
  */
 object MiniCannonRound {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/bullet.f3d")
-  val SCALE = new FxPoint3D(0.15d, 0.15d, 0.75d)
+  val SCALE = FxPoint3D(0.15d, 0.15d, 0.75d)
 
 }

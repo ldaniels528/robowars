@@ -24,6 +24,6 @@ case class MachineGunRound(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D
  */
 object MachineGunRound {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/bullet.f3d")
-  val SCALE = new FxPoint3D(0.1d, 0.1d, 0.5d)
+  val SCALE = FxPoint3D(0.15d, 0.15d, 0.75d)
 
 }

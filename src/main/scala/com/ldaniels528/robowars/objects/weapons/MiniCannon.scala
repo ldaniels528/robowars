@@ -8,8 +8,8 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * Represents a MiniCannon Weapon
  * @author lawrence.daniels@gmail.com
  */
-case class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D)
-  extends AbstractWeapon(host, relPos, loadingTime = 0.4d, ammo = 250) {
+case class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D, ammo0: Int = 250)
+  extends AbstractWeapon(host, relPos, loadingTime = 0.4d, ammo = ammo0) {
 
   override def fire(): Boolean = {
     val fired = super.fire()

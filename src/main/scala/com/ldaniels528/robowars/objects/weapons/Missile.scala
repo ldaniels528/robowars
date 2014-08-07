@@ -10,8 +10,8 @@ import com.ldaniels528.robowars.objects.weapons.Missile._
  * Represents a Missile
  * @author lawrence.daniels@gmail.com
  */
-case class Missile(w: FxWorld, theShooter: AbstractVehicle, pos0: FxPoint3D, agl0: FxAngle3D)
-  extends AbstractProjectile(w, theShooter, pos0, FxVelocityVector(agl0.y, agl0.x, MAX_VELOCITY), impactDamage = 20d, lifeTime = 4d) {
+case class Missile(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D, a: FxAngle3D)
+  extends AbstractProjectile(w, theShooter, p, FxVelocityVector(a.y, a.x, velocity = 70d), impactDamage = 20d, lifeTime = 4d) {
 
   // define the 3D model
   lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
@@ -19,12 +19,11 @@ case class Missile(w: FxWorld, theShooter: AbstractVehicle, pos0: FxPoint3D, agl
 }
 
 /**
- * Generic Missile (Companion Object)
+ * Missile (Companion Object)
  * @author lawrence.daniels@gmail.com
  */
 object Missile {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/missile.f3d")
-  val SCALE = new FxPoint3D(0.25d, 0.25d, 1.5d)
-  val MAX_VELOCITY: Double = 70d
+  val SCALE = FxPoint3D(0.25d, 0.25d, 1.5d)
 
 }

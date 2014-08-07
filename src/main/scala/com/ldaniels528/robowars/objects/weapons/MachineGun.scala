@@ -5,11 +5,11 @@ import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
- * Represents a Machine gun weapon
+ * Represents a Machine-gun weapon
  * @author lawrence.daniels@gmail.com
  */
-case class MachineGun(host: AbstractVehicle, relPos: FxPoint3D)
-  extends AbstractWeapon(host, relPos, loadingTime = 0.2d, ammo = 500) {
+case class MachineGun(host: AbstractVehicle, relPos: FxPoint3D, ammo0: Int = 500)
+  extends AbstractWeapon(host, relPos, loadingTime = 0.2d, ammo = ammo0) {
 
   override def fire(): Boolean = {
     val fired = super.fire()
