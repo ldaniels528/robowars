@@ -149,7 +149,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     if (!player.isAlive) {
       offScreen.setColor(Color.RED)
       offScreen.setFont(FONT32)
-      offScreen.drawString("You are Dead", this.getWidth / 2 - (this.getWidth / 4), this.getHeight / 2)
+      offScreen.drawString("Game Over", this.getWidth / 2 - (this.getWidth / 4), this.getHeight / 2)
       offScreen.setFont(FONT12)
     }
   }
