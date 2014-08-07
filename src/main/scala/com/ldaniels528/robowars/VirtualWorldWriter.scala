@@ -2,14 +2,13 @@ package com.ldaniels528.robowars
 
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import com.ldaniels528.robowars.objects.structures._
+import scala.xml._
 
 /**
  * Virtual World Writer
  * @author lawrence.daniels@gmail.com
  */
 object VirtualWorldWriter {
-
-  import scala.xml._
 
   def save(world: VirtualWorld) {
     val player = world.activePlayer
