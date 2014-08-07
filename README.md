@@ -31,9 +31,14 @@ support multiple players to competing in battle arenas.
 
     $ git clone git@github.com:ldaniels528/robowars.git
 
+### Configuring your IDE
+
+* For Eclipse: sbt update eclipse
+* For Intellij Idea: sbt update gen-idea
+
 ### Building the code
 
-    $ sbt clean package
+    $ sbt assembly
       
 ### Running the tests
 
