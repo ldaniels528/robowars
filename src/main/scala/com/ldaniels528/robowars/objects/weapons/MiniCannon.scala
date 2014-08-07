@@ -15,7 +15,7 @@ case class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D)
     val fired = super.fire()
     if (fired) {
       // play the audio sample
-      audioPlayer ! MachineGunClip
+      audioPlayer ! MiniCannonClip
 
       // get the world, position, and angle
       val (w, p, a) = (host.world, host.position, host.angle)

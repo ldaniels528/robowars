@@ -37,6 +37,7 @@ object AudioManager extends FxAudioPlayer {
       (ReloadClip -> "weapons/loadClip"),
       (Ambient -> "background/ambient"),
       (MachineGunClip -> "weapons/machineGun"),
+      (MiniCannonClip -> "weapons/44"),
       (MissileClip -> "weapons/missile"),
       (RewardClip -> "items/reward"))
     Map(samples map {
@@ -76,6 +77,7 @@ object AudioManager extends FxAudioPlayer {
   case object CrashClip extends AudioKey
   case object ExplosionClip extends AudioKey
   case object MachineGunClip extends AudioKey
+  case object MiniCannonClip extends AudioKey
   case object MissileClip extends AudioKey
   case object PlasmaClip extends AudioKey
   case object ReloadClip extends AudioKey
