@@ -9,12 +9,16 @@ and battle it out in a 3D battle arena.
 
 ### Status
 
-The basic 3D game engine is up and running. The next step is add the network code to allow multiple players
-to compete in battle arenas. 
+The game is up and running in single-player mode with sound effects. The next step is add the network code to 
+support multiple players to competing in battle arenas.
+
+
+### Features
 
 * Fast-paced 3D action
 * Single-player mode
 * Multi-player mode (**Coming soon**)
+* Spectator mode (**Coming soon**)
 * Basic AI combatants (**Needs improvement**)
 * Sound effects
 
