@@ -10,11 +10,8 @@ import com.ldaniels528.fxcore3d.camera.FxGenericCamera._
  * FxEngine Generic Camera
  * @author lawrence.daniels@gmail.com
  */
-class FxGenericCamera(world: FxWorld,
-                      viewAngle: Double,
-                      viewDistance: Double,
-                      pos: FxPoint3D,
-                      agl: FxAngle3D) extends FxCamera {
+abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos: FxPoint3D, agl: FxAngle3D)
+  extends FxCamera {
   // the screen distance
   protected var screenDistance: Double = _
 
@@ -58,11 +55,6 @@ class FxGenericCamera(world: FxWorld,
     // paint the objects
     sortedObjects.foreach(_.paintWithShading(g, this, light))
   }
-
-  /**
-   * Updates the camera
-   */
-  def update(dt: Double) = ()
 
   /**
    * projects an array of 3d points to the temporary 2d buffer
@@ -209,7 +201,6 @@ class FxGenericCamera(world: FxWorld,
  * @author lawrence.daniels@gmail.com
  */
 object FxGenericCamera {
-
 
   // a temporary buffer used for projection
   var our2dBuffer = FxProjectedPoints(250)
