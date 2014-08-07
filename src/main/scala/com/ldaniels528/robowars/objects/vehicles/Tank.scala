@@ -3,8 +3,8 @@ package com.ldaniels528.robowars.objects.vehicles
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.objects.vehicles.Tank._
 import com.ldaniels528.robowars.objects.structures.GenericFragment
+import com.ldaniels528.robowars.objects.vehicles.Tank._
 import com.ldaniels528.robowars.objects.weapons._
 
 /**

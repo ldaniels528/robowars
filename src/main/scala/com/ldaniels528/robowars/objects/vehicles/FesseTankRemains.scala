@@ -3,8 +3,8 @@ package com.ldaniels528.robowars.objects.vehicles
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxPoint3D, FxWorld}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.objects.vehicles.FesseTankRemains._
 import com.ldaniels528.robowars.objects.structures.AbstractMovingScenery
+import com.ldaniels528.robowars.objects.vehicles.FesseTankRemains._
 
 /**
  * Remains of a Fesse Tank

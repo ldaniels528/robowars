@@ -4,15 +4,14 @@ import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
 import com.ldaniels528.fxcore3d.{FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.objects.vehicles.Glider._
-import com.ldaniels528.robowars.objects.structures.GenericFragment
 import com.ldaniels528.robowars.objects.weapons.{BombBay, MiniCannon, MissileLauncher}
 
 /**
  * Glider Vehicle
  * @author lawrence.daniels@gmail.com
  */
-class Glider(world: FxWorld, p: FxPoint3D)
-  extends AbstractVehicle(world, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), health = 5d) {
+case class Glider(w: FxWorld, p: FxPoint3D)
+  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), health = 5d) {
 
   val turningRate: Double = 0.6d
   val pitchRate: Double = 0.5d
@@ -34,10 +33,8 @@ class Glider(world: FxWorld, p: FxPoint3D)
 
   override def die() {
     super.die()
-    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
-      new GenericFragment(world, FRAGMENT_SIZE, position,
-        FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
-    }
+
+    // leave the carcass behind
     new GliderRemains(world, this)
     ()
   }
@@ -74,12 +71,6 @@ class Glider(world: FxWorld, p: FxPoint3D)
  */
 object Glider {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/glider.f3d")
-  val SCALE = new FxPoint3D(8d, 1d, 4d)
-
-  val FRAGMENT_SIZE: Double = 0.25d
-  val FRAGMENT_SPEED: Double = 7d
-  val FRAGMENT_SPREAD: Double = 1d
-  val FRAGMENTS_WHEN_DEAD: Int = 15
-  val FRAGMENT_GENERATIONS: Int = 1
+  val SCALE = FxPoint3D(8d, 1d, 4d)
 
 }

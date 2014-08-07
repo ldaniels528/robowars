@@ -6,7 +6,8 @@ import com.ldaniels528.robowars.events.{Events, SteeringCommand, WeaponCommand}
 import com.ldaniels528.robowars.objects.AbstractMovingObject
 import com.ldaniels528.robowars.objects.ai.AbstractAI
 import com.ldaniels528.robowars.objects.items.AbstractRewardItem
-import com.ldaniels528.robowars.objects.structures.{AbstractMovingStructure, AbstractStaticStructure}
+import com.ldaniels528.robowars.objects.structures.{AbstractMovingStructure, AbstractStaticStructure, GenericFragment}
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle._
 import com.ldaniels528.robowars.objects.weapons.{AbstractProjectile, AbstractWeapon}
 
 /**
@@ -105,6 +106,12 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   override def die() {
     import com.ldaniels528.robowars.audio.AudioManager._
 
+    // display the fragments
+    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
+      new GenericFragment(world, FRAGMENT_SIZE, position,
+        FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
+    }
+
     // play the explosion clip
     if (!this.isInstanceOf[AbstractProjectile]) {
       audioPlayer ! (if (this == world.activePlayer) GameOver else BigExplosionClip)
@@ -175,7 +182,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
       case WeaponCommand(_, command, arg) =>
         command match {
           case SELECT => selectWeapon(arg - 20)
-          case FIRE => selectedWeapon.fire
+          case FIRE => selectedWeapon.fire()
           case code =>
             throw new IllegalArgumentException(s"Unhandled weapon command ($code)")
         }
@@ -237,5 +244,17 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
     p.y -= climbRate * dt * factor
     setPosition(p)
   }
+
+}
+
+/**
+ * Abstract Vehicle Companion Object
+ */
+object AbstractVehicle {
+  val FRAGMENT_SIZE: Double = 0.25d
+  val FRAGMENT_SPEED: Double = 25d
+  val FRAGMENT_SPREAD: Double = 2d
+  val FRAGMENTS_WHEN_DEAD: Int = 15
+  val FRAGMENT_GENERATIONS: Int = 1
 
 }

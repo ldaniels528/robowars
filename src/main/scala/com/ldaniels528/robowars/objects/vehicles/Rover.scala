@@ -1,16 +1,16 @@
 package com.ldaniels528.robowars.objects.vehicles
 
-import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.{FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.objects.vehicles.HoverTank._
-import com.ldaniels528.robowars.objects.weapons._
+import com.ldaniels528.robowars.objects.vehicles.Rover._
+import com.ldaniels528.robowars.objects.weapons.{MachineGun, MiniCannon, MissileLauncher}
 
 /**
- * Hover Tank
+ * Rover Vehicle
  * @author lawrence.daniels@gmail.com
  */
-case class HoverTank(w: FxWorld, p: FxPoint3D)
+case class Rover(w: FxWorld, p: FxPoint3D)
   extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), health = 5d) {
 
   val turningRate: Double = 1.25d
@@ -27,8 +27,8 @@ case class HoverTank(w: FxWorld, p: FxPoint3D)
 
   // attach some weapons
   this += MachineGun(this, FxPoint3D(0, p.y + SCALE.y, 0))
-  this += MiniCannon(this, FxPoint3D(0, p.y + SCALE.y, 0))
-  this += MissileLauncher(this, FxPoint3D(0, p.y + SCALE.y, 0))
+  this += MiniCannon(this, FxPoint3D(0, SCALE.y, 0))
+  this += MissileLauncher(this, FxPoint3D(0, SCALE.y, 0))
   selectWeapon(0)
 
   override def die() {
@@ -42,11 +42,11 @@ case class HoverTank(w: FxWorld, p: FxPoint3D)
 }
 
 /**
- * Hover Tank Companion Object
+ * Rover Companion Object
  * @author lawrence.daniels@gmail.com
  */
-object HoverTank {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/tank4.f3d")
+object Rover {
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/fesseTank.f3d")
   val SCALE = FxPoint3D(1.50d, 0.75d, 2.00d)
 
 }
