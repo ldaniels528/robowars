@@ -106,8 +106,8 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
     import com.ldaniels528.robowars.audio.AudioManager._
 
     // play the explosion clip
-    if(!this.isInstanceOf[AbstractProjectile]) {
-      audioPlayer ! BigExplosionClip
+    if (!this.isInstanceOf[AbstractProjectile]) {
+      audioPlayer ! (if (this == world.activePlayer) GameOver else BigExplosionClip)
     }
 
     // allow super-class to take action
