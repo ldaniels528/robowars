@@ -10,17 +10,17 @@ case class FxArrayOf3DPoints(capacity: Int) {
 
   def apply(n: Int): FxProjectedPoint3D = myPoints(n)
 
+  /**
+   * Creates a cloned copy of the instance
+   */
+  def makeClone: FxArrayOf3DPoints = this.copy()
+
   def point(n: Int): FxPoint3D = {
     val pp = myPoints(n)
     FxPoint3D(pp.x, pp.y, pp.z)
   }
 
-  def points: Seq[FxProjectedPoint3D] = if(capacity == length) myPoints else myPoints.slice(0, length)
-
-  /**
-   * Creates a cloned copy of the instance
-   */
-  def makeClone: FxArrayOf3DPoints = this.copy()
+  def points: Seq[FxProjectedPoint3D] = if (capacity == length) myPoints else myPoints.slice(0, length)
 
   override def toString = points mkString ","
 
@@ -34,6 +34,8 @@ case class FxArrayOf3DPoints(capacity: Int) {
  * @param index the index of the point in the sequence
  */
 case class FxProjectedPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0, index: Int) {
+
+  def dotProduct(p: FxPoint3D): Double = p.x * x + p.y * y + p.z * z
 
   /**
    * Creates a cloned copy of the instance
