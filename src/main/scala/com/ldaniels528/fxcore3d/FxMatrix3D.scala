@@ -114,7 +114,7 @@ class FxMatrix3D() {
     }
   }
 
-  def transformPoint(ps: FxPoint3D, pd: FxPoint3D) {
+  def transformPoint(ps: FxPoint3D, pd: FxPoint3D): FxPoint3D = {
     val x = ps.x
     val y = ps.y
     val z = ps.z
@@ -122,6 +122,7 @@ class FxMatrix3D() {
     pd.x = x * xx + y * xy + z * xz + xo
     pd.y = x * yx + y * yy + z * yz + yo
     pd.z = x * zx + y * zy + z * zz + zo
+    pd
   }
 
   //-- special transform
