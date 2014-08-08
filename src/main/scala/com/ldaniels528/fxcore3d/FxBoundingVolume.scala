@@ -40,27 +40,31 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
 
     otherBox.points foreach { box =>
       point.set(box.x, box.y, box.z)
-      var outside = false
-      var n = 0
-      while ((n < myNormals.length) && !outside) {
-        // make the normal
-        val np = myNormals(n)
-        normal.set(np.x, np.y, np.z)
-
-        // make the vector from my normal to other point
-        val bp = myBox(n)
-        vector.set(bp.x, bp.y, bp.z)
-        vector.makeVectorTo(point)
-
-        // use the dot product to determine whether the point is
-        // "in-front" of one of the planes. no collision
-        if (normal.dotProduct(vector) > 0) outside = true
-        n += 1
-      }
-
+      val outside = isOutSideVolume(point, normal, vector)
       if (!outside) return true
     }
     false
+  }
+
+  private def isOutSideVolume(point: FxPoint3D, normal: FxPoint3D, vector: FxPoint3D): Boolean = {
+    var outside = false
+    var n = 0
+    while ((n < myNormals.length) && !outside) {
+      // make the normal
+      val np = myNormals(n)
+      normal.set(np.x, np.y, np.z)
+
+      // make the vector from my normal to other point
+      val bp = myBox(n)
+      vector.set(bp.x, bp.y, bp.z)
+      vector.makeVectorTo(point)
+
+      // use the dot product to determine whether the point is
+      // "in-front" of one of the planes. no collision
+      if (normal.dotProduct(vector) > 0) outside = true
+      n += 1
+    }
+    outside
   }
 
   private def updateBox() {
