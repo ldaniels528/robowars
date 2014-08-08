@@ -8,16 +8,29 @@ case class FxArrayOf3DPoints(x: Array[Double], y: Array[Double], z: Array[Double
 
   var length: Int = x.length
 
-  def apply(n: Int) = (x(n), y(n), z(n))
+  def apply(n: Int): FxProjectedPoint3D = FxProjectedPoint3D(x(n), y(n), z(n), n)
 
   /**
-   * Returns a clone.
+   * Creates a cloned copy of the instance
    */
   def makeClone(): FxArrayOf3DPoints = this.copy()
 
   override def toString = {
-    ((0 to (length - 1)) map (n => "(%.1f, %.1f, %.1f)".format(x(n), y(n), z(n)))).mkString(",")
+    (0 to (length - 1)) map (n => "(%.1f, %.1f, %.1f)".format(x(n), y(n), z(n))) mkString ","
   }
+
+}
+
+/**
+ * Represents a 3D Projected Point
+ * @param x the X-axis of the point
+ * @param y the Y-axis of the point
+ * @param z the Z-axis of the point
+ * @param index the index of the point in the sequence
+ */
+case class FxProjectedPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0, index: Int) {
+
+  override def toString = "(%.1f, %.1f, %.1f)".format(x, y, z)
 
 }
 

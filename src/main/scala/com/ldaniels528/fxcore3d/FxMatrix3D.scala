@@ -94,10 +94,10 @@ class FxMatrix3D() {
 
   def rotate(ps: FxArrayOf3DPoints, pd: FxArrayOf3DPoints) {
     (0 to (ps.length - 1)) foreach { n =>
-      val (x,y,z) = ps(n)
-      pd.x(n) = x * xx + y * xy + z * xz
-      pd.y(n) = x * yx + y * yy + z * yz
-      pd.z(n) = x * zx + y * zy + z * zz
+      val pp = ps(n)
+      pd.x(n) = pp.x * xx + pp.y * xy + pp.z * xz
+      pd.y(n) = pp.x * yx + pp.y * yy + pp.z * yz
+      pd.z(n) = pp.x * zx + pp.y * zy + pp.z * zz
     }
   }
 
@@ -107,10 +107,10 @@ class FxMatrix3D() {
    */
   def transform(ps: FxArrayOf3DPoints, pd: FxArrayOf3DPoints) {
     (0 to (ps.length - 1)) foreach { n =>
-      val (x,y,z) = ps(n)
-      pd.x(n) = x * xx + y * xy + z * xz + xo
-      pd.y(n) = x * yx + y * yy + z * yz + yo
-      pd.z(n) = x * zx + y * zy + z * zz + zo
+      val pp = ps(n)
+      pd.x(n) = pp.x * xx + pp.y * xy + pp.z * xz + xo
+      pd.y(n) = pp.x * yx + pp.y * yy + pp.z * yz + yo
+      pd.z(n) = pp.x * zx + pp.y * zy + pp.z * zz + zo
     }
   }
 
