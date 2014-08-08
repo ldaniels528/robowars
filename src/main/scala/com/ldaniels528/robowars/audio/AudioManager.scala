@@ -36,6 +36,7 @@ object AudioManager extends FxAudioPlayer {
       CrashClip -> "environmental/crash",
       ExplosionClip -> "environmental/bigExplosion",
       GameOver -> "alerts/gameOver",
+      GetReady -> "alerts/getReady",
       ReloadClip -> "weapons/loadClip",
       Ambient -> "background/ambient",
       MachineGunClip -> "weapons/machineGun",
@@ -92,6 +93,8 @@ object AudioManager extends FxAudioPlayer {
   case object ExplosionClip extends AudioKey
 
   case object GameOver extends AudioKey
+
+  case object GetReady extends AudioKey
 
   case object MachineGunClip extends AudioKey
 

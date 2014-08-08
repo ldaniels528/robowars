@@ -14,7 +14,7 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * RoboWars Application Main
  * @author lawrence.daniels@gmail.com
  */
-class RoboWars() extends FxFrame("RoboWars") with Events {
+class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
   var world: FxWorld = _
   var camera: FxTrackerCamera = _
   val key = new Array[Boolean](20)
@@ -55,7 +55,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     camera = createCamera(world)
 
     // start the player moving forward
-    world.activePlayer.increaseVelocity(20, .2)
+    world.activePlayer.increaseVelocity(40, .2)
   }
 
   /**
@@ -67,7 +67,8 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     var timeMillis: Long = 0
 
     // initialize the audio player
-    audioPlayer ! Ambient
+    audioPlayer ! GetReady
+    if(!noMusic) audioPlayer ! Ambient
 
     while (alive) {
       // determine the elapsed time between frames
@@ -217,7 +218,6 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       case VK_2 => key(MISSILE) = pressed
       case VK_3 => key(BOMB) = pressed
       case _ =>
-      //println("KeyEvent: code [%d] char [%c]".format(event.getKeyCode(), event.getKeyChar()))
     }
   }
 
@@ -274,7 +274,11 @@ object RoboWars {
    * @param args the given command line arguments
    */
   def main(args: Array[String]) {
-    val app = new RoboWars()
+    // check for command line arguments
+    val noMusic = args.exists(_ == "no_music")
+
+    // start the application
+    val app = new RoboWars(noMusic)
     app.init()
     app.run()
   }
