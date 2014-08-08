@@ -14,8 +14,11 @@ object FxDayNightSky {
    * @return the [[Color]]
    */
   def getColor(time: Double): Color = {
+    // adjust the time so that the game starts during the day
+    val adjTime = time + 256
+
     // a day is 512 seconds
-    val index = (time % 512).toInt
+    val index = (adjTime % 512).toInt
 
     // generate the amount of blue (0 to 255)
     val blue = if (index < 256) index else 511 - index
