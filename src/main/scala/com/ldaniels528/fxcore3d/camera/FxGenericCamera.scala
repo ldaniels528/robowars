@@ -28,8 +28,8 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
 
   // construct the matrix
   protected lazy val matrixWCStoVCS = new FxMatrix3D()
-  protected lazy val myPosition = new FxPoint3D()
-  protected lazy val myAngle = new FxAngle3D()
+  protected lazy val myPosition = FxPoint3D()
+  protected lazy val myAngle = FxAngle3D()
   private var matrixIsDirty: Boolean = true
   var zClip: Double = 0
 
@@ -59,8 +59,8 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
     // project the VCS coordinates to SCS storing the results in a buffer
     (0 to (my3dBuffer.length - 1)) foreach { n =>
       val z = my3dBuffer.z(n)
-      my2dBuffer.x(n) = (screenDistance * my3dBuffer.x(n) / z).toInt + x0
-      my2dBuffer.y(n) = -(screenDistance * my3dBuffer.y(n) / z).toInt + y0
+      my2dBuffer(n).x = (screenDistance * my3dBuffer.x(n) / z).toInt + x0
+      my2dBuffer(n).y = -(screenDistance * my3dBuffer.y(n) / z).toInt + y0
     }
 
     // limit the 2D buffer
@@ -72,25 +72,25 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
     my2dBuffer.clipAndOp = Int.MaxValue
     my2dBuffer.clipOrOp = 0
 
-    (0 to (my2dBuffer.length - 1)) foreach { n =>
-      my2dBuffer.clipFlags(n) = 0
-      if (my2dBuffer.x(n) > myWidth) {
-        my2dBuffer.clipFlags(n) |= CLIP_RIGHT
-      } else if (my2dBuffer.x(n) < 0) {
-        my2dBuffer.clipFlags(n) |= CLIP_LEFT
+    my2dBuffer.points foreach { p =>
+      p.clipFlags = 0
+      if (p.x > myWidth) {
+        p.clipFlags |= CLIP_RIGHT
+      } else if (p.x < 0) {
+        p.clipFlags |= CLIP_LEFT
       }
-      if (my2dBuffer.y(n) > myHeight) {
-        my2dBuffer.clipFlags(n) |= CLIP_BOTTOM
-      } else if (my2dBuffer.y(n) < 0) {
-        my2dBuffer.clipFlags(n) |= CLIP_TOP
+      if (p.y > myHeight) {
+        p.clipFlags |= CLIP_BOTTOM
+      } else if (p.y < 0) {
+        p.clipFlags |= CLIP_TOP
       }
 
-      my2dBuffer.z(n) = my3dBuffer.z(n)
-      if (my2dBuffer.z(n) > zClip) {
-        my2dBuffer.clipFlags(n) |= CLIP_Z
+      p.z = my3dBuffer.z(p.index)
+      if (p.z > zClip) {
+        p.clipFlags |= CLIP_Z
       }
-      my2dBuffer.clipOrOp |= my2dBuffer.clipFlags(n)
-      my2dBuffer.clipAndOp &= my2dBuffer.clipFlags(n)
+      my2dBuffer.clipOrOp |= p.clipFlags
+      my2dBuffer.clipAndOp &= p.clipFlags
     }
   }
 

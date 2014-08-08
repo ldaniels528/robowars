@@ -2,15 +2,15 @@ package com.ldaniels528.fxcore3d.polygon
 
 import java.awt.Graphics2D
 
-import com.ldaniels528.fxcore3d.FxColor
 import com.ldaniels528.fxcore3d.polygon.FxIndexingPolygon._
+import com.ldaniels528.fxcore3d.{FxColor, FxProjectedPoints}
 
 /**
  * A solid color polygon.
  */
 class FxFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxIndexingPolygon(myIndices) {
 
-  override def makeClone(): FxIndexingPolygon = {
+  override def makeClone: FxIndexingPolygon = {
     val dst = new Array[Int](myIndices.length)
     System.arraycopy(myIndices, 0, dst, 0, dst.length)
     new FxFilledPolygon(dst, myColor.copy())
@@ -19,9 +19,9 @@ class FxFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxIndexingP
   /**
    * Paint the polygon if it is CCW
    */
-  override def paint(g: Graphics2D, x: Array[Int], y: Array[Int]) {
+  override def paint(g: Graphics2D, p: FxProjectedPoints) {
     // copy the indexed coordinates from the 2d list to the scratch-pad
-    copyIndexedPoints(x, y)
+    copyIndexedPoints(p)
     render(g)
   }
 

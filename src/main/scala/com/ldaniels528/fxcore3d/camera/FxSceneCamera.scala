@@ -89,8 +89,8 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
 
     g.setColor(new Color(0, 0, 0))
     (0 to (my2dBuffer.length - 1)) foreach { n =>
-      if (my2dBuffer.clipFlags(n) == 0) {
-        g.drawLine(my2dBuffer.x(n), my2dBuffer.y(n), my2dBuffer.x(n), my2dBuffer.y(n))
+      if (my2dBuffer(n).clipFlags == 0) {
+        g.drawLine(my2dBuffer(n).x, my2dBuffer(n).y, my2dBuffer(n).x, my2dBuffer(n).y)
       }
     }
   }

@@ -15,11 +15,11 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera) {
     // -- gather information about the clipping needed for
-    var clipFlagsAndOp: Int = p.clipFlags(myIndices(0))
+    var clipFlagsAndOp: Int = p(myIndices(0)).clipFlags
     var clipFlagsOrOp: Int = clipFlagsAndOp
 
     (1 to (myIndices.length - 1)) foreach { n =>
-      val temp = p.clipFlags(myIndices(n))
+      val temp = p(myIndices(n)).clipFlags
       clipFlagsOrOp |= temp
       clipFlagsAndOp &= temp
     }
@@ -36,7 +36,7 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
     // -- check if any clipping is needed
     if (clipFlagsOrOp == 0) {
       // -- no clipping needed, do the standard fill
-      paint(g, p.x, p.y)
+      paint(g, p)
       return
     }
 
@@ -44,17 +44,17 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
     if ((clipFlagsOrOp & FxCamera.CLIP_Z) != 0) {
       // -- polygon points are behind the camera
       // -- z-clipping needed.
-      val pleft = clipZ(p, xt, yt, camera)
-      if (pleft == 0) {
+      val pLeft = clipZ(p, xt, yt, camera)
+      if (pLeft == 0) {
         // -- no points left after clipping.
         return
       } else {
         // -- polygon successfully clipped
-        copyPoints(xt, yt, pleft)
+        copyPoints(xt, yt, pLeft)
         super.render(g)
       }
     } else {
-      paint(g, p.x, p.y)
+      paint(g, p)
     }
   }
 
@@ -71,10 +71,10 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
     var pts = 0
     var i0 = myIndices(p0)
 
-    var inside = p.z(i0) < cam.zClip
+    var inside = p(i0).z < cam.zClip
     if (inside) {
-      xt(0) = p.x(i0)
-      yt(0) = p.y(i0)
+      xt(0) = p(i0).x
+      yt(0) = p(i0).y
       pts += 1
     }
 
@@ -82,24 +82,23 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
       val p1 = if (n < myIndices.length) n else 0
       val i1 = myIndices(p1)
 
-      if (p.z(i1) < cam.zClip) {
+      if (p(i1).z < cam.zClip) {
         // -- point in front of the camera
         if (!inside) {
           // -- last point was "outside"
-          cam.clipAndStoreZ(p.x(i0), p.y(i0), p.z(i0), p.x(i1), p.y(i1), p.z(i1), xt, yt, pts)
+          cam.clipAndStoreZ(p(i0).x, p(i0).y, p(i0).z, p(i1).x, p(i1).y, p(i1).z, xt, yt, pts)
           pts += 1
         }
         // -- point inside, store it in the array
         inside = true
-        xt(pts) = p.x(i1)
-        yt(pts) = p.y(i1)
+        xt(pts) = p(i1).x
+        yt(pts) = p(i1).y
         pts += 1
       } else {
         // -- point behind camera
         if (inside) {
           // -- the last point was "inside" view volume
-          cam.clipAndStoreZ(p.x(i0), p.y(i0), p.z(i0), p.x(i1),
-            p.y(i1), p.z(i1), xt, yt, pts)
+          cam.clipAndStoreZ(p(i0).x, p(i0).y, p(i0).z, p(i1).x, p(i1).y, p(i1).z, xt, yt, pts)
           pts += 1
         }
         inside = false
@@ -109,7 +108,7 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
     pts
   }
 
-  override def makeClone(): FxIndexingPolygon = {
+  override def makeClone: FxIndexingPolygon = {
     val dst = new Array[Int](myIndices.length)
     System.arraycopy(myIndices, 0, dst, 0, myIndices.length)
     new FxClippingFilledPolygon(dst, myColor.copy())

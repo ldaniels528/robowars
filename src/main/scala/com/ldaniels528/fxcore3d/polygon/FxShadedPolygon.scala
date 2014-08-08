@@ -22,15 +22,15 @@ class FxShadedPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxClippingF
     super.clipAndPaint(g, p, camera)
   }
 
-  override def makeClone(): FxShadedPolygon = {
+  override def makeClone: FxShadedPolygon = {
     val dst = new Array[Int](myIndices.length)
     System.arraycopy(myIndices, 0, dst, 0, myIndices.length)
     new FxShadedPolygon(dst, myColor.copy())
   }
 
-  override def paintWithShading(g: Graphics2D, x: Array[Int], y: Array[Int], intensity: Double) {
+  override def paintWithShading(g: Graphics2D, p: FxProjectedPoints, intensity: Double) {
     myColor.setIntensity(intensity)
-    super.paint(g, x, y)
+    super.paint(g, p)
   }
 
 }

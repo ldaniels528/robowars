@@ -4,21 +4,15 @@ package com.ldaniels528.fxcore3d
  * FxEngine Array Of 2D Points
  * @author lawrence.daniels@gmail.com
  */
-case class FxProjectedPoints(val x: Array[Int], val y: Array[Int], val z: Array[Double], var length: Int) {
-  val clipFlags = new Array[Int](length)
+case class FxProjectedPoints(var length: Int) {
+  val myPoints = (0 to length - 1) map (n => FxProjectedPoint(index = n))
   var clipOrOp: Int = _
   var clipAndOp: Int = _
 
-}
+  def points = myPoints.slice(0, length)
 
-/**
- * FxEngine Array of Projected Points
- * @author lawrence.daniels@gmail.com
- */
-object FxProjectedPoints {
-
-  def apply(pts: Int): FxProjectedPoints = {
-    new FxProjectedPoints(new Array[Int](pts), new Array[Int](pts), new Array[Double](pts), pts)
-  }
+  def apply(n: Int): FxProjectedPoint = myPoints(n)
 
 }
+
+case class FxProjectedPoint(var x: Int = 0, var y: Int = 0, var z: Double = 0, var clipFlags: Int = 0, index: Int)

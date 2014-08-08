@@ -12,17 +12,17 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
 class FxWirePolygon(myIndices: Seq[Int]) extends FxIndexingPolygon(myIndices) {
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxCamera) {
-    paint(g, p.x, p.y)
+    paint(g, p)
   }
 
-  override def makeClone(): FxIndexingPolygon = {
+  override def makeClone: FxIndexingPolygon = {
     val dest = new Array[Int](myIndices.length)
     System.arraycopy(myIndices, 0, dest, 0, myIndices.length)
     new FxWirePolygon(dest)
   }
 
-  override def paint(g: Graphics2D, x: Array[Int], y: Array[Int]) {
-    copyIndexedPoints(x, y)
+  override def paint(g: Graphics2D, p: FxProjectedPoints) {
+    copyIndexedPoints(p)
     g.setColor(Color.black)
     g.drawPolygon(FxIndexingPolygon.ourScratchPoly)
   }

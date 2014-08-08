@@ -28,8 +28,10 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
   }
 
   override def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera, intensities: Array[Double]) {
-    (0 to (nbrOfPolygons - 1)) foreach { n =>
-      myPolygons(n).clipAndPaintWithShading(g, p, camera, intensities(n))
+    var n = 0
+    myPolygons foreach { poly =>
+      poly.clipAndPaintWithShading(g, p, camera, intensities(n))
+      n += 1
     }
   }
 
@@ -41,13 +43,13 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
    * overrides FxPolyhedron.paint(..) the polygons don't need to be sorted.
    */
   override def paint(g: Graphics2D, point2d: FxProjectedPoints) {
-    myPolygons foreach (_.paint(g, point2d.x, point2d.y))
+    myPolygons foreach (_.paint(g, point2d))
   }
 
   override def paintWithShading(g: Graphics2D, points: FxProjectedPoints, intensities: Array[Double]) {
     var n = 0
-    myPolygons foreach { p =>
-      p.paintWithShading(g, points.x, points.y, intensities(n))
+    myPolygons foreach { poly =>
+      poly.paintWithShading(g, points, intensities(n))
       n += 1
     }
   }

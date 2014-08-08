@@ -13,21 +13,22 @@ import com.ldaniels528.fxcore3d.{FxArrayOf3DPoints, FxPoint3D, FxProjectedPoints
 abstract class FxIndexingPolygon(myIndices: Seq[Int]) {
 
   def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, cam: FxCamera) {
-    paint(g, p.x, p.y)
+    paint(g, p)
   }
 
   def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera, intensity: Double) {
-    paint(g, p.x, p.y)
+    paint(g, p)
   }
 
   /**
    * pokes out the 2d coordinates and stores them into the scratch polygon.
    */
-  protected def copyIndexedPoints(x: Array[Int], y: Array[Int]) {
-    (0 to (myIndices.length - 1)) foreach { n =>
-      val index = myIndices(n)
-      ourScratchPoly.xpoints(n) = x(index)
-      ourScratchPoly.ypoints(n) = y(index)
+  protected def copyIndexedPoints(p: FxProjectedPoints) {
+    var n = 0
+    myIndices foreach { index =>
+      ourScratchPoly.xpoints(n) = p(index).x
+      ourScratchPoly.ypoints(n) = p(index).y
+      n += 1
     }
     ourScratchPoly.npoints = myIndices.length
   }
@@ -50,15 +51,15 @@ abstract class FxIndexingPolygon(myIndices: Seq[Int]) {
     norm
   }
 
-  def makeClone(): FxIndexingPolygon
+  def makeClone: FxIndexingPolygon
 
   /**
    * paints a polygon. the 2d list of coordinates must be supplied
    */
-  def paint(g: Graphics2D, x: Array[Int], y: Array[Int])
+  def paint(g: Graphics2D, p:FxProjectedPoints)
 
-  def paintWithShading(g: Graphics2D, x: Array[Int], y: Array[Int], intensity: Double) {
-    paint(g, x, y)
+  def paintWithShading(g: Graphics2D, p:FxProjectedPoints, intensity: Double) {
+    paint(g, p)
   }
 
 }
