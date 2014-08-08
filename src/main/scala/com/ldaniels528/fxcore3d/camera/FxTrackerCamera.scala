@@ -20,7 +20,7 @@ class FxTrackerCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, g
    * Returns the world coordinate for a position relative an object.
    */
   private def getWorldCoordinateOfRelativePoint(obj: FxObject, relPos: FxPoint3D): FxPoint3D = {
-    obj.polyhedronInstance.transformPoint(relPos, FxPoint3D())
+    obj.modelInstance.transformPoint(relPos, FxPoint3D())
   }
 
   override def update(dt: Double) {
@@ -28,18 +28,13 @@ class FxTrackerCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, g
     val thePointToTrack = getWorldCoordinateOfRelativePoint(host, relativePosition)
 
     // create the vector
-    val v = myPosition.vectorTo(thePointToTrack)
-    v *= (speedFactor * dt)
-    v += myPosition
+    val v = myPosition.vectorTo(thePointToTrack) *= (speedFactor * dt) += myPosition
 
     // create the angle
-    val b = host.angle
-    b += relativeAngle
+    val b = host.angle += relativeAngle
 
     // determine the angle between the object and myself
-    val a = angleBetween(myAngle, b)
-    a *= (speedFactor * dt)
-    a += myAngle
+    val a = angleBetween(myAngle, b) *= (speedFactor * dt) += myAngle
 
     // set my new orientation
     setOrientation(v, a)

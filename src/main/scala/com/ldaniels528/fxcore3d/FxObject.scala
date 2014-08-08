@@ -15,9 +15,9 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   private val events = ArrayBuffer[FxEvent]()
   private val occupiedGrids = ArrayBuffer[FxGrid]()
   private var alive: Boolean = true
+
   val Pos: FxPoint3D = myPos.makeClone
   val Agl: FxAngle3D = myAngle.makeClone
-
   var age: Double = _
   var flags: Int = _
 
@@ -25,7 +25,7 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   world += this
 
   // setup the model's orientation and update the grids
-  polyhedronInstance.setOrientation(Pos, Agl)
+  modelInstance.setOrientation(Pos, Agl)
   updateTheOccupiedGrids()
 
   /**
@@ -57,13 +57,13 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
    * Returns the polyhedron instance
    * @return the [[FxPolyhedronInstance]]
    */
-  def polyhedronInstance: FxPolyhedronInstance
+  def modelInstance: FxPolyhedronInstance
 
   /**
    * Checks collision with another object. Only implemented by checking the bounding circles.
    */
   def checkForCollisionWith(obj: FxObject, dt: Double): Boolean = {
-    polyhedronInstance.checkForCollisionWith(obj.polyhedronInstance)
+    modelInstance.checkForCollisionWith(obj.modelInstance)
   }
 
   /**
@@ -113,11 +113,11 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
    * Paints this object on camera.
    */
   def paint(g: Graphics2D, cam: FxCamera) {
-    polyhedronInstance.clipAndPaint(g, cam)
+    modelInstance.clipAndPaint(g, cam)
   }
 
   def paintWithShading(g: Graphics2D, cam: FxCamera, light: FxPoint3D) {
-    polyhedronInstance.clipAndPaintWithShading(g, cam, light)
+    modelInstance.clipAndPaintWithShading(g, cam, light)
   }
 
   /**
@@ -136,7 +136,7 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
     occupiedGrids.clear()
 
     // get the new grids.
-    world.map.getGridsForSphere(Pos, polyhedronInstance.boundingRadius, occupiedGrids)
+    world.map.getGridsForSphere(Pos, modelInstance.boundingRadius, occupiedGrids)
 
     // insert this object in all occupied grids.
     occupiedGrids.foreach(_.insertObject(this))

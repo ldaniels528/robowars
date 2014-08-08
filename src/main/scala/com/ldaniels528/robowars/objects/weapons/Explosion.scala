@@ -15,7 +15,7 @@ class Explosion(world: FxWorld, strength: Double)
   val maxVelocity = 30d
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(strength, strength, strength))
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(strength, strength, strength))
 
 }
 

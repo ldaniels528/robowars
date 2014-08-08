@@ -13,7 +13,7 @@ class PyramidRubble(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, size: FxScal
   extends AbstractStaticStructure(world, FxPoint3D(pos.x, size.h, pos.z), agl, Double.MaxValue) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, size.toPoint)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, size.toPoint)
 
 }
 

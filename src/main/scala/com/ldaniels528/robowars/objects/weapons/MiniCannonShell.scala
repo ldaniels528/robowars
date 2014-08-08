@@ -14,7 +14,7 @@ case class MiniCannonShell(w: FxWorld, p: FxPoint3D, a: FxAngle3D, vel: FxPoint3
   extends AbstractShellCasing(w, p, a, computeVector(vel, a), ANGLE, randomSpread = 1d, randomRotation = 2d, lifeTime = 1.5d) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
 }
 

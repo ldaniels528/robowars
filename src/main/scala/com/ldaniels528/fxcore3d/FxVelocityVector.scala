@@ -7,38 +7,38 @@ package com.ldaniels528.fxcore3d
 class FxVelocityVector() extends FxPoint3D() {
   var Ay: Double = _
   var Ax: Double = _
-  var velocity: Double = _
+  private var myVelocity: Double = _
 
-  override def makeClone: FxVelocityVector = FxVelocityVector(Ay, Ax, velocity, x, y, z)
+  override def makeClone: FxVelocityVector = FxVelocityVector(Ay, Ax, myVelocity, x, y, z)
 
   def setVelocity(nv: Double) {
-    velocity = nv
+    myVelocity = nv
     calculateComponents()
   }
 
-  def getVelocity(): Double = velocity
+  def velocity: Double = myVelocity
 
-  def getAngle(): FxAngle3D = new FxAngle3D(Ax, Ay, 0)
+  def angle: FxAngle3D = new FxAngle3D(Ax, Ay, 0)
 
-  def getAngleAboutYaxis(): Double = Ay
+  def getAngleAboutAxisY(): Double = Ay
 
-  def setAngleAboutYaxis(a: Double) {
+  def setAngleAboutAxisY(a: Double) {
     Ay = a
     calculateComponents()
   }
 
-  def setAngleAboutXaxis(a: Double) {
+  def setAngleAboutAxisX(a: Double) {
     Ax = a
     calculateComponents()
   }
 
-  def increaseAngleAboutYaxis(da: Double) {
+  def increaseAngleAboutAxisY(da: Double) {
     Ay += da
     calculateComponents()
   }
 
   def increaseVelocity(dv: Double) {
-    velocity += dv
+    myVelocity += dv
     calculateComponents()
   }
 
@@ -49,9 +49,10 @@ class FxVelocityVector() extends FxPoint3D() {
 
   def synchronizeAngle(a: FxAngle3D) = a.set(Ax, Ay, 0)
 
-  override def negate() {
-    velocity = -velocity
+  override def negate(): FxVelocityVector = {
+    myVelocity = -myVelocity
     super.negate()
+    this
   }
 
   override def set(p: FxPoint3D) {
@@ -61,20 +62,20 @@ class FxVelocityVector() extends FxPoint3D() {
       case vv: FxVelocityVector =>
         Ay = vv.Ay
         Ax = vv.Ax
-        velocity = vv.velocity
+        myVelocity = vv.myVelocity
       case _ =>
     }
   }
 
   private def calculateComponents() {
-    z = -velocity
+    z = -myVelocity
     x = 0
     y = 0
-    rotateAboutXaxis(-Ax)
-    rotateAboutYaxis(Ay)
+    rotateAboutAxisX(-Ax)
+    rotateAboutAxisY(Ay)
   }
 
-  override def toString = s"${super.toString} $Ay $Ax $velocity"
+  override def toString = s"${super.toString} $Ay $Ax $myVelocity"
 
 }
 
@@ -90,7 +91,7 @@ object FxVelocityVector {
     val vv = new FxVelocityVector()
     vv.Ax = Ax
     vv.Ay = Ay
-    vv.velocity = velocity
+    vv.myVelocity = velocity
     vv.calculateComponents()
     vv
   }
@@ -99,7 +100,7 @@ object FxVelocityVector {
     val vv = new FxVelocityVector()
     vv.Ax = Ax
     vv.Ay = Ay
-    vv.velocity = velocity
+    vv.myVelocity = velocity
     vv.x = x
     vv.y = y
     vv.z = z

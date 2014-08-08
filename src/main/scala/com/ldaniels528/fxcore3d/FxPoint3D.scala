@@ -35,10 +35,11 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
 
   protected def maxComponent(): Double = Math.max(Math.max(x, y), z)
 
-  def negate() {
+  def negate(): FxPoint3D = {
     x = -x
     y = -y
     z = -z
+    this
   }
 
   def normalize(length: Double) {
@@ -48,16 +49,18 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = t * z
   }
 
-  def +=(a: Double) {
+  def +=(a: Double): FxPoint3D = {
     x += a
     y += a
     z += a
+    this
   }
 
-  def +=(p: FxPoint3D) {
+  def +=(p: FxPoint3D): FxPoint3D = {
     x += p.x
     y += p.y
     z += p.z
+    this
   }
 
   def plus(p: FxPoint3D, factor: Double) {
@@ -66,16 +69,7 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z += p.z * factor
   }
 
-  def rotateAboutYaxis(a: Double) {
-    val ca = Math.cos(a)
-    val sa = Math.sin(a)
-    val nx = ca * x + sa * z
-    val nz = -sa * x + ca * z
-    x = nx
-    z = nz
-  }
-
-  def rotateAboutXaxis(a: Double) {
+  def rotateAboutAxisX(a: Double) {
     val ca = Math.cos(a)
     val sa = Math.sin(a)
     val ny = ca * y - sa * z
@@ -84,7 +78,16 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = nz
   }
 
-  def rotateAboutZaxis(a: Double) {
+  def rotateAboutAxisY(a: Double) {
+    val ca = Math.cos(a)
+    val sa = Math.sin(a)
+    val nx = ca * x + sa * z
+    val nz = -sa * x + ca * z
+    x = nx
+    z = nz
+  }
+
+  def rotateAboutAxisZ(a: Double) {
     val ca = Math.cos(a)
     val sa = Math.sin(a)
     val nx = ca * x - sa * y
@@ -105,10 +108,11 @@ case class FxPoint3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z = z0
   }
 
-  def *=(s: Double) = {
+  def *=(s: Double): FxPoint3D = {
     x *= s
     y *= s
     z *= s
+    this
   }
 
   def vectorTo(p: FxPoint3D): FxPoint3D = {

@@ -85,7 +85,7 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
     (ystart to yend) flatMap { yy =>
       (xstart to xend) flatMap { xx =>
         myGrids(yy * rows + xx).getAllObjectsInRadius(p, radius) filter { obj =>
-          val inst = obj.polyhedronInstance
+          val inst = obj.modelInstance
           sphereIsVisible(inst.position, inst.boundingRadius)
         }
       }

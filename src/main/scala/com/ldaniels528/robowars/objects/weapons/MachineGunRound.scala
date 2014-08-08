@@ -14,7 +14,7 @@ case class MachineGunRound(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D
   extends AbstractProjectile(w, theShooter, FxPoint3D(p.x, p.y/2, p.z), FxVelocityVector(a.y, a.x, velocity = 70d), impactDamage = 0.25d, lifeTime = 3d) {
 
   // define the 3D model
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
 }
 

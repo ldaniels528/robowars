@@ -12,7 +12,7 @@ import com.ldaniels528.robowars.objects.items.HealthCube._
 case class HealthCube(w: FxWorld, p: FxPoint3D) extends AbstractRewardItem(w, FxPoint3D(p.x, p.y + SCALE.y, p.z)) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
 }
 

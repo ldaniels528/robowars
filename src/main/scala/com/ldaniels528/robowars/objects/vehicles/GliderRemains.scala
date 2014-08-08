@@ -14,7 +14,7 @@ class GliderRemains(world: FxWorld, deadActor: AbstractVehicle)
   extends AbstractMovingScenery(world, deadActor.position, deadActor.angle, deadActor.getdPosition(), deadActor.getdAngle()) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // -- set a random rotation on the remaining glider
   setdAngle(FxWorld.random3DAngle(ourRandRot))

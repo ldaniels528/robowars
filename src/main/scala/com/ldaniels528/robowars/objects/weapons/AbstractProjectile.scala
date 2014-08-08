@@ -12,7 +12,7 @@ import com.ldaniels528.robowars.objects.weapons.AbstractProjectile._
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, pos0: FxPoint3D, vector0: FxVelocityVector, val impactDamage: Double, lifeTime: Double = 4d)
-  extends AbstractMovingObject(world, pos0, vector0.getAngle(), vector0, FxAngle3D(), health = 0) with Events {
+  extends AbstractMovingObject(world, pos0, vector0.angle, vector0, FxAngle3D(), health = 0) with Events {
   protected var deadOfAge: Boolean = _
   protected var dieNextUpdate: Boolean = _
 

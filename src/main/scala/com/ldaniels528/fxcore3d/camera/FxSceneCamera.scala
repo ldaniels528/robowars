@@ -49,7 +49,7 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
 
   protected def paintHorizon(g: Graphics2D) {
     val p = FxPoint3D(0, myPosition.y, -viewDistance * 5)
-    p.rotateAboutXaxis(-myAngle.x)
+    p.rotateAboutAxisX(-myAngle.x)
 
     // get the sky color
     val mySkyColor = FxDayNightSky.getColor(world.time)

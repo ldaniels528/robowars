@@ -14,7 +14,7 @@ class FesseTankRemains(world: FxWorld, deadTank: AbstractVehicle)
   extends AbstractMovingScenery(world, deadTank.position, deadTank.angle, deadTank.getdPosition(), deadTank.getdAngle()) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // throw the remaining tank up in the air
   val dp = getdPosition()

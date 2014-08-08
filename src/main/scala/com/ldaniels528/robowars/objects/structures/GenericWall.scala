@@ -13,7 +13,7 @@ case class GenericWall(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: F
   extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, dim.h, pos.z), agl) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
 
 }
 

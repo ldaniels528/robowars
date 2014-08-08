@@ -249,8 +249,8 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
     // create the light source
     val light = new FxPoint3D(0, 0, -1)
-    light.rotateAboutXaxis(-Math.PI / 4)
-    light.rotateAboutYaxis(-Math.PI / 4)
+    light.rotateAboutAxisX(-Math.PI / 4)
+    light.rotateAboutAxisY(-Math.PI / 4)
     light.normalize(1)
 
     // create the camera

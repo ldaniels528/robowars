@@ -23,7 +23,7 @@ case class Glider(w: FxWorld, p: FxPoint3D)
   val pitchClimbRateFactor: Double = 1d
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // attach some weapons
   this += new MiniCannon(this, new FxPoint3D(0, SCALE.y, 0))
@@ -51,13 +51,13 @@ case class Glider(w: FxWorld, p: FxPoint3D)
       // update the velocity
       setdPosition({
         val dp = getdPosition()
-        dp.setAngleAboutXaxis(0)
+        dp.setAngleAboutAxisX(0)
         dp.setVelocity(0)
         dp
       })
 
       // -- some damage depending on the speed
-      val vel = getdPosition().getVelocity()
+      val vel = getdPosition().velocity
       damageHealth(vel)
     }
     ()

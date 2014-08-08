@@ -13,7 +13,7 @@ class MainGate(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D)
   extends AbstractDoor(world, new FxPoint3D(pos.x, pos.y + SCALE.y, pos.z), agl, SPEED_UP, speedDown, waitTimeUp, maxHeight) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
 }
 

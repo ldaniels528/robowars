@@ -38,8 +38,8 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
 
   // create the light vector
   private var light = FxPoint3D(-1, 0, 0)
-  light.rotateAboutXaxis(Math.PI / 5)
-  light.rotateAboutYaxis(Math.PI / 3)
+  light.rotateAboutAxisX(Math.PI / 5)
+  light.rotateAboutAxisY(Math.PI / 3)
   light.normalize(1)
 
   // set the camera's orientation

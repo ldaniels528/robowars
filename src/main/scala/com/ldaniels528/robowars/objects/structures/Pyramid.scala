@@ -13,7 +13,7 @@ case class Pyramid(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, size: FxSc
   extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, 0, pos.z), agl, health = 50) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, size.toPoint)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, size.toPoint)
 
   /**
    * Causes this virtual object to die

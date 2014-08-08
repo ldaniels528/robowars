@@ -14,7 +14,7 @@ case class Missile(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D, a: FxA
   extends AbstractProjectile(w, theShooter, p, FxVelocityVector(a.y, a.x, velocity = 50d), impactDamage = 20d, lifeTime = 4d) {
 
   // define the 3D model
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
 }
 

@@ -14,7 +14,7 @@ class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, str
   extends AbstractMovingScenery(world, p, a, new FxVelocityVector(), FxWorld.random3DAngle(ROTATION)) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   override def die() {
     super.die()
