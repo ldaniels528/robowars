@@ -10,8 +10,8 @@ class FxTrackerCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, g
                       host: FxObject, relAgl: FxAngle3D, relPos: FxPoint3D)
   extends FxSceneCamera(world, viewAngle, viewDistance, host.position, host.angle, gridSize) {
 
-  private val relativeAngle: FxAngle3D = relAgl.copy()
-  private val relativePosition: FxPoint3D = relPos.copy()
+  private val relativeAngle: FxAngle3D = relAgl
+  private val relativePosition: FxPoint3D = relPos
 
   // initialize the camera
   relativeAngle.negate()
