@@ -36,7 +36,7 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
   }
 
   override def makeClone(): FxPolyhedron = {
-    new FxConvexPolyhedron(vertices.makeClone(), myPolygons map (_.makeClone), myPolygonNormals)
+    new FxConvexPolyhedron(vertices.makeClone, myPolygons map (_.makeClone), myPolygonNormals)
   }
 
   /**

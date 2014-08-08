@@ -44,10 +44,12 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
       var n = 0
       while ((n < 6) && !outside) {
         // make the normal
-        normal.set(myNormals.x(n), myNormals.y(n), myNormals.z(n))
+        val np = myNormals(n)
+        normal.set(np.x, np.y, np.z)
 
         // make the vector from my normal to other point
-        vector.set(myBox.x(n), myBox.y(n), myBox.z(n))
+        val bp = myBox(n)
+        vector.set(bp.x, bp.y, bp.z)
         vector.makeVectorTo(point)
 
         // check the dot product
@@ -77,21 +79,21 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
 object FxBoundingVolume {
 
   // the vertices of our box
-  lazy val ourBox = {
+  val ourBox = {
     //                     0   1   2  3  4   5  6   7
     val px = Array[Double](1, -1, -1, 1, -1, 1, 1, -1)
     val py = Array[Double](1, -1, 1, -1, 1, -1, 1, -1)
     val pz = Array[Double](1, -1, 1, -1, -1, 1, -1, 1)
-    new FxArrayOf3DPoints(px, py, pz)
+    FxArrayOf3DPoints(px, py, pz)
   }
 
   // the normals
-  lazy val ourNormals = {
+  val ourNormals = {
     //                     0  1   2  3  4  5
     val nx = Array[Double](0, 0, -1, 1, 0, 0)
     val ny = Array[Double](1, -1, 0, 0, 0, 0)
     val nz = Array[Double](0, 0, 0, 0, -1, 1)
-    new FxArrayOf3DPoints(nx, ny, nz)
+    FxArrayOf3DPoints(nx, ny, nz)
   }
 
 }

@@ -65,7 +65,7 @@ object FxPolyhedronLoader {
       stream.nextToken()
       z(n) = stream.nval
     }
-    new FxArrayOf3DPoints(x, y, z)
+    FxArrayOf3DPoints(x, y, z)
   }
 
   def readClippingFilledPolygon(is: InputStream): FxClippingFilledPolygon = {
