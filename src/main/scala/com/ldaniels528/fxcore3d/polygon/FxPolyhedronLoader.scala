@@ -69,19 +69,19 @@ object FxPolyhedronLoader {
   }
 
   def readClippingFilledPolygon(is: InputStream): FxClippingFilledPolygon = {
-    createColoredPolygon(is, FxClippingFilledPolygon.apply _)
+    createColoredPolygon(is, FxClippingFilledPolygon.apply)
   }
 
   def readFilledPolygon(is: InputStream): FxFilledPolygon = {
-    createColoredPolygon(is, FxFilledPolygon.apply _)
+    createColoredPolygon(is, FxFilledPolygon.apply)
   }
 
   def readShadedPolygon(is: InputStream): FxShadedPolygon = {
-    createColoredPolygon(is, FxShadedPolygon.apply _)
+    createColoredPolygon(is, FxShadedPolygon.apply)
   }
 
   def readWirePolygon(is: InputStream): FxWirePolygon = {
-    createPolygon(is, FxWirePolygon.apply _)
+    createPolygon(is, FxWirePolygon.apply)
   }
 
   /**
