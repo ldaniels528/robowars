@@ -15,7 +15,7 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
   protected var my2dBuffer = FxProjectedPoints(250)
 
   // a temporary buffer used for WCS to VCS transform
-  protected var my3dBuffer = Fx3DPointBuffer(250)
+  protected var my3dBuffer = FxArrayOf3DPoints(250)
 
   // the screen distance
   protected var screenDistance: Double = _

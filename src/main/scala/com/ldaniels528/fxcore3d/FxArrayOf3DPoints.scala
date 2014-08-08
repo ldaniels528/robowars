@@ -4,18 +4,37 @@ package com.ldaniels528.fxcore3d
  * A class that encapsulates and array of 3D points.
  * @author lawrence.daniels@gmail.com
  */
-trait FxArrayOf3DPoints {
+case class FxArrayOf3DPoints(x: Array[Double], y: Array[Double], z: Array[Double]) {
 
-  def apply(n: Int): (Double, Double, Double)
+  var length: Int = x.length
 
-  def makeClone(): FxArrayOf3DPoints
+  def apply(n: Int) = (x(n), y(n), z(n))
 
-  def x: Array[Double]
+  /**
+   * Returns a clone.
+   */
+  def makeClone(): FxArrayOf3DPoints = this.copy()
 
-  def y: Array[Double]
+  override def toString = {
+    ((0 to (length - 1)) map (n => "(%.1f, %.1f, %.1f)".format(x(n), y(n), z(n)))).mkString(",")
+  }
 
-  def z: Array[Double]
+}
 
-  def length: Int
+/**
+ * FxArrayOf3DPoints Companion Object
+ * @author lawrence.daniels@gmail.com
+ */
+object FxArrayOf3DPoints {
+
+  /**
+   * Constructs an empty array of 3D points having the given size
+   */
+  def apply(length: Int): FxArrayOf3DPoints = {
+    val x = new Array[Double](length)
+    val y = new Array[Double](length)
+    val z = new Array[Double](length)
+    new FxArrayOf3DPoints(x, y, z)
+  }
 
 }

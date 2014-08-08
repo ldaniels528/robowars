@@ -11,7 +11,7 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
  */
 class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
   // define the transformed vertices
-  protected val transformedVertices = Fx3DPointSeq(thePolyhedron.vertices.length)
+  protected val transformedVertices = FxArrayOf3DPoints(thePolyhedron.vertices.length)
   // define the matrix used for transformations
   protected val myTransformMatrix = new FxMatrix3D()
   // define position in WCS
