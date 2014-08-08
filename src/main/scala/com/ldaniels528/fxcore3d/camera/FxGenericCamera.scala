@@ -57,10 +57,11 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
 
   protected def doProjection() {
     // project the VCS coordinates to SCS storing the results in a buffer
-    (0 to (my3dBuffer.length - 1)) foreach { n =>
-      val z = my3dBuffer.z(n)
-      my2dBuffer(n).x = (screenDistance * my3dBuffer.x(n) / z).toInt + x0
-      my2dBuffer(n).y = -(screenDistance * my3dBuffer.y(n) / z).toInt + y0
+    (0 to (my3dBuffer.length - 1)) map(my3dBuffer(_)) foreach { buf3d =>
+      val z = buf3d.z
+      val index = buf3d.index
+      my2dBuffer(index).x = (screenDistance * buf3d.x / z).toInt + x0
+      my2dBuffer(index).y = -(screenDistance * buf3d.y / z).toInt + y0
     }
 
     // limit the 2D buffer
@@ -83,7 +84,7 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
       else if (p.y < 0) p.clipFlags |= CLIP_TOP
 
       // clip Z: front/back
-      p.z = my3dBuffer.z(p.index)
+      p.z = my3dBuffer(p.index).z
       if (p.z > zClip) p.clipFlags |= CLIP_Z
 
       // update the master flags

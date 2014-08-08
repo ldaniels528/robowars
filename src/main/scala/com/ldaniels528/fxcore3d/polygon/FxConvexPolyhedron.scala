@@ -17,9 +17,9 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
 
   override def calculateIntensities(light: FxPoint3D, intensities: Array[Double]) {
     val p = new FxPoint3D()
-    (0 to (nbrOfPolygons - 1)) foreach { n =>
-      p.set(myPolygonNormals.x(n), myPolygonNormals.y(n), myPolygonNormals.z(n))
-      intensities(n) = p.dotProduct(light)
+    myPolygonNormals.points.foreach { poly =>
+      p.set(poly.x, poly.y, poly.z)
+      intensities(poly.index) = p.dotProduct(light)
     }
   }
 
@@ -35,7 +35,7 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
     }
   }
 
-  override def makeClone(): FxPolyhedron = {
+  override def makeClone: FxPolyhedron = {
     new FxConvexPolyhedron(vertices.makeClone, myPolygons map (_.makeClone), myPolygonNormals)
   }
 

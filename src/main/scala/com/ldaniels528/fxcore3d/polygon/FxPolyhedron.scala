@@ -21,7 +21,7 @@ trait FxPolyhedron {
 
   def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera, intensities: Array[Double])
 
-  def makeClone(): FxPolyhedron
+  def makeClone: FxPolyhedron
 
   /**
    * paint the polyhedron using the supplied 2D coordinates.

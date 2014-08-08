@@ -28,8 +28,14 @@ class FxMatrix3D() {
     val nxz = xz * ct - yz * st
     val nxo = xo * ct - yo * st
 
-    xx = nxx; xy = nxy; xz = nxz; xo = nxo
-    yx = nyx; yy = nyy; yz = nyz; yo = nyo
+    xx = nxx;
+    xy = nxy;
+    xz = nxz;
+    xo = nxo
+    yx = nyx;
+    yy = nyy;
+    yz = nyz;
+    yo = nyo
   }
 
   /**
@@ -49,8 +55,14 @@ class FxMatrix3D() {
     val nzz = zz * ct - xz * st
     val nzo = zo * ct - xo * st
 
-    xx = nxx; xy = nxy; xz = nxz; xo = nxo
-    zx = nzx; zy = nzy; zz = nzz; zo = nzo
+    xx = nxx;
+    xy = nxy;
+    xz = nxz;
+    xo = nxo
+    zx = nzx;
+    zy = nzy;
+    zz = nzz;
+    zo = nzo
   }
 
   /**
@@ -70,8 +82,14 @@ class FxMatrix3D() {
     val nzz = zz * ct - yz * st
     val nzo = zo * ct - yo * st
 
-    yx = nyx; yy = nyy; yz = nyz; yo = nyo
-    zx = nzx; zy = nzy; zz = nzz; zo = nzo
+    yx = nyx;
+    yy = nyy;
+    yz = nyz;
+    yo = nyo
+    zx = nzx;
+    zy = nzy;
+    zz = nzz;
+    zo = nzo
   }
 
   /**
@@ -87,30 +105,39 @@ class FxMatrix3D() {
    * "Smart" multiplies scaling
    */
   def concatS(sx: Double, sy: Double, sz: Double) {
-    xx *= sx; xy *= sx; xz *= sx; xo *= sx
-    yx *= sy; yy *= sy; yz *= sy; yo *= sy
-    zx *= sz; zy *= sz; zz *= sz; zo *= sz
+    xx *= sx;
+    xy *= sx;
+    xz *= sx;
+    xo *= sx
+    yx *= sy;
+    yy *= sy;
+    yz *= sy;
+    yo *= sy
+    zx *= sz;
+    zy *= sz;
+    zz *= sz;
+    zo *= sz
   }
 
-  def rotate(ps: FxArrayOf3DPoints, pd: FxArrayOf3DPoints) {
-    (0 to (ps.length - 1)) foreach { n =>
-      val pp = ps(n)
-      pd.x(n) = pp.x * xx + pp.y * xy + pp.z * xz
-      pd.y(n) = pp.x * yx + pp.y * yy + pp.z * yz
-      pd.z(n) = pp.x * zx + pp.y * zy + pp.z * zz
+  def rotate(src: FxArrayOf3DPoints, dst: FxArrayOf3DPoints) {
+    src.points foreach { pp =>
+      val n = pp.index
+      dst.x(n) = pp.x * xx + pp.y * xy + pp.z * xz
+      dst.y(n) = pp.x * yx + pp.y * yy + pp.z * yz
+      dst.z(n) = pp.x * zx + pp.y * zy + pp.z * zz
     }
   }
 
   /**
-   * Multiplies the vector "ps" of 3d points and stores the result
-   * in "pd".
+   * Multiplies the vector "src" of 3d points and stores the result
+   * in "dst".
    */
-  def transform(ps: FxArrayOf3DPoints, pd: FxArrayOf3DPoints) {
-    (0 to (ps.length - 1)) foreach { n =>
-      val pp = ps(n)
-      pd.x(n) = pp.x * xx + pp.y * xy + pp.z * xz + xo
-      pd.y(n) = pp.x * yx + pp.y * yy + pp.z * yz + yo
-      pd.z(n) = pp.x * zx + pp.y * zy + pp.z * zz + zo
+  def transform(src: FxArrayOf3DPoints, dst: FxArrayOf3DPoints) {
+    src.points foreach { pp =>
+      val n = pp.index
+      dst.x(n) = pp.x * xx + pp.y * xy + pp.z * xz + xo
+      dst.y(n) = pp.x * yx + pp.y * yy + pp.z * yz + yo
+      dst.z(n) = pp.x * zx + pp.y * zy + pp.z * zz + zo
     }
   }
 
@@ -126,19 +153,20 @@ class FxMatrix3D() {
   }
 
   //-- special transform
-  def transformWithTranslation(ps: FxArrayOf3DPoints, pd: FxArrayOf3DPoints, et: FxPoint3D) {
+  def transformWithTranslation(src: FxArrayOf3DPoints, dst: FxArrayOf3DPoints, et: FxPoint3D) {
     val xt = et.x
     val yt = et.y
     val zt = et.z
 
-    (0 to (ps.length - 1)) foreach { n =>
-      val x = ps.x(n) + xt
-      val y = ps.y(n) + yt
-      val z = ps.z(n) + zt
+    src.points foreach { pp =>
+      val x = pp.x + xt
+      val y = pp.y + yt
+      val z = pp.z + zt
+      val n = pp.index
 
-      pd.x(n) = x * xx + y * xy + z * xz + xo
-      pd.y(n) = x * yx + y * yy + z * yz + yo
-      pd.z(n) = x * zx + y * zy + z * zz + zo
+      dst.x(n) = x * xx + y * xy + z * xz + xo
+      dst.y(n) = x * yx + y * yy + z * yz + yo
+      dst.z(n) = x * zx + y * zy + z * zz + zo
     }
   }
 
@@ -146,9 +174,18 @@ class FxMatrix3D() {
    * Resets the matrix
    */
   def setIdentity() {
-    xx = 1; xy = 0; xz = 0; xo = 0
-    yx = 0; yy = 1; yz = 0; yo = 0
-    zx = 0; zy = 0; zz = 1; zo = 0
+    xx = 1;
+    xy = 0;
+    xz = 0;
+    xo = 0
+    yx = 0;
+    yy = 1;
+    yz = 0;
+    yo = 0
+    zx = 0;
+    zy = 0;
+    zz = 1;
+    zo = 0
   }
 
   /**
@@ -202,9 +239,15 @@ class FxMatrix3D() {
     yo = -p0.y
     zo = -p0.z
 
-    xx = vectorAxisX.x; xy = vectorAxisX.y; xz = vectorAxisX.z
-    yx = vectorAxisY.x; yy = vectorAxisY.y; yz = vectorAxisY.z
-    zx = vectorAxisZ.x; zy = vectorAxisZ.y; zz = vectorAxisZ.z
+    xx = vectorAxisX.x;
+    xy = vectorAxisX.y;
+    xz = vectorAxisX.z
+    yx = vectorAxisY.x;
+    yy = vectorAxisY.y;
+    yz = vectorAxisY.z
+    zx = vectorAxisZ.x;
+    zy = vectorAxisZ.y;
+    zz = vectorAxisZ.z
   }
 
 }

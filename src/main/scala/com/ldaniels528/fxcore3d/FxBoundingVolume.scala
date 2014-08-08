@@ -38,8 +38,8 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
     val point = FxPoint3D()
     val vector = FxPoint3D()
 
-    (0 to 7) foreach { p =>
-      point.set(otherBox.x(p), otherBox.y(p), otherBox.z(p))
+    (0 to 7) map (otherBox(_)) foreach { box =>
+      point.set(box.x, box.y, box.z)
       var outside = false
       var n = 0
       while ((n < 6) && !outside) {
@@ -52,11 +52,9 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
         vector.set(bp.x, bp.y, bp.z)
         vector.makeVectorTo(point)
 
-        // check the dot product
-        if (normal.dotProduct(vector) > 0) {
-          // "in-front" of one of the planes. no collision
-          outside = true
-        }
+        // use the dot product to determine whether the point is
+        // "in-front" of one of the planes. no collision
+        if (normal.dotProduct(vector) > 0) outside = true
         n += 1
       }
 

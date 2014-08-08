@@ -41,9 +41,12 @@ abstract class FxIndexingPolygon(myIndices: Seq[Int]) {
     val i1 = myIndices(1)
     val i2 = myIndices(myIndices.length - 1)
 
-    val p0 = FxPoint3D(a.x(i0), a.y(i0), a.z(i0))
-    val v1 = p0.vectorTo(FxPoint3D(a.x(i1), a.y(i1), a.z(i1)))
-    val v2 = p0.vectorTo(FxPoint3D(a.x(i2), a.y(i2), a.z(i2)))
+    val p0 = a.point(i0)
+    val p1 = a.point(i1)
+    val p2 = a.point(i2)
+
+    val v1 = p0.vectorTo(p1)
+    val v2 = p0.vectorTo(p2)
 
     val norm = new FxPoint3D()
     norm.vectorProduct(v1, v2)
@@ -56,9 +59,9 @@ abstract class FxIndexingPolygon(myIndices: Seq[Int]) {
   /**
    * paints a polygon. the 2d list of coordinates must be supplied
    */
-  def paint(g: Graphics2D, p:FxProjectedPoints)
+  def paint(g: Graphics2D, p: FxProjectedPoints)
 
-  def paintWithShading(g: Graphics2D, p:FxProjectedPoints, intensity: Double) {
+  def paintWithShading(g: Graphics2D, p: FxProjectedPoints, intensity: Double) {
     paint(g, p)
   }
 

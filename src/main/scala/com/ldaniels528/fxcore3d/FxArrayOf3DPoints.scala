@@ -5,12 +5,17 @@ package com.ldaniels528.fxcore3d
  * @author lawrence.daniels@gmail.com
  */
 case class FxArrayOf3DPoints(capacity: Int) {
+  val myPoints: Seq[FxProjectedPoint3D] = (0 to (capacity - 1)) map (n => FxProjectedPoint3D(index = n))
   var x = new Array[Double](capacity)
   var y = new Array[Double](capacity)
   var z = new Array[Double](capacity)
   var length: Int = capacity
 
   def apply(n: Int): FxProjectedPoint3D = FxProjectedPoint3D(x(n), y(n), z(n), n)
+
+  def point(n: Int): FxPoint3D = FxPoint3D(x(n), y(n), z(n))
+
+  def points: Seq[FxProjectedPoint3D] = (0 to (length - 1)) map (n => FxProjectedPoint3D(x(n), y(n), z(n), index = n))
 
   /**
    * Creates a cloned copy of the instance
