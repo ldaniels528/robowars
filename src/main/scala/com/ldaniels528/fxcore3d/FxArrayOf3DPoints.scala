@@ -6,25 +6,23 @@ package com.ldaniels528.fxcore3d
  */
 case class FxArrayOf3DPoints(capacity: Int) {
   val myPoints: Seq[FxProjectedPoint3D] = (0 to (capacity - 1)) map (n => FxProjectedPoint3D(index = n))
-  var x = new Array[Double](capacity)
-  var y = new Array[Double](capacity)
-  var z = new Array[Double](capacity)
   var length: Int = capacity
 
-  def apply(n: Int): FxProjectedPoint3D = FxProjectedPoint3D(x(n), y(n), z(n), n)
+  def apply(n: Int): FxProjectedPoint3D = myPoints(n)
 
-  def point(n: Int): FxPoint3D = FxPoint3D(x(n), y(n), z(n))
+  def point(n: Int): FxPoint3D = {
+    val pp = myPoints(n)
+    FxPoint3D(pp.x, pp.y, pp.z)
+  }
 
-  def points: Seq[FxProjectedPoint3D] = (0 to (length - 1)) map (n => FxProjectedPoint3D(x(n), y(n), z(n), index = n))
+  def points: Seq[FxProjectedPoint3D] = if(capacity == length) myPoints else myPoints.slice(0, length)
 
   /**
    * Creates a cloned copy of the instance
    */
   def makeClone: FxArrayOf3DPoints = this.copy()
 
-  override def toString = {
-    (0 to (length - 1)) map (n => "(%.1f, %.1f, %.1f)".format(x(n), y(n), z(n))) mkString ","
-  }
+  override def toString = points mkString ","
 
 }
 
@@ -53,11 +51,15 @@ case class FxProjectedPoint3D(var x: Double = 0, var y: Double = 0, var z: Doubl
 object FxArrayOf3DPoints {
 
   def apply(x: Array[Double], y: Array[Double], z: Array[Double]): FxArrayOf3DPoints = {
-    val pp = new FxArrayOf3DPoints(x.length)
-    System.arraycopy(x, 0, pp.x, 0, x.length)
-    System.arraycopy(y, 0, pp.y, 0, y.length)
-    System.arraycopy(z, 0, pp.z, 0, z.length)
-    pp
+    val app = new FxArrayOf3DPoints(x.length)
+    var n = 0
+    app.points foreach { pp =>
+      pp.x = x(n)
+      pp.y = y(n)
+      pp.z = z(n)
+      n += 1
+    }
+    app
   }
 
 }

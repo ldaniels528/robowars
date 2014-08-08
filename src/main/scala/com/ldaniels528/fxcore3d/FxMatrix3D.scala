@@ -120,11 +120,11 @@ class FxMatrix3D() {
   }
 
   def rotate(src: FxArrayOf3DPoints, dst: FxArrayOf3DPoints) {
-    src.points foreach { pp =>
-      val n = pp.index
-      dst.x(n) = pp.x * xx + pp.y * xy + pp.z * xz
-      dst.y(n) = pp.x * yx + pp.y * yy + pp.z * yz
-      dst.z(n) = pp.x * zx + pp.y * zy + pp.z * zz
+    src.points foreach { sp =>
+      val dp = dst(sp.index)
+      dp.x = sp.x * xx + sp.y * xy + sp.z * xz
+      dp.y = sp.x * yx + sp.y * yy + sp.z * yz
+      dp.z = sp.x * zx + sp.y * zy + sp.z * zz
     }
   }
 
@@ -133,11 +133,11 @@ class FxMatrix3D() {
    * in "dst".
    */
   def transform(src: FxArrayOf3DPoints, dst: FxArrayOf3DPoints) {
-    src.points foreach { pp =>
-      val n = pp.index
-      dst.x(n) = pp.x * xx + pp.y * xy + pp.z * xz + xo
-      dst.y(n) = pp.x * yx + pp.y * yy + pp.z * yz + yo
-      dst.z(n) = pp.x * zx + pp.y * zy + pp.z * zz + zo
+    src.points foreach { sp =>
+      val dp = dst(sp.index)
+      dp.x = sp.x * xx + sp.y * xy + sp.z * xz + xo
+      dp.y = sp.x * yx + sp.y * yy + sp.z * yz + yo
+      dp.z = sp.x * zx + sp.y * zy + sp.z * zz + zo
     }
   }
 
@@ -158,15 +158,15 @@ class FxMatrix3D() {
     val yt = et.y
     val zt = et.z
 
-    src.points foreach { pp =>
-      val x = pp.x + xt
-      val y = pp.y + yt
-      val z = pp.z + zt
-      val n = pp.index
+    src.points foreach { sp =>
+      val x = sp.x + xt
+      val y = sp.y + yt
+      val z = sp.z + zt
+      val dp = dst(sp.index)
 
-      dst.x(n) = x * xx + y * xy + z * xz + xo
-      dst.y(n) = x * yx + y * yy + z * yz + yo
-      dst.z(n) = x * zx + y * zy + z * zz + zo
+      dp.x = x * xx + y * xy + z * xz + xo
+      dp.y = x * yx + y * yy + z * yz + yo
+      dp.z = x * zx + y * zy + z * zz + zo
     }
   }
 

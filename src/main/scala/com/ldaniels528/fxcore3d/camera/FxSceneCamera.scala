@@ -23,21 +23,22 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
   }
 
   private def createTerrain(nbrPointsInGround: Int): FxArrayOf3DPoints = {
-    val terrain = FxArrayOf3DPoints(nbrPointsInGround)
+    val terrainPts = FxArrayOf3DPoints(nbrPointsInGround)
     var n = 0
     var x = -viewDistance
     while (x <= viewDistance) {
       var z = -viewDistance
       while (z <= viewDistance) {
-        terrain.x(n) = x
-        terrain.y(n) = 0
-        terrain.z(n) = z
+        val terrain = terrainPts(n)
+        terrain.x = x
+        terrain.y = 0
+        terrain.z = z
         n += 1
         z += gridSize
       }
       x += gridSize
     }
-    terrain
+    terrainPts
   }
 
   override def paint(g: Graphics2D) {
