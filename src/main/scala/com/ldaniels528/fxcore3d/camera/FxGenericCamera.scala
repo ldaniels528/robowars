@@ -12,10 +12,10 @@ import com.ldaniels528.fxcore3d.camera.FxCamera._
 abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos: FxPoint3D, agl: FxAngle3D)
   extends FxCamera {
   // a temporary buffer used for projection
-  protected var my2dBuffer = FxProjectedPoints(250)
+  protected var my2dBuffer = FxProjectedPoints(25)
 
   // a temporary buffer used for WCS to VCS transform
-  protected var my3dBuffer = FxArrayOf3DPoints(250)
+  protected var my3dBuffer = FxArrayOf3DPoints(25)
 
   // the screen distance
   protected var screenDistance: Double = _
@@ -57,11 +57,11 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
 
   protected def doProjection() {
     // project the VCS coordinates to SCS storing the results in a buffer
-    (0 to (my3dBuffer.length - 1)) map(my3dBuffer(_)) foreach { buf3d =>
+    my3dBuffer.points foreach { buf3d =>
       val z = buf3d.z
-      val index = buf3d.index
-      my2dBuffer(index).x = (screenDistance * buf3d.x / z).toInt + x0
-      my2dBuffer(index).y = -(screenDistance * buf3d.y / z).toInt + y0
+      val buf2d = my2dBuffer(buf3d.index)
+      buf2d.x = (screenDistance * buf3d.x / z).toInt + x0
+      buf2d.y = -(screenDistance * buf3d.y / z).toInt + y0
     }
 
     // limit the 2D buffer
