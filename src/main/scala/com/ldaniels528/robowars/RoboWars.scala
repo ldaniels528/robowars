@@ -50,15 +50,12 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     theScreen = contentPane.getGraphics.asInstanceOf[Graphics2D]
     screenDim = dim
 
-    // initialize the audio player
-    audioPlayer ! InitAudio
-
     // load the world
     world = VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
 
     // start the player moving forward
-    world.activePlayer.increaseVelocity(40, .2)
+    world.activePlayer.increaseVelocity(20, .2)
   }
 
   /**
@@ -68,6 +65,9 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     var lastUpdate: Long = System.currentTimeMillis()
     var frames: Int = 0
     var timeMillis: Long = 0
+
+    // initialize the audio player
+    audioPlayer ! Ambient
 
     while (alive) {
       // determine the elapsed time between frames
