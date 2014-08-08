@@ -38,11 +38,11 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
     val point = FxPoint3D()
     val vector = FxPoint3D()
 
-    (0 to 7) map (otherBox(_)) foreach { box =>
+    otherBox.points foreach { box =>
       point.set(box.x, box.y, box.z)
       var outside = false
       var n = 0
-      while ((n < 6) && !outside) {
+      while ((n < myNormals.length) && !outside) {
         // make the normal
         val np = myNormals(n)
         normal.set(np.x, np.y, np.z)
