@@ -15,13 +15,13 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
 
   override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera) {
     // -- gather information about the clipping needed for
-    var clipFlagsAndOp: Int = p(myIndices(0)).clipFlags
+    var clipFlagsAndOp: Int = p(myIndices.head).clipFlags
     var clipFlagsOrOp: Int = clipFlagsAndOp
 
-    (1 to (myIndices.length - 1)) foreach { n =>
-      val temp = p(myIndices(n)).clipFlags
-      clipFlagsOrOp |= temp
-      clipFlagsAndOp &= temp
+    myIndices.tail foreach { index =>
+      val flag = p(index).clipFlags
+      clipFlagsOrOp |= flag
+      clipFlagsAndOp &= flag
     }
 
     // -- check if all points of the polygon are
@@ -53,17 +53,13 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
         copyPoints(xt, yt, pLeft)
         super.render(g)
       }
-    } else {
-      paint(g, p)
-    }
+    } else paint(g, p)
   }
 
-  protected def copyPoints(x: Array[Int], y: Array[Int], npts: Int) {
-    for (n <- 0 to (npts - 1)) {
-      ourScratchPoly.xpoints(n) = x(n)
-      ourScratchPoly.ypoints(n) = y(n)
-    }
-    ourScratchPoly.npoints = npts
+  protected def copyPoints(x: Array[Int], y: Array[Int], length: Int) {
+    System.arraycopy(x, 0, ourScratchPoly.xpoints, 0, length)
+    System.arraycopy(y, 0, ourScratchPoly.ypoints, 0, length)
+    ourScratchPoly.npoints = length
   }
 
   protected def clipZ(p: FxProjectedPoints, xt: Array[Int], yt: Array[Int], cam: FxCamera): Int = {
@@ -73,32 +69,37 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
 
     var inside = p(i0).z < cam.zClip
     if (inside) {
-      xt(0) = p(i0).x
-      yt(0) = p(i0).y
+      val pi0 = p(i0)
+      xt(0) = pi0.x
+      yt(0) = pi0.y
       pts += 1
     }
 
-    for (n <- 1 to (myIndices.length - 1)) {
-      val p1 = if (n < myIndices.length) n else 0
-      val i1 = myIndices(p1)
-
-      if (p(i1).z < cam.zClip) {
-        // -- point in front of the camera
+    myIndices.tail foreach { i1 =>
+      // is the point in front of the camera?
+      if (p(i1).z <= cam.zClip) {
+        // was the last point was "outside"?
         if (!inside) {
-          // -- last point was "outside"
-          cam.clipAndStoreZ(p(i0).x, p(i0).y, p(i0).z, p(i1).x, p(i1).y, p(i1).z, xt, yt, pts)
+          val pi0 = p(i0)
+          val pi1 = p(i1)
+          cam.clipAndStoreZ(pi0.x, pi0.y, pi0.z, pi1.x, pi1.y, pi1.z, xt, yt, pts)
           pts += 1
         }
+
         // -- point inside, store it in the array
         inside = true
-        xt(pts) = p(i1).x
-        yt(pts) = p(i1).y
+        val pi1 = p(i1)
+        xt(pts) = pi1.x
+        yt(pts) = pi1.y
         pts += 1
+
       } else {
-        // -- point behind camera
+        // point behind camera:
+        // the last point was "inside" view volume?
         if (inside) {
-          // -- the last point was "inside" view volume
-          cam.clipAndStoreZ(p(i0).x, p(i0).y, p(i0).z, p(i1).x, p(i1).y, p(i1).z, xt, yt, pts)
+          val pi0 = p(i0)
+          val pi1 = p(i1)
+          cam.clipAndStoreZ(pi0.x, pi0.y, pi0.z, pi1.x, pi1.y, pi1.z, xt, yt, pts)
           pts += 1
         }
         inside = false
@@ -109,9 +110,9 @@ class FxClippingFilledPolygon(myIndices: Seq[Int], myColor: FxColor) extends FxF
   }
 
   override def makeClone: FxIndexingPolygon = {
-    val dst = new Array[Int](myIndices.length)
-    System.arraycopy(myIndices, 0, dst, 0, myIndices.length)
-    new FxClippingFilledPolygon(dst, myColor.copy())
+    val newIndices = new Array[Int](myIndices.length)
+    System.arraycopy(myIndices, 0, newIndices, 0, myIndices.length)
+    new FxClippingFilledPolygon(newIndices, myColor.makeClone)
   }
 
 }
@@ -125,8 +126,6 @@ object FxClippingFilledPolygon {
   val xt = new Array[Int](100)
   val yt = new Array[Int](100)
 
-  def apply(myIndices: Seq[Int], color: FxColor): FxClippingFilledPolygon = {
-    new FxClippingFilledPolygon(myIndices, color)
-  }
+  def apply(myIndices: Seq[Int], color: FxColor) = new FxClippingFilledPolygon(myIndices, color)
 
 }
