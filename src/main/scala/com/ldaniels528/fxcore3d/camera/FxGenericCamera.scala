@@ -74,21 +74,19 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
 
     my2dBuffer.points foreach { p =>
       p.clipFlags = 0
-      if (p.x > myWidth) {
-        p.clipFlags |= CLIP_RIGHT
-      } else if (p.x < 0) {
-        p.clipFlags |= CLIP_LEFT
-      }
-      if (p.y > myHeight) {
-        p.clipFlags |= CLIP_BOTTOM
-      } else if (p.y < 0) {
-        p.clipFlags |= CLIP_TOP
-      }
+      // clip X: left/right
+      if (p.x > myWidth) p.clipFlags |= CLIP_RIGHT
+      else if (p.x < 0) p.clipFlags |= CLIP_LEFT
 
+      // clip Y: top/bottom
+      if (p.y > myHeight) p.clipFlags |= CLIP_BOTTOM
+      else if (p.y < 0) p.clipFlags |= CLIP_TOP
+
+      // clip Z: front/back
       p.z = my3dBuffer.z(p.index)
-      if (p.z > zClip) {
-        p.clipFlags |= CLIP_Z
-      }
+      if (p.z > zClip) p.clipFlags |= CLIP_Z
+
+      // update the master flags
       my2dBuffer.clipOrOp |= p.clipFlags
       my2dBuffer.clipAndOp &= p.clipFlags
     }
@@ -192,9 +190,8 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
   }
 
   private def sphereIsVisible(pos: FxPoint3D, radius: Double): Boolean = {
-    val p = FxPoint3D()
     updateMatrix()
-    matrixWCStoVCS.transformPoint(pos, p)
+    val p = matrixWCStoVCS.transformPoint(pos, FxPoint3D())
     (p.z - radius) <= zClip
   }
 
