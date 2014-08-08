@@ -12,7 +12,6 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
   extends FxGenericCamera(world, viewAngle, viewDistance, pos, agl) {
 
   // make the default ground
-  private val myGroundColor = new Color(130, 130, 50)
   private val pts = ((2 * viewDistance / gridSize) + 1).toInt
   private val nbrPointsInGround: Int = pts * pts
   private val groundWCS = createTerrain(nbrPointsInGround)
@@ -51,8 +50,9 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
     val p = FxPoint3D(0, myPosition.y, -viewDistance * 5)
     p.rotateAboutAxisX(-myAngle.x)
 
-    // get the sky color
-    val mySkyColor = FxDayNightSky.getColor(world.time)
+    // get the sky & terrain color
+    val mySkyColor = FxDayNightCycle.skyColor(world.time)
+    val myGroundColor = FxDayNightCycle.groundColor(world.time)
 
     // paint the scene
     val screenY = ((screenDistance * p.y / p.z) + y0).toInt
