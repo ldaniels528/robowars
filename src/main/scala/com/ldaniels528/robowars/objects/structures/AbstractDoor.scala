@@ -1,8 +1,8 @@
 package com.ldaniels528.robowars.objects.structures
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import com.ldaniels528.robowars.objects.structures.AbstractDoor._
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
  * Abstract Door
