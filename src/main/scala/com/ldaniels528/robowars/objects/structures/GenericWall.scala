@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars.objects.structures
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxModelInstance}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.objects.structures.GenericWall._
 
@@ -13,7 +13,7 @@ case class GenericWall(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: F
   extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, dim.h, pos.z), agl) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, dim)
+  lazy val modelInstance = new FxModelInstance(MODEL, dim)
 
 }
 
