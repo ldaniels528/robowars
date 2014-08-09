@@ -38,7 +38,7 @@ object VirtualWorldReader {
         case "actor" => toActor(world, classDefs, node) foreach {
           case (actor, isPlayer) =>
             if (isPlayer) {
-              println(s"Player is $actor (${actor.getClass.getName()})")
+              println(s"Player is $actor (${actor.getClass.getName})")
               thePlayer = actor
               world.activePlayer = actor
             } else {
@@ -48,10 +48,6 @@ object VirtualWorldReader {
         }
         case "colorDef" => toColor(node) foreach (colors += _)
         case "door" => toDoor(world, classDefs, node)
-        case "environment" => toEnvironment(node) foreach { env =>
-          world.skyColor = lookup("color", colors, env.sky)
-          world.groundColor = lookup("color", colors, env.ground)
-        }
         case "item" => toItem(world, classDefs, node)
         case "objectDef" => toClassDef(node) foreach (classDefs += _)
         case "structure" => toStructure(world, classDefs, node)
@@ -63,7 +59,7 @@ object VirtualWorldReader {
   }
 
   private def lookup[T](entityType: String, items: MMap[String, T], id: String): T = {
-    items.get(id).getOrElse(die(s"Missing $entityType definition $id"))
+    items.getOrElse(id, die(s"Missing $entityType definition $id"))
   }
 
   private def toWorld(xml: Elem): Option[VirtualWorld] = {
@@ -103,21 +99,19 @@ object VirtualWorldReader {
     } yield new Environment(sky, ground)
   }
 
-  private def toActor(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[(AbstractVehicle, Boolean)] = {
-    for {
-      id <- (node \ "@type").map(_.text).headOption
-      classDef = lookup("object", classDefs, id)
-      x <- (node \ "@x").map(_.text).headOption.map(_.toDouble)
-      y <- (node \ "@y").map(_.text).headOption.map(_.toDouble)
-      z <- (node \ "@z").map(_.text).headOption.map(_.toDouble)
-      isPlayer = (node \ "@isPlayer").map(_.text).headOption.map(_ == "true").getOrElse(false)
-    } yield {
-      //println(s"Instantiating '$id' from ${classDef.getName}")
-      val args = Array(world, new FxPoint3D(x, y, z)) map (_.asInstanceOf[Object])
-      val cons = classDef.getConstructors()(0)
-      val actor = cons.newInstance(args: _*).asInstanceOf[AbstractVehicle]
-      (actor, isPlayer)
-    }
+  private def toActor(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[(AbstractVehicle, Boolean)] = for {
+    id <- (node \ "@type").map(_.text).headOption
+    classDef = lookup("object", classDefs, id)
+    x <- (node \ "@x").map(_.text).headOption.map(_.toDouble)
+    y <- (node \ "@y").map(_.text).headOption.map(_.toDouble)
+    z <- (node \ "@z").map(_.text).headOption.map(_.toDouble)
+    isPlayer = (node \ "@isPlayer").map(_.text).headOption.contains("true")
+  } yield {
+    //println(s"Instantiating '$id' from ${classDef.getName}")
+    val args = Array(world, new FxPoint3D(x, y, z)) map (_.asInstanceOf[Object])
+    val cons = classDef.getConstructors()(0)
+    val actor = cons.newInstance(args: _*).asInstanceOf[AbstractVehicle]
+    (actor, isPlayer)
   }
 
   private def toDoor(world: VirtualWorld, classDefs: MMap[String, Class[_]], node: Node): Option[FxObject] = {
