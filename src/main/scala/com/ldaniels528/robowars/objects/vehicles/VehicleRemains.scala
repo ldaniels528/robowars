@@ -1,6 +1,6 @@
 package com.ldaniels528.robowars.objects.vehicles
 
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxModelInstance}
 import com.ldaniels528.fxcore3d.{FxScale3D, FxAngle3D, FxPoint3D, FxWorld}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.objects.structures.AbstractMovingScenery
@@ -14,7 +14,7 @@ class VehicleRemains(world: FxWorld, deadTank: AbstractVehicle)
   extends AbstractMovingScenery(world, deadTank.position, deadTank.angle, deadTank.getdPosition(), deadTank.getdAngle()) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxModelInstance(MODEL, SCALE)
 
   // throw the remaining tank up in the air
   val dp = getdPosition()

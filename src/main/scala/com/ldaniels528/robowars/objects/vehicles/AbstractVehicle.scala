@@ -106,6 +106,9 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   override def die() {
     import com.ldaniels528.robowars.audio.AudioManager._
 
+    // leave the carcass behind
+    new VehicleRemains(world, this)
+
     // display the fragments
     (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
       new GenericFragment(world, FRAGMENT_SIZE, position,

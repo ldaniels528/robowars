@@ -1,6 +1,6 @@
 package com.ldaniels528.robowars.objects.vehicles
 
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxModelInstance}
 import com.ldaniels528.fxcore3d.{FxScale3D, FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.objects.vehicles.Rover._
@@ -23,21 +23,12 @@ case class Rover(w: FxWorld, p: FxPoint3D)
   val pitchClimbRateFactor: Double = 0
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = new FxModelInstance(MODEL, SCALE)
 
   // attach some weapons
   this += MachineGun(this, FxPoint3D(0, p.y + SCALE.h, 0))
   this += MiniCannon(this, FxPoint3D(0, SCALE.h, 0))
   this += MissileLauncher(this, FxPoint3D(0, SCALE.h, 0))
-  selectWeapon(0)
-
-  override def die() {
-    super.die()
-
-    // leave the carcass behind
-    new VehicleRemains(world, this)
-    ()
-  }
 
 }
 
