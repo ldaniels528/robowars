@@ -96,7 +96,7 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
   protected def doTransform(p3d: FxArrayOf3DPoints) {
     updateMatrix()
     matrixWCStoVCS.transform(p3d, my3dBuffer)
-    my3dBuffer.length = p3d.length
+    my3dBuffer.setLength( p3d.length )
   }
 
   def paint(g: Graphics2D) {

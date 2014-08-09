@@ -5,22 +5,34 @@ package com.ldaniels528.fxcore3d
  * @author lawrence.daniels@gmail.com
  */
 case class FxArrayOf3DPoints(capacity: Int) {
-  val myPoints: Seq[FxProjectedPoint3D] = (0 to (capacity - 1)) map (n => FxProjectedPoint3D(index = n))
+  val myPoints: Array[FxProjectedPoint3D] = ((0 to (capacity - 1)) map (n => FxProjectedPoint3D(index = n))).toArray
+  var pointsCache: Seq[FxProjectedPoint3D] = _
   var length: Int = capacity
 
-  def apply(n: Int): FxProjectedPoint3D = myPoints(n)
+  def apply(index: Int): FxProjectedPoint3D = myPoints(index)
+
+  def setLength(length: Int) = {
+    this.length = length
+    pointsCache = null
+  }
 
   /**
    * Creates a cloned copy of the instance
    */
   def makeClone: FxArrayOf3DPoints = this.copy()
 
-  def point(n: Int): FxPoint3D = {
-    val pp = myPoints(n)
+  def point(index: Int): FxPoint3D = {
+    val pp = myPoints(index)
     FxPoint3D(pp.x, pp.y, pp.z)
   }
 
-  def points: Seq[FxProjectedPoint3D] = if (capacity == length) myPoints else myPoints.slice(0, length)
+  def points: Seq[FxProjectedPoint3D] =
+    if (capacity == length) myPoints
+    else if (pointsCache != null) pointsCache
+    else {
+      pointsCache = myPoints.slice(0, length)
+      pointsCache
+    }
 
   override def toString = points mkString ","
 

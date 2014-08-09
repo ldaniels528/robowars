@@ -90,7 +90,7 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
     matrixWCStoVCS.transformWithTranslation(groundWCS, my3dBuffer, FxPoint3D(centerX * gridSize, 0, centerZ * gridSize))
 
     // set the number of points in the cache buffer
-    my3dBuffer.length = groundWCS.length
+    my3dBuffer.setLength(groundWCS.length)
 
     doProjection()
     doTheChecks()
