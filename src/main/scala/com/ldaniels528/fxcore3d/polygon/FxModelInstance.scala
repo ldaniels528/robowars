@@ -141,8 +141,7 @@ case class FxModelInstance(thePolyhedron: FxPolyhedron, scale: FxScale3D) {
  */
 object FxModelInstance {
 
-  def apply(modelPath:String, scale: FxScale3D) = {
-    val model = ContentManager.loadModel("/models/weapons/bullet.f3d")
-    new FxModelInstance(model, scale)
+  def apply(modelPath:String, scale: FxScale3D): FxModelInstance = {
+    new FxModelInstance(ContentManager.loadModel(modelPath), scale)
   }
 }
