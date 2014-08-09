@@ -4,9 +4,10 @@ import java.awt.Graphics2D
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera.FxCamera
+import com.ldaniels528.robowars.ContentManager
 
 /**
- * FxEngine Polyhedron Instance
+ * FxEngine Model Instance
  * @author lawrence.daniels@gmail.com
  */
 case class FxModelInstance(thePolyhedron: FxPolyhedron, scale: FxScale3D) {
@@ -132,4 +133,16 @@ case class FxModelInstance(thePolyhedron: FxPolyhedron, scale: FxScale3D) {
 
   def position: FxPoint3D = myPosition
 
+}
+
+/**
+ * FxEngine Model Instance Companion Object
+ * @author lawrence.daniels@gmail.com
+ */
+object FxModelInstance {
+
+  def apply(modelPath:String, scale: FxScale3D) = {
+    val model = ContentManager.loadModel("/models/weapons/bullet.f3d")
+    new FxModelInstance(model, scale)
+  }
 }
