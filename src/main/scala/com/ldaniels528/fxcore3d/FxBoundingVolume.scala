@@ -1,13 +1,13 @@
 package com.ldaniels528.fxcore3d
 
 import com.ldaniels528.fxcore3d.FxBoundingVolume._
-import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
 /**
  * FxEngine Bounding Volume
  * @author lawrence.daniels@gmail.com
  */
-case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxScale3D) {
+case class FxBoundingVolume(theHostPolyInst: FxModelInstance, myScale: FxScale3D) {
   val boundingRadius = myScale.magnitude()
   protected val myBox = FxArrayOf3DPoints(8)
   protected val myNormals = FxArrayOf3DPoints(6)

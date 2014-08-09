@@ -3,7 +3,7 @@ package com.ldaniels528.fxcore3d
 import java.awt.Graphics2D
 
 import com.ldaniels528.fxcore3d.camera.FxCamera
-import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
 import scala.collection.mutable.ListBuffer
 
@@ -55,9 +55,9 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
 
   /**
    * Returns the polyhedron instance
-   * @return the [[FxPolyhedronInstance]]
+   * @return the [[FxModelInstance]]
    */
-  def modelInstance: FxPolyhedronInstance
+  def modelInstance: FxModelInstance
 
   /**
    * Checks collision with another object. Only implemented by checking the bounding circles.
