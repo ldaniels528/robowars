@@ -23,11 +23,11 @@ abstract class FxMovingObject(world: FxWorld,
    */
   override def checkForCollisionWith(obj: FxObject, dt: Double): Boolean = {
     // update the position and angle of the polyhedron
-    polyhedronInstance.setOrientation(Pos, Agl)
+    modelInstance.setOrientation(Pos, Agl)
 
     // if the other object is a moving object then update it too.
     if (obj.isInstanceOf[FxMovingObject]) {
-      obj.polyhedronInstance.setOrientation(obj.Pos, obj.Agl)
+      obj.modelInstance.setOrientation(obj.Pos, obj.Agl)
     }
 
     // let the overridden method check the collision
@@ -35,12 +35,12 @@ abstract class FxMovingObject(world: FxWorld,
   }
 
   override def paint(g: Graphics2D, cam: FxCamera) {
-    polyhedronInstance.setOrientation(Pos, Agl)
+    modelInstance.setOrientation(Pos, Agl)
     super.paint(g, cam)
   }
 
   override def paintWithShading(g: Graphics2D, cam: FxCamera, light: FxPoint3D) {
-    polyhedronInstance.setOrientation(Pos, Agl)
+    modelInstance.setOrientation(Pos, Agl)
     super.paintWithShading(g, cam, light)
   }
 

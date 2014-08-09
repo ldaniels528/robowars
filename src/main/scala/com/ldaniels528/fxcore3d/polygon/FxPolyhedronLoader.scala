@@ -31,11 +31,14 @@ object FxPolyhedronLoader {
 
   private def createPolygonNormals(vertices: FxArrayOf3DPoints, myPolygons: Seq[FxIndexingPolygon]): FxArrayOf3DPoints = {
     val normals = FxArrayOf3DPoints(myPolygons.length)
-    (0 to (myPolygons.length - 1)) foreach { n =>
-      val norm = myPolygons(n).getNormal(vertices)
-      normals.x(n) = norm.x
-      normals.y(n) = norm.y
-      normals.z(n) = norm.z
+    var n = 0
+    myPolygons foreach { poly =>
+      val norm = poly.getNormal(vertices)
+      val normal = normals(n)
+      normal.x = norm.x
+      normal.y = norm.y
+      normal.z = norm.z
+      n += 1
     }
     normals
   }

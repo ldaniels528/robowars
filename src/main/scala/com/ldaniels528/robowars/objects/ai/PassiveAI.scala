@@ -85,7 +85,7 @@ class PassiveAI(host: AbstractVehicle) extends AbstractAI(host) with Events {
 
     // -- make vector for host's direction
     val v2 = new FxPoint3D(0, 0, -1)
-    v2.rotateAboutYaxis(host.angle.y)
+    v2.rotateAboutAxisY(host.angle.y)
 
     // -- check if destination is in front of the host
     if (v1.dotProduct(v2) > 0) {

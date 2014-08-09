@@ -1,20 +1,18 @@
 package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
-import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 import com.ldaniels528.robowars.objects.structures.AbstractMovingScenery
-import com.ldaniels528.robowars.objects.weapons.GenericBomb._
 
 /**
  * Generic Bomb
  * @author lawrence.daniels@gmail.com
  */
-class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, strength: Double)
-  extends AbstractMovingScenery(world, p, a, new FxVelocityVector(), FxWorld.random3DAngle(ROTATION)) {
+case class GenericBomb(w: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, strength: Double)
+  extends AbstractMovingScenery(w, p, a, new FxVelocityVector(), FxWorld.random3DAngle(rotation = 3d)) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, SCALE)
+  lazy val modelInstance = FxModelInstance("/models/weapons/bomb1.f3d", FxScale3D(0.5d, 0.5d, 1d))
 
   override def die() {
     super.die()
@@ -23,15 +21,15 @@ class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, str
     new GenericExplosion(world, position, strength * 0.25, 0.5, strength, 0.6, strength * 0.1)
 
     // create an explosion round since
-    val explosion = new Explosion(world, 10 * strength)
+    val explosion = new Explosion(world, strength = 10 * strength)
 
-    // get all objects within a radius and check feed them with the impact of the bomb
-    val objects = world.getAllObjectsInRadius(position, BLAST_RADIUS)
+    // get all objects within the blast radius and check feed them with the impact of the bomb
+    val objects = world.getAllObjectsInRadius(position, radius = 30d)
 
     // check for collisions
     objects foreach { obj =>
       if (obj.interestedOfCollisionWith(explosion)) {
-        obj.collisionWith(explosion, 1)
+        obj.collisionWith(explosion, dt = 1)
       }
     }
 
@@ -56,15 +54,3 @@ class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, str
 
 }
 
-/**
- * Generic Bomb (Companion Object)
- * @author lawrence.daniels@gmail.com
- */
-object GenericBomb {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/bomb1.f3d")
-  val SCALE = new FxPoint3D(0.5d, 0.5d, 1d)
-  val START_ANGLE: Double = 1d
-  val ROTATION: Double = 3d
-  val BLAST_RADIUS = 30d
-
-}

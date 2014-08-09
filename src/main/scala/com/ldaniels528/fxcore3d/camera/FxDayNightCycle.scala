@@ -3,19 +3,20 @@ package com.ldaniels528.fxcore3d.camera
 import java.awt.Color
 
 /**
- * Day-Night Sky Cycle
+ * Day-Night Cycle
  * @author lawrence.daniels@gmail.com
  */
-object FxDayNightSky {
+object FxDayNightCycle {
+  val DAYLIGHT_ADJUSTMENT = 384
 
   /**
    * Returns the color of the sky
    * @param time the world time (in seconds)
    * @return the [[Color]]
    */
-  def getColor(time: Double): Color = {
+  def skyColor(time: Double): Color = {
     // adjust the time so that the game starts during the day
-    val adjTime = time + 256
+    val adjTime = time + DAYLIGHT_ADJUSTMENT
 
     // a day is 512 seconds
     val index = (adjTime % 512).toInt
@@ -25,6 +26,18 @@ object FxDayNightSky {
 
     // return the sky color
     new Color(0, 0, blue)
+  }
+
+  def groundColor(time: Double) : Color = {
+    // adjust the time so that the game starts during the day
+    val adjTime = time + DAYLIGHT_ADJUSTMENT
+
+    // a day is 512 seconds
+    val index = (adjTime % 512).toInt
+
+    val intensity  = if (index < 256) index else 511 - index
+
+    new Color(intensity/4, intensity/2, intensity/4)
   }
 
 }

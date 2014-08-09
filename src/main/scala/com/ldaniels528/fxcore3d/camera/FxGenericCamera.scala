@@ -12,10 +12,10 @@ import com.ldaniels528.fxcore3d.camera.FxCamera._
 abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos: FxPoint3D, agl: FxAngle3D)
   extends FxCamera {
   // a temporary buffer used for projection
-  protected var my2dBuffer = FxProjectedPoints(250)
+  protected var my2dBuffer = FxProjectedPoints(25)
 
   // a temporary buffer used for WCS to VCS transform
-  protected var my3dBuffer = FxArrayOf3DPoints(250)
+  protected var my3dBuffer = FxArrayOf3DPoints(25)
 
   // the screen distance
   protected var screenDistance: Double = _
@@ -38,8 +38,8 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
 
   // create the light vector
   private var light = FxPoint3D(-1, 0, 0)
-  light.rotateAboutXaxis(Math.PI / 5)
-  light.rotateAboutYaxis(Math.PI / 3)
+  light.rotateAboutAxisX(Math.PI / 5)
+  light.rotateAboutAxisY(Math.PI / 3)
   light.normalize(1)
 
   // set the camera's orientation
@@ -57,10 +57,11 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
 
   protected def doProjection() {
     // project the VCS coordinates to SCS storing the results in a buffer
-    (0 to (my3dBuffer.length - 1)) foreach { n =>
-      val z = my3dBuffer.z(n)
-      my2dBuffer(n).x = (screenDistance * my3dBuffer.x(n) / z).toInt + x0
-      my2dBuffer(n).y = -(screenDistance * my3dBuffer.y(n) / z).toInt + y0
+    my3dBuffer.points foreach { buf3d =>
+      val z = buf3d.z
+      val buf2d = my2dBuffer(buf3d.index)
+      buf2d.x = (screenDistance * buf3d.x / z).toInt + x0
+      buf2d.y = -(screenDistance * buf3d.y / z).toInt + y0
     }
 
     // limit the 2D buffer
@@ -83,7 +84,7 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
       else if (p.y < 0) p.clipFlags |= CLIP_TOP
 
       // clip Z: front/back
-      p.z = my3dBuffer.z(p.index)
+      p.z = my3dBuffer(p.index).z
       if (p.z > zClip) p.clipFlags |= CLIP_Z
 
       // update the master flags
@@ -95,7 +96,7 @@ abstract class FxGenericCamera(world: FxWorld, viewAngle: Double, viewDistance: 
   protected def doTransform(p3d: FxArrayOf3DPoints) {
     updateMatrix()
     matrixWCStoVCS.transform(p3d, my3dBuffer)
-    my3dBuffer.length = p3d.length
+    my3dBuffer.setLength( p3d.length )
   }
 
   def paint(g: Graphics2D) {

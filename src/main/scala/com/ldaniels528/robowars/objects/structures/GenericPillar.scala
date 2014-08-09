@@ -1,27 +1,16 @@
 package com.ldaniels528.robowars.objects.structures
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
-import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.objects.structures.GenericPillar._
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
 /**
  * Generic Pillar
  * @author lawrence.daniels@gmail.com
  */
-case class GenericPillar(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
-  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, dim.h, pos.z), agl) {
+case class GenericPillar(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
+  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, scale.h, pos.z), agl) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
-
-}
-
-/**
- * Generic Pillar (Companion Object)
- * @author lawrence.daniels@gmail.com
- */
-object GenericPillar {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/pillar1.f3d")
+  lazy val modelInstance = FxModelInstance("/models/structures/pillar1.f3d", scale)
 
 }

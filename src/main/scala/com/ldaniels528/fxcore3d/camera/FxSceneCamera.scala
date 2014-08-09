@@ -12,32 +12,36 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
   extends FxGenericCamera(world, viewAngle, viewDistance, pos, agl) {
 
   // make the default ground
-  private val myGroundColor = new Color(130, 130, 50)
   private val pts = ((2 * viewDistance / gridSize) + 1).toInt
   private val nbrPointsInGround: Int = pts * pts
   private val groundWCS = createTerrain(nbrPointsInGround)
+  private var mySkyColor: Color = _
+  private var myGroundColor: Color = _
+  private var environmentUpdate: Long = _
 
   if (my3dBuffer.length < nbrPointsInGround) {
+    System.err.println(s"FxSceneCamera: Resizing buffers (${my3dBuffer.length} to $nbrPointsInGround)")
     my3dBuffer = FxArrayOf3DPoints(nbrPointsInGround)
     my2dBuffer = FxProjectedPoints(nbrPointsInGround)
   }
 
   private def createTerrain(nbrPointsInGround: Int): FxArrayOf3DPoints = {
-    val terrain = FxArrayOf3DPoints(nbrPointsInGround)
+    val terrainPts = FxArrayOf3DPoints(nbrPointsInGround)
     var n = 0
     var x = -viewDistance
     while (x <= viewDistance) {
       var z = -viewDistance
       while (z <= viewDistance) {
-        terrain.x(n) = x
-        terrain.y(n) = 0
-        terrain.z(n) = z
+        val terrain = terrainPts(n)
+        terrain.x = x
+        terrain.y = 0
+        terrain.z = z
         n += 1
         z += gridSize
       }
       x += gridSize
     }
-    terrain
+    terrainPts
   }
 
   override def paint(g: Graphics2D) {
@@ -48,10 +52,14 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
 
   protected def paintHorizon(g: Graphics2D) {
     val p = FxPoint3D(0, myPosition.y, -viewDistance * 5)
-    p.rotateAboutXaxis(-myAngle.x)
+    p.rotateAboutAxisX(-myAngle.x)
 
-    // get the sky color
-    val mySkyColor = FxDayNightSky.getColor(world.time)
+    // get the sky & terrain color
+    if (mySkyColor == null || System.currentTimeMillis - environmentUpdate >= 2000) {
+      mySkyColor = FxDayNightCycle.skyColor(world.time)
+      myGroundColor = FxDayNightCycle.groundColor(world.time)
+      environmentUpdate = System.currentTimeMillis()
+    }
 
     // paint the scene
     val screenY = ((screenDistance * p.y / p.z) + y0).toInt
@@ -82,15 +90,15 @@ class FxSceneCamera(world: FxWorld, viewAngle: Double, viewDistance: Double, pos
     matrixWCStoVCS.transformWithTranslation(groundWCS, my3dBuffer, FxPoint3D(centerX * gridSize, 0, centerZ * gridSize))
 
     // set the number of points in the cache buffer
-    my3dBuffer.length = groundWCS.length
+    my3dBuffer.setLength(groundWCS.length)
 
     doProjection()
     doTheChecks()
 
-    g.setColor(new Color(0, 0, 0))
-    (0 to (my2dBuffer.length - 1)) foreach { n =>
-      if (my2dBuffer(n).clipFlags == 0) {
-        g.drawLine(my2dBuffer(n).x, my2dBuffer(n).y, my2dBuffer(n).x, my2dBuffer(n).y)
+    g.setColor(Color.BLACK)
+    my2dBuffer.points foreach { pp =>
+      if (pp.clipFlags == 0) {
+        g.drawLine(pp.x, pp.y, pp.x, pp.y)
       }
     }
   }

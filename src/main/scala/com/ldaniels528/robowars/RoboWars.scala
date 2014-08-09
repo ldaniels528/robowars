@@ -14,7 +14,7 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * RoboWars Application Main
  * @author lawrence.daniels@gmail.com
  */
-class RoboWars() extends FxFrame("RoboWars") with Events {
+class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
   var world: FxWorld = _
   var camera: FxTrackerCamera = _
   val key = new Array[Boolean](20)
@@ -50,9 +50,6 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     theScreen = contentPane.getGraphics.asInstanceOf[Graphics2D]
     screenDim = dim
 
-    // initialize the audio player
-    audioPlayer ! InitAudio
-
     // load the world
     world = VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
@@ -69,6 +66,10 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
     var frames: Int = 0
     var timeMillis: Long = 0
 
+    // initialize the audio player
+    audioPlayer ! GetReady
+    if(!noMusic) audioPlayer ! Ambient
+
     while (alive) {
       // determine the elapsed time between frames
       val currentTime = System.currentTimeMillis()
@@ -76,7 +77,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       lastUpdate = currentTime
 
       // compute the delta time
-      val dt = Math.min(0.2, dtMillis.toDouble / 1000d)
+      val dt = dtMillis.toDouble / 1000d
 
       // handle keyboard events
       handleKeyboardEvents(dt)
@@ -130,7 +131,7 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
   }
 
   private def renderNotices(player: AbstractVehicle) {
-    if (world.time < 4d) {
+    if (world.time < 3d) {
       // show cursor key instructions
       val cursorCenterX = (super.getWidth - controlKeysImage.getWidth) / 2
       val textLeftX =   cursorCenterX - 150
@@ -217,7 +218,6 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
       case VK_2 => key(MISSILE) = pressed
       case VK_3 => key(BOMB) = pressed
       case _ =>
-      //println("KeyEvent: code [%d] char [%c]".format(event.getKeyCode(), event.getKeyChar()))
     }
   }
 
@@ -249,8 +249,8 @@ class RoboWars() extends FxFrame("RoboWars") with Events {
 
     // create the light source
     val light = new FxPoint3D(0, 0, -1)
-    light.rotateAboutXaxis(-Math.PI / 4)
-    light.rotateAboutYaxis(-Math.PI / 4)
+    light.rotateAboutAxisX(-Math.PI / 4)
+    light.rotateAboutAxisY(-Math.PI / 4)
     light.normalize(1)
 
     // create the camera
@@ -274,7 +274,11 @@ object RoboWars {
    * @param args the given command line arguments
    */
   def main(args: Array[String]) {
-    val app = new RoboWars()
+    // check for command line arguments
+    val noMusic = args.contains("no_music")
+
+    // start the application
+    val app = new RoboWars(noMusic)
     app.init()
     app.run()
   }

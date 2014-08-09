@@ -66,7 +66,7 @@ trait FxWorld {
    * Inserts all objects that are within radius and in-front of the plane
    * specified by a point (pos) and a normal (norm).
    */
-  def getAllObjectsInRadiusAndInfront(point: FxPoint3D, norm: FxPoint3D, radius: Double): Seq[FxObject]
+  def getAllObjectsInRadiusAndInFront(point: FxPoint3D, norm: FxPoint3D, radius: Double): Seq[FxObject]
 
 }
 
@@ -75,6 +75,15 @@ trait FxWorld {
  * @author lawrence.daniels@gmail.com
  */
 object FxWorld {
+
+  /**
+   * Returns a point in a random position in space
+   * @param range the range of each coordinate value
+   * @return a [[FxScale3D]]
+   */
+  def random3DScale(range: Double): FxScale3D = {
+    FxScale3D(rand(0, range), rand(0, range), rand(0, range))
+  }
 
   /**
    * Returns a point in a random position in space
@@ -103,7 +112,7 @@ object FxWorld {
    * Prints the class name and a string to stout.
    */
   def debug(source: Any, message: String) {
-    System.out.println(s"***${source.getClass().getName()} : $message")
+    System.out.println(s"***${source.getClass.getName} : $message")
   }
 
 }

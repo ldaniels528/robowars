@@ -1,20 +1,19 @@
 package com.ldaniels528.fxcore3d
 
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a grid in FxMap
  * @see [[FxMap]]
  */
 class FxGrid() {
-  private val theMovingObjects = ArrayBuffer[FxMovingObject]()
-  private val theStaticObjects = ArrayBuffer[FxObject]()
+  private val theMovingObjects = ListBuffer[FxObject]()
+  private val theStaticObjects = ListBuffer[FxObject]()
 
   /**
    * Retrieve all the objects within the specified radius into the supplied vector.
    */
-  def getAllObjectsInRadius(p: FxPoint3D, radius: Double): Seq[FxObject] = {
-    val radiusSq = radius * radius
+  def getAllObjectsInRadius(p: FxPoint3D, radiusSq: Double): Seq[FxObject] = {
     val listA = theMovingObjects filter (_.position.distanceToPoint(p) <= radiusSq)
     val listB = theStaticObjects filter (_.position.distanceToPoint(p) <= radiusSq)
     listA ++ listB
@@ -24,22 +23,16 @@ class FxGrid() {
    * Inserts an object into this zone
    */
   def insertObject(obj: FxObject) {
-    obj match {
-      case mo: FxMovingObject => theMovingObjects += mo
-      case _ => theStaticObjects += obj
-    }
-    ()
+    val bucket = if (obj.isInstanceOf[FxMovingObject]) theMovingObjects else theStaticObjects
+    bucket += obj
   }
 
   /**
    * Removes an object from this zone
    */
   def removeObject(obj: FxObject) {
-    obj match {
-      case mo: FxMovingObject => theMovingObjects -= mo
-      case _ => theStaticObjects -= obj
-    }
-    ()
+    val bucket = if (obj.isInstanceOf[FxMovingObject]) theMovingObjects else theStaticObjects
+    bucket -= obj
   }
 
   /**

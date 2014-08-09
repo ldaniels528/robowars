@@ -1,13 +1,13 @@
 package com.ldaniels528.fxcore3d
 
 import com.ldaniels528.fxcore3d.FxBoundingVolume._
-import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
 /**
  * FxEngine Bounding Volume
  * @author lawrence.daniels@gmail.com
  */
-case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPoint3D) {
+case class FxBoundingVolume(theHostPolyInst: FxModelInstance, myScale: FxScale3D) {
   val boundingRadius = myScale.magnitude()
   protected val myBox = FxArrayOf3DPoints(8)
   protected val myNormals = FxArrayOf3DPoints(6)
@@ -34,35 +34,26 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
 
   private def pointInMyVolume(otherBox: FxArrayOf3DPoints): Boolean = {
     // start checking if any point is within my volume
-    val normal = FxPoint3D()
     val point = FxPoint3D()
     val vector = FxPoint3D()
 
-    (0 to 7) foreach { p =>
-      point.set(otherBox.x(p), otherBox.y(p), otherBox.z(p))
-      var outside = false
-      var n = 0
-      while ((n < 6) && !outside) {
-        // make the normal
-        val np = myNormals(n)
-        normal.set(np.x, np.y, np.z)
-
-        // make the vector from my normal to other point
-        val bp = myBox(n)
-        vector.set(bp.x, bp.y, bp.z)
-        vector.makeVectorTo(point)
-
-        // check the dot product
-        if (normal.dotProduct(vector) > 0) {
-          // "in-front" of one of the planes. no collision
-          outside = true
-        }
-        n += 1
-      }
-
-      if (!outside) return true
+    otherBox.points exists { box =>
+      point.set(box.x, box.y, box.z)
+      !isPointOutSideVolume(point, vector)
     }
-    false
+  }
+
+  private def isPointOutSideVolume(point: FxPoint3D, vector: FxPoint3D): Boolean = {
+    myNormals.points exists { normal =>
+      // make the vector from my normal to other point
+      val vp = myBox(normal.index)
+      vector.set(vp.x, vp.y, vp.z)
+      vector.makeVectorTo(point)
+
+      // use the dot product to determine whether the point is
+      // "in-front" of one of the planes. no collision
+      normal.dotProduct(vector) > 0
+    }
   }
 
   private def updateBox() {

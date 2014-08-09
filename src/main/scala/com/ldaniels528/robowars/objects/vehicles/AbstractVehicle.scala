@@ -1,13 +1,13 @@
 package com.ldaniels528.robowars.objects.vehicles
 
+import AbstractVehicle._
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxEvent, FxObject, FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.{Events, SteeringCommand, WeaponCommand}
 import com.ldaniels528.robowars.objects.AbstractMovingObject
 import com.ldaniels528.robowars.objects.ai.AbstractAI
 import com.ldaniels528.robowars.objects.items.AbstractRewardItem
-import com.ldaniels528.robowars.objects.structures.{AbstractMovingStructure, AbstractStaticStructure, GenericFragment}
-import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle._
+import com.ldaniels528.robowars.objects.structures.{GenericFragment, AbstractMovingStructure, AbstractStaticStructure}
 import com.ldaniels528.robowars.objects.weapons.{AbstractProjectile, AbstractWeapon}
 
 /**
@@ -18,7 +18,7 @@ import com.ldaniels528.robowars.objects.weapons.{AbstractProjectile, AbstractWea
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocityVector, health: Double)
-  extends AbstractMovingObject(world, pos, vector.getAngle(), vector, FxAngle3D(), health) with Events {
+  extends AbstractMovingObject(world, pos, vector.angle, vector, FxAngle3D(), health) with Events {
 
   private var weaponIndex = 0
   private val weapons = collection.mutable.Buffer[AbstractWeapon]()
@@ -41,6 +41,27 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   def decentRate: Double
 
   def pitchClimbRateFactor: Double
+
+  override def die() {
+    import com.ldaniels528.robowars.audio.AudioManager._
+
+    // leave the carcass behind
+    new VehicleRemains(world, this)
+
+    // display the fragments
+    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
+      new GenericFragment(world, FRAGMENT_SIZE, position,
+        FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
+    }
+
+    // play the explosion clip
+    if (!this.isInstanceOf[AbstractProjectile]) {
+      audioPlayer ! (if (this == world.activePlayer) GameOver else BigExplosionClip)
+    }
+
+    // allow super-class to take action
+    super.die()
+  }
 
   override def interestedOfCollisionWith(obj: FxObject) = {
     obj match {
@@ -101,24 +122,6 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   def selectWeapon(weaponIndex: Int) {
     this.weaponIndex = weaponIndex
-  }
-
-  override def die() {
-    import com.ldaniels528.robowars.audio.AudioManager._
-
-    // display the fragments
-    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
-      new GenericFragment(world, FRAGMENT_SIZE, position,
-        FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
-    }
-
-    // play the explosion clip
-    if (!this.isInstanceOf[AbstractProjectile]) {
-      audioPlayer ! (if (this == world.activePlayer) GameOver else BigExplosionClip)
-    }
-
-    // allow super-class to take action
-    super.die()
   }
 
   override def update(dt: Double) {
@@ -194,19 +197,19 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   protected def handleTurnLeft(factor: Double, dt: Double) {
     val v = getdPosition()
-    v.increaseAngleAboutYaxis(turningRate * factor * dt)
+    v.increaseAngleAboutAxisY(turningRate * factor * dt)
     setdPosition(v)
   }
 
   protected def handleTurnRight(factor: Double, dt: Double) {
     val v = getdPosition()
-    v.increaseAngleAboutYaxis(-turningRate * factor * dt)
+    v.increaseAngleAboutAxisY(-turningRate * factor * dt)
     setdPosition(v)
   }
 
   protected def handleIncreaseVelocity(factor: Double, dt: Double) {
     val v = getdPosition()
-    if (v.getVelocity() < maxVelocity) {
+    if (v.velocity < maxVelocity) {
       v.increaseVelocity(acceleration * factor * dt)
       setdPosition(v)
     }
@@ -214,7 +217,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   protected def handleDecreaseVelocity(factor: Double, dt: Double) {
     val v = getdPosition()
-    if (v.getVelocity() > -maxVelocity) {
+    if (v.velocity > -maxVelocity) {
       v.increaseVelocity(-acceleration * factor * dt)
       setdPosition(v)
     }
@@ -222,8 +225,8 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   protected def handleBrake(factor: Double, dt: Double) {
     val v = getdPosition()
-    if (v.getVelocity() > 0) v.increaseVelocity(-brakingRate * factor * dt)
-    else if (v.getVelocity() < 0) v.setVelocity(0)
+    if (v.velocity > 0) v.increaseVelocity(-brakingRate * factor * dt)
+    else if (v.velocity < 0) v.setVelocity(0)
     setdPosition(v)
   }
 

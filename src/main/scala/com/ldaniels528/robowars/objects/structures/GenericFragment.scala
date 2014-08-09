@@ -3,9 +3,7 @@ package com.ldaniels528.robowars.objects.structures
 import java.lang.Math.random
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
-import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.objects.structures.GenericFragment._
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
 /**
  * Generic Fragment
@@ -24,13 +22,14 @@ class GenericFragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: D
   val generation = generation0 - 1
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, FxWorld.random3DPoint(size))
+  lazy val modelInstance = FxModelInstance("/models/structures/fragment.f3d", FxWorld.random3DScale(size))
 
   // set the delta-position
   setdPosition({
+    val Y_VELOCITY_FACTOR = 3d
     val v = getdPosition()
     v.x = FxWorld.rand(-speed, speed)
-    v.y = FxWorld.rand(0, speed * velYfactor)
+    v.y = FxWorld.rand(0, speed * Y_VELOCITY_FACTOR)
     v.z = FxWorld.rand(-speed, speed)
     v
   })
@@ -61,15 +60,5 @@ class GenericFragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: D
       die()
     }
   }
-
-}
-
-/**
- * Generic Fragment (Companion Object)
- * @author lawrence.daniels@gmail.com
- */
-object GenericFragment {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/fragment.f3d")
-  val velYfactor: Double = 3d
 
 }

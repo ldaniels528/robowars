@@ -17,48 +17,48 @@ case class FxConvexPolyhedron(vertices: FxArrayOf3DPoints,
 
   override def calculateIntensities(light: FxPoint3D, intensities: Array[Double]) {
     val p = new FxPoint3D()
-    (0 to (nbrOfPolygons - 1)) foreach { n =>
-      p.set(myPolygonNormals.x(n), myPolygonNormals.y(n), myPolygonNormals.z(n))
-      intensities(n) = p.dotProduct(light)
+    myPolygonNormals.points.foreach { poly =>
+      p.set(poly.x, poly.y, poly.z)
+      intensities(poly.index) = p.dotProduct(light)
     }
   }
 
-  override def clipAndPaint(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera) {
-    myPolygons foreach (_.clipAndPaint(g, p, camera))
+  override def clipAndPaint(g: Graphics2D, ppa: FxProjectedPoints, camera: FxCamera) {
+    myPolygons foreach (_.clipAndPaint(g, ppa, camera))
   }
 
-  override def clipAndPaintWithShading(g: Graphics2D, p: FxProjectedPoints, camera: FxCamera, intensities: Array[Double]) {
+  override def clipAndPaintWithShading(g: Graphics2D, ppa: FxProjectedPoints, camera: FxCamera, intensities: Array[Double]) {
     var n = 0
     myPolygons foreach { poly =>
-      poly.clipAndPaintWithShading(g, p, camera, intensities(n))
+      poly.clipAndPaintWithShading(g, ppa, camera, intensities(n))
       n += 1
     }
   }
 
-  override def makeClone(): FxPolyhedron = {
+  override def makeClone: FxPolyhedron = {
     new FxConvexPolyhedron(vertices.makeClone, myPolygons map (_.makeClone), myPolygonNormals)
   }
 
   /**
    * overrides FxPolyhedron.paint(..) the polygons don't need to be sorted.
    */
-  override def paint(g: Graphics2D, point2d: FxProjectedPoints) {
-    myPolygons foreach (_.paint(g, point2d))
+  override def paint(g: Graphics2D, ppa: FxProjectedPoints) {
+    myPolygons foreach (_.paint(g, ppa))
   }
 
-  override def paintWithShading(g: Graphics2D, points: FxProjectedPoints, intensities: Array[Double]) {
+  override def paintWithShading(g: Graphics2D, ppa: FxProjectedPoints, intensities: Array[Double]) {
     var n = 0
     myPolygons foreach { poly =>
-      poly.paintWithShading(g, points, intensities(n))
+      poly.paintWithShading(g, ppa, intensities(n))
       n += 1
     }
   }
 
-  override def scalePoints(fx: Double, fy: Double, fz: Double) {
-    (0 to (vertices.length - 1)) foreach { n =>
-      vertices.x(n) *= fx
-      vertices.y(n) *= fy
-      vertices.z(n) *= fz
+  override def scalePoints(sx: Double, sy: Double, sz: Double) {
+    vertices.points foreach { vertex =>
+      vertex.x *= sx
+      vertex.y *= sy
+      vertex.z *= sz
     }
   }
 

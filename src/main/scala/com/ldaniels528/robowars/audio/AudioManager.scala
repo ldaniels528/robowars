@@ -30,11 +30,13 @@ object AudioManager extends FxAudioPlayer {
    */
   private def loadSamples(): Map[AudioKey, FxAudioSample] = {
     val samples = Seq[(AudioKey, String)](
+      Ambient -> "background/ambient",
       BigExplosionClip -> "environmental/bigExplosion",
       BuildingExplodeClip -> "environmental/buildingExplode",
       CrashClip -> "environmental/crash",
       ExplosionClip -> "environmental/bigExplosion",
       GameOver -> "alerts/gameOver",
+      GetReady -> "alerts/getReady",
       ReloadClip -> "weapons/loadClip",
       Ambient -> "background/ambient",
       MachineGunClip -> "weapons/machineGun",
@@ -47,7 +49,6 @@ object AudioManager extends FxAudioPlayer {
   }
 
   private def loadSample(resource: String) = {
-    println(s"Loading audio sample '$resource'...")
     loadAudioSample(ContentManager.getResource(resource))
   }
 
@@ -56,9 +57,16 @@ object AudioManager extends FxAudioPlayer {
    * @author lawrence.daniels@gmail.com
    */
   class AudioPlaybackActor extends Actor {
+    import scala.concurrent.ExecutionContext.Implicits._
+    import scala.concurrent.Future
+
     def receive = {
-      case InitAudio =>
-        println("Initializing sound system...")
+      case audioKey: ContinuousAudioKey =>
+        audioSampleCache.get(audioKey) foreach { sample =>
+          Future {
+            playContinuousSample(sample, isAlive = true)
+          }
+        }
       case audioKey: AudioKey =>
         audioSampleCache.get(audioKey) foreach { sample =>
           playSample(sample)
@@ -71,18 +79,33 @@ object AudioManager extends FxAudioPlayer {
    * Audio-Clip messages
    */
   trait AudioKey
-  case object InitAudio
-  case object Ambient extends AudioKey
+
+  trait ContinuousAudioKey extends AudioKey
+
+  case object Ambient extends ContinuousAudioKey
+
   case object BuildingExplodeClip extends AudioKey
+
   case object BigExplosionClip extends AudioKey
+
   case object CrashClip extends AudioKey
+
   case object ExplosionClip extends AudioKey
+
   case object GameOver extends AudioKey
+
+  case object GetReady extends AudioKey
+
   case object MachineGunClip extends AudioKey
+
   case object MiniCannonClip extends AudioKey
+
   case object MissileClip extends AudioKey
+
   case object PlasmaClip extends AudioKey
+
   case object ReloadClip extends AudioKey
+
   case object RewardClip extends AudioKey
 
 }

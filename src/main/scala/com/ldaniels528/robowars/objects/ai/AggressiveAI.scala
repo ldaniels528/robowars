@@ -17,6 +17,13 @@ class AggressiveAI(host: AbstractVehicle) extends PassiveAI(host) {
 
   override def update(dt: Double) {
     super.update(dt)
+
+    // if current weapon is empty, switch
+    if(host.selectedWeapon.ammo == 0) {
+      host.switchWeapons()
+    }
+
+    // pursue the target
     for {
       target <- myTarget
       distanceToTarget = target.distanceToPoint(host.position)

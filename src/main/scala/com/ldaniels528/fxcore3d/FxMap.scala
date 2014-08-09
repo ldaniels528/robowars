@@ -1,7 +1,5 @@
 package com.ldaniels528.fxcore3d
 
-import scala.collection.mutable.ArrayBuffer
-
 /**
  * Represents a virtual map of the world divided into grids which are populated
  * by objects. The map is only used to optimize collision detection.
@@ -32,24 +30,23 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
   /**
    * Inserts the grids that are within the sphere into the supplied vector.
    */
-  def getGridsForSphere(p: FxPoint3D, radius: Double, grids: ArrayBuffer[FxGrid]) {
+  def getGridsForSphere(p: FxPoint3D, radius: Double): Seq[FxGrid] = {
     val x = p.x
     val y = p.z
 
     // calculate the number of grids needed to cover the radius
-    val xstart = getGridX(x - radius)
-    val xend = getGridX(x + radius)
+    val xStart = getGridX(x - radius)
+    val xEnd = getGridX(x + radius)
 
     // calculate the starting y position in the map
-    val ystart = getGridY(y - radius)
-    val yend = getGridY(y + radius)
+    val yStart = getGridY(y - radius)
+    val yEnd = getGridY(y + radius)
 
     // insert all those grids into the array provided
-    for (yy <- ystart to yend) {
-      for (xx <- xstart to xend) {
-        grids += myGrids(yy * rows + xx)
-      }
-    }
+    for {
+      yy <- yStart to yEnd
+      xx <- xStart to xEnd
+    } yield myGrids(yy * rows + xx)
   }
 
   /**
@@ -57,35 +54,41 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
    */
   def getAllObjectsInRadius(p: FxPoint3D, radius: Double): Seq[FxObject] = {
     // calculate the number of grids needed to cover the radius
-    val xstart = getGridX(p.x - radius)
-    val xend = getGridX(p.x + radius)
+    val xStart = getGridX(p.x - radius)
+    val xEnd = getGridX(p.x + radius)
 
     // calculate the starting y position in the map
-    val ystart = getGridY(p.y - radius)
-    val yend = getGridY(p.y + radius)
+    val yStart = getGridY(p.y - radius)
+    val yEnd = getGridY(p.y + radius)
+
+    // compute the square radius
+    val radiusSq = radius * radius
 
     // filter for only the objects within the square radius
-    (ystart to yend) flatMap { yy =>
-      (xstart to xend) flatMap { xx =>
-        myGrids(yy * rows + xx).getAllObjectsInRadius(p, radius)
+    (yStart to yEnd) flatMap { yy =>
+      (xStart to xEnd) flatMap { xx =>
+        myGrids(yy * rows + xx).getAllObjectsInRadius(p, radiusSq)
       }
     }
   }
 
   def getAllObjectsInSphere(p: FxPoint3D, radius: Double, sphereIsVisible: (FxPoint3D, Double) => Boolean): Seq[FxObject] = {
     // calculate the number of grids needed to cover the radius
-    val xstart = getGridX(p.x - radius)
-    val xend = getGridX(p.x + radius)
+    val xStart = getGridX(p.x - radius)
+    val xEnd = getGridX(p.x + radius)
 
     // calculate the starting y position in the map
-    val ystart = getGridY(p.y - radius)
-    val yend = getGridY(p.y + radius)
+    val yStart = getGridY(p.y - radius)
+    val yEnd = getGridY(p.y + radius)
+
+    // compute the square radius
+    val radiusSq = radius * radius
 
     // filter for only the objects within the square radius
-    (ystart to yend) flatMap { yy =>
-      (xstart to xend) flatMap { xx =>
-        myGrids(yy * rows + xx).getAllObjectsInRadius(p, radius) filter { obj =>
-          val inst = obj.polyhedronInstance
+    (yStart to yEnd) flatMap { yy =>
+      (xStart to xEnd) flatMap { xx =>
+        myGrids(yy * rows + xx).getAllObjectsInRadius(p, radiusSq) filter { obj =>
+          val inst = obj.modelInstance
           sphereIsVisible(inst.position, inst.boundingRadius)
         }
       }
@@ -95,19 +98,22 @@ case class FxMap(xmin: Double, ymin: Double, size: Double, rows: Int) {
   /**
    * Retrieve all the objects within the specified radius into the supplied vector and in-front of the plane
    */
-  def getAllObjectsInRadiusAndInfront(p: FxPoint3D, dir: FxPoint3D, radius: Double): Seq[FxObject] = {
+  def getAllObjectsInRadiusAndInFront(p: FxPoint3D, dir: FxPoint3D, radius: Double): Seq[FxObject] = {
     // calculate the number of grids needed to cover the radius
-    val xstart = getGridX(p.x - radius)
-    val xend = getGridX(p.x + radius)
+    val xStart = getGridX(p.x - radius)
+    val xEnd = getGridX(p.x + radius)
 
     // calculate the starting y position in the map
-    val ystart = getGridY(p.y - radius)
-    val yend = getGridY(p.y + radius)
+    val yStart = getGridY(p.y - radius)
+    val yEnd = getGridY(p.y + radius)
+
+    // compute the square radius
+    val radiusSq = radius * radius
 
     // filter for only the objects within the square radius
-    (ystart to yend) flatMap { yy =>
-      (xstart to xend) flatMap { xx =>
-        myGrids(yy * rows + xx).getAllObjectsInRadius(p, radius) filter { obj =>
+    (yStart to yEnd) flatMap { yy =>
+      (xStart to xEnd) flatMap { xx =>
+        myGrids(yy * rows + xx).getAllObjectsInRadius(p, radiusSq) filter { obj =>
           val vector = p.vectorTo(obj.position)
           vector.dotProduct(dir) < 0
         }

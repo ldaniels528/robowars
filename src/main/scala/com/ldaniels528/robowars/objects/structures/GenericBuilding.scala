@@ -1,28 +1,26 @@
 package com.ldaniels528.robowars.objects.structures
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
-import com.ldaniels528.robowars.ContentManager
-import com.ldaniels528.robowars.objects.structures.GenericBuilding._
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
 /**
  * Generic Building
  * @author lawrence.daniels@gmail.com
  */
-case class GenericBuilding(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
-  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, dim.h, pos.z), agl, health = 50) {
+case class GenericBuilding(w: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
+  extends AbstractStaticStructure(w, FxPoint3D(pos.x, scale.h, pos.z), agl, health = 50) {
 
   // set the default polyhedron instance
-  lazy val polyhedronInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
+  lazy val modelInstance = FxModelInstance("/models/structures/building1.f3d", scale)
 
   override def die() {
     super.die()
-    val pos = position
 
-    new GenericBuildingRuin(world, pos, angle, FxScale3D(dim.w, dim.h * .2, dim.d))
+    // leave ruins behind
+    new GenericBuildingRuin(world, position, angle, scale.reducedHeight(0.2d))
 
     // destroy the building
-    destruct(dim.h)
+    destruct(scale.h)
   }
 }
 
@@ -31,10 +29,9 @@ case class GenericBuilding(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, di
  * @author lawrence.daniels@gmail.com
  */
 object GenericBuilding {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/structures/building1.f3d")
 
-  def apply(world: FxWorld, pos: FxPoint3D, dim: FxScale3D): GenericBuilding = {
-    GenericBuilding(world, pos, FxAngle3D(), dim)
+  def apply(world: FxWorld, pos: FxPoint3D, scale: FxScale3D): GenericBuilding = {
+    GenericBuilding(world, pos, FxAngle3D(), scale)
   }
 
 }
