@@ -66,7 +66,7 @@ trait FxWorld {
    * Inserts all objects that are within radius and in-front of the plane
    * specified by a point (pos) and a normal (norm).
    */
-  def getAllObjectsInRadiusAndInfront(point: FxPoint3D, norm: FxPoint3D, radius: Double): Seq[FxObject]
+  def getAllObjectsInRadiusAndInFront(point: FxPoint3D, norm: FxPoint3D, radius: Double): Seq[FxObject]
 
 }
 
