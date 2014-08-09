@@ -7,7 +7,7 @@ import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
  * FxEngine Bounding Volume
  * @author lawrence.daniels@gmail.com
  */
-case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPoint3D) {
+case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxScale3D) {
   val boundingRadius = myScale.magnitude()
   protected val myBox = FxArrayOf3DPoints(8)
   protected val myNormals = FxArrayOf3DPoints(6)
@@ -37,16 +37,14 @@ case class FxBoundingVolume(theHostPolyInst: FxPolyhedronInstance, myScale: FxPo
     val point = FxPoint3D()
     val vector = FxPoint3D()
 
-    otherBox.points foreach { box =>
+    otherBox.points exists { box =>
       point.set(box.x, box.y, box.z)
-      val outside = isPointOutSideVolume(point, vector)
-      if (!outside) return true
+      !isPointOutSideVolume(point, vector)
     }
-    false
   }
 
   private def isPointOutSideVolume(point: FxPoint3D, vector: FxPoint3D): Boolean = {
-    myNormals.points.exists { normal =>
+    myNormals.points exists { normal =>
       // make the vector from my normal to other point
       val vp = myBox(normal.index)
       vector.set(vp.x, vp.y, vp.z)
