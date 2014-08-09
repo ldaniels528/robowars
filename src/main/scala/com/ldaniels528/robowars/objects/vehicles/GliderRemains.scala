@@ -24,8 +24,8 @@ class GliderRemains(world: FxWorld, deadActor: AbstractVehicle)
     val p = position
 
     // -- check if collision with ground
-    if (p.y < SCALE.y) {
-      p.y = SCALE.y
+    if (p.y < SCALE.h) {
+      p.y = SCALE.h
 
       val dp = getdPosition()
       dp.x = 0
@@ -40,7 +40,7 @@ class GliderRemains(world: FxWorld, deadActor: AbstractVehicle)
       setAngle(a)
       setdAngle(new FxAngle3D())
       setdPosition(dp)
-    } else if (p.y > SCALE.y) {
+    } else if (p.y > SCALE.h) {
       // -- GRAVITY
       val dp = getdPosition()
       dp.y += world.gravity * dt
@@ -52,7 +52,7 @@ class GliderRemains(world: FxWorld, deadActor: AbstractVehicle)
 
 object GliderRemains {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/gliderRemains.f3d")
-  val SCALE: FxPoint3D = new FxPoint3D(8d, 0.2d, 4d)
+  val SCALE = new FxScale3D(8d, 0.2d, 4d)
   val ourRandRot: Double = 1d
 
 }

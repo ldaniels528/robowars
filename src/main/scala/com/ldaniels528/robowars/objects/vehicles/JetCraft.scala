@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
-import com.ldaniels528.fxcore3d.{FxPoint3D, FxVelocityVector, FxWorld}
+import com.ldaniels528.fxcore3d.{FxScale3D, FxPoint3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.objects.vehicles.JetCraft._
 import com.ldaniels528.robowars.objects.weapons.{BombBay, MiniCannon, MissileLauncher}
@@ -11,7 +11,7 @@ import com.ldaniels528.robowars.objects.weapons.{BombBay, MiniCannon, MissileLau
  * @author ldaniels
  */
 case class JetCraft(w: FxWorld, p: FxPoint3D)
-  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), health = 5d) {
+  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0), health = 5d) {
 
   val turningRate: Double = 0.6d
   val pitchRate: Double = 0.5d
@@ -26,9 +26,9 @@ case class JetCraft(w: FxWorld, p: FxPoint3D)
   lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // -- add the weapons
-  this += new MiniCannon(this, FxPoint3D(0, SCALE.y, 0))
-  this += new MissileLauncher(this, FxPoint3D(0, SCALE.y, 0))
-  this += new BombBay(this, FxPoint3D(0, SCALE.y, 0))
+  this += new MiniCannon(this, FxPoint3D(0, SCALE.h, 0))
+  this += new MissileLauncher(this, FxPoint3D(0, SCALE.h, 0))
+  this += new BombBay(this, FxPoint3D(0, SCALE.h, 0))
   selectWeapon(0)
 
   override def die() {
@@ -44,8 +44,8 @@ case class JetCraft(w: FxWorld, p: FxPoint3D)
 
     // -- check collision with ground
     val p = position
-    if (p.y < SCALE.y) {
-      p.y = SCALE.y
+    if (p.y < SCALE.h) {
+      p.y = SCALE.h
       setPosition(p)
 
       // update the velocity
@@ -71,6 +71,6 @@ case class JetCraft(w: FxWorld, p: FxPoint3D)
  */
 object JetCraft {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/bomber.f3d")
-  val SCALE = FxPoint3D(8d, 1d, 4d)
+  val SCALE = FxScale3D(8d, 1d, 4d)
 
 }

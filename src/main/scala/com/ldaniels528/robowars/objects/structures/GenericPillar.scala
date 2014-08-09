@@ -9,11 +9,11 @@ import com.ldaniels528.robowars.objects.structures.GenericPillar._
  * Generic Pillar
  * @author lawrence.daniels@gmail.com
  */
-case class GenericPillar(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
-  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, dim.h, pos.z), agl) {
+case class GenericPillar(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
+  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, scale.h, pos.z), agl) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, dim.toPoint)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, scale)
 
 }
 

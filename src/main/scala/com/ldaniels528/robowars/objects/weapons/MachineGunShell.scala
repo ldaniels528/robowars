@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
-import com.ldaniels528.fxcore3d.{FxAngle3D, FxPoint3D, FxVelocityVector, FxWorld}
+import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.objects.weapons.MachineGunShell._
 import com.ldaniels528.robowars.objects.weapons.AbstractShellCasing.computeVector
@@ -24,7 +24,7 @@ case class MachineGunShell(w: FxWorld, p: FxPoint3D, a: FxAngle3D, vel: FxPoint3
  */
 object MachineGunShell {
   private val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/shell.f3d")
-  private val SCALE = new FxPoint3D(0.05d, 0.05d, 0.05d)
+  private val SCALE = new FxScale3D(0.05d, 0.05d, 0.05d)
   private val ANGLE = FxAngle3D(2d, 2d, 2d)
 
 }

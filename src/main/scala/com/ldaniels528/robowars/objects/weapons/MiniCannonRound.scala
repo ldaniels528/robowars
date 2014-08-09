@@ -24,6 +24,6 @@ case class MiniCannonRound(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D
  */
 object MiniCannonRound {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/bullet.f3d")
-  val SCALE = FxPoint3D(0.15d, 0.15d, 0.75d)
+  val SCALE = FxScale3D(0.15d, 0.15d, 0.75d)
 
 }

@@ -11,7 +11,7 @@ import com.ldaniels528.robowars.objects.weapons.MissileLauncher
  * @author lawrence.daniels@gmail.com
  */
 case class AntiTankCannon(w: FxWorld, p: FxPoint3D)
-  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.y, p.z), FxVelocityVector(Math.PI, 0, 0), health = 10d) {
+  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0), health = 10d) {
 
   val turningRate: Double = 4d
   val pitchRate: Double = 0
@@ -26,14 +26,14 @@ case class AntiTankCannon(w: FxWorld, p: FxPoint3D)
   lazy val modelInstance = new FxPolyhedronInstance(MODEL, SCALE)
 
   // attach some weapons
-  this += MissileLauncher(this, FxPoint3D(0, p.y + SCALE.y, 0), ammo0 = Int.MaxValue)
+  this += MissileLauncher(this, FxPoint3D(0, p.y + SCALE.h, 0), ammo0 = Int.MaxValue)
   selectWeapon(0)
 
   override def die() {
     super.die()
 
     // leave the carcass behind
-    new FesseTankRemains(world, this)
+    new VehicleRemains(world, this)
     ()
   }
 
@@ -45,6 +45,6 @@ case class AntiTankCannon(w: FxWorld, p: FxPoint3D)
  */
 object AntiTankCannon {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/antitank1.f3d")
-  val SCALE = FxPoint3D(1d, 1d, 2d)
+  val SCALE = FxScale3D(1d, 1d, 2d)
 
 }

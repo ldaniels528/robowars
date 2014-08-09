@@ -24,7 +24,7 @@ class GenericFragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: D
   val generation = generation0 - 1
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, FxWorld.random3DPoint(size))
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, FxWorld.random3DScale(size))
 
   // set the delta-position
   setdPosition({

@@ -26,7 +26,7 @@ class GenericExplosion(world: FxWorld,
   var dScale2: Double = _
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, FxPoint3D(strength0 * 2, strength0 * 0.33, strength0 * 2))
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, FxScale3D(strength0 * 2, strength0 * 0.33, strength0 * 2))
 
   // create some fragments
   for (n <- 1 to (nbrOfFragments * strength).toInt) {

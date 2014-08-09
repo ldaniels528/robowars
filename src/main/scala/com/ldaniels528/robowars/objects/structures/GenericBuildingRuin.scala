@@ -13,7 +13,7 @@ class GenericBuildingRuin(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale:
   extends AbstractStaticStructure(world, FxPoint3D(pos.x, scale.h, pos.z), agl, Double.MaxValue) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, scale.toPoint)
+  lazy val modelInstance = new FxPolyhedronInstance(MODEL, scale)
 
 }
 

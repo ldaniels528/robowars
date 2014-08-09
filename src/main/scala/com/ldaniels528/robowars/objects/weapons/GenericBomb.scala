@@ -62,7 +62,7 @@ class GenericBomb(world: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, str
  */
 object GenericBomb {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/bomb1.f3d")
-  val SCALE = new FxPoint3D(0.5d, 0.5d, 1d)
+  val SCALE = new FxScale3D(0.5d, 0.5d, 1d)
   val START_ANGLE: Double = 1d
   val ROTATION: Double = 3d
   val BLAST_RADIUS = 30d

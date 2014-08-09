@@ -24,6 +24,6 @@ case class Missile(w: FxWorld, theShooter: AbstractVehicle, p: FxPoint3D, a: FxA
  */
 object Missile {
   val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/missile.f3d")
-  val SCALE = FxPoint3D(0.25d, 0.25d, 1.5d)
+  val SCALE = FxScale3D(0.25d, 0.25d, 1.5d)
 
 }

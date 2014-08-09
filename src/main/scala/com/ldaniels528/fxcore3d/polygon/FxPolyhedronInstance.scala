@@ -9,13 +9,14 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
  * FxEngine Polyhedron Instance
  * @author lawrence.daniels@gmail.com
  */
-class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
+class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, scale: FxScale3D) {
   protected val polygonIntensities = new Array[Double](thePolyhedron.nbrOfPolygons)
   protected val transformedVertices = new FxArrayOf3DPoints(thePolyhedron.vertices.length)
   protected val transformMatrix = new FxMatrix3D()
-  protected val boundingVolume = new FxBoundingVolume(this, myScale)
+  protected val boundingVolume = new FxBoundingVolume(this, scale)
   protected val myPosition = new FxPoint3D()
   protected val myAngle = new FxAngle3D()
+  protected val myScale = scale.toPoint
 
   // create the vertices to be used for storing transformations
   protected var verticesAreDirty: Boolean = true
@@ -47,7 +48,7 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, myScale: FxPoint3D) {
     val theirBuffer = camera.projectWithCheck(transformedVertices)
     if (theirBuffer.clipAndOp != 0) {
       // -- all vertices outside the view
-      return 
+      return
     }
     if (theirBuffer.clipOrOp != 0) {
       // -- some vertices outside

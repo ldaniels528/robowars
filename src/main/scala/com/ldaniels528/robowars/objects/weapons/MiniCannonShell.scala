@@ -24,7 +24,7 @@ case class MiniCannonShell(w: FxWorld, p: FxPoint3D, a: FxAngle3D, vel: FxPoint3
  */
 object MiniCannonShell {
   private val MODEL: FxPolyhedron = ContentManager.loadModel("/models/weapons/shell.f3d")
-  private val SCALE = new FxPoint3D(0.1d, 0.1d, 0.2d)
+  private val SCALE = new FxScale3D(0.1d, 0.1d, 0.2d)
   private val ANGLE = FxAngle3D(2d, 2d, 2d)
 
 }

@@ -79,6 +79,15 @@ object FxWorld {
   /**
    * Returns a point in a random position in space
    * @param range the range of each coordinate value
+   * @return a [[FxScale3D]]
+   */
+  def random3DScale(range: Double): FxScale3D = {
+    FxScale3D(rand(0, range), rand(0, range), rand(0, range))
+  }
+
+  /**
+   * Returns a point in a random position in space
+   * @param range the range of each coordinate value
    * @return a [[FxPoint3D]]
    */
   def random3DPoint(range: Double): FxPoint3D = {
@@ -103,7 +112,7 @@ object FxWorld {
    * Prints the class name and a string to stout.
    */
   def debug(source: Any, message: String) {
-    System.out.println(s"***${source.getClass().getName()} : $message")
+    System.out.println(s"***${source.getClass.getName} : $message")
   }
 
 }
