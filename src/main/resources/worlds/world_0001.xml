@@ -1,9 +1,5 @@
 <world name="Atlantis" minX="-500" minY="-500" size="1000" rows="2" gravity="-10">
     <!-- color definitions -->
-    <colorDef id="daySky" red="50" green="50" blue="200"/>
-    <colorDef id="eveningSky" red="50" green="50" blue="100"/>
-    <colorDef id="nightSky" red="30" green="30" blue="50"/>
-
     <colorDef id="desertLand" red="170" green="170" blue="90"/>
     <colorDef id="pasture1" red="90" green="90" blue="0"/>
     <colorDef id="pasture2" red="50" green="50" blue="0"/>
@@ -28,11 +24,31 @@
     <objectDef id="HoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank"/>
     <objectDef id="Rover" class="com.ldaniels528.robowars.objects.vehicles.Rover"/>
     <objectDef id="Tank" class="com.ldaniels528.robowars.objects.vehicles.Tank"/>
+    <objectDef id="Speeder" class="com.ldaniels528.robowars.objects.vehicles.Speeder"/>
 
-    <!-- actor definitions -->
-    <actor type="HoverTank" x="0.0" y="0.75" z="-290.0" isPlayer="true"/>
+    <!-- vehicle placements -->
+    <actor type="Speeder" x="0.0" y="0.75" z="-290.0" isPlayer="true"/>
+    <actor type="Cruiser" x="-165.0" y="1.0" z="-185.0" isPlayer="false"/>
+    <actor type="Rover" x="-43.6" y="1.0" z="-104.8" isPlayer="false"/>
+    <actor type="AntiTankCannon" x="-295.0" y="1.0" z="165.0" isPlayer="false"/>
+    <actor type="Speeder" x="-345.0" y="1.0" z="165.0" isPlayer="false"/>
+    <actor type="AntiTankCannon" x="-295.0" y="1.0" z="215.0" isPlayer="false"/>
+    <actor type="Cruiser" x="-345.0" y="1.0" z="215.0" isPlayer="false"/>
+    <actor type="Rover" x="25.0" y="1.0" z="225.0" isPlayer="false"/>
+    <actor type="AntiTankCannon" x="-25.0" y="1.0" z="225.0" isPlayer="false"/>
+    <actor type="Cruiser" x="15.0" y="1.0" z="335.0" isPlayer="false"/>
+    <actor type="Speeder" x="-15.0" y="1.0" z="335.0" isPlayer="false"/>
+    <actor type="AntiTankCannon" x="-255.0" y="1.0" z="295.0" isPlayer="false"/>
+    <actor type="Cruiser" x="-255.0" y="1.0" z="365.0" isPlayer="false"/>
+    <actor type="AntiTankCannon" x="-305.0" y="1.0" z="325.0" isPlayer="false"/>
+    <actor type="Speeder" x="0.0" y="0.75" z="300.0" isPlayer="false"/>
+    <actor type="Rover" x="0.0" y="0.75" z="-360.0" isPlayer="false"/>
+    <actor type="Tank" x="-10.0" y="-369.0" z="0.0" isPlayer="false"/>
+
+    <!-- item placements -->
     <item type="HealthCube" x="-100.0" y="0.25" z="0.0" />
 
+    <!-- structure placements  -->
     <structure type="GenericPillar" x="-410.0" y="0.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="2.0" height="12.0"
                depth="3.0"/>
     <structure type="GenericWall" x="-400.0" y="0.0" z="-300.0" rx="0.0" ry="0.0" rz="0.0" width="8.0" height="10.0"
@@ -1505,20 +1521,5 @@
                depth="5.0"/>
     <structure type="GenericBuilding" x="115.0" y="0.0" z="-35.0" rx="0.0" ry="0.0" rz="0.0" width="5.0" height="5.0"
                depth="5.0"/>
-    <actor type="Cruiser" x="-165.0" y="1.0" z="-185.0" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="-43.6" y="1.0" z="-104.8" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="-295.0" y="1.0" z="165.0" isPlayer="false"/>
-    <actor type="Cruiser" x="-345.0" y="1.0" z="165.0" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="-295.0" y="1.0" z="215.0" isPlayer="false"/>
-    <actor type="Cruiser" x="-345.0" y="1.0" z="215.0" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="25.0" y="1.0" z="225.0" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="-25.0" y="1.0" z="225.0" isPlayer="false"/>
-    <actor type="Cruiser" x="15.0" y="1.0" z="335.0" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="-15.0" y="1.0" z="335.0" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="-255.0" y="1.0" z="295.0" isPlayer="false"/>
-    <actor type="Cruiser" x="-255.0" y="1.0" z="365.0" isPlayer="false"/>
-    <actor type="AntiTankCannon" x="-305.0" y="1.0" z="325.0" isPlayer="false"/>
-    <actor type="Rover" x="0.0" y="0.75" z="-500.0" isPlayer="false"/>
-    <actor type="Rover" x="0.0" y="0.75" z="-360.0" isPlayer="false"/>
-    <actor type="Tank" x="-10.0" y="-369.0" z="0.0" isPlayer="false"/>
+
 </world>
