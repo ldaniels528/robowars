@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxPolyhedronInstance}
+import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxModelInstance}
 import com.ldaniels528.robowars.ContentManager
 import com.ldaniels528.robowars.objects.structures.{AbstractMovingScenery, GenericFragment}
 import com.ldaniels528.robowars.objects.weapons.GenericExplosion._
@@ -26,7 +26,7 @@ class GenericExplosion(world: FxWorld,
   var dScale2: Double = _
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxPolyhedronInstance(MODEL, FxScale3D(strength0 * 2, strength0 * 0.33, strength0 * 2))
+  lazy val modelInstance = new FxModelInstance(MODEL, FxScale3D(strength0 * 2, strength0 * 0.33, strength0 * 2))
 
   // create some fragments
   for (n <- 1 to (nbrOfFragments * strength).toInt) {
