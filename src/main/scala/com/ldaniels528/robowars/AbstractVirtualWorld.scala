@@ -3,7 +3,7 @@ package com.ldaniels528.robowars
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ListBuffer
 
 /**
  * Represents the virtual world in which all objects reside.
@@ -19,12 +19,12 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
   /**
    * All objects in this world.
    */
-  val myObjects = ArrayBuffer[FxObject]()
+  val myObjects = ListBuffer[FxObject]()
 
   /**
    * Stack of new objects that should enter the world next round.
    */
-  private val newObjects = ArrayBuffer[FxObject]()
+  private val newObjects = ListBuffer[FxObject]()
 
   /**
    * The time in this world.
@@ -96,7 +96,7 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
    */
   private def updateObjects(dt: Double) {
     // create a container for removing dead objects
-    val deadObjects = ArrayBuffer[FxObject]()
+    val deadObjects = ListBuffer[FxObject]()
 
     // update all living objects
     myObjects.foreach { obj =>
@@ -118,7 +118,7 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
    * Instructs all objects to handle their collisions.
    */
   private def handleEvents() {
-    myObjects.foreach(_.handleEvents)
+    myObjects.foreach(_.handleEvents())
   }
 
   /**
@@ -127,7 +127,7 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
   private def insertNewObjects() {
     if (newObjects.nonEmpty) {
       myObjects ++= newObjects
-      newObjects.clear
+      newObjects.clear()
     }
   }
 
@@ -149,8 +149,8 @@ abstract class AbstractVirtualWorld(Xmin: Double, Ymin: Double, size: Double, ro
    * Inserts all objects that are within radius and in-front of the plane
    * specified by a point (pos) and a normal (norm).
    */
-  def getAllObjectsInRadiusAndInfront(point: FxPoint3D, norm: FxPoint3D, radius: Double): Seq[FxObject] = {
-    map.getAllObjectsInRadiusAndInfront(point, norm, radius)
+  def getAllObjectsInRadiusAndInFront(point: FxPoint3D, norm: FxPoint3D, radius: Double): Seq[FxObject] = {
+    map.getAllObjectsInRadiusAndInFront(point, norm, radius)
   }
 
 }
