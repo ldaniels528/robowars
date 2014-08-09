@@ -9,7 +9,7 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
  * FxEngine Polyhedron Instance
  * @author lawrence.daniels@gmail.com
  */
-class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, scale: FxScale3D) {
+case class FxModelInstance(thePolyhedron: FxPolyhedron, scale: FxScale3D) {
   protected val polygonIntensities = new Array[Double](thePolyhedron.nbrOfPolygons)
   protected val transformedVertices = new FxArrayOf3DPoints(thePolyhedron.vertices.length)
   protected val transformMatrix = new FxMatrix3D()
@@ -39,7 +39,7 @@ class FxPolyhedronInstance(thePolyhedron: FxPolyhedron, scale: FxScale3D) {
     }
   }
 
-  def checkForCollisionWith(polyhedron: FxPolyhedronInstance): Boolean = {
+  def checkForCollisionWith(polyhedron: FxModelInstance): Boolean = {
     boundingVolume.checkForCollisionWith(polyhedron.boundingVolume)
   }
 
