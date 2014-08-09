@@ -5,15 +5,15 @@ import java.awt.Graphics2D
 import com.ldaniels528.fxcore3d.camera.FxCamera
 import com.ldaniels528.fxcore3d.polygon.FxPolyhedronInstance
 
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ListBuffer
 
 /**
  * Abstract class the represents a virtual object.
  * @author lawrence.daniels@gmail.com
  */
 abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D) {
-  private val events = ArrayBuffer[FxEvent]()
-  private val occupiedGrids = ArrayBuffer[FxGrid]()
+  private val events = ListBuffer[FxEvent]()
+  private var occupiedGrids: Seq[FxGrid] = Seq.empty
   private var alive: Boolean = true
 
   val Pos: FxPoint3D = myPos.makeClone
@@ -132,11 +132,8 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
    * frame while static objects do it once.
    */
   protected def updateTheOccupiedGrids() {
-    // clear the list.
-    occupiedGrids.clear()
-
     // get the new grids.
-    world.map.getGridsForSphere(Pos, modelInstance.boundingRadius, occupiedGrids)
+    occupiedGrids = world.map.getGridsForSphere(Pos, modelInstance.boundingRadius)
 
     // insert this object in all occupied grids.
     occupiedGrids.foreach(_.insertObject(this))
