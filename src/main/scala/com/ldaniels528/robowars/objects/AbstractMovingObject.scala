@@ -4,12 +4,12 @@ import com.ldaniels528.fxcore3d._
 
 /**
  * Represents an abstract moving object
- * @param world
- * @param pos
- * @param agl
- * @param dpos
- * @param dagl
- * @param health
+ * @param world the virtual world
+ * @param pos the object's position in space
+ * @param agl the object's angle in space
+ * @param dpos the object's positional acceleration
+ * @param dagl the object's angular acceleration
+ * @param initialHealth the object's initial health
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractMovingObject(world: FxWorld,
@@ -17,18 +17,5 @@ abstract class AbstractMovingObject(world: FxWorld,
                                     val agl: FxAngle3D,
                                     val dpos: FxVelocityVector,
                                     val dagl: FxAngle3D,
-                                    var health: Double = Double.MaxValue)
-  extends FxMovingObject(world, pos, agl, dpos, dagl) {
-
-  /**
-   * Causes the host's health to be reduced by the given damage amount
-   * @param damage the given damage amount
-   * @return the remaining health amount
-   */
-  def damageHealth(damage: Double): Double = {
-    health -= damage
-    if (health > 5) health = 5
-    health
-  }
-
-}
+                                    val initialHealth: Double = Double.MaxValue)
+  extends FxMovingObject(world, pos, agl, dpos, dagl) with Damageable
