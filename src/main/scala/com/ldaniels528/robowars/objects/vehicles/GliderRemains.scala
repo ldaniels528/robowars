@@ -1,8 +1,7 @@
 package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxModelInstance}
-import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 import com.ldaniels528.robowars.objects.structures.AbstractMovingScenery
 import com.ldaniels528.robowars.objects.vehicles.GliderRemains._
 
@@ -14,10 +13,10 @@ class GliderRemains(world: FxWorld, deadActor: AbstractVehicle)
   extends AbstractMovingScenery(world, deadActor.position, deadActor.angle, deadActor.getdPosition(), deadActor.getdAngle()) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxModelInstance(MODEL, SCALE)
+  lazy val modelInstance = FxModelInstance("/models/actors/gliderRemains.f3d", SCALE)
 
   // -- set a random rotation on the remaining glider
-  setdAngle(FxWorld.random3DAngle(ourRandRot))
+  setdAngle(FxWorld.random3DAngle(rotation = 1d))
 
   override def update(dt: Double) {
     super.update(dt)
@@ -51,8 +50,6 @@ class GliderRemains(world: FxWorld, deadActor: AbstractVehicle)
 }
 
 object GliderRemains {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/gliderRemains.f3d")
   val SCALE = new FxScale3D(8d, 0.2d, 4d)
-  val ourRandRot: Double = 1d
 
 }

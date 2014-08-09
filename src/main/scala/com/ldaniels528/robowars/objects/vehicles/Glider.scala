@@ -1,8 +1,7 @@
 package com.ldaniels528.robowars.objects.vehicles
 
-import com.ldaniels528.fxcore3d.polygon.{FxPolyhedron, FxModelInstance}
-import com.ldaniels528.fxcore3d.{FxScale3D, FxPoint3D, FxVelocityVector, FxWorld}
-import com.ldaniels528.robowars.ContentManager
+import com.ldaniels528.fxcore3d.polygon.FxModelInstance
+import com.ldaniels528.fxcore3d.{FxPoint3D, FxScale3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.objects.vehicles.Glider._
 import com.ldaniels528.robowars.objects.weapons.{BombBay, MiniCannon, MissileLauncher}
 
@@ -23,7 +22,7 @@ case class Glider(w: FxWorld, p: FxPoint3D)
   val pitchClimbRateFactor: Double = 1d
 
   // set the default polyhedron instance
-  lazy val modelInstance = new FxModelInstance(MODEL, SCALE)
+  lazy val modelInstance = FxModelInstance("/models/actors/glider.f3d", SCALE)
 
   // attach some weapons
   this += new MiniCannon(this, new FxPoint3D(0, SCALE.h, 0))
@@ -61,7 +60,6 @@ case class Glider(w: FxWorld, p: FxPoint3D)
  * @author lawrence.daniels@gmail.com
  */
 object Glider {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/glider.f3d")
   val SCALE = FxScale3D(8d, 1d, 4d)
 
 }
