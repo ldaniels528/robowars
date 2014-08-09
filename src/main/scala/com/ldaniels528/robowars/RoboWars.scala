@@ -77,7 +77,7 @@ class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
       lastUpdate = currentTime
 
       // compute the delta time
-      val dt = Math.min(0.2, dtMillis.toDouble / 1000d)
+      val dt = dtMillis.toDouble / 1000d
 
       // handle keyboard events
       handleKeyboardEvents(dt)
@@ -131,7 +131,7 @@ class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
   }
 
   private def renderNotices(player: AbstractVehicle) {
-    if (world.time < 4d) {
+    if (world.time < 3d) {
       // show cursor key instructions
       val cursorCenterX = (super.getWidth - controlKeysImage.getWidth) / 2
       val textLeftX =   cursorCenterX - 150
@@ -275,7 +275,7 @@ object RoboWars {
    */
   def main(args: Array[String]) {
     // check for command line arguments
-    val noMusic = args.exists(_ == "no_music")
+    val noMusic = args.contains("no_music")
 
     // start the application
     val app = new RoboWars(noMusic)
