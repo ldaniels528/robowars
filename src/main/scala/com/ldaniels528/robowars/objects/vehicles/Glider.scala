@@ -16,7 +16,7 @@ case class Glider(w: FxWorld, p: FxPoint3D)
   val pitchRate: Double = 0.5d
   val acceleration: Double = 3d
   val brakingRate: Double = 3d
-  val maxVelocity: Double = 150d
+  val maxVelocity: Double = 100d
   val climbRate: Double = 3d
   val decentRate: Double = 4d
   val pitchClimbRateFactor: Double = 1d
