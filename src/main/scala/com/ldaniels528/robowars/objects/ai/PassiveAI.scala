@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars.objects.ai
 
 import com.ldaniels528.fxcore3d.{FxEvent, FxPoint3D}
-import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.MotionCommand
 import com.ldaniels528.robowars.objects.ai.PassiveAI._
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle

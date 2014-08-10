@@ -7,14 +7,13 @@ import com.ldaniels528.robowars.objects.vehicles._
 import com.ldaniels528.robowars.objects.ai.AggressiveAI
 
 import scala.collection.mutable.{Map => MMap}
+import scala.xml._
 
 /**
  * Virtual World Reader
  * @author lawrence.daniels@gmail.com
  */
 object VirtualWorldReader {
-
-  import scala.xml._
 
   /**
    * Loads the virtual world from disk
@@ -30,7 +29,7 @@ object VirtualWorldReader {
     var thePlayer: AbstractVehicle = null
 
     // create the world
-    val world = toWorld(xml).getOrElse(die("Invalid virtual world defintion"))
+    val world = toWorld(xml).getOrElse(die("Invalid virtual world definition"))
 
     // process the XML file
     xml.child map { node =>

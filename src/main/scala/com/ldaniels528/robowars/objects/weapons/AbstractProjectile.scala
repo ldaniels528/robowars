@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.SteeringCommand
 import com.ldaniels528.robowars.objects.Destructible
 import com.ldaniels528.robowars.objects.structures.Structure

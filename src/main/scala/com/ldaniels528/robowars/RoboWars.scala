@@ -7,7 +7,7 @@ import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
 import com.ldaniels528.robowars.audio.AudioManager._
-import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.WeaponCommand
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle

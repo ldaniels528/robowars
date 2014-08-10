@@ -2,7 +2,7 @@ package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.audio.AudioManager._
-import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.{SteeringCommand, WeaponCommand}
 import com.ldaniels528.robowars.objects.ai.AbstractAI
 import com.ldaniels528.robowars.objects.items.RewardItem
@@ -124,20 +124,23 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
     myLastPos = position
     myLastAgl = angle
 
-    super.update(dt)
-
     // -- synchronize this object's angle with the
     // -- angle in the velocity vector
-    val v = getdPosition()
-    val a = angle
-    v.synchronizeAngle(a)
-    setAngle(a)
+    setAngle({
+      val v = getdPosition()
+      val a = angle
+      v.synchronizeAngle(a)
+      a
+    })
 
     // update the CPU
     cpu.foreach(_.update(dt))
 
     // update the weapons
     weapons.foreach(_.update(dt))
+
+    // allow the super-class to update
+    super.update(dt)
   }
 
   def fireSelectedWeapon() = this += WeaponCommand(world.time, FIRE, 0)
