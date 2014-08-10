@@ -13,17 +13,4 @@ case class Pyramid(w: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/structures/pyramid.f3d", scale)
 
-  /**
-   * Causes this virtual object to die
-   */
-  override def die() {
-    super.die()
-
-    // leave ruins behind
-    new PyramidRuins(world, position, angle, scale.reducedHeight(0.2d))
-
-    // destroy the pyramid
-    destruct(scale.h)
-  }
-
 }

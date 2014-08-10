@@ -8,18 +8,20 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * Abstract Door
  * @author lawrence.daniels@gmail.com
  */
-abstract class AbstractMovingDoor(world: FxWorld,
-                                  pos: FxPoint3D,
-                                  agl: FxAngle3D,
-                                  speedUp: Double,
-                                  speedDown: Double,
-                                  waitTimeUp: Double,
-                                  height: Double)
+abstract class AbstractMovingDoor(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D)
   extends AbstractMovingStructure(world, pos, agl, new FxVelocityVector(), new FxAngle3D()) {
 
   private val originalPos: Double = pos.y
   private var state: Int = DOOR_INITIAL_STATE
   private var counter: Double = 0
+
+  def speedUp: Double
+
+  def speedDown: Double
+
+  def waitTimeUp: Double
+
+  def height: Double
 
   override def interestedOfCollisionWith(obj: FxObject): Boolean = {
     obj match {

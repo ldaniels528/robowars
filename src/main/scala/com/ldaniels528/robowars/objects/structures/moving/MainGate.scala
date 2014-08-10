@@ -9,8 +9,15 @@ import com.ldaniels528.robowars.objects.structures.moving.MainGate._
  * @author lawrence.daniels@gmail.com
  */
 case class MainGate(w: FxWorld, pos0: FxPoint3D, agl0: FxAngle3D)
-  extends AbstractMovingDoor(w, new FxPoint3D(pos0.x, pos0.y + SCALE.h, pos0.z), agl0,
-    speedUp = 10d, speedDown = 10d, waitTimeUp = 3d, height = 10d) {
+  extends AbstractMovingDoor(w, new FxPoint3D(pos0.x, pos0.y + SCALE.h, pos0.z), agl0) {
+
+  def speedUp = 10d
+
+  def speedDown = 10d
+
+  def waitTimeUp = 3d
+
+  def height = 10d
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/structures/mainGate.f3d", SCALE)

@@ -7,10 +7,10 @@ import com.ldaniels528.fxcore3d.polygon.FxModelInstance
  * Generic Wall
  * @author lawrence.daniels@gmail.com
  */
-case class GenericWall(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dim: FxScale3D)
-  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, dim.h, pos.z), agl) {
+case class GenericWall(theWorld: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
+  extends AbstractStaticStructure(theWorld, FxPoint3D(pos.x, scale.h, pos.z), agl) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = FxModelInstance("/models/structures/wall1.f3d", dim)
+  lazy val modelInstance = FxModelInstance("/models/structures/wall1.f3d", scale)
 
 }

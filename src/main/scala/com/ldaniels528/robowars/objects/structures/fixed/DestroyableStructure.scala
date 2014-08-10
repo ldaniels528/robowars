@@ -1,6 +1,6 @@
 package com.ldaniels528.robowars.objects.structures.fixed
 
-import com.ldaniels528.fxcore3d.{FxAngle3D, FxObject, FxPoint3D, FxWorld}
+import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.structures.fixed.DestroyableStructure._
@@ -17,21 +17,26 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
 
   def maxHealth: Double = initialHealth
 
-  override def die() {
-    import com.ldaniels528.robowars.audio.AudioManager._
+  def scale: FxScale3D
 
+  override def die() {
     // play the explosion clip
     audioPlayer ! BuildingExplodeClip
 
+    // leave ruins behind
+    new GenericBuildingRuin(world, position, angle, scale.reducedHeight(0.2d))
+
+    // create the explosion
+    val height = scale.h
+    val fragCount = (REL_FRAG_WHEN_DEAD * height).toInt
+    (1 to fragCount) foreach { n =>
+      new GenericFragment(world, REL_FRAG_SIZE * height,
+        position, REL_FRAG_SPREAD * height,
+        (height * REL_FRAG_GENERATIONS).toInt, height * REL_FRAG_SPEED, height * REL_FRAG_ROTATION)
+    }
+
     // allow super-class to take action
     super.die()
-  }
-
-  override def interestedOfCollisionWith(obj: FxObject): Boolean = {
-    obj match {
-      case r: AbstractProjectile => true
-      case _ => super.interestedOfCollisionWith(obj)
-    }
   }
 
   override def handleCollisionWith(obj: FxObject, dt: Double): Boolean = {
@@ -47,12 +52,10 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
     super.handleCollisionWith(obj, dt)
   }
 
-  protected def destruct(height: Double) {
-    val fragCount = (REL_FRAG_WHEN_DEAD * height).toInt
-    (1 to fragCount) foreach { n =>
-      new GenericFragment(world, REL_FRAG_SIZE * height,
-        position, REL_FRAG_SPREAD * height,
-        (height * REL_FRAG_GENERATIONS).toInt, height * REL_FRAG_SPEED, height * REL_FRAG_ROTATION)
+  override def interestedOfCollisionWith(obj: FxObject): Boolean = {
+    obj match {
+      case r: AbstractProjectile => true
+      case _ => super.interestedOfCollisionWith(obj)
     }
   }
 

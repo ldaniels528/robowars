@@ -13,15 +13,6 @@ case class GenericBuilding(w: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: Fx
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/structures/building1.f3d", scale)
 
-  override def die() {
-    super.die()
-
-    // leave ruins behind
-    new GenericBuildingRuin(world, position, angle, scale.reducedHeight(0.2d))
-
-    // destroy the building
-    destruct(scale.h)
-  }
 }
 
 /**
