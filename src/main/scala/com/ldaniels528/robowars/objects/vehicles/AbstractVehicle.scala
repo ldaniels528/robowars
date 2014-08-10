@@ -68,7 +68,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
       case i: RewardItem =>
         if (i.isAlive) {
           audioPlayer ! RewardClip
-          this.damageHealth(-2)
+          this.damageHealth(-maxHealth)
           i.die()
         }
         true

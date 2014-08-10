@@ -1,15 +1,15 @@
-package com.ldaniels528.robowars.objects.structures.moving
+package com.ldaniels528.robowars.objects.structures
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.robowars.objects.structures.moving.MainGate._
+import com.ldaniels528.robowars.objects.structures.MainGate._
 
 /**
  * Main Gate
  * @author lawrence.daniels@gmail.com
  */
 case class MainGate(w: FxWorld, pos0: FxPoint3D, agl0: FxAngle3D)
-  extends AbstractMovingDoor(w, new FxPoint3D(pos0.x, pos0.y + SCALE.h, pos0.z), agl0) {
+  extends MovingDoor(w, new FxPoint3D(pos0.x, pos0.y + SCALE.h, pos0.z), agl0) {
 
   def speedUp = 10d
 

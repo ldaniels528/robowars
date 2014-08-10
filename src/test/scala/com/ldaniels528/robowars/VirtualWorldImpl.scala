@@ -1,11 +1,9 @@
 package com.ldaniels528.robowars
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.objects.structures.fixed.{Wall1, Pillar, Building1}
-import com.ldaniels528.robowars.objects.structures.moving.MainGate
-import com.ldaniels528.robowars.objects.vehicles._
 import com.ldaniels528.robowars.objects.ai._
-import com.ldaniels528.robowars.objects.structures._
+import com.ldaniels528.robowars.objects.structures.{Wall1, _}
+import com.ldaniels528.robowars.objects.vehicles._
 
 /**
  * Virtual World Test Implementation

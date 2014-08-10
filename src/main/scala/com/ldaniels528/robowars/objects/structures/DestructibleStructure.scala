@@ -1,16 +1,15 @@
-package com.ldaniels528.robowars.objects.structures.fixed
+package com.ldaniels528.robowars.objects.structures
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.audio.AudioManager._
-import com.ldaniels528.robowars.objects.structures.Structure
 import com.ldaniels528.robowars.objects.weapons.AbstractProjectile
 import com.ldaniels528.robowars.objects.{Damageable, Destructible}
 
 /**
- * Destroyable Structure
+ * Represents a [[Structure]] that can be destroyed
  * @author lawrence.daniels@gmail.com
  */
-abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, initialHealth: Double)
+abstract class DestructibleStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, initialHealth: Double)
   extends FxObject(world, pos, agl)
   with Structure
   with Damageable
@@ -58,4 +57,3 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
   }
 
 }
-
