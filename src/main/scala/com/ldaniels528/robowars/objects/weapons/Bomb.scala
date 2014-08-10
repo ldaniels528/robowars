@@ -2,14 +2,13 @@ package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingScenery
 
 /**
  * Bomb
  * @author lawrence.daniels@gmail.com
  */
 case class Bomb(w: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, strength: Double)
-  extends AbstractMovingScenery(w, p, a, new FxVelocityVector(), FxWorld.random3DAngle(rotation = 3d)) {
+  extends FxMovingObject(w, p, a, new FxVelocityVector(), FxWorld.random3DAngle(rotation = 3d)) {
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/weapons/bomb1.f3d", FxScale3D(0.5d, 0.5d, 1d))

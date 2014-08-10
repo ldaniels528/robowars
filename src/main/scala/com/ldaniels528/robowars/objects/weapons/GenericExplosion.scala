@@ -2,8 +2,7 @@ package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingScenery, GenericFragment}
-import com.ldaniels528.robowars.objects.weapons.GenericExplosion._
+import com.ldaniels528.robowars.objects.Destructible
 
 /**
  * Generic Explosion
@@ -16,27 +15,23 @@ class GenericExplosion(world: FxWorld,
                        strength: Double,
                        time1: Double,
                        strength1: Double)
-  extends AbstractMovingScenery(world,
-    new FxPoint3D(pos.x, strength0, pos.z),
-    new FxAngle3D(0, 0, 0),
-    new FxVelocityVector(),
-    new FxAngle3D(0, 3, 0)) {
-  var dScale1: Double = _
-  var dScale2: Double = _
+  extends FxMovingObject(world, FxPoint3D(pos.x, strength0, pos.z), FxAngle3D(), FxVelocityVector(), FxAngle3D(0, 3, 0))
+  with Destructible {
+
+  val dScale1: Double = (strength - strength0) / time0
+  val dScale2: Double = (strength1 - strength) / time1
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/weapons/explosion.f3d", FxScale3D(strength0 * 2, strength0 * 0.33, strength0 * 2))
 
   // create some fragments
-  for (n <- 1 to (nbrOfFragments * strength).toInt) {
-    new GenericFragment(world, strength * fragmentsSize, pos, strength0
-      * fragmentsSpeed, 1, strength * fragmentsSpeed, strength0
-      * fragmentsRotation)
-
-    // calculate the delta scaling
-    dScale1 = (strength - strength0) / time0
-    dScale2 = (strength1 - strength) / time1
-  }
+  explodeIntoFragments(
+    fragments = strength.toInt,
+    size = strength * 0.2,
+    speed = strength,
+    spread = strength0,
+    rotation = strength0 * 0.3
+  )
 
   override def update(dt: Double) {
     super.update(dt)
@@ -47,6 +42,7 @@ class GenericExplosion(world: FxWorld,
     else if (age > time0) scale += (dScale2 * dt)
     else scale += (dScale1 * dt)
 
+    // scale up the explosion (sphere)
     modelInstance.setScalingFactor(scale)
 
     // adjust the position so that the bottom always touches the ground
@@ -54,17 +50,5 @@ class GenericExplosion(world: FxWorld,
     p.y = scale.y
     setPosition(p)
   }
-
-}
-
-/**
- * Generic Explosion (Companion Object)
- * @author lawrence.daniels@gmail.com
- */
-object GenericExplosion {
-  val nbrOfFragments: Double = 1d
-  val fragmentsSpeed: Double = 1d
-  val fragmentsSize: Double = 0.2d
-  val fragmentsRotation: Double = 0.3d
 
 }

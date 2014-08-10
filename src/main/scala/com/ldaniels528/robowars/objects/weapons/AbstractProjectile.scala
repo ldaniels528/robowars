@@ -3,8 +3,8 @@ package com.ldaniels528.robowars.objects.weapons
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.events.Events._
 import com.ldaniels528.robowars.events.SteeringCommand
-import com.ldaniels528.robowars.objects.structures.fixed.AbstractStaticStructure
-import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingStructure, GenericFragment}
+import com.ldaniels528.robowars.objects.Destructible
+import com.ldaniels528.robowars.objects.structures.Structure
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
@@ -12,7 +12,9 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, pos0: FxPoint3D, vector0: FxVelocityVector, val impactDamage: Double, lifeTime: Double = 4d)
-  extends FxMovingObject(world, pos0, vector0.angle, vector0, FxAngle3D()) {
+  extends FxMovingObject(world, pos0, vector0.angle, vector0, FxAngle3D())
+  with Destructible {
+
   protected var deadOfAge: Boolean = _
   protected var dieNextUpdate: Boolean = _
 
@@ -20,9 +22,12 @@ abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, 
     super.die()
 
     if (!deadOfAge) {
-      (0 to (5 * impactDamage).toInt) foreach { n =>
-        new GenericFragment(world, size = 0.25d, origin = position, spread = 1d, generation0 = 1, speed = 7d, rotation = 3)
-      }
+      explodeIntoFragments(
+        fragments = (5 * impactDamage).toInt,
+        size = 0.25,
+        speed = 7,
+        spread = 1,
+        rotation = 3)
     }
   }
 
@@ -36,8 +41,7 @@ abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, 
   override def interestedOfCollisionWith(obj: FxObject) = {
     obj match {
       case p: AbstractProjectile => p.shooter != shooter
-      case m: AbstractMovingStructure => true
-      case s: AbstractStaticStructure => true
+      case s: Structure => true
       case v: AbstractVehicle => shooter != v
       case _ => false
     }

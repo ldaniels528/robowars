@@ -3,7 +3,6 @@ package com.ldaniels528.robowars.objects.weapons
 import com.ldaniels528.fxcore3d.FxWorld._
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingScenery
 import com.ldaniels528.robowars.objects.weapons.ShellCasing._
 
 /**
@@ -11,7 +10,7 @@ import com.ldaniels528.robowars.objects.weapons.ShellCasing._
  * @author lawrence.daniels@gmail.com
  */
 class ShellCasing(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, vel: FxVelocityVector, scale: FxScale3D)
-  extends AbstractMovingScenery(world, pos, agl, randomVector(vel), randomAngle(vel.angle)) {
+  extends FxMovingObject(world, pos, agl, randomVector(vel), randomAngle(vel.angle)) {
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/weapons/shell.f3d", scale)
