@@ -2,7 +2,8 @@ package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.audio.AudioManager._
-import com.ldaniels528.robowars.events.{Events, SteeringCommand, WeaponCommand}
+import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.{SteeringCommand, WeaponCommand}
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.ai.AbstractAI
 import com.ldaniels528.robowars.objects.items.AbstractRewardItem
@@ -20,8 +21,7 @@ import com.ldaniels528.robowars.objects.weapons.{AbstractProjectile, AbstractWea
  */
 abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocityVector, initialHealth: Double = 5d)
   extends FxMovingObject(world, pos, vector.angle, vector, FxAngle3D())
-  with Damageable
-  with Events {
+  with Damageable {
 
   private var weaponIndex = 0
   private val weapons = collection.mutable.Buffer[AbstractWeapon]()
@@ -126,7 +126,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   }
 
   def selectWeapon(weaponIndex: Int) {
-    this.weaponIndex = if(weaponIndex < weapons.length) weaponIndex else weapons.length - 1
+    this.weaponIndex = if (weaponIndex < weapons.length) weaponIndex else weapons.length - 1
   }
 
   override def update(dt: Double) {

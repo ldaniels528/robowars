@@ -1,15 +1,16 @@
 package com.ldaniels528.robowars.objects.ai
 
 import com.ldaniels528.fxcore3d.{FxEvent, FxPoint3D}
-import com.ldaniels528.robowars.events.{Events, MotionCommand}
-import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
+import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.MotionCommand
 import com.ldaniels528.robowars.objects.ai.PassiveAI._
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
  * Represents a non-aggressive autonomous artificial intelligence
  * @param host the host [[AbstractVehicle]]
  */
-class PassiveAI(host: AbstractVehicle) extends AbstractAI(host) with Events {
+class PassiveAI(host: AbstractVehicle) extends AbstractAI(host) {
   protected var destination: Option[FxPoint3D] = None
   protected var maxError: Double = 0
   protected var state: Int = STANDBY

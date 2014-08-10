@@ -1,7 +1,8 @@
 package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.events.{Events, SteeringCommand}
+import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.SteeringCommand
 import com.ldaniels528.robowars.objects.structures.fixed.AbstractStaticStructure
 import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingStructure, GenericFragment}
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
@@ -11,7 +12,7 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, pos0: FxPoint3D, vector0: FxVelocityVector, val impactDamage: Double, lifeTime: Double = 4d)
-  extends FxMovingObject(world, pos0, vector0.angle, vector0, FxAngle3D()) with Events {
+  extends FxMovingObject(world, pos0, vector0.angle, vector0, FxAngle3D()) {
   protected var deadOfAge: Boolean = _
   protected var dieNextUpdate: Boolean = _
 
