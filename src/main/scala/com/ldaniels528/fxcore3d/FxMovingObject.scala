@@ -11,8 +11,8 @@ import com.ldaniels528.fxcore3d.camera.FxCamera
 abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dpos: FxVelocityVector, dagl: FxAngle3D)
   extends FxObject(world, pos, agl) {
 
-  var dPos: FxVelocityVector = dpos.makeClone
-  var dAgl: FxAngle3D = dagl.makeClone
+  val dPos: FxVelocityVector = dpos.makeClone
+  val dAgl: FxAngle3D = dagl.makeClone
 
   /**
    * Overrides.
