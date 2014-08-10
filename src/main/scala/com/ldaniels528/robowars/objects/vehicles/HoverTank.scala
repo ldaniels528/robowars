@@ -10,7 +10,7 @@ import com.ldaniels528.robowars.objects.weapons._
  * @author lawrence.daniels@gmail.com
  */
 case class HoverTank(w: FxWorld, p: FxPoint3D)
-  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0)) {
+  extends AbstractVehicle(w, FxPoint3D(p.x, SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0)) {
 
   val turningRate: Double = 1.25d
   val pitchRate: Double = 0
