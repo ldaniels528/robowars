@@ -2,18 +2,19 @@ package com.ldaniels528.robowars.objects.structures.fixed
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.audio.AudioManager._
-import com.ldaniels528.robowars.objects.Damageable
-import com.ldaniels528.robowars.objects.structures.fixed.DestroyableStructure._
-import com.ldaniels528.robowars.objects.structures.moving.GenericFragment
+import com.ldaniels528.robowars.objects.structures.Structure
 import com.ldaniels528.robowars.objects.weapons.AbstractProjectile
+import com.ldaniels528.robowars.objects.{Damageable, Destructible}
 
 /**
  * Destroyable Structure
  * @author lawrence.daniels@gmail.com
  */
 abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, initialHealth: Double)
-  extends AbstractStaticStructure(world, pos, agl)
-  with Damageable {
+  extends FxObject(world, pos, agl)
+  with Structure
+  with Damageable
+  with Destructible {
 
   def maxHealth: Double = initialHealth
 
@@ -28,12 +29,13 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
 
     // create the explosion
     val height = scale.h
-    val fragCount = (REL_FRAG_WHEN_DEAD * height).toInt
-    (1 to fragCount) foreach { n =>
-      new GenericFragment(world, REL_FRAG_SIZE * height,
-        position, REL_FRAG_SPREAD * height,
-        (height * REL_FRAG_GENERATIONS).toInt, height * REL_FRAG_SPEED, height * REL_FRAG_ROTATION)
-    }
+    explodeIntoFragments(
+      fragments = height.toInt,
+      size = height * 0.6,
+      speed = height * 2d,
+      spread = height,
+      rotation = height * 0.2,
+      generations = (height * 0.01d).toInt)
 
     // allow super-class to take action
     super.die()
@@ -42,11 +44,7 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
   override def handleCollisionWith(obj: FxObject, dt: Double): Boolean = {
     obj match {
       case r: AbstractProjectile =>
-        if (damageHealth(r.impactDamage) <= 0) die()
-        else {
-          // play projectile's death song
-          audioPlayer ! CrashClip
-        }
+        if (damageHealth(r.impactDamage) <= 0) die() //else audioPlayer ! GunImpact
       case _ =>
     }
     super.handleCollisionWith(obj, dt)
@@ -61,16 +59,3 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
 
 }
 
-/**
- * Destroyable Structure Companion Object
- * @author lawrence.daniels@gmail.com
- */
-object DestroyableStructure {
-  val REL_FRAG_SIZE: Double = 0.6d
-  val REL_FRAG_SPEED: Double = 2d
-  val REL_FRAG_SPREAD: Double = 1d
-  val REL_FRAG_WHEN_DEAD: Double = 1d
-  val REL_FRAG_GENERATIONS: Double = 0.01d
-  val REL_FRAG_ROTATION: Double = 0.2d
-
-}

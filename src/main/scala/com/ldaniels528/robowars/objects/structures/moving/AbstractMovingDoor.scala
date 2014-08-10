@@ -1,6 +1,7 @@
 package com.ldaniels528.robowars.objects.structures.moving
 
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.robowars.objects.structures.Structure
 import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingDoor._
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
@@ -9,7 +10,8 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractMovingDoor(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D)
-  extends AbstractMovingStructure(world, pos, agl, new FxVelocityVector(), new FxAngle3D()) {
+  extends FxMovingObject(world, pos, agl, FxVelocityVector(), FxAngle3D())
+  with Structure {
 
   private val originalPos: Double = pos.y
   private var state: Int = DOOR_INITIAL_STATE

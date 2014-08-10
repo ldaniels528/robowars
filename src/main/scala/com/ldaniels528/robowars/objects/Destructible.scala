@@ -1,7 +1,7 @@
 package com.ldaniels528.robowars.objects
 
 import com.ldaniels528.fxcore3d.{FxPoint3D, FxWorld}
-import com.ldaniels528.robowars.objects.structures.moving.Fragment
+import com.ldaniels528.robowars.objects.Fragment
 
 /**
  * <h2>Destructible</h2>
