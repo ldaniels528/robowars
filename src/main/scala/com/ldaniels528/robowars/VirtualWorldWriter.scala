@@ -1,5 +1,6 @@
 package com.ldaniels528.robowars
 
+import com.ldaniels528.robowars.objects.structures.Structure
 import com.ldaniels528.robowars.objects.structures.fixed._
 import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingDoor, MainGate}
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
@@ -14,13 +15,12 @@ object VirtualWorldWriter {
 
   def save(world: VirtualWorld) {
     val player = world.activePlayer
-    System.err.println(s"activePlayer = $player")
 
     // extract the vehicles first
     val objects = world.myObjects.toSeq flatMap {
       case actor: AbstractVehicle => Some(encodeActor(actor, actor == player))
-      case structure: AbstractStaticStructure => Some(encodeStructure(structure))
       case door: MainGate => Some(encodeMovingDoor(door))
+      case structure: Structure => Some(encodeStructure(structure))
       case _ => None
     }
 
@@ -35,7 +35,7 @@ object VirtualWorldWriter {
     (id, className, node)
   }
 
-  private def encodeStructure(structure: AbstractStaticStructure): (String, String, Node) = {
+  private def encodeStructure(structure: Structure): (String, String, Node) = {
     val (w, p, a, s) = structure match {
       case Building1(world, pos, agl, dim) => (world, pos, agl, dim)
       case Pillar(world, pos, agl, dim) => (world, pos, agl, dim)
