@@ -22,8 +22,12 @@ trait Events {
   // weapon events
   val FIRE = 10
   val SELECT = 11
-  val MINI_CANNON = 12
-  val MISSILE = 13
-  val BOMB = 14
+
+  // weapon constants
+  val WEAPON_CODE = 12
+  val MACHINE_GUN = 12
+  val MINI_CANNON = 13
+  val MISSILE = 14
+  val BOMB = 15
 
 }

@@ -221,9 +221,10 @@ class RoboWars(noMusic: Boolean) extends FxFrame("RoboWars") with Events {
       case VK_DOWN => key(PITCH_UP) = pressed
       case VK_Z =>
         if (pressed) world.activePlayer.switchWeapons(); ()
-      case VK_1 => key(MINI_CANNON) = pressed
-      case VK_2 => key(MISSILE) = pressed
-      case VK_3 => key(BOMB) = pressed
+      case VK_1 => key(MACHINE_GUN) = pressed
+      case VK_2 => key(MINI_CANNON) = pressed
+      case VK_3 => key(MISSILE) = pressed
+      case VK_4 => key(BOMB) = pressed
       case _ =>
     }
   }
@@ -245,6 +246,7 @@ class RoboWars(noMusic: Boolean) extends FxFrame("RoboWars") with Events {
 
     // weapon events
     if (key(FIRE)) player.fireSelectedWeapon()
+    if (key(MACHINE_GUN)) player += WeaponCommand(world.time, SELECT, MACHINE_GUN)
     if (key(MINI_CANNON)) player += WeaponCommand(world.time, SELECT, MINI_CANNON)
     if (key(MISSILE)) player += WeaponCommand(world.time, SELECT, MISSILE)
     if (key(BOMB)) player += WeaponCommand(world.time, SELECT, BOMB)

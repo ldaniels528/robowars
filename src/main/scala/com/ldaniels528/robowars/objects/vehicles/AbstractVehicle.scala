@@ -126,7 +126,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   }
 
   def selectWeapon(weaponIndex: Int) {
-    this.weaponIndex = weaponIndex
+    this.weaponIndex = if(weaponIndex < weapons.length) weaponIndex else weapons.length - 1
   }
 
   override def update(dt: Double) {
@@ -189,7 +189,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
       case WeaponCommand(_, command, arg) =>
         command match {
-          case SELECT => selectWeapon(arg - 20)
+          case SELECT => selectWeapon(arg - WEAPON_CODE)
           case FIRE => selectedWeapon.fire()
           case code =>
             throw new IllegalArgumentException(s"Unhandled weapon command ($code)")
