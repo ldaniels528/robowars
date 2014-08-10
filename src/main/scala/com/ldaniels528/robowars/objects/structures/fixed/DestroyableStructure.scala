@@ -1,6 +1,7 @@
 package com.ldaniels528.robowars.objects.structures.fixed
 
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxObject, FxPoint3D, FxWorld}
+import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.structures.fixed.DestroyableStructure._
 import com.ldaniels528.robowars.objects.structures.moving.GenericFragment
@@ -37,6 +38,10 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
     obj match {
       case r: AbstractProjectile =>
         if (damageHealth(r.impactDamage) <= 0) die()
+        else {
+          // play projectile's death song
+          audioPlayer ! CrashClip
+        }
       case _ =>
     }
     super.handleCollisionWith(obj, dt)
