@@ -19,7 +19,7 @@ abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, 
     super.die()
 
     if (!deadOfAge) {
-      (1 to 15) foreach { n =>
+      (0 to (5 * impactDamage).toInt) foreach { n =>
         new GenericFragment(world, size = 0.25d, origin = position, spread = 1d, generation0 = 1, speed = 7d, rotation = 3)
       }
     }
