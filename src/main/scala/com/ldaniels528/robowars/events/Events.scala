@@ -4,7 +4,7 @@ package com.ldaniels528.robowars.events
  * Game Event Constants
  * @author lawrence.daniels@gmail.com
  */
-trait Events {
+object Events {
   // motion events
   val GOTO_POSITION = 0
 
