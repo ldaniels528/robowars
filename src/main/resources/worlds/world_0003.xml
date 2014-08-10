@@ -15,7 +15,7 @@
 
   <!-- create actor definitions -->
   <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon" />
-  <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.Rover" />
+  <objectDef id="Rover" class="com.ldaniels528.robowars.objects.vehicles.Rover" />
   <objectDef id="Glider" class="com.ldaniels528.robowars.objects.vehicles.Glider" />
   <objectDef id="HoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank" />
   <objectDef id="JetCraft" class="com.ldaniels528.robowars.objects.vehicles.JetCraft" />
@@ -30,34 +30,34 @@
 
   <!-- create structure definitions -->
 
-  <objectDef id="Building1" class="com.ldaniels528.robowars.objects.structures.fixed.GenericBuilding" />
-  <objectDef id="Building2" class="com.ldaniels528.robowars.objects.structures.fixed.GenericTower" />
+  <objectDef id="Building1" class="com.ldaniels528.robowars.objects.structures.fixed.Building1" />
+  <objectDef id="Building2" class="com.ldaniels528.robowars.objects.structures.fixed.Tower" />
   <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.moving.MainGate" />
-  <objectDef id="Pillar" class="com.ldaniels528.robowars.objects.structures.fixed.GenericPillar" />
+  <objectDef id="Pillar" class="com.ldaniels528.robowars.objects.structures.fixed.Pillar" />
   <objectDef id="Pyramid" class="com.ldaniels528.robowars.objects.structures.fixed.Pyramid" />
-  <objectDef id="Wall1" class="com.ldaniels528.robowars.objects.structures.fixed.GenericWall" />
+  <objectDef id="Wall1" class="com.ldaniels528.robowars.objects.structures.fixed.Wall1" />
 
-  <!-- add the actors to this world -->
+  <!-- add the vehicles to this world -->
   <actor type="HoverTank" x="-300" y="0" z="-250" isPlayer="true" />
   <actor type="AntiTankCannon" x="-15"  y="0"   z="335" />
   <actor type="Tank" x="-150" y="0" z="200" />
-  <actor type="FesseTank" x="-150" y="0" z="250" />
+  <actor type="Rover" x="-150" y="0" z="250" />
   <actor type="AntiTankCannon" x="-165" y="0"   z="-185" />
   <actor type="Tank" x="-165" y="0"   z="65" />
   <actor type="AntiTankCannon" x="-255" y="0"   z="365" />
   <actor type="Tank" x="-295" y="0"   z="215" />
   <actor type="Tank" x="-345" y="0"   z="215" />
   <actor type="AntiTankCannon" x="25"   y="0"   z="225" />
-  <actor type="FesseTank" x="-25"  y="0"   z="225" />
-  <actor type="FesseTank" x="15"   y="0"   z="335" />
+  <actor type="Rover" x="-25"  y="0"   z="225" />
+  <actor type="Rover" x="15"   y="0"   z="335" />
   <actor type="AntiTankCannon" x="255"  y="0"   z="295" />
-  <actor type="FesseTank" x="295" y="0"   z="255" />
+  <actor type="Rover" x="295" y="0"   z="255" />
   <actor type="Tank" x="28" y="0" z="35" />
-  <actor type="FesseTank" x="150" y="0"   z="-200" />
-  <actor type="FesseTank" x="150" y="0"   z="-225" />
+  <actor type="Rover" x="150" y="0"   z="-200" />
+  <actor type="Rover" x="150" y="0"   z="-225" />
   <actor type="AntiTankCannon" x="150" y="0"   z="-250" />
-  <actor type="FesseTank" x="0" y="0"   z="-350" />
-  <actor type="FesseTank" x="150" y="0"   z="-350" />
+  <actor type="Rover" x="0" y="0"   z="-350" />
+  <actor type="Rover" x="150" y="0"   z="-350" />
 
   <!-- add items to the world -->
   <item type="HealthCube" x="-235" y="0" z="226" />
