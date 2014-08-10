@@ -33,12 +33,17 @@ object AudioManager extends FxAudioPlayer {
    */
   private def loadSamples(): Map[AudioKey, FxAudioSample] = {
     val samples = Seq[(AudioKey, String)](
+      // background samples
       Ambient -> "background/ambient",
+      ErokiaElementary -> "background/erokia_elementary",
+
+      // audio clips
       BigExplosionClip -> "environmental/bigExplosion",
       BuildingExplodeClip -> "environmental/buildingExplode",
       CrashClip -> "environmental/crash",
       ExplosionClip -> "environmental/bigExplosion",
       GameOver -> "alerts/gameOver",
+      GunImpact -> "environmental/gun_impact",
       GetReady -> "alerts/getReady",
       ReloadClip -> "weapons/loadClip",
       Ambient -> "background/ambient",
@@ -59,7 +64,8 @@ object AudioManager extends FxAudioPlayer {
    * Audio-Clip Playback Actor
    * @author lawrence.daniels@gmail.com
    */
-  class AudioPlaybackActor extends Actor {
+  class AudioPlaybackActor() extends Actor {
+
     import scala.concurrent.ExecutionContext.Implicits._
     import scala.concurrent.Future
 
@@ -67,7 +73,7 @@ object AudioManager extends FxAudioPlayer {
       case audioKey: ContinuousAudioKey =>
         audioSampleCache.get(audioKey) foreach { sample =>
           Future {
-            playContinuousSample(sample, isAlive = true)
+            playContinuousSample(sample, isAlive = playbackOn)
           }
         }
       case audioKey: AudioKey =>
@@ -87,6 +93,8 @@ object AudioManager extends FxAudioPlayer {
 
   case object Ambient extends ContinuousAudioKey
 
+  case object ErokiaElementary extends ContinuousAudioKey
+
   case object BuildingExplodeClip extends AudioKey
 
   case object BigExplosionClip extends AudioKey
@@ -98,6 +106,8 @@ object AudioManager extends FxAudioPlayer {
   case object GameOver extends AudioKey
 
   case object GetReady extends AudioKey
+
+  case object GunImpact extends AudioKey
 
   case object MachineGunClip extends AudioKey
 
