@@ -4,24 +4,24 @@ import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.Events._
 import com.ldaniels528.robowars.events.{SteeringCommand, WeaponCommand}
-import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.ai.AbstractAI
 import com.ldaniels528.robowars.objects.items.AbstractRewardItem
-import com.ldaniels528.robowars.objects.structures.fixed.AbstractStaticStructure
-import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingStructure, GenericFragment}
-import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle._
+import com.ldaniels528.robowars.objects.structures.Structure
 import com.ldaniels528.robowars.objects.weapons.{AbstractProjectile, AbstractWeapon}
+import com.ldaniels528.robowars.objects.{Damageable, Destructible}
 
 /**
  * Represents an abstract moving vehicle
  * @param world the virtual world
  * @param pos the vehicle's position in space
  * @param vector the vehicle's current vector
+ * @param initialHealth the vehicle's initial health
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocityVector, initialHealth: Double = 5d)
   extends FxMovingObject(world, pos, vector.angle, vector, FxAngle3D())
-  with Damageable {
+  with Damageable
+  with Destructible {
 
   private var weaponIndex = 0
   private val weapons = collection.mutable.Buffer[AbstractWeapon]()
@@ -48,16 +48,11 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   def pitchClimbRateFactor: Double
 
   override def die() {
-    import com.ldaniels528.robowars.audio.AudioManager._
-
     // leave the carcass behind
-    new VehicleRemains(world, this)
+    new VehicleRuins(world, this)
 
     // display the fragments
-    (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
-      new GenericFragment(world, FRAGMENT_SIZE, position,
-        FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
-    }
+    explodeIntoFragments(fragments = 15, size = 0.25, speed = 25, spread = 2d)
 
     // play the explosion clip
     if (!this.isInstanceOf[AbstractProjectile]) {
@@ -66,17 +61,6 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
     // allow super-class to take action
     super.die()
-  }
-
-  override def interestedOfCollisionWith(obj: FxObject) = {
-    obj match {
-      case i: AbstractRewardItem => true
-      case m: AbstractMovingStructure => true
-      case r: AbstractProjectile => true
-      case s: AbstractStaticStructure => true
-      case v: AbstractVehicle => true
-      case _ => super.interestedOfCollisionWith(obj)
-    }
   }
 
   override def handleCollisionWith(obj: FxObject, dt: Double) = {
@@ -88,23 +72,30 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
           i.die()
         }
         true
-      case m: AbstractMovingStructure =>
-        oldStates()
-        true
-      case s: AbstractStaticStructure =>
+      case s: Structure =>
         oldStates()
         true
       case p: AbstractProjectile =>
         // check if the round comes from this actor
         if (p.shooter == this) true
         else {
-          if (damageHealth(p.impactDamage) < 0) die()
+          if (damageHealth(p.impactDamage) < 0) die() else audioPlayer ! CrashClip
           false
         }
       case v: AbstractVehicle =>
         oldStates()
         true
       case _ => super.handleCollisionWith(obj, dt)
+    }
+  }
+
+  override def interestedOfCollisionWith(obj: FxObject) = {
+    obj match {
+      case i: AbstractRewardItem => true
+      case r: AbstractProjectile => true
+      case s: Structure => true
+      case v: AbstractVehicle => true
+      case _ => super.interestedOfCollisionWith(obj)
     }
   }
 
@@ -252,17 +243,5 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
     p.y -= climbRate * dt * factor
     setPosition(p)
   }
-
-}
-
-/**
- * Abstract Vehicle Companion Object
- */
-object AbstractVehicle {
-  val FRAGMENT_SIZE: Double = 0.25d
-  val FRAGMENT_SPEED: Double = 25d
-  val FRAGMENT_SPREAD: Double = 2d
-  val FRAGMENTS_WHEN_DEAD: Int = 15
-  val FRAGMENT_GENERATIONS: Int = 1
 
 }

@@ -5,14 +5,12 @@ import java.awt.Graphics2D
 import com.ldaniels528.fxcore3d.camera.FxCamera
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
-import scala.collection.mutable.ListBuffer
-
 /**
  * Abstract class the represents a virtual object.
  * @author lawrence.daniels@gmail.com
  */
 abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D) {
-  private val events = ListBuffer[FxEvent]()
+  private var events: List[FxEvent] = Nil
   private var occupiedGrids: Seq[FxGrid] = Seq.empty
   private var alive: Boolean = true
 
@@ -70,7 +68,7 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
    * Creates a collision event which is added to the event list.
    */
   def collisionWith(obj: FxObject, dt: Double) {
-    events += FxEventCollision(age, obj, dt)
+    events = FxEventCollision(age, obj, dt) :: events
     ()
   }
 
@@ -101,13 +99,13 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
     events.reverse.foreach(handleEvent)
 
     // all collisions are handled. clear the list.
-    events.clear()
+    events = Nil
   }
 
   /**
    * Associates an event with this object
    */
-  def +=(event: FxEvent) = events += event
+  def +=(event: FxEvent) = events = event :: events
 
   /**
    * Paints this object on camera.

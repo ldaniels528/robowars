@@ -2,7 +2,6 @@ package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingScenery
 import com.ldaniels528.robowars.objects.vehicles.GliderRemains._
 
 /**
@@ -10,7 +9,7 @@ import com.ldaniels528.robowars.objects.vehicles.GliderRemains._
  * @author lawrence.daniels@gmail.com
  */
 class GliderRemains(world: FxWorld, deadActor: AbstractVehicle)
-  extends AbstractMovingScenery(world, deadActor.position, deadActor.angle, deadActor.getdPosition(), deadActor.getdAngle()) {
+  extends FxMovingObject(world, deadActor.position, deadActor.angle, deadActor.getdPosition(), deadActor.getdAngle()) {
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/vehicles/gliderRemains.f3d", SCALE)
