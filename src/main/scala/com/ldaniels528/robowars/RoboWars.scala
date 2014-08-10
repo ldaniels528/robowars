@@ -1,13 +1,14 @@
 package com.ldaniels528.robowars
 
 import java.awt._
-import java.awt.event.{KeyEvent, KeyListener}
+import java.awt.event._
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
 import com.ldaniels528.robowars.audio.AudioManager._
-import com.ldaniels528.robowars.events.{Events, WeaponCommand}
+import com.ldaniels528.robowars.events.Events._
+import com.ldaniels528.robowars.events.WeaponCommand
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
@@ -15,7 +16,7 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * RoboWars Application Main
  * @author lawrence.daniels@gmail.com
  */
-class RoboWars(noMusic: Boolean) extends FxFrame("RoboWars") with Events {
+class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", windowed) {
   var world: FxWorld = _
   var camera: FxTrackerCamera = _
   val key = new Array[Boolean](20)
@@ -32,8 +33,30 @@ class RoboWars(noMusic: Boolean) extends FxFrame("RoboWars") with Events {
   // setup the key listener
   super.addKeyListener(new KeyListener {
     override def keyTyped(event: KeyEvent) = ()
+
     override def keyReleased(event: KeyEvent) = keyboardEvent(event, pressed = false)
+
     override def keyPressed(event: KeyEvent) = keyboardEvent(event, pressed = true)
+  })
+
+  // setup the window listener
+  super.addComponentListener(new ComponentListener {
+    override def componentShown(e: ComponentEvent): Unit = ()
+
+    override def componentHidden(e: ComponentEvent): Unit = ()
+
+    override def componentMoved(e: ComponentEvent): Unit = ()
+
+    override def componentResized(e: ComponentEvent): Unit = {
+      val dim = e.getComponent.getSize
+      System.out.println(s"screenSize = $dim, comp = ${e.getComponent.getClass.getName}")
+
+      // create the image buffer and graphics context
+      buffer = createImage(dim.width, dim.height)
+      offScreen = buffer.getGraphics.asInstanceOf[Graphics2D]
+      offScreen.setFont(FONT12)
+      screenDim = dim
+    }
   })
 
   /**
@@ -177,8 +200,8 @@ class RoboWars(noMusic: Boolean) extends FxFrame("RoboWars") with Events {
 
         // set the appropriate color for the health level
         offScreen.setColor({
-          if(healthPct >= 0.75) Color.GREEN
-          else if(healthPct >= 0.25) Color.YELLOW
+          if (healthPct >= 0.75) Color.GREEN
+          else if (healthPct >= 0.25) Color.YELLOW
           else Color.RED
         })
         offScreen.fillRect(X_POS, Y_POS, healthBar, BAR_HEIGHT)
@@ -290,9 +313,10 @@ object RoboWars {
   def main(args: Array[String]) {
     // check for command line arguments
     val noMusic = args.contains("no_music")
+    val windowed = args.contains("windowed")
 
     // start the application
-    val app = new RoboWars(noMusic)
+    val app = new RoboWars(windowed, noMusic)
     app.init()
     app.run()
   }
