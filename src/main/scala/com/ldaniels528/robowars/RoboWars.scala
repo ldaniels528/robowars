@@ -49,13 +49,15 @@ class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", 
 
     override def componentResized(e: ComponentEvent): Unit = {
       val dim = e.getComponent.getSize
-      System.out.println(s"screenSize = $dim, comp = ${e.getComponent.getClass.getName}")
+      if(screenDim != dim) {
+        System.out.println(s"Screen size changed to $dim")
 
-      // create the image buffer and graphics context
-      buffer = createImage(dim.width, dim.height)
-      offScreen = buffer.getGraphics.asInstanceOf[Graphics2D]
-      offScreen.setFont(FONT12)
-      screenDim = dim
+        // create the image buffer and graphics context
+        buffer = createImage(dim.width, dim.height)
+        offScreen = buffer.getGraphics.asInstanceOf[Graphics2D]
+        offScreen.setFont(FONT12)
+        screenDim = dim
+      }
     }
   })
 
