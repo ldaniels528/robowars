@@ -24,7 +24,7 @@ abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle
     audioPlayer ! BuildingExplodeClip
 
     // leave ruins behind
-    new GenericBuildingRuin(world, position, angle, scale.reducedHeight(0.2d))
+    new BuildingRuin(world, position, angle, scale.reducedHeight(0.2d))
 
     // create the explosion
     val height = scale.h

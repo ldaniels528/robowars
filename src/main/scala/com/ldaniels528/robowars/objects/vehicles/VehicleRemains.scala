@@ -13,7 +13,7 @@ class VehicleRemains(world: FxWorld, deadTank: AbstractVehicle)
   extends AbstractMovingScenery(world, deadTank.position, deadTank.angle, deadTank.getdPosition(), deadTank.getdAngle()) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = FxModelInstance("/models/actors/vehicleRuins.f3d", SCALE)
+  lazy val modelInstance = FxModelInstance("/models/vehicles/vehicleRuins.f3d", SCALE)
 
   // throw the remaining tank up in the air
   val dp = getdPosition()

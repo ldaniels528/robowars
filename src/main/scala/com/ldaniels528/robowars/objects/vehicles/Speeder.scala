@@ -36,7 +36,7 @@ class Speeder(w: FxWorld, p: FxPoint3D)
  * @author lawrence.daniels@gmail.com
  */
 object Speeder {
-  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/actors/speeder.f3d")
+  val MODEL: FxPolyhedron = ContentManager.loadModel("/models/vehicles/speeder.f3d")
   val SCALE = FxScale3D(w = 1.50d, h = 0.75d, d = 2.00d)
 
 }

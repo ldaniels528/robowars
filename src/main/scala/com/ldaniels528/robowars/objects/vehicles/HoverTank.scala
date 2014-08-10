@@ -22,7 +22,7 @@ case class HoverTank(w: FxWorld, p: FxPoint3D)
   val pitchClimbRateFactor: Double = 0
 
   // set the default polyhedron instance
-  lazy val modelInstance = FxModelInstance("/models/actors/tank4.f3d", SCALE)
+  lazy val modelInstance = FxModelInstance("/models/vehicles/tank4.f3d", SCALE)
 
   // attach some weapons
   this += MachineGun(this, FxPoint3D(0, p.y + SCALE.h, 0))

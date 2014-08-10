@@ -19,15 +19,15 @@ case class MachineGun(host: AbstractVehicle, relPos: FxPoint3D, ammo0: Int = 500
       // play the audio sample
       audioPlayer ! MachineGunClip
 
-      // get the world, position, and angle
-      val (w, p, a) = (host.world, host.position, host.angle)
+      // get the world instance
+      val world = host.world
 
       // fire the round
-      p += relOrigin
-      MachineGunRound(w, host, p, a)
+      val p = host.position += relOrigin
+      MachineGunRound(world, host, p, host.angle)
 
       // eject the shell casing
-      new ShellCasing(w, p, a, host.getdPosition(), shellCasingScale)
+      new ShellCasing(world, host.position, host.angle, host.getdPosition(), shellCasingScale)
     }
     fired
   }

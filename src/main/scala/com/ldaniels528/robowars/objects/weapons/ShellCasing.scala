@@ -19,17 +19,16 @@ class ShellCasing(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, vel: FxVelocit
   override def update(dt: Double) {
     super.update(dt)
 
-    // move-out toward the ground
-    setdPosition({
-      val v = getdPosition()
-      v.y += world.gravity * dt
-      v
-    })
-
-    // die once it hits the ground
-    if (position.y < 0 || age > 1.5d) {
-      die()
+    // if the shell is above ground and within its lifespan
+    if (position.y > 0 && age < 1.5d) {
+      // move-out toward the ground
+      setdPosition({
+        val v = getdPosition()
+        v.y += world.gravity * dt
+        v
+      })
     }
+    else die()
   }
 
 }
@@ -40,14 +39,14 @@ class ShellCasing(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, vel: FxVelocit
  */
 object ShellCasing {
 
-  def randomVector(dPos: FxVelocityVector, randomSpread: Double = 0.5d): FxVelocityVector = {
+  private def randomVector(dPos: FxVelocityVector, randomSpread: Double = 0.5d): FxVelocityVector = {
     FxVelocityVector(
       dPos.x + rand(-randomSpread, randomSpread),
       dPos.y + rand(-randomSpread, randomSpread),
       dPos.z + rand(-randomSpread, randomSpread))
   }
 
-  def randomAngle(dAgl: FxAngle3D, randomRotation: Double = 2d): FxAngle3D = {
+  private def randomAngle(dAgl: FxAngle3D, randomRotation: Double = 2d): FxAngle3D = {
     FxAngle3D(
       dAgl.x + rand(-randomRotation, randomRotation),
       dAgl.y + rand(-randomRotation, randomRotation),

@@ -16,7 +16,7 @@ object VirtualWorldWriter {
     val player = world.activePlayer
     System.err.println(s"activePlayer = $player")
 
-    // extract the actors first
+    // extract the vehicles first
     val objects = world.myObjects.toSeq flatMap {
       case actor: AbstractVehicle => Some(encodeActor(actor, actor == player))
       case structure: AbstractStaticStructure => Some(encodeStructure(structure))
@@ -37,10 +37,10 @@ object VirtualWorldWriter {
 
   private def encodeStructure(structure: AbstractStaticStructure): (String, String, Node) = {
     val (w, p, a, s) = structure match {
-      case GenericBuilding(world, pos, agl, dim) => (world, pos, agl, dim)
-      case GenericPillar(world, pos, agl, dim) => (world, pos, agl, dim)
-      case GenericTower(world, pos, agl, dim) => (world, pos, agl, dim)
-      case GenericWall(world, pos, agl, dim) => (world, pos, agl, dim)
+      case Building1(world, pos, agl, dim) => (world, pos, agl, dim)
+      case Pillar(world, pos, agl, dim) => (world, pos, agl, dim)
+      case Tower(world, pos, agl, dim) => (world, pos, agl, dim)
+      case Wall1(world, pos, agl, dim) => (world, pos, agl, dim)
       case x =>
         throw new IllegalStateException(s"Class type ${x.getClass.getName} not recognized")
     }

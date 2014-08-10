@@ -3,7 +3,7 @@ package com.ldaniels528.robowars.objects.vehicles
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 import com.ldaniels528.fxcore3d.{FxPoint3D, FxScale3D, FxVelocityVector, FxWorld}
 import com.ldaniels528.robowars.objects.vehicles.Glider._
-import com.ldaniels528.robowars.objects.weapons.{BombBay, MiniCannon, MissileLauncher}
+import com.ldaniels528.robowars.objects.weapons.{BombLauncher, MiniCannon, MissileLauncher}
 
 /**
  * Glider Vehicle
@@ -22,12 +22,12 @@ case class Glider(w: FxWorld, p: FxPoint3D)
   val pitchClimbRateFactor: Double = 1d
 
   // set the default polyhedron instance
-  lazy val modelInstance = FxModelInstance("/models/actors/glider.f3d", SCALE)
+  lazy val modelInstance = FxModelInstance("/models/vehicles/glider.f3d", SCALE)
 
   // attach some weapons
   this += new MiniCannon(this, new FxPoint3D(0, SCALE.h, 0))
   this += new MissileLauncher(this, new FxPoint3D(0, SCALE.h, 0))
-  this += new BombBay(this, new FxPoint3D(0, SCALE.h, 0))
+  this += new BombLauncher(this, new FxPoint3D(0, SCALE.h, 0))
 
   override def update(dt: Double) {
     super.update(dt)

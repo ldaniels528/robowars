@@ -7,7 +7,7 @@ import com.ldaniels528.fxcore3d.polygon.FxModelInstance
  * Generic Building Ruin
  * @author lawrence.daniels@gmail.com
  */
-class GenericBuildingRuin(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
+class BuildingRuin(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
   extends AbstractStaticStructure(world, FxPoint3D(pos.x, scale.h, pos.z), agl) {
 
   // set the default polyhedron instance

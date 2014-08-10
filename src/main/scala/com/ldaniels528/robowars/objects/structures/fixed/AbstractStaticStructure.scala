@@ -1,6 +1,6 @@
 package com.ldaniels528.robowars.objects.structures.fixed
 
-import com.ldaniels528.fxcore3d.{FxObject, FxAngle3D, FxPoint3D, FxWorld}
+import com.ldaniels528.fxcore3d.{FxAngle3D, FxObject, FxPoint3D, FxWorld}
 
 /**
  * Abstract Static Structure
