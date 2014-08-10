@@ -1,7 +1,7 @@
-package com.ldaniels528.robowars.objects.structures
+package com.ldaniels528.robowars.objects.structures.moving
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.objects.AbstractMovingObject
+import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.weapons.AbstractProjectile
 
 /**
@@ -13,7 +13,9 @@ abstract class AbstractMovingStructure(world: FxWorld,
                                        agl: FxAngle3D,
                                        dpos: FxVelocityVector,
                                        dagl: FxAngle3D)
-  extends AbstractMovingObject(world, pos, agl, dpos, dagl) {
+  extends FxMovingObject(world, pos, agl, dpos, dagl) with Damageable {
+
+  def maxHealth = 60d
 
   override def interestedOfCollisionWith(obj: FxObject): Boolean = {
     obj match {

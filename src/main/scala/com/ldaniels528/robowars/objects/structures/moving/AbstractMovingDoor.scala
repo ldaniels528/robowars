@@ -1,20 +1,20 @@
-package com.ldaniels528.robowars.objects.structures
+package com.ldaniels528.robowars.objects.structures.moving
 
 import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.objects.structures.AbstractDoor._
+import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingDoor._
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
  * Abstract Door
  * @author lawrence.daniels@gmail.com
  */
-abstract class AbstractDoor(world: FxWorld,
-                            pos: FxPoint3D,
-                            agl: FxAngle3D,
-                            speedUp: Double,
-                            speedDown: Double,
-                            waitTimeUp: Double,
-                            height: Double)
+abstract class AbstractMovingDoor(world: FxWorld,
+                                  pos: FxPoint3D,
+                                  agl: FxAngle3D,
+                                  speedUp: Double,
+                                  speedDown: Double,
+                                  waitTimeUp: Double,
+                                  height: Double)
   extends AbstractMovingStructure(world, pos, agl, new FxVelocityVector(), new FxAngle3D()) {
 
   private val originalPos: Double = pos.y
@@ -95,7 +95,7 @@ abstract class AbstractDoor(world: FxWorld,
  * Abstract Door
  * @author lawrence.daniels@gmail.com
  */
-object AbstractDoor {
+object AbstractMovingDoor {
   val DOOR_INITIAL_STATE = 0
   val DOOR_START_MOVING_UP = 1
   val DOOR_MOVING_UP = 2

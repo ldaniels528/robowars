@@ -2,7 +2,7 @@ package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxScale3D, FxWorld}
-import com.ldaniels528.robowars.objects.structures.AbstractMovingScenery
+import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingScenery
 import com.ldaniels528.robowars.objects.vehicles.VehicleRemains._
 
 /**

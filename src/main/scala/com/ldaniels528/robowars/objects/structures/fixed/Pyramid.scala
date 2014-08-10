@@ -1,4 +1,4 @@
-package com.ldaniels528.robowars.objects.structures
+package com.ldaniels528.robowars.objects.structures.fixed
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
@@ -8,7 +8,7 @@ import com.ldaniels528.fxcore3d.polygon.FxModelInstance
  * @author lawrence.daniels@gmail.com
  */
 case class Pyramid(w: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
-  extends AbstractStaticStructure(w, FxPoint3D(pos.x, 0, pos.z), agl, health = 50) {
+  extends DestroyableStructure(w, FxPoint3D(pos.x, 0, pos.z), agl, initialHealth = 60) {
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/structures/pyramid.f3d", scale)
@@ -20,7 +20,7 @@ case class Pyramid(w: FxWorld, pos: FxPoint3D, agl: FxAngle3D, scale: FxScale3D)
     super.die()
 
     // leave ruins behind
-    new PyramidRubble(world, position, angle, scale.reducedHeight(0.2d))
+    new PyramidRuins(world, position, angle, scale.reducedHeight(0.2d))
 
     // destroy the pyramid
     destruct(scale.h)

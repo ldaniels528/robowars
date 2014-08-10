@@ -12,13 +12,13 @@
     <environment sky="eveningSky" ground="pasture2"/>
 
     <!-- object definitions -->
-    <objectDef id="GenericPillar" class="com.ldaniels528.robowars.objects.structures.GenericPillar"/>
+    <objectDef id="GenericPillar" class="com.ldaniels528.robowars.objects.structures.fixed.GenericPillar"/>
     <objectDef id="HoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank"/>
     <objectDef id="Glider" class="com.ldaniels528.robowars.objects.vehicles.Glider"/>
-    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.objects.structures.GenericBuilding"/>
-    <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.MainGate"/>
+    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.objects.structures.fixed.GenericBuilding"/>
+    <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.moving.MainGate"/>
     <objectDef id="FesseTank" class="com.ldaniels528.robowars.objects.vehicles.Rover"/>
-    <objectDef id="GenericWall" class="com.ldaniels528.robowars.objects.structures.GenericWall"/>
+    <objectDef id="GenericWall" class="com.ldaniels528.robowars.objects.structures.fixed.GenericWall"/>
     <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon"/>
     <!-- actor definitions -->
     <actor type="HoverTank" x="0.0" y="0.75" z="-290.0" isPlayer="true"/>

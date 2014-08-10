@@ -1,15 +1,20 @@
-package com.ldaniels528.robowars.objects.structures
+package com.ldaniels528.robowars.objects.structures.fixed
 
-import com.ldaniels528.fxcore3d._
-import com.ldaniels528.robowars.objects.structures.AbstractStaticStructure._
-import com.ldaniels528.robowars.objects.weapons._
+import com.ldaniels528.fxcore3d.{FxAngle3D, FxObject, FxPoint3D, FxWorld}
+import com.ldaniels528.robowars.objects.Damageable
+import com.ldaniels528.robowars.objects.structures.fixed.DestroyableStructure._
+import com.ldaniels528.robowars.objects.structures.moving.GenericFragment
+import com.ldaniels528.robowars.objects.weapons.AbstractProjectile
 
 /**
- * Abstract Static Structure
+ * Destroyable Structure
  * @author lawrence.daniels@gmail.com
  */
-abstract class AbstractStaticStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, health: Double = Double.MaxValue)
-  extends AbstractStaticObject(world, pos, agl, health) {
+abstract class DestroyableStructure(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, initialHealth: Double)
+  extends AbstractStaticStructure(world, pos, agl)
+  with Damageable {
+
+  def maxHealth: Double = initialHealth
 
   override def die() {
     import com.ldaniels528.robowars.audio.AudioManager._
@@ -46,18 +51,13 @@ abstract class AbstractStaticStructure(world: FxWorld, pos: FxPoint3D, agl: FxAn
     }
   }
 
-  protected def destruct(height: Double, carcass: (FxWorld, Double, Double, FxAngle3D, Double, Double, Double) => FxObject) {
-    destruct(height)
-    // TODO
-  }
-
 }
 
 /**
- * Abstract Static Structure Companion Object
+ * Destroyable Structure Companion Object
  * @author lawrence.daniels@gmail.com
  */
-object AbstractStaticStructure {
+object DestroyableStructure {
   val REL_FRAG_SIZE: Double = 0.6d
   val REL_FRAG_SPEED: Double = 2d
   val REL_FRAG_SPREAD: Double = 1d

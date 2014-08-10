@@ -8,13 +8,14 @@ import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
 import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.{Events, WeaponCommand}
+import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 /**
  * RoboWars Application Main
  * @author lawrence.daniels@gmail.com
  */
-class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
+class RoboWars(noMusic: Boolean) extends FxFrame("RoboWars") with Events {
   var world: FxWorld = _
   var camera: FxTrackerCamera = _
   val key = new Array[Boolean](20)
@@ -68,7 +69,7 @@ class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
 
     // initialize the audio player
     audioPlayer ! GetReady
-    if(!noMusic) audioPlayer ! Ambient
+    if (!noMusic) audioPlayer ! Ambient
 
     while (alive) {
       // determine the elapsed time between frames
@@ -134,8 +135,8 @@ class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
     if (world.time < 3d) {
       // show cursor key instructions
       val cursorCenterX = (super.getWidth - controlKeysImage.getWidth) / 2
-      val textLeftX =   cursorCenterX - 150
-      offScreen.setFont(FONT32)
+      val textLeftX = cursorCenterX - 150
+      offScreen.setFont(FONT50)
 
       // cursor key image & text
       offScreen.setColor(Color.LIGHT_GRAY)
@@ -149,19 +150,17 @@ class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
     // is the player dead?
     if (!player.isAlive) {
       offScreen.setColor(Color.RED)
-      offScreen.setFont(FONT32)
+      offScreen.setFont(FONT64)
       offScreen.drawString("Game Over", this.getWidth / 2 - (this.getWidth / 4), this.getHeight / 2)
       offScreen.setFont(FONT12)
     }
   }
 
   private def renderHUD(player: AbstractVehicle, dt: Double) {
-    val XPOS = 5
-    val YPOS = 25
+    val X_POS = 5
+    val Y_POS = 25
     val BAR_WIDTH = 300
     val BAR_HEIGHT = 10
-    val healthPct = player.health / 5d
-    val healthBar = (BAR_WIDTH.toDouble * healthPct).toInt
 
     // cache the selected weapon
     val weapon = player.selectedWeapon
@@ -171,20 +170,28 @@ class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
     offScreen.drawString(s"${weapon.name} x ${weapon.ammo}", 5, 15)
 
     // fill the health meter
-    offScreen.setColor(healthPct match {
-      case n if n >= 0.75 => Color.GREEN
-      case n if n >= 0.25 => Color.YELLOW
-      case _ => Color.RED
-    })
-    offScreen.fillRect(XPOS, YPOS, healthBar, BAR_HEIGHT)
+    player match {
+      case d: Damageable =>
+        val healthPct = d.health / d.maxHealth
+        val healthBar = (BAR_WIDTH.toDouble * healthPct).toInt
 
-    // draw the outline
-    offScreen.setColor(Color.GRAY)
-    offScreen.drawRect(XPOS, YPOS, BAR_WIDTH, BAR_HEIGHT)
+        // set the appropriate color for the health level
+        offScreen.setColor({
+          if(healthPct >= 0.75) Color.GREEN
+          else if(healthPct >= 0.25) Color.YELLOW
+          else Color.RED
+        })
+        offScreen.fillRect(X_POS, Y_POS, healthBar, BAR_HEIGHT)
+
+        // draw the outline
+        offScreen.setColor(Color.GRAY)
+        offScreen.drawRect(X_POS, Y_POS, BAR_WIDTH, BAR_HEIGHT)
+      case _ =>
+    }
 
     // render the cycle time
     val p = player.position
-    offScreen.setColor(new Color(0xFF, 0x80, 0x00))
+    offScreen.setColor(ORANGE_COLOR)
     offScreen.drawString(f"pos = $p,  dt = $dt%.3f", this.getWidth - 300, this.getHeight - 25)
   }
 
@@ -266,8 +273,13 @@ class RoboWars( noMusic:Boolean) extends FxFrame("RoboWars") with Events {
  * @author lawrence.daniels@gmail.com
  */
 object RoboWars {
+  // font definitions
   private val FONT12 = new Font(Font.MONOSPACED, Font.BOLD, 12)
-  private val FONT32 = new Font(Font.MONOSPACED, Font.BOLD, 50)
+  private val FONT50 = new Font(Font.MONOSPACED, Font.BOLD, 50)
+  private val FONT64 = new Font(Font.MONOSPACED, Font.BOLD, 64)
+
+  // color definitions
+  private val ORANGE_COLOR = new Color(0xFF, 0x80, 0x00)
 
   /**
    * Main application entry-point

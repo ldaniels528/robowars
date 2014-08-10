@@ -1,6 +1,8 @@
 package com.ldaniels528.robowars
 
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.robowars.objects.structures.fixed.{GenericWall, GenericPillar, GenericBuilding}
+import com.ldaniels528.robowars.objects.structures.moving.MainGate
 import com.ldaniels528.robowars.objects.vehicles._
 import com.ldaniels528.robowars.objects.ai._
 import com.ldaniels528.robowars.objects.structures._

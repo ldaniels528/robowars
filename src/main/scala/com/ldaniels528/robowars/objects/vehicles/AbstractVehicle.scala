@@ -1,30 +1,35 @@
 package com.ldaniels528.robowars.objects.vehicles
 
-import AbstractVehicle._
-import com.ldaniels528.fxcore3d.{FxAngle3D, FxEvent, FxObject, FxPoint3D, FxVelocityVector, FxWorld}
+import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.{Events, SteeringCommand, WeaponCommand}
-import com.ldaniels528.robowars.objects.AbstractMovingObject
+import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.ai.AbstractAI
 import com.ldaniels528.robowars.objects.items.AbstractRewardItem
-import com.ldaniels528.robowars.objects.structures.{GenericFragment, AbstractMovingStructure, AbstractStaticStructure}
+import com.ldaniels528.robowars.objects.structures.fixed.AbstractStaticStructure
+import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingStructure, GenericFragment}
+import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle._
 import com.ldaniels528.robowars.objects.weapons.{AbstractProjectile, AbstractWeapon}
 
 /**
  * Represents an abstract moving vehicle
- * @param world
- * @param pos
- * @param vector
+ * @param world the virtual world
+ * @param pos the vehicle's position in space
+ * @param vector the vehicle's current vector
  * @author lawrence.daniels@gmail.com
  */
-abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocityVector, health: Double)
-  extends AbstractMovingObject(world, pos, vector.angle, vector, FxAngle3D(), health) with Events {
+abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocityVector, initialHealth: Double = 5d)
+  extends FxMovingObject(world, pos, vector.angle, vector, FxAngle3D())
+  with Damageable
+  with Events {
 
   private var weaponIndex = 0
   private val weapons = collection.mutable.Buffer[AbstractWeapon]()
   private var myLastPos: FxPoint3D = _
   private var myLastAgl: FxAngle3D = _
   var cpu: Option[AbstractAI] = None
+
+  def maxHealth: Double = initialHealth
 
   def turningRate: Double
 

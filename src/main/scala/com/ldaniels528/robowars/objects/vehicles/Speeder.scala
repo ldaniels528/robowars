@@ -11,7 +11,7 @@ import com.ldaniels528.robowars.objects.weapons.{MachineGun, MiniCannon}
  * @author lawrence.daniels@gmail.com
  */
 class Speeder(w: FxWorld, p: FxPoint3D)
-  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0), health = 5d) {
+  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0)) {
 
   val turningRate: Double = 1.25d
   val pitchRate: Double = 0

@@ -1,19 +1,19 @@
-package com.ldaniels528.robowars.objects.structures
+package com.ldaniels528.robowars.objects.structures.moving
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.robowars.objects.structures.MainGate._
+import com.ldaniels528.robowars.objects.structures.moving.MainGate._
 
 /**
  * Main Gate
  * @author lawrence.daniels@gmail.com
  */
-class MainGate(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D)
-  extends AbstractDoor(world, new FxPoint3D(pos.x, pos.y + SCALE.h, pos.z), agl,
+case class MainGate(w: FxWorld, pos0: FxPoint3D, agl0: FxAngle3D)
+  extends AbstractMovingDoor(w, new FxPoint3D(pos0.x, pos0.y + SCALE.h, pos0.z), agl0,
     speedUp = 10d, speedDown = 10d, waitTimeUp = 3d, height = 10d) {
 
   // set the default polyhedron instance
-  lazy val modelInstance = FxModelInstance("/models/structures/main_gate.f3d", SCALE)
+  lazy val modelInstance = FxModelInstance("/models/structures/mainGate.f3d", SCALE)
 
 }
 

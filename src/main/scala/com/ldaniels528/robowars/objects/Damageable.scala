@@ -6,11 +6,9 @@ package com.ldaniels528.robowars.objects
  * @author lawrence.daniels@gmail.com
  */
 trait Damageable {
-  self: {def initialHealth: Double} =>
+  self: {def maxHealth: Double} =>
 
-  var health: Double = self.initialHealth
-
-  def maxHealth = initialHealth
+  var health: Double = self.maxHealth
 
   /**
    * Causes the host's health to be reduced by the given damage amount
@@ -19,7 +17,7 @@ trait Damageable {
    */
   def damageHealth(damage: Double): Double = {
     health -= damage
-    if (health > 5) health = 5
+    if (health > maxHealth) health = maxHealth
     health
   }
 

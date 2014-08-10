@@ -2,17 +2,16 @@ package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.robowars.events.{Events, SteeringCommand}
-import com.ldaniels528.robowars.objects.AbstractMovingObject
-import com.ldaniels528.robowars.objects.structures.{AbstractMovingStructure, AbstractStaticStructure, GenericFragment}
+import com.ldaniels528.robowars.objects.structures.fixed.AbstractStaticStructure
+import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingStructure, GenericFragment}
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
-import com.ldaniels528.robowars.objects.weapons.AbstractProjectile._
 
 /**
  * Represents a projectile (i.e. bullet, missile, etc.)
  * @author lawrence.daniels@gmail.com
  */
 abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, pos0: FxPoint3D, vector0: FxVelocityVector, val impactDamage: Double, lifeTime: Double = 4d)
-  extends AbstractMovingObject(world, pos0, vector0.angle, vector0, FxAngle3D(), initialHealth = 0) with Events {
+  extends FxMovingObject(world, pos0, vector0.angle, vector0, FxAngle3D()) with Events {
   protected var deadOfAge: Boolean = _
   protected var dieNextUpdate: Boolean = _
 
@@ -20,10 +19,8 @@ abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, 
     super.die()
 
     if (!deadOfAge) {
-      (1 to FRAGMENTS_WHEN_DEAD) foreach { n =>
-        new GenericFragment(
-          world, FRAGMENT_SIZE, position,
-          FRAGMENT_SPREAD, FRAGMENT_GENERATIONS, FRAGMENT_SPEED, 3)
+      (1 to 15) foreach { n =>
+        new GenericFragment(world, size = 0.25d, origin = position, spread = 1d, generation0 = 1, speed = 7d, rotation = 3)
       }
     }
   }
@@ -74,17 +71,3 @@ abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, 
   }
 
 }
-
-/**
- * Abstract Projectile Companion Object
- * @author lawrence.daniels@gmail.com
- */
-object AbstractProjectile {
-  val FRAGMENT_SIZE: Double = 0.25d
-  val FRAGMENT_SPEED: Double = 7d
-  val FRAGMENT_SPREAD: Double = 1d
-  val FRAGMENTS_WHEN_DEAD: Int = 15
-  val FRAGMENT_GENERATIONS: Int = 1
-
-}
-

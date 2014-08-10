@@ -10,7 +10,7 @@ import com.ldaniels528.robowars.objects.weapons.MissileLauncher
  * @author lawrence.daniels@gmail.com
  */
 case class AntiTankCannon(w: FxWorld, p: FxPoint3D)
-  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0), health = 10d) {
+  extends AbstractVehicle(w, FxPoint3D(p.x, p.y + SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0), initialHealth = 10d) {
 
   val turningRate: Double = 4d
   val pitchRate: Double = 0

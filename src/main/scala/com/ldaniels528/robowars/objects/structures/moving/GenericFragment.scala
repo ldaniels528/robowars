@@ -1,4 +1,4 @@
-package com.ldaniels528.robowars.objects.structures
+package com.ldaniels528.robowars.objects.structures.moving
 
 import java.lang.Math.random
 

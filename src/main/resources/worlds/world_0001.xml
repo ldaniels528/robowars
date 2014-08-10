@@ -8,11 +8,11 @@
     <environment sky="eveningSky" ground="pasture2"/>
 
     <!-- structure definitions -->
-    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.objects.structures.GenericBuilding"/>
-    <objectDef id="GenericPillar" class="com.ldaniels528.robowars.objects.structures.GenericPillar"/>
-    <objectDef id="GenericTower" class="com.ldaniels528.robowars.objects.structures.GenericTower"/>
-    <objectDef id="GenericWall" class="com.ldaniels528.robowars.objects.structures.GenericWall"/>
-    <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.MainGate"/>
+    <objectDef id="GenericBuilding" class="com.ldaniels528.robowars.objects.structures.fixed.GenericBuilding"/>
+    <objectDef id="GenericPillar" class="com.ldaniels528.robowars.objects.structures.fixed.GenericPillar"/>
+    <objectDef id="GenericTower" class="com.ldaniels528.robowars.objects.structures.fixed.GenericTower"/>
+    <objectDef id="GenericWall" class="com.ldaniels528.robowars.objects.structures.fixed.GenericWall"/>
+    <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.moving.MainGate"/>
 
     <!-- item definitions -->
     <objectDef id="HealthCube" class="com.ldaniels528.robowars.objects.items.HealthCube"/>

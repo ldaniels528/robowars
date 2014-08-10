@@ -2,7 +2,7 @@ package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.robowars.objects.structures.AbstractMovingScenery
+import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingScenery
 
 /**
  * Generic Bomb
