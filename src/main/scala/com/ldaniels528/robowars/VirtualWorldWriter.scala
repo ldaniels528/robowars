@@ -1,8 +1,6 @@
 package com.ldaniels528.robowars
 
-import com.ldaniels528.robowars.objects.structures.Structure
-import com.ldaniels528.robowars.objects.structures.fixed._
-import com.ldaniels528.robowars.objects.structures.moving.{AbstractMovingDoor, MainGate}
+import com.ldaniels528.robowars.objects.structures._
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 
 import scala.xml._
@@ -53,7 +51,7 @@ object VirtualWorldWriter {
     (id, className, node)
   }
 
-  private def encodeMovingDoor(door: AbstractMovingDoor): (String, String, Node) = {
+  private def encodeMovingDoor(door: MovingDoor): (String, String, Node) = {
     val p = door.Pos
     val w = MainGate.SCALE.w.toString
     val d = MainGate.SCALE.d.toString
