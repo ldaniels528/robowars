@@ -5,7 +5,7 @@ import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.Events._
 import com.ldaniels528.robowars.events.{SteeringCommand, WeaponCommand}
 import com.ldaniels528.robowars.objects.ai.AbstractAI
-import com.ldaniels528.robowars.objects.items.AbstractRewardItem
+import com.ldaniels528.robowars.objects.items.RewardItem
 import com.ldaniels528.robowars.objects.structures.Structure
 import com.ldaniels528.robowars.objects.weapons.{AbstractProjectile, AbstractWeapon}
 import com.ldaniels528.robowars.objects.{Damageable, Destructible}
@@ -65,7 +65,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   override def handleCollisionWith(obj: FxObject, dt: Double) = {
     obj match {
-      case i: AbstractRewardItem =>
+      case i: RewardItem =>
         if (i.isAlive) {
           audioPlayer ! RewardClip
           this.damageHealth(-2)
@@ -91,7 +91,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
   override def interestedOfCollisionWith(obj: FxObject) = {
     obj match {
-      case i: AbstractRewardItem => true
+      case i: RewardItem => true
       case r: AbstractProjectile => true
       case s: Structure => true
       case v: AbstractVehicle => true
