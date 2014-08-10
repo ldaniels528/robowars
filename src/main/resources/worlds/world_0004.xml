@@ -12,13 +12,13 @@
     <environment sky="eveningSky" ground="pasture2"/>
 
     <!-- object definitions -->
-    <objectDef id="Pillar" class="com.ldaniels528.robowars.objects.structures.fixed.Pillar"/>
+    <objectDef id="Pillar" class="com.ldaniels528.robowars.objects.structures.Pillar"/>
     <objectDef id="HoverTank" class="com.ldaniels528.robowars.objects.vehicles.HoverTank"/>
     <objectDef id="Glider" class="com.ldaniels528.robowars.objects.vehicles.Glider"/>
-    <objectDef id="Building1" class="com.ldaniels528.robowars.objects.structures.fixed.Building1"/>
-    <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.moving.MainGate"/>
+    <objectDef id="Building1" class="com.ldaniels528.robowars.objects.structures.Building1"/>
+    <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.MainGate"/>
     <objectDef id="Rover" class="com.ldaniels528.robowars.objects.vehicles.Rover"/>
-    <objectDef id="Wall1" class="com.ldaniels528.robowars.objects.structures.fixed.Wall1"/>
+    <objectDef id="Wall1" class="com.ldaniels528.robowars.objects.structures.Wall1"/>
     <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon"/>
     
     <!-- actor definitions -->

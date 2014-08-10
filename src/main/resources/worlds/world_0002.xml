@@ -22,11 +22,11 @@
   <objectDef id="AntiTankCannon" class="com.ldaniels528.robowars.objects.vehicles.AntiTankCannon" />
 
   <!-- create structure definitions -->
-  <objectDef id="Building1" class="com.ldaniels528.robowars.objects.structures.fixed.Building1" />
-  <objectDef id="Wall1" class="com.ldaniels528.robowars.objects.structures.fixed.Wall1" />
-  <objectDef id="Pillar" class="com.ldaniels528.robowars.objects.structures.fixed.Pillar" />
-  <objectDef id="Tower" class="com.ldaniels528.robowars.objects.structures.fixed.Tower" />
-  <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.moving.MainGate" />
+  <objectDef id="Building1" class="com.ldaniels528.robowars.objects.structures.Building1" />
+  <objectDef id="Wall1" class="com.ldaniels528.robowars.objects.structures.Wall1" />
+  <objectDef id="Pillar" class="com.ldaniels528.robowars.objects.structures.Pillar" />
+  <objectDef id="Tower" class="com.ldaniels528.robowars.objects.structures.Tower" />
+  <objectDef id="MainGate" class="com.ldaniels528.robowars.objects.structures.MainGate" />
 
   <!-- add the player to this world -->
   <actor type="RoverTank" x="0" y="0" z="-250" isPlayer="true" />
