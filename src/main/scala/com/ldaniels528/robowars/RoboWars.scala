@@ -94,7 +94,7 @@ class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", 
 
     // initialize the audio player
     audioPlayer ! GetReady
-    if (!noMusic) audioPlayer ! Ambient
+    if (!noMusic) audioPlayer ! ErokiaElementary
 
     while (alive) {
       // determine the elapsed time between frames
