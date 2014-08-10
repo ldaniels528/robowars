@@ -1,4 +1,4 @@
-package com.ldaniels528.robowars.objects.structures.moving
+package com.ldaniels528.robowars.objects
 
 import java.lang.Math.random
 
@@ -6,11 +6,11 @@ import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 
 /**
- * Generic Fragment
+ * Represents a Fragment
  * @author lawrence.daniels@gmail.com
  */
-class GenericFragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: Double, generation0: Int, speed: Double, rotation: Double)
-  extends AbstractMovingScenery(world,
+class Fragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: Double, generation0: Int, speed: Double, rotation: Double)
+  extends FxMovingObject(world,
     FxPoint3D(
       origin.x + spread * (random() - 0.5),
       origin.y + spread * (random() - 0.5),
@@ -39,7 +39,7 @@ class GenericFragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: D
 
     if (generation > 0) {
       (1 to 5) foreach { n =>
-        new GenericFragment(world, size / 2d, position, size, generation - 1, getdPosition().y * 0.5, 3)
+        new Fragment(world, size / 2d, position, size, generation - 1, getdPosition().y * 0.5, 3)
       }
     }
   }

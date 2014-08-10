@@ -1,16 +1,15 @@
 package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
-import com.ldaniels528.fxcore3d.{FxAngle3D, FxScale3D, FxWorld}
-import com.ldaniels528.robowars.objects.structures.moving.AbstractMovingScenery
-import com.ldaniels528.robowars.objects.vehicles.VehicleRemains._
+import com.ldaniels528.fxcore3d.{FxAngle3D, FxMovingObject, FxScale3D, FxWorld}
+import com.ldaniels528.robowars.objects.vehicles.VehicleRuins._
 
 /**
  * Remains of a Vehicle
  * @author lawrence.daniels@gmail.com
  */
-class VehicleRemains(world: FxWorld, deadTank: AbstractVehicle)
-  extends AbstractMovingScenery(world, deadTank.position, deadTank.angle, deadTank.getdPosition(), deadTank.getdAngle()) {
+class VehicleRuins(world: FxWorld, deadTank: AbstractVehicle)
+  extends FxMovingObject(world, deadTank.position, deadTank.angle, deadTank.getdPosition(), deadTank.getdAngle()) {
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/vehicles/vehicleRuins.f3d", SCALE)
@@ -46,10 +45,10 @@ class VehicleRemains(world: FxWorld, deadTank: AbstractVehicle)
 }
 
 /**
- * VehicleRemains Companion Object
+ * VehicleRuins Companion Object
  * @author lawrence.daniels@gmail.com
  */
-object VehicleRemains {
+object VehicleRuins {
   val SCALE = new FxScale3D(1.5d, 0.23d, 2d)
   val SPEED_UP: Double = 20d
   val ROTATION: Double = 3d
