@@ -4,7 +4,7 @@ package com.ldaniels528.fxcore3d
  * Represents a virtual map of the world divided into grids which are populated
  * by objects. The map is only used to optimize collision detection.
  *
- * Xmin,Ymin ----+--| ----+--| ----+----Xmin+size,Ymin+size
+ * minX,minY ----+--| ----+--| ----+----minX+size,minY+size
  * @param rows Number of rows and columns in this map. Rows = columns => map should be a square.
  * @param xmin  My left-,topmost point.
  * @param ymin  My left-,topmost point.
