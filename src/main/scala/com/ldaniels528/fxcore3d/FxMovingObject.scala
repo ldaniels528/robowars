@@ -14,6 +14,23 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
   val dPos: FxVelocityVector = dpos.makeClone
   val dAgl: FxAngle3D = dagl.makeClone
 
+  def angle_=(a: FxAngle3D) = Agl.set(a)
+
+  def position_=(p: FxPoint3D) {
+    Pos.set(p)
+    updateTheOccupiedGrids()
+  }
+
+  def dAngle: FxAngle3D = dAgl.makeClone
+
+  def dAngle_=(a: FxAngle3D) = dAgl.set(a)
+
+  def dPosition: FxVelocityVector = dPos.makeClone
+
+  def dPosition_=(p: FxPoint3D) = dPos.set(p)
+
+  protected def $dPosition = dPos
+
   /**
    * Overrides.
    */
@@ -56,24 +73,9 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
   /**
    * Updates the physical state of this object.
    */
-  protected def updatePhysics(dt: Double) {
+  private[fxcore3d] def updatePhysics(dt: Double) {
     Pos.plus(dPos, dt)
     Agl.plus(dAgl, dt)
   }
-
-  def getdAngle(): FxAngle3D = dAgl.makeClone
-
-  def getdPosition(): FxVelocityVector = dPos.makeClone
-
-  def setdPosition(p: FxPoint3D) = dPos.set(p)
-
-  def setPosition(p: FxPoint3D) {
-    Pos.set(p)
-    updateTheOccupiedGrids()
-  }
-
-  def setdAngle(a: FxAngle3D) = dAgl.set(a)
-
-  def setAngle(a: FxAngle3D) = Agl.set(a)
 
 }
