@@ -39,6 +39,15 @@ case class FxAngle3D(var x: Double = 0, var y: Double = 0, var z: Double = 0) {
     z += p.z * factor
   }
 
+  /**
+   * Resets this angle to (0,0,0)
+   */
+  def reset: Unit = {
+    x = 0
+    y = 0
+    z = 0
+  }
+
   def set(a: FxAngle3D) {
     x = a.x
     y = a.y
