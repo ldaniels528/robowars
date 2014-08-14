@@ -1,6 +1,7 @@
 package com.ldaniels528.robowars.objects.weapons
 
 import com.ldaniels528.fxcore3d._
+import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.SteeringCommand
 import com.ldaniels528.robowars.objects.Destructible
@@ -19,17 +20,22 @@ abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, 
   protected var dieNextUpdate: Boolean = _
 
   override def die() {
-    super.die()
-
     if (!deadOfAge) {
+      // play the audio clip
+      deathClip.foreach(audioPlayer ! _)
+
+      // spread the fragments
       explodeIntoFragments(
-        fragments = (5 * impactDamage).toInt,
+        fragments = (2.5 * impactDamage).toInt,
         size = 0.25,
         speed = 7,
         spread = 1,
         rotation = 3)
     }
+    super.die()
   }
+
+  def deathClip: Option[AudioKey] = None
 
   override def handleCollisionWith(obj: FxObject, dt: Double) = {
     if (obj != shooter) {
