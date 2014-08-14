@@ -126,12 +126,7 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
 
     // -- synchronize this object's angle with the
     // -- angle in the velocity vector
-    setAngle({
-      val v = getdPosition()
-      val a = angle
-      v.synchronizeAngle(a)
-      a
-    })
+    $dPosition.synchronizeAngle($angle)
 
     // update the CPU
     cpu.foreach(_.update(dt))
@@ -195,56 +190,43 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   }
 
   protected def handleTurnLeft(factor: Double, dt: Double) {
-    val v = getdPosition()
-    v.increaseAngleAboutAxisY(turningRate * factor * dt)
-    setdPosition(v)
+    $dPosition.increaseAngleAboutAxisY(turningRate * factor * dt)
   }
 
   protected def handleTurnRight(factor: Double, dt: Double) {
-    val v = getdPosition()
-    v.increaseAngleAboutAxisY(-turningRate * factor * dt)
-    setdPosition(v)
+    $dPosition.increaseAngleAboutAxisY(-turningRate * factor * dt)
   }
 
   protected def handleIncreaseVelocity(factor: Double, dt: Double) {
-    val v = getdPosition()
+    val v = $dPosition
     if (v.velocity < maxVelocity) {
       v.increaseVelocity(acceleration * factor * dt)
-      setdPosition(v)
     }
   }
 
   protected def handleDecreaseVelocity(factor: Double, dt: Double) {
-    val v = getdPosition()
+    val v = $dPosition
     if (v.velocity > -maxVelocity) {
       v.increaseVelocity(-acceleration * factor * dt)
-      setdPosition(v)
     }
   }
 
   protected def handleBrake(factor: Double, dt: Double) {
-    val v = getdPosition()
+    val v = $dPosition
     if (v.velocity > 0) v.increaseVelocity(-brakingRate * factor * dt)
     else if (v.velocity < 0) v.setVelocity(0)
-    setdPosition(v)
   }
 
   protected def handlePitch(factor: Double, dt: Double) {
-    val v = getdPosition()
-    v.increasePitch(-pitchRate * factor * dt)
-    setdPosition(v)
+    $dPosition.increasePitch(-pitchRate * factor * dt)
   }
 
   protected def handleClimb(factor: Double, dt: Double) {
-    val p = position
-    p.y += climbRate * dt * factor
-    setPosition(p)
+    $position.y += climbRate * dt * factor
   }
 
   protected def handleDecent(factor: Double, dt: Double) {
-    val p = position
-    p.y -= climbRate * dt * factor
-    setPosition(p)
+    $position.y -= climbRate * dt * factor
   }
 
 }

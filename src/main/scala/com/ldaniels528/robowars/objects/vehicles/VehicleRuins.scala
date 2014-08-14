@@ -15,31 +15,22 @@ class VehicleRuins(world: FxWorld, deadTank: AbstractVehicle)
   lazy val modelInstance = FxModelInstance("/models/vehicles/vehicleRuins.f3d", SCALE)
 
   // throw the remaining tank up in the air
-  val dp = getdPosition()
-  dp.y = FxWorld.rand(0, SPEED_UP)
-  setdPosition(dp)
+  $dPosition.y = FxWorld.rand(0, SPEED_UP)
 
   // set a random rotation on the remaining tank
-  setdAngle(FxWorld.random3DAngle(ROTATION))
+  dAngle = FxWorld.random3DAngle(ROTATION)
 
   override def update(dt: Double) {
     super.update(dt)
-    val p = position
+
     // -- check if hit the ground
-    if (p.y < SCALE.h) {
-      val dp = getdPosition()
-      p.y = SCALE.h
-      dp.set(0, 0, 0)
-      setPosition(p)
-      val a = angle
-      a.set(0, a.y, 0)
-      setAngle(a)
-      setdAngle(new FxAngle3D())
-      setdPosition(dp)
-    } else if (p.y > SCALE.h) {
-      val dp = getdPosition()
-      dp.y += world.gravity * dt
-      setdPosition(dp)
+    if ($position.y < SCALE.h) {
+      $position.y = SCALE.h
+      $dPosition.reset
+      audioPlayer ! CrashClip
+
+      $angle.set(0, $angle.y, 0)
+      dAngle = FxAngle3D()
     }
   }
 }

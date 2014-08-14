@@ -32,23 +32,16 @@ case class Glider(w: FxWorld, p: FxPoint3D)
   override def update(dt: Double) {
     super.update(dt)
 
-    // -- check collision with ground
-    val p = position
-    if (p.y < SCALE.h) {
-      p.y = SCALE.h
-      setPosition(p)
+    // check collision with ground
+    if ($position.y < SCALE.h) {
+      $position.y = SCALE.h
+
+      // some damage depending on the speed
+      if(damageHealth($dPosition.velocity) < 0) die()
 
       // update the velocity
-      setdPosition({
-        val dp = getdPosition()
-        dp.setAngleAboutAxisX(0)
-        dp.setVelocity(0)
-        dp
-      })
-
-      // -- some damage depending on the speed
-      val vel = getdPosition().velocity
-      damageHealth(vel)
+      $dPosition.setAngleAboutAxisX(0)
+      $dPosition.setVelocity(0)
     }
     ()
   }

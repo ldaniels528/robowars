@@ -19,13 +19,9 @@ class ShellCasing(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, vel: FxVelocit
     super.update(dt)
 
     // if the shell is above ground and within its lifespan
-    if (position.y > 0 && age < 1.5d) {
-      // move-out toward the ground
-      setdPosition({
-        val v = getdPosition()
-        v.y += world.gravity * dt
-        v
-      })
+    if ($position.y > 0 && age < 1.5d) {
+      // apply the effects of gravity
+      applyGravity(dt)
     }
     else die()
   }

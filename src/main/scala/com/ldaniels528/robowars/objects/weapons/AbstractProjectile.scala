@@ -60,10 +60,8 @@ abstract class AbstractProjectile(world: FxWorld, val shooter: AbstractVehicle, 
       // -- if bullet hits the ground then die
       // -- next round so that a collision detection
       // -- can be done
-      val p = position
-      if (p.y < 0) {
-        p.y = 0
-        setPosition(p)
+      if ($position.y < 0) {
+        $position.y = 0
         dieNextUpdate = true
       }
 

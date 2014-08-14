@@ -39,14 +39,11 @@ case class Bomb(w: FxWorld, p: FxPoint3D, a: FxAngle3D, dp: FxPoint3D, strength:
   override def update(dt: Double) {
     super.update(dt)
 
-    setdPosition({
-      val v = getdPosition()
-      v.y += world.gravity
-      v
-    })
+    // apply the effects of gravity
+    applyGravity(dt)
 
-    val p = position
-    if (p.y < 0) {
+    // did it hit the ground?
+    if ($position.y < 0) {
       die()
     }
   }

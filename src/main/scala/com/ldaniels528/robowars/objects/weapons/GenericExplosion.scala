@@ -46,9 +46,7 @@ class GenericExplosion(world: FxWorld,
     modelInstance.setScalingFactor(scale)
 
     // adjust the position so that the bottom always touches the ground
-    val p = position
-    p.y = scale.y
-    setPosition(p)
+    $position.y = scale.y
   }
 
 }

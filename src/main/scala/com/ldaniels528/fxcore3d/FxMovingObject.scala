@@ -48,7 +48,7 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
 
     // if the other object is a moving object then update it too.
     if (obj.isInstanceOf[FxMovingObject]) {
-      obj.modelInstance.setOrientation(obj.Pos, obj.Agl)
+      obj.modelInstance.setOrientation(obj.$position, obj.$angle)
     }
 
     // let the overridden method check the collision
