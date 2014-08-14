@@ -43,14 +43,26 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   def isAlive: Boolean = alive
 
   /**
+   * Returns a clone of the angle.
+   */
+  def angle: FxAngle3D = Agl.makeClone
+
+  /**
+   * Returns the object's angle
+   * @return the object's angle
+   */
+  protected[fxcore3d] def $angle = Agl
+
+  /**
    * Returns a clone of the position.
    */
   def position: FxPoint3D = Pos.makeClone
 
   /**
-   * Returns a clone of the angle.
+   * Returns the object's position
+   * @return the object's position
    */
-  def angle: FxAngle3D = Agl.makeClone
+  protected[fxcore3d] def $position: FxPoint3D = Pos
 
   /**
    * Returns the polyhedron instance

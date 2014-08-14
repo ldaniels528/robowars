@@ -9,12 +9,6 @@ import com.ldaniels528.fxcore3d._
 trait RewardItem {
   self: FxMovingObject =>
 
-  def spin(dt: Double): Unit = {
-    setAngle({
-      val agl = angle
-      agl.y += dt
-      agl
-    })
-  }
+  def spin(dt: Double): Unit = $angle.y += dt
 
 }

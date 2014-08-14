@@ -36,6 +36,9 @@ case class JetCraft(w: FxWorld, p: FxPoint3D)
     if ($position.y < SCALE.h) {
       $position.y = SCALE.h
 
+      // some damage depending on the speed
+      if (damageHealth($dPosition.velocity) < 0) die()
+
       // update the velocity
       $dPosition.setAngleAboutAxisX(0)
       $dPosition.setVelocity(0)

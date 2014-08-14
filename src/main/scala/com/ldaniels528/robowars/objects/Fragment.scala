@@ -36,16 +36,12 @@ class Fragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: Double, 
   override def update(dt: Double) {
     super.update(dt)
 
-    setdPosition({
-      val v = getdPosition()
-      v.y -= 10 * dt
-      v
-    })
+    // apply the affects of gravity
+    applyGravity(dt)
 
-    val p = position
-    if (p.y < 0) {
-      p.y = size
-      setPosition(p)
+    // if the fragment has hit the ground, die.
+    if ($position.y < 0) {
+      $position.y = size
       die()
     }
   }

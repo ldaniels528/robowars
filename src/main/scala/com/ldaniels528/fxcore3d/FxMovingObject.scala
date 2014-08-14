@@ -33,6 +33,8 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
 
   def dAngle_=(a: FxAngle3D) = dAgl.set(a)
 
+  protected def $dAngle: FxAngle3D = dAgl
+
   def dPosition: FxVelocityVector = dPos.makeClone
 
   def dPosition_=(p: FxPoint3D) = dPos.set(p)
