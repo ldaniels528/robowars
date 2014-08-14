@@ -108,11 +108,4 @@ object FxWorld {
    */
   def rand(b: Double, e: Double): Double = (e - b) * Math.random() + b
 
-  /**
-   * Prints the class name and a string to stout.
-   */
-  def debug(source: Any, message: String) {
-    System.out.println(s"***${source.getClass.getName} : $message")
-  }
-
 }
