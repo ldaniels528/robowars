@@ -100,8 +100,8 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
   }
 
   private def oldStates() {
-    setPosition(myLastPos)
-    setAngle(myLastAgl)
+    position = myLastPos
+    angle = myLastAgl
     dPos.setVelocity(0)
   }
 

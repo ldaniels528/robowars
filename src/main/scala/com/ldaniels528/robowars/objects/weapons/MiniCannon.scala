@@ -27,7 +27,7 @@ case class MiniCannon(host: AbstractVehicle, relPos: FxPoint3D, ammo0: Int = 250
       MiniCannonRound(world, host, host.position, host.angle)
 
       // eject the shell casing
-      new ShellCasing(world, host.position, host.angle, host.getdPosition(), shellCasingScale)
+      new ShellCasing(world, host.position, host.angle, host.dPosition, shellCasingScale)
     }
     fired
   }

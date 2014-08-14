@@ -14,7 +14,7 @@ class BombLauncher(host: AbstractVehicle, relPos: FxPoint3D)
     val fired = super.fire()
     if (fired) {
       val p = theHost.position += relOrigin
-      new Bomb(host.world, p, host.angle, host.getdPosition(), strength = 15)
+      new Bomb(host.world, p, host.angle, host.dPosition, strength = 15)
     }
     fired
   }

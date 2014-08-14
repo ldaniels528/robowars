@@ -9,7 +9,7 @@ import com.ldaniels528.robowars.objects.vehicles.VehicleRuins._
  * @author lawrence.daniels@gmail.com
  */
 class VehicleRuins(world: FxWorld, deadTank: AbstractVehicle)
-  extends FxMovingObject(world, deadTank.position, deadTank.angle, deadTank.getdPosition(), deadTank.getdAngle()) {
+  extends FxMovingObject(world, deadTank.position, deadTank.angle, deadTank.dPosition, deadTank.dAngle) {
 
   // set the default polyhedron instance
   lazy val modelInstance = FxModelInstance("/models/vehicles/vehicleRuins.f3d", SCALE)
