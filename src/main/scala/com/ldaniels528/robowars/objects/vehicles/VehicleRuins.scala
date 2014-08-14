@@ -2,6 +2,7 @@ package com.ldaniels528.robowars.objects.vehicles
 
 import com.ldaniels528.fxcore3d.polygon.FxModelInstance
 import com.ldaniels528.fxcore3d.{FxAngle3D, FxMovingObject, FxScale3D, FxWorld}
+import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.objects.vehicles.VehicleRuins._
 
 /**
@@ -32,6 +33,9 @@ class VehicleRuins(world: FxWorld, deadTank: AbstractVehicle)
       $angle.set(0, $angle.y, 0)
       dAngle = FxAngle3D()
     }
+
+    // apply the effects of gravity
+    else if ($position.y > SCALE.h) applyGravity(dt)
   }
 }
 
