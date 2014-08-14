@@ -13,7 +13,7 @@ object AudioManager extends FxAudioPlayer {
   private val audioSampleCache = loadSamples()
 
   // create the audio play-back actors
-  val audioPlayers = (1 to 10) map (n => system.actorOf(Props[AudioPlaybackActor], name = s"audioPlayer$n"))
+  val audioPlayers = (1 to 18) map (n => system.actorOf(Props[AudioPlaybackActor], name = s"audioPlayer$n"))
   var ticker = 0
 
   // allows background audio playback to be turned on/off
