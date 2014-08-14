@@ -6,8 +6,8 @@ import com.ldaniels528.robowars.objects.vehicles.JetCraft._
 import com.ldaniels528.robowars.objects.weapons.{BombLauncher, MiniCannon, MissileLauncher}
 
 /**
- * Jet Fighter
- * @author ldaniels
+ * Jet Fighter Vehicle
+ * @author lawrence.daniels@gmail.com
  */
 case class JetCraft(w: FxWorld, p: FxPoint3D)
   extends AbstractVehicle(w, FxPoint3D(p.x, SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0)) {

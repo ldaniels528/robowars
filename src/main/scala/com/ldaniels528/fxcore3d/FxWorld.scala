@@ -8,9 +8,9 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  */
 trait FxWorld {
 
-  def Xmin: Double
+  def minX: Double
 
-  def Ymin: Double
+  def minY: Double
 
   def size: Double
 

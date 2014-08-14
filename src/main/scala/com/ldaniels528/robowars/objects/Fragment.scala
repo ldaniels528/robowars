@@ -47,3 +47,18 @@ class Fragment(world: FxWorld, size: Double, origin: FxPoint3D, spread: Double, 
   }
 
 }
+
+/**
+ * Fragment Companion Object
+ * @author lawrence.daniels@gmail.com
+ */
+object Fragment {
+
+  private def randomPoint(origin: FxPoint3D, spread: Double) = FxPoint3D(
+    origin.x + spread * (random() - 0.5),
+    origin.y + spread * (random() - 0.5),
+    origin.z + spread * (random() - 0.5))
+
+  private def randomAngle = FxAngle3D(random() * 3d, random() * 3d, random() * 3d)
+
+}

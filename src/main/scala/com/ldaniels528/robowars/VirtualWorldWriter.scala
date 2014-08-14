@@ -52,7 +52,7 @@ object VirtualWorldWriter {
   }
 
   private def encodeMovingDoor(door: MovingDoor): (String, String, Node) = {
-    val p = door.Pos
+    val p = door.position
     val w = MainGate.SCALE.w.toString
     val d = MainGate.SCALE.d.toString
     val h = MainGate.SCALE.h.toString

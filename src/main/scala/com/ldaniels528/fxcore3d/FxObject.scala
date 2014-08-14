@@ -14,8 +14,8 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   private var occupiedGrids: Seq[FxGrid] = Seq.empty
   private var alive: Boolean = true
 
-  protected val Pos: FxPoint3D = myPos.makeClone
-  protected val Agl: FxAngle3D = myAngle.makeClone
+  protected [fxcore3d] val Pos: FxPoint3D = myPos.makeClone
+  protected [fxcore3d] val Agl: FxAngle3D = myAngle.makeClone
   protected [fxcore3d] var age: Double = _
 
   // setup the model's orientation
@@ -100,7 +100,7 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   /**
    * Returns the distance of this object to some other point.
    */
-  def distanceToPoint(toPoint: FxPoint3D): Double = Math.sqrt(Pos.distanceToPoint(toPoint))
+  def distanceToPoint(p: FxPoint3D): Double = Math.sqrt(Pos.distanceToPoint(p))
 
   /**
    * Calls handleEvent for every event in the list.

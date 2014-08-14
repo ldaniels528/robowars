@@ -8,7 +8,7 @@ import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
  * Represents a Missile Launcher Weapon
  * @author lawrence.daniels@gmail.com
  */
-case class MissileLauncher(host: AbstractVehicle, relPos: FxPoint3D, ammo0: Int = 10)
+case class MissileLauncher(host: AbstractVehicle, relPos: FxPoint3D, ammo0: Int = 15)
   extends AbstractWeapon(host, relPos, loadingTime = 2d, ammo = ammo0) {
 
   override def fire(): Boolean = {
