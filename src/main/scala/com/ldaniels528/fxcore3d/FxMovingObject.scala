@@ -14,6 +14,14 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
   val dPos: FxVelocityVector = dpos.makeClone
   val dAgl: FxAngle3D = dagl.makeClone
 
+  /**
+   * Apply the affects the gravity
+   * @param dt the given delta time
+   */
+  def applyGravity(dt: Double) {
+    $dPosition.y += world.gravity * dt
+  }
+
   def angle_=(a: FxAngle3D) = Agl.set(a)
 
   def position_=(p: FxPoint3D) {
