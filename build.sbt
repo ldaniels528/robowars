@@ -33,7 +33,8 @@ mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
 libraryDependencies ++= Seq(
 	"com.typesafe.akka" %% "akka-actor" % "2.3.4",
 	"commons-io" % "commons-io" % "2.4",
-	"org.slf4j" % "slf4j-api" % "1.7.6",
+	"org.slf4j" % "slf4j-api" % "1.7.7",
+  "org.slf4j" % "slf4j-log4j12" % "1.7.7",
 	"org.scala-lang" % "scala-library" % "2.11.2",
 	"org.scala-lang.modules" %% "scala-xml" % "1.0.2"
 )
