@@ -19,10 +19,11 @@ object VirtualWorldReader {
    * Loads the virtual world from disk
    * @param path the given resource path
    */
-  def load(path: String): VirtualWorld = {
-    // load the XML file
-    val xml = XML.load(ContentManager.getResource(path))
+  def load(path: String): VirtualWorld = parse(XML.load(ContentManager.getResource(path)))
 
+  def decode(xmlString: String): VirtualWorld = parse(XML.loadString(xmlString))
+
+  def parse(xml: Elem): VirtualWorld = {
     // define the containers
     val colors = MMap[String, Color]()
     val classDefs = MMap[String, Class[_]]()
