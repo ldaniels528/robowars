@@ -11,7 +11,7 @@ class VirtualWorldWriterTest {
   def save() {
     val world = new VirtualWorldImpl()
     world.update(0)
-    VirtualWorldWriter.save(world)
+    println(VirtualWorldWriter.save(world))
   }
 
 }
