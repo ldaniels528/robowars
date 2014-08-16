@@ -11,7 +11,7 @@ import scala.xml._
  */
 object VirtualWorldWriter {
 
-  def save(world: VirtualWorld) {
+  def save(world: VirtualWorld): NodeSeq = {
     val player = world.activePlayer
 
     // extract the vehicles first
@@ -21,8 +21,7 @@ object VirtualWorldWriter {
       case structure: Structure => Some(encodeStructure(structure))
       case _ => None
     }
-
-    println(constructDocument(objects))
+    constructDocument(objects)
   }
 
   private def encodeActor(actor: AbstractVehicle, isPlayer: Boolean): (String, String, Node) = {
