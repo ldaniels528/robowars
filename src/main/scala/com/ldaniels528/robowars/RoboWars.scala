@@ -296,7 +296,7 @@ class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", 
 }
 
 /**
- * RoboWars Application Main
+ * RoboWars Companion Object
  * @author lawrence.daniels@gmail.com
  */
 object RoboWars {
