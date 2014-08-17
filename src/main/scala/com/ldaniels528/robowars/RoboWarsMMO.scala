@@ -15,6 +15,7 @@ import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import org.slf4j.LoggerFactory
 
+import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
