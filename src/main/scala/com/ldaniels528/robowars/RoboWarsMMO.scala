@@ -10,7 +10,7 @@ import com.ldaniels528.robowars.RoboWarsMMO._
 import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.WeaponCommand
-import com.ldaniels528.robowars.net.{NetworkPeer, ClientSideProcessor}
+import com.ldaniels528.robowars.net.{ClientSideProcessor, NetworkPeer}
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import org.slf4j.LoggerFactory
@@ -335,7 +335,7 @@ object RoboWarsMMO {
 
     // connect to the server
     logger.info(s"Connecting to $host:$port...")
-    val app = new RoboWarsMMO(NetworkPeer(new Socket(host, port)), windowed, noMusic)
+    val app = new RoboWarsMMO(NetworkPeer(socket = new Socket(host, port), capacity = 8192), windowed, noMusic)
 
     // initialize and start the application
     app.init()

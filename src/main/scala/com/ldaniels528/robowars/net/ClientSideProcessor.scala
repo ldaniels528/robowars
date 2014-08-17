@@ -19,7 +19,7 @@ trait ClientSideProcessor {
 
   def getRemoteWorld(client: NetworkPeer): Future[VirtualWorld] = {
     clientSide ! WorldRequest(client, level = 1)
-    makePromise
+    makePromise(client.id)
   }
 
   /**
@@ -45,11 +45,11 @@ object ClientSideProcessor {
   // create the client side actor
   private val system = ActorSystem("ClientSideActors")
   private val clientSide = system.actorOf(Props[ClientSideActor], name = "clientSide")
-  private val callbacks = collection.mutable.Stack[Promise[VirtualWorld]]()
+  private val callbacks = collection.concurrent.TrieMap[Long, Promise[VirtualWorld]]()
 
-  def makePromise: Future[VirtualWorld] = {
+  def makePromise(id: Long): Future[VirtualWorld] = {
     val promise = Promise[VirtualWorld]()
-    callbacks.push(promise)
+    callbacks += (id -> promise)
     promise.future
   }
 
@@ -58,15 +58,12 @@ object ClientSideProcessor {
    * @author lawrence.daniels@gmail.com
    */
   class ClientSideActor() extends Actor {
-
     import com.ldaniels528.robowars.net.NetworkActionProcessor._
 
     def receive = {
       case r@WorldRequest(peer, level) => peer.send(r)
-      case WorldResponse(_, world) =>
-        logger.info(s"Fulfilling promise: callbacks = $callbacks")
-        val promise = callbacks.pop()
-        promise.success(world)
+      case WorldResponse(peer, world) =>
+        callbacks.remove(peer.id) foreach (_.success(world))
         ()
       case HelloResponse(_, slots) =>
       case unknown => this.unhandled(unknown)

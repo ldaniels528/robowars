@@ -1,5 +1,6 @@
 package com.ldaniels528.robowars.net
 
+import java.io.InputStream
 import java.nio.ByteBuffer
 
 import com.ldaniels528.fxcore3d.FxPoint3D
@@ -23,6 +24,21 @@ class NetworkBuffer(capacity: Int, var autoReset: Boolean = true) {
 
   def remaining: Int = length - position
 
+  def remainingCapacity = capacity - length
+
+  def read(in: InputStream): Int = {
+    var total = 0
+    while(in.available() > 0) {
+      // write the chunk of data to the client's buffer
+      val count = in.read(bytes, length, remainingCapacity)
+      if (count > 0) {
+        total += count
+        length += count
+      }
+    }
+    total
+  }
+
   def reset(): Unit = {
     position = 0
     length = 0
@@ -35,6 +51,13 @@ class NetworkBuffer(capacity: Int, var autoReset: Boolean = true) {
     position += 1
     limitCheck()
     v
+  }
+
+  def getArray(count: Int): Array[Byte] = {
+    val dest = new Array[Byte](count)
+    System.arraycopy(bytes, position, dest, 0, count)
+    position += count
+    dest
   }
 
   def getDouble: Double = {
@@ -83,7 +106,6 @@ class NetworkBuffer(capacity: Int, var autoReset: Boolean = true) {
   }
 
   def getString(len: Int): String = {
-    logger.info(s"Retrieving string [$len bytes]")
     val data = new Array[Byte](len)
     buf.position(position)
     buf.get(data, 0, data.length)

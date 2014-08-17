@@ -23,13 +23,13 @@ class GameServer(port: Int) {
     // load the virtual world
     logger.info(s"Loading virtual world for level $level...")
     world = ContentManager.loadWorld(f"/worlds/world_$level%04d.xml")
+    world.update(.02)
 
     // start the thread manager
     logger.info("Starting client manager...")
     new Thread(clientMgr).start()
 
     // start listening on the port
-    logger.info(s"Binding to port $port...")
     val serverSock = new ServerSocket(port)
     logger.info(s"Listening on port $port")
 
@@ -56,7 +56,7 @@ class GameServer(port: Int) {
 
     def +=(socket: Socket) {
       // create a client wrapper
-      val client = NetworkPeer(socket)
+      val client = NetworkPeer(socket, capacity = 512)
 
       // track this client
       clients = client :: clients
@@ -65,7 +65,7 @@ class GameServer(port: Int) {
     override def run() {
       while (alive) {
         // check for input from each client
-        clients foreach (client => manage(client))
+        clients foreach manage
 
         // sleep 1 millis
         Thread.sleep(1)

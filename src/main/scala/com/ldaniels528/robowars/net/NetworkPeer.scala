@@ -1,37 +1,36 @@
 package com.ldaniels528.robowars.net
 
-import java.io.{BufferedInputStream, DataOutputStream}
 import java.net.Socket
 
 import com.ldaniels528.robowars.net.NetworkActionProcessor._
+import com.ldaniels528.robowars.net.NetworkPeer._
 import org.slf4j.LoggerFactory
 
 /**
  * Represents a connection to a network peer
  * @param socket the given socket
  */
-case class NetworkPeer(socket: Socket) {
+case class NetworkPeer(socket: Socket, capacity: Int) {
   private val logger = LoggerFactory.getLogger(getClass)
 
+  // get a unique ID
+  val id = generateUniqueID
+  val hostName = socket.getInetAddress.getHostName
+
   // get the input and output streams
-  private val in = new BufferedInputStream(socket.getInputStream, 1024)
-  private val out = new DataOutputStream(socket.getOutputStream)
+  private val in = socket.getInputStream
+  private val out = socket.getOutputStream
 
   // create a network input buffer
-  val buffer = new NetworkBuffer(16384, autoReset = true)
-
-  // create a scratch buffer for reading data
-  private val scratch = new Array[Byte](8192)
+  val buffer = new NetworkBuffer(capacity, autoReset = true)
 
   /**
    * Reads bytes from the input stream and populated the network buffer
    */
   def fillBuffer(): Unit = {
-    if (in.available() > 0) {
-      // write the chunk of data to the client's buffer
-      val count = in.read(scratch)
-      logger.info(s"Read $count bytes from client ${socket.getInetAddress.getHostName}")
-      buffer.put(scratch, 0, count)
+    val total = buffer.read(in)
+    if (total > 0) {
+      logger.info(s"Read $total bytes from client $hostName")
     }
   }
 
@@ -57,5 +56,15 @@ case class NetworkPeer(socket: Socket) {
     val elapsed = (endTime - startTime).toDouble / 1e+6
     logger.info(f"Transmitted ${bytes.length} bytes to remote peer [$elapsed%.1f msec]...")
   }
+
+}
+
+/**
+ * Network Peer Companion Object
+ * @author lawrence.daniels@gmail.com
+ */
+object NetworkPeer {
+
+  def generateUniqueID = System.nanoTime()
 
 }

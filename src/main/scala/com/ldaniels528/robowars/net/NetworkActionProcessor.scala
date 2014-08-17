@@ -1,5 +1,8 @@
 package com.ldaniels528.robowars.net
 
+import java.nio.ByteBuffer._
+
+import com.ldaniels528.robowars.util.Compression
 import com.ldaniels528.robowars.{VirtualWorld, VirtualWorldReader, VirtualWorldWriter}
 import org.slf4j.LoggerFactory
 
@@ -7,7 +10,7 @@ import org.slf4j.LoggerFactory
  * Network Action Processor
  * @author lawrence.daniels@gmail.com
  */
-object NetworkActionProcessor {
+object NetworkActionProcessor extends Compression {
   private val logger = LoggerFactory.getLogger(getClass)
 
   /**
@@ -47,15 +50,19 @@ object NetworkActionProcessor {
       case HelloRequest(_) => Array(OP_HELLO_REQ)
       case HelloResponse(_, slots) => Array(OP_HELLO_RESP)
       case WorldRequest(_, level) => allocate(3).put(OP_WORLD_REQ).putShort(level.toShort).array()
-      case WorldResponse(_, world) =>
-        val worldBytes = VirtualWorldWriter.save(world).toString().getBytes
-        allocate(worldBytes.length + 5).put(OP_WORLD_RESP).putInt(worldBytes.length).put(worldBytes).array()
+      case WorldResponse(_, world) => encodeWorld(world)
     }
   }
 
   private def decodeWorld(buf: NetworkBuffer): VirtualWorld = {
     val length = buf.getInt
-    VirtualWorldReader.decode(buf.getString(length))
+    val xml = new String(decompress(buf.getArray(length)))
+    VirtualWorldReader.decode(xml)
+  }
+
+  private def encodeWorld(world: VirtualWorld): Array[Byte] = {
+    val compressed = compress(VirtualWorldWriter.save(world).toString().getBytes)
+    allocate(compressed.length + 5).put(OP_WORLD_RESP).putInt(compressed.length).put(compressed).array()
   }
 
   /**
