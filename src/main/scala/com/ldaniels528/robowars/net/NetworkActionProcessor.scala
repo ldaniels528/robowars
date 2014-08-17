@@ -29,7 +29,8 @@ object NetworkActionProcessor {
       logger.info(f"Received ${OP_CODES.getOrElse(code, "Unknown Code")} ($code%02x) at position $position [$remaining remaining]")
       code match {
         case OP_SHUTDOWN_REQ => Some(ShutdownServer(client))
-        case OP_WELCOME_RESP => Some(WelcomeRequest(client))
+        case OP_WELCOME_REQ => Some(WelcomeRequest(client))
+        case OP_WELCOME_RESP => Some(WelcomeResponse(client, availableSlots = buf.getShort))
         case OP_WORLD_REQ => Some(WorldRequest(client, level = buf.getShort))
         case OP_WORLD_RESP => Some(WorldResponse(client, world = decodeWorld(buf)))
         case unknown =>
