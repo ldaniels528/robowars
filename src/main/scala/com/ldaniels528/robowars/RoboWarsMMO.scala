@@ -86,6 +86,9 @@ class RoboWarsMMO(val client: NetworkPeer, windowed: Boolean, noMusic: Boolean)
     theScreen = contentPane.getGraphics.asInstanceOf[Graphics2D]
     screenDim = dim
 
+    // schedule the updates
+    scheduleUpdates(client)
+
     // load the world
     logger.info("Waiting for world to load...")
     world = Await.result(getRemoteWorld(client), 30.seconds)
