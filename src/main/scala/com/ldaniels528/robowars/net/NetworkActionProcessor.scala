@@ -27,6 +27,8 @@ object NetworkActionProcessor extends Compression {
       val code = buf.get
       logger.info(f"Received ${OP_CODES.getOrElse(code, "Unknown Code")} ($code%02x) at position $position [$remaining remaining]")
       code match {
+        case OP_EVENT_REQ => Some(EventRequest(client, eventCode = buf.get))
+        case OP_EVENT_RESP => Some(EventResponse(client, eventCode = buf.get))
         case OP_HELLO_REQ => Some(HelloRequest(client))
         case OP_HELLO_RESP => Some(HelloResponse(client, availableSlots = buf.getShort))
         case OP_JOIN_REQ => Some(JoinRequest(client, level = buf.getShort))
@@ -47,6 +49,8 @@ object NetworkActionProcessor extends Compression {
     import java.nio.ByteBuffer.allocate
 
     action match {
+      case EventRequest(_, eventCode) => Array(OP_EVENT_REQ, eventCode.toByte)
+      case EventResponse(_, eventCode) => Array(OP_EVENT_RESP, eventCode.toByte)
       case HelloRequest(_) => Array(OP_HELLO_REQ)
       case HelloResponse(_, slots) => Array(OP_HELLO_RESP)
       case JoinRequest(_, level) => allocate(3).put(OP_JOIN_REQ).putShort(level.toShort).array()
@@ -69,12 +73,21 @@ object NetworkActionProcessor extends Compression {
    * Operation Code definitions
    */
 
+  val OP_EVENT_REQ = 0x06: Byte
+  val OP_EVENT_RESP = 0x07: Byte
   val OP_HELLO_REQ = 0x10: Byte
   val OP_HELLO_RESP = 0x11: Byte
   val OP_JOIN_REQ = 0x22: Byte
   val OP_JOIN_RESP = 0x23: Byte
 
+
+  /**
+   * Operation Code translations
+   */
+
   val OP_CODES = Map(
+    OP_EVENT_REQ -> "EVENT_REQ",
+    OP_EVENT_RESP -> "EVENT_RESP",
     OP_HELLO_REQ -> "HELLO_REQ",
     OP_HELLO_RESP -> "HELLO_RESP",
     OP_JOIN_REQ -> "JOIN_REQ",
@@ -85,6 +98,10 @@ object NetworkActionProcessor extends Compression {
    */
 
   trait NetworkAction
+
+  case class EventRequest(client: NetworkPeer, eventCode: Int) extends NetworkAction
+
+  case class EventResponse(client: NetworkPeer, eventCode: Int) extends NetworkAction
 
   case class HelloRequest(client: NetworkPeer) extends NetworkAction
 
