@@ -19,6 +19,10 @@ class GameServer(port: Int) {
   private var world: VirtualWorld = _
   private var level: Int = 1
 
+  /**
+   * Kills the process
+   */
+  def die(): Unit = alive = false
   def run() {
     // load the virtual world
     logger.info(s"Loading virtual world for level $level...")
