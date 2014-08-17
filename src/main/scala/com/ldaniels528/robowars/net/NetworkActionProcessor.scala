@@ -15,7 +15,7 @@ object NetworkActionProcessor {
    * @param client the client whose buffer is being monitored
    * @return an option of a network action
    */
-  def decodeNext(client: Client): Option[NetworkAction] = {
+  def decodeNext(client: NetworkPeer): Option[NetworkAction] = {
     val buf = client.buffer
     val remaining = buf.remaining
     if (remaining == 0) None
@@ -58,7 +58,9 @@ object NetworkActionProcessor {
     VirtualWorldReader.decode(buf.getString(length))
   }
 
-  // Operation Code definitions
+  /**
+   * Operation Code definitions
+   */
 
   val OP_HELLO_REQ = 0x10: Byte
   val OP_HELLO_RESP = 0x11: Byte
@@ -71,17 +73,18 @@ object NetworkActionProcessor {
     OP_WORLD_REQ -> "JOIN_REQ",
     OP_WORLD_RESP -> "JOIN_RESP")
 
-  // Network Action definitions
+  /**
+   * Network Action definitions
+   */
 
   trait NetworkAction
 
-  case class HelloRequest(client: Client) extends NetworkAction
+  case class HelloRequest(client: NetworkPeer) extends NetworkAction
 
-  case class HelloResponse(client: Client, availableSlots: Int) extends NetworkAction
+  case class HelloResponse(client: NetworkPeer, availableSlots: Int) extends NetworkAction
 
+  case class WorldRequest(client: NetworkPeer, level: Int) extends NetworkAction
 
-  case class WorldRequest(client: Client, level: Int) extends NetworkAction
-
-  case class WorldResponse(client: Client, world: VirtualWorld) extends NetworkAction
+  case class WorldResponse(client: NetworkPeer, world: VirtualWorld) extends NetworkAction
 
 }

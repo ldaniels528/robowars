@@ -52,11 +52,11 @@ class GameServer(port: Int) {
     private val logger = LoggerFactory.getLogger(getClass)
 
     // define the client container
-    var clients: List[Client] = Nil
+    var clients: List[NetworkPeer] = Nil
 
     def +=(socket: Socket) {
       // create a client wrapper
-      val client = Client(socket)
+      val client = NetworkPeer(socket)
 
       // track this client
       clients = client :: clients
@@ -72,7 +72,7 @@ class GameServer(port: Int) {
       }
     }
 
-    private def manage(peer: Client) {
+    private def manage(peer: NetworkPeer) {
       Try {
         // fill the peer's data buffer
         peer.fillBuffer()

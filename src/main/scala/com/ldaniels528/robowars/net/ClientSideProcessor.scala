@@ -1,6 +1,6 @@
 package com.ldaniels528.robowars.net
 
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.{Actor, ActorSystem, Cancellable, Props}
 import com.ldaniels528.robowars.VirtualWorld
 import com.ldaniels528.robowars.net.ClientSideProcessor._
 import com.ldaniels528.robowars.net.NetworkActionProcessor._
@@ -15,9 +15,9 @@ import scala.concurrent.{ExecutionContext, Future, Promise}
  */
 trait ClientSideProcessor {
 
-  def client: Client
+  def client: NetworkPeer
 
-  def getRemoteWorld(client: Client): Future[VirtualWorld] = {
+  def getRemoteWorld(client: NetworkPeer): Future[VirtualWorld] = {
     clientSide ! WorldRequest(client, level = 1)
     makePromise
   }
@@ -25,16 +25,14 @@ trait ClientSideProcessor {
   /**
    * Sets up a task to receive network actions
    */
-  def scheduleUpdates(interval: FiniteDuration = 5.millis)(implicit ec: ExecutionContext) {
+  def scheduleUpdates(interval: FiniteDuration = 5.millis)(implicit ec: ExecutionContext): Cancellable = {
     system.scheduler.schedule(initialDelay = 0.millis, interval, new Runnable {
-      val bytes = new Array[Byte](1024)
       override def run() {
         // fill the peer's data buffer
         client.fillBuffer()
 
-        if(client.buffer.nonEmpty) {
-          decodeNext(client) foreach (clientSide ! _)
-        }
+        // decode and process the next action
+        decodeNext(client) foreach (clientSide ! _)
       }
     })
   }
@@ -60,14 +58,16 @@ object ClientSideProcessor {
    * @author lawrence.daniels@gmail.com
    */
   class ClientSideActor() extends Actor {
+
     import com.ldaniels528.robowars.net.NetworkActionProcessor._
 
     def receive = {
-      case r@WorldRequest(peer, level) => peer.out.write(encode(r))
+      case r@WorldRequest(peer, level) => peer.send(r)
       case WorldResponse(_, world) =>
         logger.info(s"Fulfilling promise: callbacks = $callbacks")
         val promise = callbacks.pop()
         promise.success(world)
+        ()
       case HelloResponse(_, slots) =>
       case unknown => this.unhandled(unknown)
     }

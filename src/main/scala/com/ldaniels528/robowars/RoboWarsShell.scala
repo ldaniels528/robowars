@@ -2,8 +2,8 @@ package com.ldaniels528.robowars
 
 import java.net.Socket
 
-import com.ldaniels528.robowars.RoboWarsShell.{logger, _}
-import com.ldaniels528.robowars.net.{Client, ClientSideProcessor}
+import com.ldaniels528.robowars.RoboWarsShell._
+import com.ldaniels528.robowars.net.{NetworkPeer, ClientSideProcessor}
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import org.slf4j.LoggerFactory
 
@@ -14,7 +14,7 @@ import scala.util.Try
  * RoboWars Shell Client
  * @author lawrence.daniels@gmail.com
  */
-class RoboWarsShell(val client: Client, host: String) extends ClientSideProcessor {
+class RoboWarsShell(val client: NetworkPeer, host: String) extends ClientSideProcessor {
   private val commandSet = generateCommands
   private val out = System.out
   private var world: Option[VirtualWorld] = None
@@ -204,7 +204,7 @@ object RoboWarsShell {
 
     // connect to the remote host
     logger.info(s"Connecting to remote peer $host:$port...")
-    val client = new Client(new Socket(host, port))
+    val client = new NetworkPeer(new Socket(host, port))
 
     // get the system reported hostname
     val systemHost = getHostname getOrElse host

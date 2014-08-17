@@ -10,7 +10,7 @@ import com.ldaniels528.robowars.RoboWarsMMO._
 import com.ldaniels528.robowars.audio.AudioManager._
 import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.WeaponCommand
-import com.ldaniels528.robowars.net.{Client, ClientSideProcessor}
+import com.ldaniels528.robowars.net.{NetworkPeer, ClientSideProcessor}
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import org.slf4j.LoggerFactory
@@ -22,7 +22,7 @@ import scala.concurrent.duration._
  * RoboWars Online MMO Application Main
  * @author lawrence.daniels@gmail.com
  */
-class RoboWarsMMO(val client: Client, windowed: Boolean, noMusic: Boolean)
+class RoboWarsMMO(val client: NetworkPeer, windowed: Boolean, noMusic: Boolean)
   extends FxFrame("RoboWars Online", windowed)
   with ClientSideProcessor {
 
@@ -87,7 +87,7 @@ class RoboWarsMMO(val client: Client, windowed: Boolean, noMusic: Boolean)
 
     // load the world
     logger.info("Waiting for world to load...")
-    world = Await.result(getRemoteWorld(client), 30 seconds)
+    world = Await.result(getRemoteWorld(client), 30.seconds)
 
     //world = VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
@@ -335,7 +335,7 @@ object RoboWarsMMO {
 
     // connect to the server
     logger.info(s"Connecting to $host:$port...")
-    val app = new RoboWarsMMO(Client(new Socket(host, port)), windowed, noMusic)
+    val app = new RoboWarsMMO(NetworkPeer(new Socket(host, port)), windowed, noMusic)
 
     // initialize and start the application
     app.init()
