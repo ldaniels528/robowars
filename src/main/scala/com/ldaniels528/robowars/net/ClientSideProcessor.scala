@@ -74,7 +74,7 @@ object ClientSideProcessor {
    * Client Handler Actor
    * @author lawrence.daniels@gmail.com
    */
-  class ClientSideActor() extends Actor with Transmitter {
+  class ClientSideActor() extends Actor with NetworkActionTransmission {
     import com.ldaniels528.robowars.net.NetworkActionProcessor._
 
     def receive = {
@@ -83,7 +83,7 @@ object ClientSideProcessor {
         logger.info(s"Fulfilling promise: callbacks = $callbacks")
         val promise = callbacks.pop()
         promise.success(world)
-      case WelcomeResponse(_, slots) =>
+      case HelloResponse(_, slots) =>
       case unknown => this.unhandled(unknown)
     }
 
