@@ -39,6 +39,11 @@ object NetworkActionProcessor {
     }
   }
 
+  /**
+   * Encodes a network action into a byte array
+   * @param action the given network action
+   * @return a byte array
+   */
   def encode(action: NetworkAction): Array[Byte] = {
     import java.nio.ByteBuffer.allocate
 
