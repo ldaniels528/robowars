@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
  * This trait is implemented primarily by actors that are required to transmit
  * network action messages across the wire from peer-to-peer.
  */
-trait Transmitter {
+trait NetworkActionTransmission {
 
   protected def send(peer: Client, action: NetworkAction) {
     val bytes = encode(action)
