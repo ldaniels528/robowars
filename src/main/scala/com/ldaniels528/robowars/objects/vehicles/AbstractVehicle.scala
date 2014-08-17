@@ -229,4 +229,6 @@ abstract class AbstractVehicle(world: FxWorld, pos: FxPoint3D, vector: FxVelocit
     $position.y -= climbRate * dt * factor
   }
 
+  override def toString = s"${getClass.getSimpleName}${$position}"
+
 }
