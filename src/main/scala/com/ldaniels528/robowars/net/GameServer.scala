@@ -1,6 +1,6 @@
 package com.ldaniels528.robowars.net
 
-import java.net.{ServerSocket, Socket}
+import java.net.ServerSocket
 
 import com.ldaniels528.robowars.net.NetworkActionProcessor._
 import com.ldaniels528.robowars.{ContentManager, VirtualWorld}
@@ -14,24 +14,59 @@ import scala.util.Try
  */
 class GameServer(port: Int) {
   private val logger = LoggerFactory.getLogger(getClass)
-  var alive: Boolean = true
-  private val clientMgr = new ClientManager()
   private var world: VirtualWorld = _
   private var level: Int = 1
+  private var alive: Boolean = _
+
+  // define the client container
+  private var clients: List[NetworkPeer] = Nil
 
   /**
    * Kills the process
    */
   def die(): Unit = alive = false
+
+  /**
+   * Server main loop
+   */
   def run() {
     // load the virtual world
     logger.info(s"Loading virtual world for level $level...")
     world = ContentManager.loadWorld(f"/worlds/world_$level%04d.xml")
-    world.update(.02)
 
-    // start the thread manager
-    logger.info("Starting client manager...")
-    new Thread(clientMgr).start()
+    // the process is now live
+    alive = true
+
+    // continually update the server
+    new Thread {
+      override def run() = {
+        val times = Array[Double](25)
+        var ticker = 0
+        var dt: Double = 0.3
+
+        while (alive) {
+          // capture the start time
+          val startTime = System.nanoTime()
+
+          // update all clients
+          clients foreach manage
+
+          // update the world
+          world.update(dt)
+
+          // compute the frame rate
+          val endTime = System.nanoTime()
+          dt = (endTime - startTime) / 1e6
+          times(ticker % times.length) = dt
+          ticker += 1
+
+          if(ticker % 10000 == 0) {
+            logger.info(f"Frames: max = ${times.max}%.01f, min = ${times.min}%.01f")
+
+          }
+        }
+      }
+    }.start()
 
     // start listening on the port
     val serverSock = new ServerSocket(port)
@@ -40,57 +75,28 @@ class GameServer(port: Int) {
     // loop indefinitely
     while (alive) {
       // get the client connection
-      val socket = serverSock.accept()
-      logger.info(s"Client ${socket.getInetAddress.getHostName} connected")
+      val client = NetworkPeer(socket = serverSock.accept(), capacity = 512)
+      logger.info(s"Client ${client.hostName} connected")
 
       // track the client
-      clientMgr += socket
+      clients = client :: clients
     }
   }
 
-  /**
-   * Client Connection Manager
-   * @author lawrence.daniels@gmail.com
-   */
-  class ClientManager() extends Runnable {
-    private val logger = LoggerFactory.getLogger(getClass)
+  private def manage(peer: NetworkPeer) {
+    Try {
+      // fill the peer's data buffer
+      peer.fillBuffer()
 
-    // define the client container
-    var clients: List[NetworkPeer] = Nil
-
-    def +=(socket: Socket) {
-      // create a client wrapper
-      val client = NetworkPeer(socket, capacity = 512)
-
-      // track this client
-      clients = client :: clients
-    }
-
-    override def run() {
-      while (alive) {
-        // check for input from each client
-        clients foreach manage
-
-        // sleep 1 millis
-        Thread.sleep(1)
-      }
-    }
-
-    private def manage(peer: NetworkPeer) {
-      Try {
-        // fill the peer's data buffer
-        peer.fillBuffer()
-
-        // attempt to decode messages from the client
-        if (peer.buffer.nonEmpty) {
-          decodeNext(peer) foreach {
-            case HelloRequest(client) => client.send(HelloResponse(client, availableSlots = 4))
-            case r@HelloResponse(client, _) => client.send(r)
-            case JoinRequest(client, _) => client.send(JoinResponse(client, world))
-            case r@JoinResponse(client, _) => client.send(r)
-            case unknown =>
-              logger.error(s"Unhandled message $unknown (${unknown.getClass.getName}})")
-          }
+      // attempt to decode messages from the client
+      if (peer.buffer.nonEmpty) {
+        decodeNext(peer) foreach {
+          case HelloRequest(client) => client.send(HelloResponse(client, availableSlots = 4))
+          case r@HelloResponse(client, _) => client.send(r)
+          case JoinRequest(client, _) => client.send(JoinResponse(client, world))
+          case r@JoinResponse(client, _) => client.send(r)
+          case unknown =>
+            logger.error(s"Unhandled message $unknown (${unknown.getClass.getName}})")
         }
       }
     }
