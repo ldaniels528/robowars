@@ -21,7 +21,7 @@ class RoboWarsShell(val client: NetworkPeer, host: String) extends ClientSidePro
   var alive: Boolean = true
 
   // schedule the updates
-  scheduleUpdates()
+  scheduleUpdates(client)
 
   // retrieve the virtual world from the server
   {
