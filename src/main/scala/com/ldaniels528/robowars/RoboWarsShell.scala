@@ -77,16 +77,7 @@ class RoboWarsShell(val client: Client, host: String) extends ClientSideProcesso
       case Some(vw) => out.println("You have already joined")
       case None =>
         logger.info("Attempting to join game session...")
-        if (world.isEmpty) {
-          // schedule the updates
-          scheduleUpdates()
-        }
 
-        getRemoteWorld(client) foreach { theWorld =>
-          logger.info(s"Loaded virtual world $theWorld")
-          theWorld.update(.02)
-          world = Some(theWorld)
-        }
     }
   }
 

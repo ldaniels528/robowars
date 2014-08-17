@@ -61,14 +61,7 @@ object NetworkActionProcessor {
 
   private def decodeWorld(buf: NetworkBuffer): VirtualWorld = {
     val length = buf.getInt
-
-    // retrieve the data
     VirtualWorldReader.decode(buf.getString(length))
-  }
-
-  private def encodeJoinRequest(): Unit = {
-
-
   }
 
   private def encodeWorld(level: Int): Array[Byte] = {
