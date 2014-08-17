@@ -26,7 +26,7 @@ object NetworkActionProcessor {
     else {
       val position = buf.position
       val code = buf.get
-      logger.info(f"Received ${OPCODES.getOrElse(code, "UNKWN")} ($code%02x) at position $position [$remaining remaining]")
+      logger.info(f"Received ${OP_CODES.getOrElse(code, "Unknown Code")} ($code%02x) at position $position [$remaining remaining]")
       code match {
         case OP_SHUTDOWN_REQ => Some(ShutdownServer(client))
         case OP_WELCOME_RESP => Some(WelcomeRequest(client))
@@ -84,7 +84,7 @@ object NetworkActionProcessor {
   val OP_WORLD_REQ = 0x22: Byte
   val OP_WORLD_RESP = 0x23: Byte
 
-  val OPCODES = Map(
+  val OP_CODES = Map(
     OP_SHUTDOWN_REQ -> "SHDN_REQ",
     OP_WELCOME_REQ -> "WELCM_REQ",
     OP_WELCOME_RESP -> "WELCM_RESP",
