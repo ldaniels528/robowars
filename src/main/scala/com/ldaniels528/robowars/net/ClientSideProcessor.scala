@@ -58,8 +58,6 @@ object ClientSideProcessor {
    * @author lawrence.daniels@gmail.com
    */
   class ClientSideActor() extends Actor {
-    import com.ldaniels528.robowars.net.NetworkActionProcessor._
-
     def receive = {
       case r@JoinRequest(peer, level) => peer.send(r)
       case JoinResponse(peer, world) =>
@@ -68,9 +66,6 @@ object ClientSideProcessor {
       case HelloResponse(_, slots) =>
       case unknown => this.unhandled(unknown)
     }
-
   }
-
-  case class Callback(promise: Promise[VirtualWorld])
 
 }
