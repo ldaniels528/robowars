@@ -90,7 +90,6 @@ class RoboWarsMMO(val client: NetworkPeer, windowed: Boolean, noMusic: Boolean)
     logger.info("Waiting for world to load...")
     world = Await.result(getRemoteWorld(client), 30.seconds)
 
-    //world = VirtualWorldReader.load("/worlds/world_0001.xml")
     camera = createCamera(world)
 
     // start the player moving forward
