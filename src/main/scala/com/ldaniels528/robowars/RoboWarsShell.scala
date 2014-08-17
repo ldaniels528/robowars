@@ -20,6 +20,25 @@ class RoboWarsShell(val client: Client, host: String) extends ClientSideProcesso
   private var world: Option[VirtualWorld] = None
   var alive: Boolean = true
 
+  // schedule the updates
+  scheduleUpdates()
+
+  // retrieve the virtual world from the server
+  {
+    logger.info("Retrieving the virtual world from the remote peer...")
+    val startTime = System.nanoTime()
+    getRemoteWorld(client) foreach { theWorld =>
+      val endTime = System.nanoTime()
+      val elapsed = (endTime - startTime).toDouble / 1e+6
+      logger.info(f"Loaded virtual world $theWorld in $elapsed%.1f msec")
+      theWorld.update(.02)
+      world = Some(theWorld)
+    }
+  }
+
+  /**
+   * Interactive shell
+   */
   def shell() {
     while (alive) {
       // read a line of input
