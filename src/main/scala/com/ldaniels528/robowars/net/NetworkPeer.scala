@@ -7,15 +7,15 @@ import com.ldaniels528.robowars.net.NetworkActionProcessor._
 import org.slf4j.LoggerFactory
 
 /**
- * Represents a client connection
+ * Represents a connection to a network peer
  * @param socket the given socket
  */
-case class Client(socket: Socket) {
+case class NetworkPeer(socket: Socket) {
   private val logger = LoggerFactory.getLogger(getClass)
 
   // get the input and output streams
-  val in = new BufferedInputStream(socket.getInputStream, 1024)
-  val out = new DataOutputStream(socket.getOutputStream)
+  private val in = new BufferedInputStream(socket.getInputStream, 1024)
+  private val out = new DataOutputStream(socket.getOutputStream)
 
   // create a network input buffer
   val buffer = new NetworkBuffer(16384, autoReset = true)
@@ -23,6 +23,9 @@ case class Client(socket: Socket) {
   // create a scratch buffer for reading data
   private val scratch = new Array[Byte](8192)
 
+  /**
+   * Reads bytes from the input stream and populated the network buffer
+   */
   def fillBuffer(): Unit = {
     if (in.available() > 0) {
       // write the chunk of data to the client's buffer
@@ -32,6 +35,10 @@ case class Client(socket: Socket) {
     }
   }
 
+  /**
+   * Transmits the given network action to a remote peer
+   * @param action the given network action
+   */
   def send(action: NetworkAction) {
     // capture the start time (in nanoseconds)
     val startTime = System.nanoTime()
