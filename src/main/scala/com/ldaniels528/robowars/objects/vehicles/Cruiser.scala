@@ -9,7 +9,7 @@ import com.ldaniels528.robowars.objects.weapons.{MachineGun, MiniCannon, Missile
  * Cruiser Vehicle
  * @author lawrence.daniels@gmail.com
  */
-class Cruiser(w: FxWorld, p: FxPoint3D)
+case class Cruiser(w: FxWorld, p: FxPoint3D)
   extends AbstractVehicle(w, FxPoint3D(p.x, SCALE.h, p.z), FxVelocityVector(Math.PI, 0, 0)) {
 
   val turningRate: Double = 1.25d
