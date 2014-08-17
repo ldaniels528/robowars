@@ -14,6 +14,11 @@ import org.slf4j.LoggerFactory
 object NetworkActionProcessor {
   private val logger = LoggerFactory.getLogger(getClass)
 
+  /**
+   * Decodes the next message from the underlying buffer
+   * @param client the client whose buffer is being monitored
+   * @return an option of a network action
+   */
   def decodeNext(client: Client): Option[NetworkAction] = {
     val buf = client.buffer
     val remaining = buf.remaining
