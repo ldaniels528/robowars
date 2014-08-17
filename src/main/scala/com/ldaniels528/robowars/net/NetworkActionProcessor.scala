@@ -29,8 +29,8 @@ object NetworkActionProcessor extends Compression {
       code match {
         case OP_HELLO_REQ => Some(HelloRequest(client))
         case OP_HELLO_RESP => Some(HelloResponse(client, availableSlots = buf.getShort))
-        case OP_WORLD_REQ => Some(WorldRequest(client, level = buf.getShort))
-        case OP_WORLD_RESP => Some(WorldResponse(client, world = decodeWorld(buf)))
+        case OP_JOIN_REQ => Some(JoinRequest(client, level = buf.getShort))
+        case OP_JOIN_RESP => Some(JoinResponse(client, world = decodeWorld(buf)))
         case unknown =>
           logger.info(f"Unhandled network code $unknown%02x")
           None
@@ -49,8 +49,8 @@ object NetworkActionProcessor extends Compression {
     action match {
       case HelloRequest(_) => Array(OP_HELLO_REQ)
       case HelloResponse(_, slots) => Array(OP_HELLO_RESP)
-      case WorldRequest(_, level) => allocate(3).put(OP_WORLD_REQ).putShort(level.toShort).array()
-      case WorldResponse(_, world) => encodeWorld(world)
+      case JoinRequest(_, level) => allocate(3).put(OP_JOIN_REQ).putShort(level.toShort).array()
+      case JoinResponse(_, world) => encodeWorld(world)
     }
   }
 
@@ -62,7 +62,7 @@ object NetworkActionProcessor extends Compression {
 
   private def encodeWorld(world: VirtualWorld): Array[Byte] = {
     val compressed = compress(VirtualWorldWriter.save(world).toString().getBytes)
-    allocate(compressed.length + 5).put(OP_WORLD_RESP).putInt(compressed.length).put(compressed).array()
+    allocate(compressed.length + 5).put(OP_JOIN_RESP).putInt(compressed.length).put(compressed).array()
   }
 
   /**
@@ -71,14 +71,14 @@ object NetworkActionProcessor extends Compression {
 
   val OP_HELLO_REQ = 0x10: Byte
   val OP_HELLO_RESP = 0x11: Byte
-  val OP_WORLD_REQ = 0x22: Byte
-  val OP_WORLD_RESP = 0x23: Byte
+  val OP_JOIN_REQ = 0x22: Byte
+  val OP_JOIN_RESP = 0x23: Byte
 
   val OP_CODES = Map(
     OP_HELLO_REQ -> "HELLO_REQ",
     OP_HELLO_RESP -> "HELLO_RESP",
-    OP_WORLD_REQ -> "JOIN_REQ",
-    OP_WORLD_RESP -> "JOIN_RESP")
+    OP_JOIN_REQ -> "JOIN_REQ",
+    OP_JOIN_RESP -> "JOIN_RESP")
 
   /**
    * Network Action definitions
@@ -90,8 +90,8 @@ object NetworkActionProcessor extends Compression {
 
   case class HelloResponse(client: NetworkPeer, availableSlots: Int) extends NetworkAction
 
-  case class WorldRequest(client: NetworkPeer, level: Int) extends NetworkAction
+  case class JoinRequest(client: NetworkPeer, level: Int) extends NetworkAction
 
-  case class WorldResponse(client: NetworkPeer, world: VirtualWorld) extends NetworkAction
+  case class JoinResponse(client: NetworkPeer, world: VirtualWorld) extends NetworkAction
 
 }

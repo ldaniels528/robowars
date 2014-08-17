@@ -18,7 +18,7 @@ trait ClientSideProcessor {
   def client: NetworkPeer
 
   def getRemoteWorld(client: NetworkPeer): Future[VirtualWorld] = {
-    clientSide ! WorldRequest(client, level = 1)
+    clientSide ! JoinRequest(client, level = 1)
     makePromise(client.id)
   }
 
@@ -61,8 +61,8 @@ object ClientSideProcessor {
     import com.ldaniels528.robowars.net.NetworkActionProcessor._
 
     def receive = {
-      case r@WorldRequest(peer, level) => peer.send(r)
-      case WorldResponse(peer, world) =>
+      case r@JoinRequest(peer, level) => peer.send(r)
+      case JoinResponse(peer, world) =>
         callbacks.remove(peer.id) foreach (_.success(world))
         ()
       case HelloResponse(_, slots) =>

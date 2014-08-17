@@ -82,8 +82,8 @@ class GameServer(port: Int) {
           decodeNext(peer) foreach {
             case HelloRequest(client) => client.send(HelloResponse(client, availableSlots = 4))
             case r@HelloResponse(client, _) => client.send(r)
-            case WorldRequest(client, _) => client.send(WorldResponse(client, world))
-            case r@WorldResponse(client, _) => client.send(r)
+            case JoinRequest(client, _) => client.send(JoinResponse(client, world))
+            case r@JoinResponse(client, _) => client.send(r)
             case unknown =>
               logger.error(s"Unhandled message $unknown (${unknown.getClass.getName}})")
           }
