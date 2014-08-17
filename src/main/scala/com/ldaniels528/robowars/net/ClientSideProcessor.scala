@@ -17,17 +17,6 @@ trait ClientSideProcessor {
 
   def client: Client
 
-  def ~>(action: NetworkAction): Unit = clientSide ! action
-
-  def <~[T](action: NetworkAction)(implicit ec: ExecutionContext): Future[T] = {
-    import akka.pattern.ask
-    import akka.util.Timeout
-
-    implicit val timeout = new Timeout(30 seconds)
-
-    (clientSide ? action).map(_.asInstanceOf[T])
-  }
-
   def getRemoteWorld(client: Client): Future[VirtualWorld] = {
     clientSide ! WorldRequest(client, level = 1)
     makePromise
@@ -39,13 +28,9 @@ trait ClientSideProcessor {
   def scheduleUpdates(interval: FiniteDuration = 5.millis)(implicit ec: ExecutionContext) {
     system.scheduler.schedule(initialDelay = 0.millis, interval, new Runnable {
       val bytes = new Array[Byte](1024)
-      override def run(): Unit = {
-        if(client.in.available > 0) {
-          // write the chunk of data to the client's buffer
-          val count = client.in.read(bytes)
-          //log ! s"Read $count bytes for client ${client.socket.getInetAddress.getHostName}"
-          client.buffer.put(bytes, 0, count)
-        }
+      override def run() {
+        // fill the peer's data buffer
+        client.fillBuffer()
 
         if(client.buffer.nonEmpty) {
           decodeNext(client) foreach (clientSide ! _)
@@ -74,7 +59,7 @@ object ClientSideProcessor {
    * Client Handler Actor
    * @author lawrence.daniels@gmail.com
    */
-  class ClientSideActor() extends Actor with NetworkActionTransmission {
+  class ClientSideActor() extends Actor {
     import com.ldaniels528.robowars.net.NetworkActionProcessor._
 
     def receive = {

@@ -3,7 +3,7 @@ package com.ldaniels528.robowars
 import java.net.Socket
 
 import com.ldaniels528.robowars.RoboWarsShell.{logger, _}
-import com.ldaniels528.robowars.net.{Client, ClientSideProcessor, NetworkActionTransmission}
+import com.ldaniels528.robowars.net.{Client, ClientSideProcessor}
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
 import org.slf4j.LoggerFactory
 
@@ -14,7 +14,7 @@ import scala.util.Try
  * RoboWars Shell Client
  * @author lawrence.daniels@gmail.com
  */
-class RoboWarsShell(val client: Client, host: String) extends ClientSideProcessor with NetworkActionTransmission {
+class RoboWarsShell(val client: Client, host: String) extends ClientSideProcessor {
   private val commandSet = generateCommands
   private val out = System.out
   private var world: Option[VirtualWorld] = None

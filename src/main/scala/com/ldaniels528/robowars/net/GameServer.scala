@@ -2,7 +2,6 @@ package com.ldaniels528.robowars.net
 
 import java.net.{ServerSocket, Socket}
 
-import com.ldaniels528.robowars.net.GameServer._
 import com.ldaniels528.robowars.net.NetworkActionProcessor._
 import com.ldaniels528.robowars.{ContentManager, VirtualWorld}
 import org.slf4j.LoggerFactory
@@ -14,6 +13,7 @@ import scala.util.Try
  * @author lawrence.daniels@gmail.com
  */
 class GameServer(port: Int) {
+  private val logger = LoggerFactory.getLogger(getClass)
   var alive: Boolean = true
   private val clientMgr = new ClientManager()
   private var world: VirtualWorld = _
@@ -48,10 +48,11 @@ class GameServer(port: Int) {
    * Client Connection Manager
    * @author lawrence.daniels@gmail.com
    */
-  class ClientManager() extends Runnable with NetworkActionTransmission {
+  class ClientManager() extends Runnable {
+    private val logger = LoggerFactory.getLogger(getClass)
+
     // define the client container
     var clients: List[Client] = Nil
-    val bytes = new Array[Byte](8192)
 
     def +=(socket: Socket) {
       // create a client wrapper
@@ -73,20 +74,16 @@ class GameServer(port: Int) {
 
     private def manage(peer: Client) {
       Try {
-        if (peer.in.available() > 0) {
-          // write the chunk of data to the client's buffer
-          val count = peer.in.read(bytes)
-          logger.info(s"Read $count bytes for client ${peer.socket.getInetAddress.getHostName}")
-          peer.buffer.put(bytes, 0, count)
-        }
+        // fill the peer's data buffer
+        peer.fillBuffer()
 
         // attempt to decode messages from the client
         if (peer.buffer.nonEmpty) {
           decodeNext(peer) foreach {
-            case HelloRequest(client) => send(client, HelloResponse(client, availableSlots = 4))
-            case r@HelloResponse(client, _) => send(client, r)
-            case WorldRequest(client, _) => send(client, WorldResponse(client, world))
-            case r@WorldResponse(client, _) => send(client, r)
+            case HelloRequest(client) => client.send(HelloResponse(client, availableSlots = 4))
+            case r@HelloResponse(client, _) => client.send(r)
+            case WorldRequest(client, _) => client.send(WorldResponse(client, world))
+            case r@WorldResponse(client, _) => client.send(r)
             case unknown =>
               logger.error(s"Unhandled message $unknown (${unknown.getClass.getName}})")
           }
@@ -102,7 +99,6 @@ class GameServer(port: Int) {
  * @author lawrence.daniels@gmail.com
  */
 object GameServer {
-  private val logger = LoggerFactory.getLogger(getClass)
 
   /**
    * Main application entry-point
