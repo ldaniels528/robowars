@@ -121,9 +121,10 @@ case class VirtualWorld(minX: Double, minY: Double, size: Double, rows: Int, gra
    * Inserts all new objects from the stack into the world.
    */
   private def insertNewObjects() {
-    if (newObjects.nonEmpty) {
-      myObjects ++= newObjects
-      newObjects.clear()
+    newObjects.foreach { obj =>
+      obj.init()
+      myObjects += obj
+      newObjects -= obj
     }
   }
 
