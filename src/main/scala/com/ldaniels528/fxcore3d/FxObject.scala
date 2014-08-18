@@ -14,18 +14,23 @@ abstract class FxObject(var world: FxWorld, myPos: FxPoint3D, myAngle: FxAngle3D
   private var occupiedGrids: Seq[FxGrid] = Seq.empty
   private var alive: Boolean = true
 
-  protected [fxcore3d] val Pos: FxPoint3D = myPos.makeClone
-  protected [fxcore3d] val Agl: FxAngle3D = myAngle.makeClone
+  private val Pos: FxPoint3D = myPos.makeClone
+  private val Agl: FxAngle3D = myAngle.makeClone
   protected [fxcore3d] var age: Double = _
-
-  // setup the model's orientation
-  modelInstance.setOrientation(Pos, Agl)
 
   // insert object into the world
   world += this
 
-  // update the occupied grids
-  updateTheOccupiedGrids()
+  /**
+   * Initializes the object
+   */
+  def init() {
+    // setup the model's orientation
+    modelInstance.setOrientation(Pos, Agl)
+
+    // update the occupied grids
+    updateTheOccupiedGrids()
+  }
 
   /**
    * Causes this object to die
