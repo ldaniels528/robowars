@@ -10,7 +10,7 @@ import scala.collection.mutable.ListBuffer
  * @author lawrence.daniels@gmail.com
  */
 case class VirtualWorld(minX: Double, minY: Double, size: Double, rows: Int, gravity: Double = -10)
-  extends FxWorld(minX, minY, size, rows) {
+  extends FxWorld {
 
   /**
    * The active player
