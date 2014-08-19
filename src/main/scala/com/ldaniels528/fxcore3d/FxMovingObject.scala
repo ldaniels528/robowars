@@ -22,10 +22,10 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
     $dPosition.y += world.gravity * dt
   }
 
-  def angle_=(a: FxAngle3D) = Agl.set(a)
+  def angle_=(a: FxAngle3D) = $angle.set(a)
 
   def position_=(p: FxPoint3D) {
-    Pos.set(p)
+    $position.set(p)
     updateTheOccupiedGrids()
   }
 
@@ -46,7 +46,7 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
    */
   override def checkForCollisionWith(obj: FxObject, dt: Double): Boolean = {
     // update the position and angle of the polyhedron
-    modelInstance.setOrientation(Pos, Agl)
+    modelInstance.setOrientation($position, $angle)
 
     // if the other object is a moving object then update it too.
     if (obj.isInstanceOf[FxMovingObject]) {
@@ -58,12 +58,12 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
   }
 
   override def paint(g: Graphics2D, cam: FxCamera) {
-    modelInstance.setOrientation(Pos, Agl)
+    modelInstance.setOrientation($position, $angle)
     super.paint(g, cam)
   }
 
   override def paintWithShading(g: Graphics2D, cam: FxCamera, light: FxPoint3D) {
-    modelInstance.setOrientation(Pos, Agl)
+    modelInstance.setOrientation($position, $angle)
     super.paintWithShading(g, cam, light)
   }
 
@@ -84,8 +84,8 @@ abstract class FxMovingObject(world: FxWorld, pos: FxPoint3D, agl: FxAngle3D, dp
    * Updates the physical state of this object.
    */
   private[fxcore3d] def updatePhysics(dt: Double) {
-    Pos.plus(dPos, dt)
-    Agl.plus(dAgl, dt)
+    $position.plus(dPos, dt)
+    $angle.plus(dAgl, dt)
   }
 
 }
