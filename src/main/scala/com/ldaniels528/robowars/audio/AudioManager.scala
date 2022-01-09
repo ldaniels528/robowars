@@ -13,7 +13,7 @@ object AudioManager extends FxAudioPlayer {
   private val audioSampleCache = loadSamples()
 
   // create the audio play-back actors
-  val audioPlayers = (1 to 18) map (n => system.actorOf(Props[AudioPlaybackActor], name = s"audioPlayer$n"))
+  val audioPlayers: Seq[ActorRef] = (1 to 18) map (n => system.actorOf(Props[AudioPlaybackActor], name = s"audioPlayer$n"))
   var ticker = 0
 
   // allows background audio playback to be turned on/off
@@ -56,7 +56,7 @@ object AudioManager extends FxAudioPlayer {
     }: _*)
   }
 
-  private def loadSample(resource: String) = {
+  private def loadSample(resource: String): FxAudioSample = {
     loadAudioSample(ContentManager.getResource(resource))
   }
 
@@ -65,11 +65,10 @@ object AudioManager extends FxAudioPlayer {
    * @author lawrence.daniels@gmail.com
    */
   class AudioPlaybackActor() extends Actor {
-
     import scala.concurrent.ExecutionContext.Implicits._
     import scala.concurrent.Future
 
-    def receive = {
+    def receive: Receive = {
       case audioKey: ContinuousAudioKey =>
         audioSampleCache.get(audioKey) foreach { sample =>
           Future {

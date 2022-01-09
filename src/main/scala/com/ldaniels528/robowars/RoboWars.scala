@@ -2,7 +2,6 @@ package com.ldaniels528.robowars
 
 import java.awt._
 import java.awt.event._
-
 import com.ldaniels528.fxcore3d._
 import com.ldaniels528.fxcore3d.camera._
 import com.ldaniels528.robowars.RoboWars._
@@ -11,6 +10,8 @@ import com.ldaniels528.robowars.events.EventCommands._
 import com.ldaniels528.robowars.events.WeaponCommand
 import com.ldaniels528.robowars.objects.Damageable
 import com.ldaniels528.robowars.objects.vehicles.AbstractVehicle
+
+import java.awt.image.BufferedImage
 
 /**
  * RoboWars Application Main
@@ -24,7 +25,7 @@ class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", 
   var fps: Double = 0.0
 
   // the off-screen buffer variables
-  lazy val controlKeysImage = ContentManager.loadImage("/images/control_keys.png")
+  lazy val controlKeysImage: BufferedImage = ContentManager.loadImage("/images/control_keys.png")
   var buffer: Image = _
   var offScreen: Graphics2D = _
   var theScreen: Graphics2D = _
@@ -32,11 +33,11 @@ class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", 
 
   // setup the key listener
   super.addKeyListener(new KeyListener {
-    override def keyTyped(event: KeyEvent) = ()
+    override def keyTyped(event: KeyEvent): Unit = ()
 
-    override def keyReleased(event: KeyEvent) = keyboardEvent(event, pressed = false)
+    override def keyReleased(event: KeyEvent): Unit = keyboardEvent(event, pressed = false)
 
-    override def keyPressed(event: KeyEvent) = keyboardEvent(event, pressed = true)
+    override def keyPressed(event: KeyEvent): Unit = keyboardEvent(event, pressed = true)
   })
 
   // setup the window listener
@@ -64,7 +65,7 @@ class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", 
   /**
    * Initializes the application
    */
-  def init() {
+  def init(): Unit = {
     // get the dimensions of the content pane
     val contentPane = super.getContentPane
     val dim = contentPane.getSize
@@ -87,7 +88,7 @@ class RoboWars(windowed: Boolean, noMusic: Boolean) extends FxFrame("RoboWars", 
   /**
    * Main application loop
    */
-  def run() {
+  def run(): Unit = {
     var lastUpdate: Long = System.currentTimeMillis()
     var frames: Int = 0
     var timeMillis: Long = 0

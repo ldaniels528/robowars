@@ -1,1 +1,3 @@
-/bin/
+.bsp/
+project/target
+target/
